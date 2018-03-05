@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RobotPlay", "Assembly-CSharp-firstpass.csproj", "{FC8E429C-F3C6-A806-F9DB-67D66AD9D9A1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RobotPlay", "Assembly-CSharp.csproj", "{07BCCD39-F772-3DEF-ADE0-E588257CB0AB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RobotPlay", "Assembly-CSharp-Editor.csproj", "{35238E06-4A0B-1065-D668-BFFD9D2756A5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FC8E429C-F3C6-A806-F9DB-67D66AD9D9A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC8E429C-F3C6-A806-F9DB-67D66AD9D9A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC8E429C-F3C6-A806-F9DB-67D66AD9D9A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC8E429C-F3C6-A806-F9DB-67D66AD9D9A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07BCCD39-F772-3DEF-ADE0-E588257CB0AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07BCCD39-F772-3DEF-ADE0-E588257CB0AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07BCCD39-F772-3DEF-ADE0-E588257CB0AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07BCCD39-F772-3DEF-ADE0-E588257CB0AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35238E06-4A0B-1065-D668-BFFD9D2756A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35238E06-4A0B-1065-D668-BFFD9D2756A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35238E06-4A0B-1065-D668-BFFD9D2756A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35238E06-4A0B-1065-D668-BFFD9D2756A5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Assembly-CSharp.csproj
+	EndGlobalSection
+EndGlobal
