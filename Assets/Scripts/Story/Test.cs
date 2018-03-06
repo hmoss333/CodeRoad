@@ -7,7 +7,7 @@ public class Test : MonoBehaviour
 	[Header("Variables")]
 	private bool enabled = true;
 	//public bool isOn = false; // Clicking will toggle the button on and off. Starts off
-	private int count = -1;
+	public int count = -1;
 	string message;
 	private bool completetext = true;
 	//bool animateBook = false;
@@ -118,8 +118,38 @@ public class Test : MonoBehaviour
 	public AudioClip part16;
 	public AudioClip part17;
 	public AudioClip part18;
+    public AudioClip part19;
+    public AudioClip part20;
+    public AudioClip part21;
+    public AudioClip part22;
+    public AudioClip part23;
+    public AudioClip part24;
+    public AudioClip part25;
+    public AudioClip part26;
+    public AudioClip part27;
+    public AudioClip part28;
+    public AudioClip part29;
+    public AudioClip part30;
+    public AudioClip part31;
+    public AudioClip part32;
+    public AudioClip part33;
+    public AudioClip part34;
+    public AudioClip part35;
+    public AudioClip part36;
+    public AudioClip part37;
+    public AudioClip part38;
+    public AudioClip part39;
+    public AudioClip part40;
+    public AudioClip part41;
+    public AudioClip part42;
+    public AudioClip part43;
+    public AudioClip part44;
+    public AudioClip part45;
+    public AudioClip part46;
+    public AudioClip part47;
+    public AudioClip part48;
 
-	[Header("Audio")]
+    [Header("Audio")]
 	public AudioClip robotSound1;
 	public AudioClip robotSound2;
 	public AudioClip robotSound3;
@@ -1401,7 +1431,7 @@ public class Test : MonoBehaviour
         for (int i = 0; i < pageNum.Length; i++)
         {
             pageNum[i].SetActive(true);
-            pageNum[i].GetComponent<UI2DSpriteAnimation>().Play();
+            //pageNum[i].GetComponent<UI2DSpriteAnimation>().Play();
         }
     }
 
@@ -1441,8 +1471,17 @@ public class Test : MonoBehaviour
         DisableCharacters(page24);
     }
 
-	//minigame logic here
-	public void SetMiniGame()
+    void AnimatePage(GameObject[] pageNum)
+    {
+        for (int i = 0; i < pageNum.Length; i++)
+        {
+            if (pageNum[i].GetComponent<UI2DSpriteAnimation>() != null)
+                pageNum[i].GetComponent<UI2DSpriteAnimation>().Play();
+        }
+    }
+
+    //minigame logic here
+    public void SetMiniGame()
 	{
 		inMiniGameMode = true;
 		if (count >= 3)
@@ -1503,13 +1542,6 @@ public class Test : MonoBehaviour
 		}
 	}
 
-	void PlayCharacterAnim (GameObject character)
-	{
-        //character.GetComponentInChildren<ButtonState>().OnButtonPressed();
-        //character.GetComponentInChildren<ButtonState>().OnButtonRelease();
-        character.GetComponent<UI2DSpriteAnimation>().Play();
-	}
-
 	IEnumerator FadeOther(UIWidget w, float durationInSeconds)
 	{
 		float startA = w.alpha;
@@ -1524,11 +1556,11 @@ public class Test : MonoBehaviour
 		StartCoroutine(FadeIn(sprite, 0.5f, startA));
 	}
 
-	IEnumerator FadeOuter(UIWidget w, float durationInSeconds, float nextAlpha, float coverAlpha)
-	{
-		inMiniGameMode = false; //ensures the scene has changed before OnClick checks if minigame is active; update OnClick so this isn't necissary
+    IEnumerator FadeOuter(UIWidget w, float durationInSeconds, float nextAlpha, float coverAlpha)
+    {
+        inMiniGameMode = false; //ensures the scene has changed before OnClick checks if minigame is active; update OnClick so this isn't necissary
 
-		float startA = w.alpha;
+        float startA = w.alpha;
         label.text = "";
         //float currentTime = 0f;
         //if (PlayerPrefs.GetFloat("printSize") < 0.6f)
@@ -1555,7 +1587,7 @@ public class Test : MonoBehaviour
         //}
         yield return null;
 
-		/*
+        /*
 		if (PlayerPrefs.GetFloat("printSize") < 0.6f) {
 			if (((back == false) && ((count == 0) || (count == 1) || (count == 2) || (count == 3) || (count == 4))) || ((back == true) 
 			                                                                                                            && ((count == -1) || (count == 0) || (count == 1) || (count == 2) || (count == 3)))) {
@@ -1578,299 +1610,817 @@ public class Test : MonoBehaviour
 			}
 		}
 		*/
-		//cover.alpha = coverAlpha;
+        //cover.alpha = coverAlpha;
 
-		//if (PlayerPrefs.GetFloat("printSize") < 0.6f)
-		//{
-		if (count == -1)
-		{
+        //if (PlayerPrefs.GetFloat("printSize") < 0.6f)
+        //{
+        if (count == -1)
+        {
             EnableCharacters(page1);
+
+            audiosource.Stop();
+            audiosource.clip = part1;
+            audiosource.Play();
+            count++;
+            sprite.mainTexture = Resources.Load("image1") as Texture;
+            StartCoroutine(FadeIn(sprite, 0.5f, startA));
+            message = "What is coding? \n Is this something for me? ";
+            StartCoroutine(TypeText(nextAlpha, coverAlpha));
+        }
+        else if (count == 0)
+        {
             DisableCharacters(page2);
+            EnableCharacters(page1);
 
-			audiosource.Stop();
-			audiosource.clip = part1;
-			audiosource.Play();
-			count++;
-			sprite.mainTexture = Resources.Load("image1") as Texture;
-			StartCoroutine(FadeIn(sprite, 0.5f, startA));
-			message = "Robots are amazing.\n They do all kinds of stuff. ";
-			StartCoroutine(TypeText(nextAlpha, coverAlpha));
+            if (back)
+                AnimatePage(page1);
 
-		}
-		else if (count == 0)
-		{
+            audiosource.Stop();
+            audiosource.clip = part2;
+            audiosource.Play();
+            count++;
+            sprite.mainTexture = Resources.Load("image1") as Texture;
+            StartCoroutine(FadeIn(sprite, 0.5f, startA));
+            message = "Coding helps to make computers \n think more quickly. ";
+            StartCoroutine(TypeText(nextAlpha, coverAlpha));
+        }
+        else if (count == 1)
+        {
             DisableCharacters(page1);
             EnableCharacters(page2);
-            DisableCharacters(page3);
 
-			audiosource.Stop();
-			audiosource.clip = part2;
-			audiosource.Play();
-			count++;
-			sprite.mainTexture = Resources.Load("image2") as Texture;
-			StartCoroutine(FadeIn(sprite, 0.5f, startA));
-			message = "Robots build things in factories \n that for people is quite tough. ";
-			StartCoroutine(TypeText(nextAlpha, coverAlpha));
-		}
-		else if (count == 1)
-		{
+            if (!back)
+                AnimatePage(page2);
+
+            audiosource.Stop();
+            audiosource.clip = part3;
+            audiosource.Play();
+            count++;
+            sprite.mainTexture = Resources.Load("image2") as Texture;
+            StartCoroutine(FadeIn(sprite, 0.5f, startA));
+            message = "Meet Tommy the Turtle who will \n help you learn to code. ";
+            StartCoroutine(TypeText(nextAlpha, coverAlpha));
+        }
+        else if (count == 2)
+        {
+            DisableCharacters(page3);
+            EnableCharacters(page2);
+
+            if (back)
+                AnimatePage(page2);
+
+            audiosource.Stop();
+            audiosource.clip = part4;
+            audiosource.Play();
+            count++;
+            sprite.mainTexture = Resources.Load("image2") as Texture;
+            StartCoroutine(FadeIn(sprite, 0.5f, startA));
+            message = "He and his friends will lead you \n down the Code Road. ";
+            StartCoroutine(TypeText(nextAlpha, coverAlpha));
+        }
+        else if (count == 3)
+        {
             DisableCharacters(page2);
             EnableCharacters(page3);
-            DisableCharacters(page4);
 
-			audiosource.Stop();
-			audiosource.clip = part3;
-			audiosource.Play();
-			count++;
-			sprite.mainTexture = Resources.Load("image3") as Texture;
-			StartCoroutine(FadeIn(sprite, 0.5f, startA));
-			message = "I love robots in movies \n like Wall-E and Number 5. ";
-			StartCoroutine(TypeText(nextAlpha, coverAlpha));
-		}
-		else if (count == 2)
-		{
+            if (!back)
+                AnimatePage(page3);
+
+            audiosource.Stop();
+            audiosource.clip = part5;
+            audiosource.Play();
+            count++;
+            sprite.mainTexture = Resources.Load("image3") as Texture;
+            StartCoroutine(FadeIn(sprite, 0.5f, startA));
+            message = "We will first get help \n from Ollie Owl and Cathy Cat. ";
+            StartCoroutine(TypeText(nextAlpha, coverAlpha));
+        }
+        else if (count == 4)
+        {
+            DisableCharacters(page4);
+            EnableCharacters(page3);
+
+            if (back)
+                AnimatePage(page3);
+
+            audiosource.Stop();
+            audiosource.clip = part6;
+            audiosource.Play();
+            count++;
+            sprite.mainTexture = Resources.Load("image3") as Texture;
+            StartCoroutine(FadeIn(sprite, 0.5f, startA));
+            message = "We will all work together \n as we code and chat. ";
+            StartCoroutine(TypeText(nextAlpha, coverAlpha));
+        }
+        else if (count == 5)
+        {
             DisableCharacters(page3);
             EnableCharacters(page4);
-            DisableCharacters(page5);
 
-			audiosource.Stop();
-			audiosource.clip = part4;
-			audiosource.Play();
-			count++;
-			sprite.mainTexture = Resources.Load("image4") as Texture;
-			StartCoroutine(FadeIn(sprite, 0.5f, startA));
-			message = "Robots in outer space movies \n all seem so alive. ";
-			StartCoroutine(TypeText(nextAlpha, coverAlpha));
-		}
-		else if (count == 3)
-		{
+            if (!back)
+                AnimatePage(page4);
+
+            audiosource.Stop();
+            audiosource.clip = part7;
+            audiosource.Play();
+            count++;
+            sprite.mainTexture = Resources.Load("image4") as Texture;
+            StartCoroutine(FadeIn(sprite, 0.5f, startA));
+            message = "We will also meet other friends \n along the way ";
+            StartCoroutine(TypeText(nextAlpha, coverAlpha));
+        }
+        else if (count == 6)
+        {
+            DisableCharacters(page5);
+            EnableCharacters(page4);
+
+            if (back)
+                AnimatePage(page4);
+
+            audiosource.Stop();
+            audiosource.clip = part8;
+            audiosource.Play();
+            count++;
+            sprite.mainTexture = Resources.Load("image4") as Texture;
+            StartCoroutine(FadeIn(sprite, 0.5f, startA));
+            message = "To teach computers what to do \n and what to say. ";
+            StartCoroutine(TypeText(nextAlpha, coverAlpha));
+        }
+        else if (count == 7)
+        {
             DisableCharacters(page4);
+            EnableCharacters(page5);
+
+            if (!back)
+                AnimatePage(page5);
+
+            audiosource.Stop();
+            audiosource.clip = part9;
+            audiosource.Play();
+            count++;
+            sprite.mainTexture = Resources.Load("image5") as Texture;
+            StartCoroutine(FadeIn(sprite, 0.5f, startA));
+            message = "You might think- I can't talk to computers. \n I don't know how! ";
+            StartCoroutine(TypeText(nextAlpha, coverAlpha));
+        }
+        else if (count == 8)
+        {
             EnableCharacters(page5);
             DisableCharacters(page6);
 
-			audiosource.Stop();
-			audiosource.clip = part5;
-			audiosource.Play();
-			count++;
-			sprite.mainTexture = Resources.Load("image5") as Texture;
-			StartCoroutine(FadeIn(sprite, 0.5f, startA));
-			message = "There are even robot battles, \n like fighters in a ring. ";
-			StartCoroutine(TypeText(nextAlpha, coverAlpha));
-		}
-		else if (count == 4)
-		{
+            if (back)
+                AnimatePage(page5);
+
+            audiosource.Stop();
+            audiosource.clip = part10;
+            audiosource.Play();
+            count++;
+            sprite.mainTexture = Resources.Load("image5") as Texture;
+            StartCoroutine(FadeIn(sprite, 0.5f, startA));
+            message = "Time for an adventure with Tommy \n who will show you now. ";
+            StartCoroutine(TypeText(nextAlpha, coverAlpha));
+        }
+        else if (count == 9)
+        {
             DisableCharacters(page5);
+            EnableCharacters(page6);
+
+            if (!back)
+                AnimatePage(page6);
+
+            audiosource.Stop();
+            audiosource.clip = part11;
+            audiosource.Play();
+            count++;
+            sprite.mainTexture = Resources.Load("image6") as Texture;
+            StartCoroutine(FadeIn(sprite, 0.5f, startA));
+            message = "First on the road, \n we meet Ollie Owl sitting in a tree. ";
+            StartCoroutine(TypeText(nextAlpha, coverAlpha));
+        }
+        else if (count == 10)
+        {
             EnableCharacters(page6);
             DisableCharacters(page7);
 
-			audiosource.Stop();
-			audiosource.clip = part6;
-			audiosource.Play();
-			count++;
-			sprite.mainTexture = Resources.Load("image6") as Texture;
-			StartCoroutine(FadeIn(sprite, 0.5f, startA));
-			message = "There are different kinds of robots \n that do most everything. ";
-			StartCoroutine(TypeText(nextAlpha, coverAlpha));
-		}
-		else if (count == 5)
-		{
+            if (back)
+                AnimatePage(page6);
+
+            audiosource.Stop();
+            audiosource.clip = part12;
+            audiosource.Play();
+            count++;
+            sprite.mainTexture = Resources.Load("image6") as Texture;
+            StartCoroutine(FadeIn(sprite, 0.5f, startA));
+            message = "Ollie is laughing \n and singing with glee. ";
+            StartCoroutine(TypeText(nextAlpha, coverAlpha));
+        }
+        else if (count == 11)
+        {
             DisableCharacters(page6);
+            EnableCharacters(page7);
+
+            if (!back)
+                AnimatePage(page7);
+
+            audiosource.Stop();
+            audiosource.clip = part13;
+            audiosource.Play();
+            count++;
+            sprite.mainTexture = Resources.Load("image7") as Texture;
+            StartCoroutine(FadeIn(sprite, 0.5f, startA));
+            message = "Ollie says 'I sit here and sing \n because it's what I was told.' ";
+            StartCoroutine(TypeText(nextAlpha, coverAlpha));
+        }
+        else if (count == 12)
+        {
             EnableCharacters(page7);
             DisableCharacters(page8);
 
-			audiosource.Stop();
-			audiosource.clip = part7;
-			audiosource.Play();
-			count++;
-			sprite.mainTexture = Resources.Load("image7") as Texture;
-			StartCoroutine(FadeIn(sprite, 0.5f, startA));
-			message = "Robots can be servants \n that clean your house and cook. ";
-			StartCoroutine(TypeText(nextAlpha, coverAlpha));
-		}
-		else if (count == 6)
-		{
+            if (back)
+                AnimatePage(page7);
+
+            audiosource.Stop();
+            audiosource.clip = part14;
+            audiosource.Play();
+            count++;
+            sprite.mainTexture = Resources.Load("image7") as Texture;
+            StartCoroutine(FadeIn(sprite, 0.5f, startA));
+            message = "'Please give me another command \n before I grow old.' ";
+            StartCoroutine(TypeText(nextAlpha, coverAlpha));
+        }
+        else if (count == 13)
+        {
             DisableCharacters(page7);
+            EnableCharacters(page8);
+
+            if (!back)
+                AnimatePage(page8);
+
+            audiosource.Stop();
+            audiosource.clip = part15;
+            audiosource.Play();
+            count++;
+            sprite.mainTexture = Resources.Load("image8") as Texture;
+            StartCoroutine(FadeIn(sprite, 0.5f, startA));
+            message = "Our computers use commands \n in just the same way, ";
+            StartCoroutine(TypeText(nextAlpha, coverAlpha));
+        }
+        else if (count == 14)
+        {
             EnableCharacters(page8);
             DisableCharacters(page9);
 
-			audiosource.Stop();
-			audiosource.clip = part8;
-			audiosource.Play();
-			count++;
-			sprite.mainTexture = Resources.Load("image8") as Texture;
-			StartCoroutine(FadeIn(sprite, 0.5f, startA));
-			message = "Robots can be toys for kids \n or live in stories of a book. ";
-			StartCoroutine(TypeText(nextAlpha, coverAlpha));
-		}
-		else if (count == 7)
-		{
+            if (back)
+                AnimatePage(page8);
+
+            audiosource.Stop();
+            audiosource.clip = part16;
+            audiosource.Play();
+            count++;
+            sprite.mainTexture = Resources.Load("image8") as Texture;
+            StartCoroutine(FadeIn(sprite, 0.5f, startA));
+            message = "When a simple command runs \n it makes the computer play. ";
+            StartCoroutine(TypeText(nextAlpha, coverAlpha));
+        }
+        else if (count == 15)
+        {
             DisableCharacters(page8);
             EnableCharacters(page9);
-            DisableCharacters(page10);
+
+            if (!back)
+                AnimatePage(page9);
 
             audiosource.Stop();
-			audiosource.clip = part9;
-			audiosource.Play();
-			count++;
-			sprite.mainTexture = Resources.Load("image9") as Texture;
-			StartCoroutine(FadeIn(sprite, 0.5f, startA));
-			message = "There are robot drones that fly \n or move by brain control. ";
-			StartCoroutine(TypeText(nextAlpha, coverAlpha));
-		}
-		else if (count == 8)
-		{
+            audiosource.clip = part17;
+            audiosource.Play();
+            count++;
+            sprite.mainTexture = Resources.Load("image9") as Texture;
+            StartCoroutine(FadeIn(sprite, 0.5f, startA));
+            message = "As we travel down the road, \n we see Leo Lion slinking along. ";
+            StartCoroutine(TypeText(nextAlpha, coverAlpha));
+        }
+        else if (count == 16)
+        {
+            DisableCharacters(page10);
+            EnableCharacters(page9);
+
+            if (back)
+                AnimatePage(page9);
+
+            audiosource.Stop();
+            audiosource.clip = part18;
+            audiosource.Play();
+            count++;
+            sprite.mainTexture = Resources.Load("image9") as Texture;
+            StartCoroutine(FadeIn(sprite, 0.5f, startA));
+            message = "All of a sudden he takes a big, high jump \n right off of the ground. ";
+            StartCoroutine(TypeText(nextAlpha, coverAlpha));
+        }
+        else if (count == 17)
+        {
             DisableCharacters(page9);
             EnableCharacters(page10);
-            DisableCharacters(page11);
+
+            if (!back)
+                AnimatePage(page10);
 
             audiosource.Stop();
-			audiosource.clip = part10;
-			audiosource.Play();
-			count++;
-			sprite.mainTexture = Resources.Load("image10") as Texture;
-			StartCoroutine(FadeIn(sprite, 0.5f, startA));
-			message = "Robots are used by lots of folks \n for many different roles. ";
-			StartCoroutine(TypeText(nextAlpha, coverAlpha));
-		}
-		else if (count == 9)
-		{
+            audiosource.clip = part19;
+            audiosource.Play();
+            count++;
+            sprite.mainTexture = Resources.Load("image10") as Texture;
+            StartCoroutine(FadeIn(sprite, 0.5f, startA));
+            message = "Leo says, 'I take little steps \n until I get in place.' ";
+            StartCoroutine(TypeText(nextAlpha, coverAlpha));
+        }
+        else if (count == 18)
+        {
+            DisableCharacters(page11);
+            EnableCharacters(page10);
+
+            if (back)
+                AnimatePage(page10);
+
+            audiosource.Stop();
+            audiosource.clip = part20;
+            audiosource.Play();
+            count++;
+            sprite.mainTexture = Resources.Load("image10") as Texture;
+            StartCoroutine(FadeIn(sprite, 0.5f, startA));
+            message = "'Then I make a big jump \n and get ahead of the race.' ";
+            StartCoroutine(TypeText(nextAlpha, coverAlpha));
+        }
+        else if (count == 19)
+        {
             DisableCharacters(page10);
             EnableCharacters(page11);
-            DisableCharacters(page12);
+
+            if (!back)
+                AnimatePage(page11);
 
             audiosource.Stop();
-			audiosource.clip = part11;
-			audiosource.Play();
-			count++;
-			sprite.mainTexture = Resources.Load("image11") as Texture;
-			StartCoroutine(FadeIn(sprite, 0.5f, startA));
-			message = "Some robots are sent to space \n and explore the moon and Mars. ";
-			StartCoroutine(TypeText(nextAlpha, coverAlpha));
-		}
-		else if (count == 10)
-		{
+            audiosource.clip = part21;
+            audiosource.Play();
+            count++;
+            sprite.mainTexture = Resources.Load("image11") as Texture;
+            StartCoroutine(FadeIn(sprite, 0.5f, startA));
+            message = "See-our computer can do that- \n make a jump too, ";
+            StartCoroutine(TypeText(nextAlpha, coverAlpha));
+        }
+        else if (count == 20)
+        {
+            DisableCharacters(page12);
+            EnableCharacters(page11);
+
+            if (back)
+                AnimatePage(page11);
+
+            audiosource.Stop();
+            audiosource.clip = part22;
+            audiosource.Play();
+            count++;
+            sprite.mainTexture = Resources.Load("image11") as Texture;
+            StartCoroutine(FadeIn(sprite, 0.5f, startA));
+            message = "Over the steps called coding \n that tells it what to do. ";
+            StartCoroutine(TypeText(nextAlpha, coverAlpha));
+        }
+        else if (count == 21)
+        {
             DisableCharacters(page11);
             EnableCharacters(page12);
-            DisableCharacters(page13);
+
+            if (!back)
+                AnimatePage(page12);
 
             audiosource.Stop();
-			audiosource.clip = part12;
-			audiosource.Play();
-			count++;
-			sprite.mainTexture = Resources.Load("image12") as Texture;
-			StartCoroutine(FadeIn(sprite, 0.5f, startA));
-			message = "With today’s technology, \n there’s even robot driven cars. ";
-			StartCoroutine(TypeText(nextAlpha, coverAlpha));
-		}
-		else if (count == 11)
-		{
+            audiosource.clip = part23;
+            audiosource.Play();
+            count++;
+            sprite.mainTexture = Resources.Load("image12") as Texture;
+            StartCoroutine(FadeIn(sprite, 0.5f, startA));
+            message = "Next, we run into Elenor Elephant \n who walks slow as can be. ";
+            StartCoroutine(TypeText(nextAlpha, coverAlpha));
+        }
+        else if (count == 22)
+        {
+            DisableCharacters(page13);
+            EnableCharacters(page12);
+
+            if (back)
+                AnimatePage(page12);
+
+            audiosource.Stop();
+            audiosource.clip = part24;
+            audiosource.Play();
+            count++;
+            sprite.mainTexture = Resources.Load("image12") as Texture;
+            StartCoroutine(FadeIn(sprite, 0.5f, startA));
+            message = "She says 'I don't run. \n I walk quite deliberately.' ";
+            StartCoroutine(TypeText(nextAlpha, coverAlpha));
+        }
+        else if (count == 23)
+        {
             DisableCharacters(page12);
             EnableCharacters(page13);
-            DisableCharacters(page14);
+
+            if (!back)
+                AnimatePage(page13);
 
             audiosource.Stop();
-			audiosource.clip = part13;
-			audiosource.Play();
-			count++;
-			sprite.mainTexture = Resources.Load("image13") as Texture;
-			StartCoroutine(FadeIn(sprite, 0.5f, startA));
-			message = "There are robot dogs, dinosaurs \n and robot vacuum cleaners. ";
-			StartCoroutine(TypeText(nextAlpha, coverAlpha));
-		}
-		else if (count == 12)
-		{
+            audiosource.clip = part25;
+            audiosource.Play();
+            count++;
+            sprite.mainTexture = Resources.Load("image13") as Texture;
+            StartCoroutine(FadeIn(sprite, 0.5f, startA));
+            message = "'Two steps left, \n then four steps right.' ";
+            StartCoroutine(TypeText(nextAlpha, coverAlpha));
+        }
+        else if (count == 24)
+        {
+            DisableCharacters(page14);
+            EnableCharacters(page13);
+
+            if (back)
+                AnimatePage(page13);
+
+            audiosource.Stop();
+            audiosource.clip = part26;
+            audiosource.Play();
+            count++;
+            sprite.mainTexture = Resources.Load("image13") as Texture;
+            StartCoroutine(FadeIn(sprite, 0.5f, startA));
+            message = "'I count to make sure \n I don't lose sight.' ";
+            StartCoroutine(TypeText(nextAlpha, coverAlpha));
+        }
+        else if (count == 25)
+        {
             DisableCharacters(page13);
             EnableCharacters(page14);
-            DisableCharacters(page15);
+
+            if (!back)
+                AnimatePage(page14);
 
             audiosource.Stop();
-			audiosource.clip = part14;
-			audiosource.Play();
-			count++;
-			sprite.mainTexture = Resources.Load("image14") as Texture;
-			StartCoroutine(FadeIn(sprite, 0.5f, startA));
-			message = "Robots can be anything \n that fills the heads of dreamers. ";
-			StartCoroutine(TypeText(nextAlpha, coverAlpha));
-		}
-		else if (count == 13)
-		{
+            audiosource.clip = part27;
+            audiosource.Play();
+            count++;
+            sprite.mainTexture = Resources.Load("image14") as Texture;
+            StartCoroutine(FadeIn(sprite, 0.5f, startA));
+            message = "Our computers also count \n each step along their way, ";
+            StartCoroutine(TypeText(nextAlpha, coverAlpha));
+        }
+        else if (count == 26)
+        {
+            DisableCharacters(page15);
+            EnableCharacters(page14);
+
+            if (back)
+                AnimatePage(page14);
+
+            audiosource.Stop();
+            audiosource.clip = part28;
+            audiosource.Play();
+            count++;
+            sprite.mainTexture = Resources.Load("image14") as Texture;
+            StartCoroutine(FadeIn(sprite, 0.5f, startA));
+            message = "To make sure it does \n exactly what we say. ";
+            StartCoroutine(TypeText(nextAlpha, coverAlpha));
+        }
+        else if (count == 27)
+        {
             DisableCharacters(page14);
             EnableCharacters(page15);
-            DisableCharacters(page16);
+
+            if (!back)
+                AnimatePage(page15);
 
             audiosource.Stop();
-			audiosource.clip = part15;
-			audiosource.Play();
-			count++;
-			sprite.mainTexture = Resources.Load("image15") as Texture;
-			StartCoroutine(FadeIn(sprite, 0.5f, startA));
-			message = "One day we will have robots \n that help us in every way. ";
-			StartCoroutine(TypeText(nextAlpha, coverAlpha));
-		}
-		else if (count == 14)
-		{
+            audiosource.clip = part29;
+            audiosource.Play();
+            count++;
+            sprite.mainTexture = Resources.Load("image15") as Texture;
+            StartCoroutine(FadeIn(sprite, 0.5f, startA));
+            message = "Next on the road, we come to Cathy Cat \n who is twirling, twirling around. ";
+            StartCoroutine(TypeText(nextAlpha, coverAlpha));
+        }
+        else if (count == 28)
+        {
+            DisableCharacters(page16);
+            EnableCharacters(page15);
+
+            if (back)
+                AnimatePage(page15);
+
+            audiosource.Stop();
+            audiosource.clip = part30;
+            audiosource.Play();
+            count++;
+            sprite.mainTexture = Resources.Load("image15") as Texture;
+            StartCoroutine(FadeIn(sprite, 0.5f, startA));
+            message = "'What in the world are you doing Cathy?' \n says Tommy with a frown. ";
+            StartCoroutine(TypeText(nextAlpha, coverAlpha));
+        }
+        else if (count == 29)
+        {
             DisableCharacters(page15);
             EnableCharacters(page16);
-            DisableCharacters(page17);
+
+            if (!back)
+                AnimatePage(page16);
 
             audiosource.Stop();
-			audiosource.clip = part16;
-			audiosource.Play();
-			count++;
-			sprite.mainTexture = Resources.Load("image16") as Texture;
-			StartCoroutine(FadeIn(sprite, 0.5f, startA));
-			message = "A robot to be our friend \n with whom we could always play. ";
-			StartCoroutine(TypeText(nextAlpha, coverAlpha));
-		}
-		else if (count == 15)
-		{
+            audiosource.clip = part31;
+            audiosource.Play();
+            count++;
+            sprite.mainTexture = Resources.Load("image16") as Texture;
+            StartCoroutine(FadeIn(sprite, 0.5f, startA));
+            message = "Cathy says 'I'm looping, \n looping don't you see?' ";
+            StartCoroutine(TypeText(nextAlpha, coverAlpha));
+        }
+        else if (count == 30)
+        {
             DisableCharacters(page17);
+            EnableCharacters(page16);
+
+            if (back)
+                AnimatePage(page16);
+
+            audiosource.Stop();
+            audiosource.clip = part32;
+            audiosource.Play();
+            count++;
+            sprite.mainTexture = Resources.Load("image16") as Texture;
+            StartCoroutine(FadeIn(sprite, 0.5f, startA));
+            message = "'I loop and I loop. \n Its really fun for me.' ";
+            StartCoroutine(TypeText(nextAlpha, coverAlpha));
+        }
+        else if (count == 31)
+        {
+            DisableCharacters(page16);
+            EnableCharacters(page17);
+
+            if (!back)
+                AnimatePage(page17);
+
+            audiosource.Stop();
+            audiosource.clip = part33;
+            audiosource.Play();
+            count++;
+            sprite.mainTexture = Resources.Load("image17") as Texture;
+            StartCoroutine(FadeIn(sprite, 0.5f, startA));
+            message = "Our computers use looping \n in just the same way ";
+            StartCoroutine(TypeText(nextAlpha, coverAlpha));
+        }
+        else if (count == 32)
+        {
+            DisableCharacters(page18);
+            EnableCharacters(page17);
+
+            if (back)
+                AnimatePage(page17);
+
+            audiosource.Stop();
+            audiosource.clip = part34;
+            audiosource.Play();
+            count++;
+            sprite.mainTexture = Resources.Load("image17") as Texture;
+            StartCoroutine(FadeIn(sprite, 0.5f, startA));
+            message = "By doing the same thing \n a million times a day. ";
+            StartCoroutine(TypeText(nextAlpha, coverAlpha));
+        }
+        else if (count == 33)
+        {
+            DisableCharacters(page17);
+            EnableCharacters(page18);
+
+            if (!back)
+                AnimatePage(page18);
+
+            audiosource.Stop();
+            audiosource.clip = part35;
+            audiosource.Play();
+            count++;
+            sprite.mainTexture = Resources.Load("image18") as Texture;
+            StartCoroutine(FadeIn(sprite, 0.5f, startA));
+            message = "With Cat in tow, we meet Dudly Dog \n who is sad you see, ";
+            StartCoroutine(TypeText(nextAlpha, coverAlpha));
+        }
+        else if (count == 34)
+        {
             EnableCharacters(page18);
             DisableCharacters(page19);
 
             audiosource.Stop();
-			audiosource.clip = part17;
-			audiosource.Play();
-			count++;
-			sprite.mainTexture = Resources.Load("image17") as Texture;
-			StartCoroutine(FadeIn(sprite, 0.5f, startA));
-			message = "We could go on many adventures \n at home and beyond. ";
-			StartCoroutine(TypeText(nextAlpha, coverAlpha));
-		}
-		else if (count == 16)
-		{
+            audiosource.clip = part36;
+            audiosource.Play();
+            count++;
+            sprite.mainTexture = Resources.Load("image18") as Texture;
+            StartCoroutine(FadeIn(sprite, 0.5f, startA));
+            message = "Because he wants to do things \n faster and more easily. ";
+            StartCoroutine(TypeText(nextAlpha, coverAlpha));
+        }
+        else if (count == 35)
+        {
             DisableCharacters(page18);
+            EnableCharacters(page19);
+
+            if (!back)
+                AnimatePage(page19);
+
+            audiosource.Stop();
+            audiosource.clip = part37;
+            audiosource.Play();
+            count++;
+            sprite.mainTexture = Resources.Load("image19") as Texture;
+            StartCoroutine(FadeIn(sprite, 0.5f, startA));
+            message = "With Cat in tow, we meet Dudly Dog \n who is sad you see, ";
+            StartCoroutine(TypeText(nextAlpha, coverAlpha));
+        }
+        else if (count == 36)
+        {
             EnableCharacters(page19);
             DisableCharacters(page20);
 
             audiosource.Stop();
-			audiosource.clip = part18;
-			audiosource.Play();
-			count++;
-			sprite.mainTexture = Resources.Load("image18") as Texture;
-			StartCoroutine(FadeIn(sprite, 0.5f, startA));
-			message = "We would have a special friendship \n - a flesh and metal bond. ";
-			StartCoroutine(TypeText(nextAlpha, coverAlpha));
-		}
-		else if (count == 17)
-		{
+            audiosource.clip = part38;
+            audiosource.Play();
+            count++;
+            sprite.mainTexture = Resources.Load("image19") as Texture;
+            StartCoroutine(FadeIn(sprite, 0.5f, startA));
+            message = "Because he wants to do things \n faster and more easily. ";
+            StartCoroutine(TypeText(nextAlpha, coverAlpha));
+        }
+        else if (count == 37)
+        {
             DisableCharacters(page19);
+            EnableCharacters(page20);
+
+            if (!back)
+                AnimatePage(page20);
+
+            audiosource.Stop();
+            audiosource.clip = part39;
+            audiosource.Play();
+            count++;
+            sprite.mainTexture = Resources.Load("image20") as Texture;
+            StartCoroutine(FadeIn(sprite, 0.5f, startA));
+            message = "With Cat in tow, we meet Dudly Dog \n who is sad you see, ";
+            StartCoroutine(TypeText(nextAlpha, coverAlpha));
+        }
+        else if (count == 38)
+        {
             EnableCharacters(page20);
             DisableCharacters(page21);
 
+            audiosource.Stop();
+            audiosource.clip = part40;
+            audiosource.Play();
+            count++;
+            sprite.mainTexture = Resources.Load("image20") as Texture;
+            StartCoroutine(FadeIn(sprite, 0.5f, startA));
+            message = "Because he wants to do things \n faster and more easily. ";
+            StartCoroutine(TypeText(nextAlpha, coverAlpha));
+        }
+        else if (count == 39)
+        {
+            DisableCharacters(page20);
+            EnableCharacters(page21);
+
+            if (!back)
+                AnimatePage(page21);
+
+            audiosource.Stop();
+            audiosource.clip = part41;
+            audiosource.Play();
+            count++;
+            sprite.mainTexture = Resources.Load("image21") as Texture;
+            StartCoroutine(FadeIn(sprite, 0.5f, startA));
+            message = "With Cat in tow, we meet Dudly Dog \n who is sad you see, ";
+            StartCoroutine(TypeText(nextAlpha, coverAlpha));
+        }
+        else if (count == 40)
+        {
+            EnableCharacters(page21);
+            DisableCharacters(page22);
+
+            audiosource.Stop();
+            audiosource.clip = part42;
+            audiosource.Play();
+            count++;
+            sprite.mainTexture = Resources.Load("image21") as Texture;
+            StartCoroutine(FadeIn(sprite, 0.5f, startA));
+            message = "Because he wants to do things \n faster and more easily. ";
+            StartCoroutine(TypeText(nextAlpha, coverAlpha));
+        }
+        else if (count == 41)
+        {
+            DisableCharacters(page21);
+            EnableCharacters(page22);
+
+            if (!back)
+                AnimatePage(page22);
+
+            audiosource.Stop();
+            audiosource.clip = part43;
+            audiosource.Play();
+            count++;
+            sprite.mainTexture = Resources.Load("image22") as Texture;
+            StartCoroutine(FadeIn(sprite, 0.5f, startA));
+            message = "With Cat in tow, we meet Dudly Dog \n who is sad you see, ";
+            StartCoroutine(TypeText(nextAlpha, coverAlpha));
+        }
+        else if (count == 40)
+        {
+            EnableCharacters(page22);
+            DisableCharacters(page23);
+
+            audiosource.Stop();
+            audiosource.clip = part44;
+            audiosource.Play();
+            count++;
+            sprite.mainTexture = Resources.Load("image22") as Texture;
+            StartCoroutine(FadeIn(sprite, 0.5f, startA));
+            message = "Because he wants to do things \n faster and more easily. ";
+            StartCoroutine(TypeText(nextAlpha, coverAlpha));
+        }
+        else if (count == 41)
+        {
+            DisableCharacters(page22);
+            EnableCharacters(page23);
+
+            if (!back)
+                AnimatePage(page23);
+
+            audiosource.Stop();
+            audiosource.clip = part45;
+            audiosource.Play();
+            count++;
+            sprite.mainTexture = Resources.Load("image23") as Texture;
+            StartCoroutine(FadeIn(sprite, 0.5f, startA));
+            message = "With Cat in tow, we meet Dudly Dog \n who is sad you see, ";
+            StartCoroutine(TypeText(nextAlpha, coverAlpha));
+        }
+        else if (count == 42)
+        {
+            EnableCharacters(page23);
+            DisableCharacters(page24);
+
+            audiosource.Stop();
+            audiosource.clip = part46;
+            audiosource.Play();
+            count++;
+            sprite.mainTexture = Resources.Load("image23") as Texture;
+            StartCoroutine(FadeIn(sprite, 0.5f, startA));
+            message = "Because he wants to do things \n faster and more easily. ";
+            StartCoroutine(TypeText(nextAlpha, coverAlpha));
+        }
+        else if (count == 43)
+        {
+            DisableCharacters(page23);
+            EnableCharacters(page24);
+
+            if (!back)
+                AnimatePage(page24);
+
+            audiosource.Stop();
+            audiosource.clip = part47;
+            audiosource.Play();
+            count++;
+            sprite.mainTexture = Resources.Load("image24") as Texture;
+            StartCoroutine(FadeIn(sprite, 0.5f, startA));
+            message = "With Cat in tow, we meet Dudly Dog \n who is sad you see, ";
+            StartCoroutine(TypeText(nextAlpha, coverAlpha));
+        }
+        else if (count == 42)
+        {
+            EnableCharacters(page24);
+
+            audiosource.Stop();
+            audiosource.clip = part48;
+            audiosource.Play();
+            count++;
+            sprite.mainTexture = Resources.Load("image24") as Texture;
+            StartCoroutine(FadeIn(sprite, 0.5f, startA));
+            message = "Because he wants to do things \n faster and more easily. ";
+            StartCoroutine(TypeText(nextAlpha, coverAlpha));
+        }
+
+
+        else if (count == 43)
+        {
+            DisableCharacters(page24);
             //ls.GetComponent<UIPanel>().alpha = 1f;
             storyView.alpha = 0f;
 
-            SceneManager.LoadSceneAsync("LoadingScreen", LoadSceneMode.Additive);
-			StartCoroutine(DisplayScene());
-		} 
-		//}
+            //SceneManager.LoadSceneAsync("LoadingScreen");
+            StartCoroutine(DisplayScene());
+        }
+        //}
 
-		back = false;
-	}
+        back = false;
+    }
 
-
-	IEnumerator FadeIn(UIWidget w, float durationInSeconds, float a)
+    IEnumerator FadeIn(UIWidget w, float durationInSeconds, float a)
 	{
 		float startA = w.alpha;
 		float currentTime = 0f;
