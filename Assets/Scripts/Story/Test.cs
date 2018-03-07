@@ -180,7 +180,7 @@ public class Test : MonoBehaviour
 	private bool playedGame1;
 	private bool playedGame2;
 	private bool playedGame3;
-	//private bool playedGame4;
+	private bool playedGame4;
 
 	[Header("Tutorial")]
 	public GameObject Tutorial_1;
@@ -436,7 +436,6 @@ public class Test : MonoBehaviour
 			{
 				key1Press = true;
 				objectApp = true;
-				Debug.Log("Press 1");
 				setTap ();
                 //OnClick(); //trying this out
 			}
@@ -444,7 +443,6 @@ public class Test : MonoBehaviour
 			{
 				key2Press = true;
 				objectApp = true;
-				Debug.Log("Press 2");
 				setTap ();
                 //OnClick(); //trying this out
             }
@@ -452,7 +450,6 @@ public class Test : MonoBehaviour
 			{
 				key3Press = true;
 				objectApp = true;
-				Debug.Log("Press 3");
 				setTap ();
                 //OnClick(); //trying this out
             }
@@ -460,7 +457,6 @@ public class Test : MonoBehaviour
 			{
 				keyspacePress = true;
 				objectApp = true;
-				Debug.Log("Press space");
 				setTap ();
                 //OnClick(); //trying this out
             }
@@ -471,7 +467,6 @@ public class Test : MonoBehaviour
 					//if (Input.GetKeyDown(KeyCode.Return)) {
 					keyenterPress = true;
 					objectApp = true;
-					Debug.Log("Press enter");
 					setTap ();
                     //OnClick(); //trying this out
                 }
@@ -1386,15 +1381,19 @@ public class Test : MonoBehaviour
 			//}
 
 			//every 5 levels, if minigame option is active, display minigame instead of going to next page
-			if (count == 3 || count == 8 || count == 13 /*|| count == 18*/)
+			if (count == 15 || count == 27 || count == 33 || count == 39)
 			{
 				if (PlayerPrefs.GetInt("minigames") == 1)
 				{
 					if (!inMiniGameMode && CanPlay())
 					{
 						label.text = "";
-						SetMiniGame();
-					}
+                        //SetMiniGame();
+
+                        //==For Testing; Replace when minigame is ready==//
+                        Debug.Log("Minigame plays here");
+                        StartCoroutine(FadeOuter(sprite, 0.5f, nextAlpha, coverAlpha));
+                    }
 					else
 					{
 						//inMiniGameMode = false;
@@ -1414,15 +1413,15 @@ public class Test : MonoBehaviour
 	//check which minigames have already been played
 	bool CanPlay ()
 	{
-		if (count >= 3 && !playedGame1)
+		if (count >= 15 && !playedGame1)
 			return true;
-		else if (count >= 8 && !playedGame2)
+		else if (count >= 27 && !playedGame2)
 			return true;
-		else if (count >= 13 && !playedGame3)
+		else if (count >= 33 && !playedGame3)
 			return true;
-		//else if (count >= 18 && !playedGame4)
-		//    return true;
-		else
+        else if (count >= 39 && !playedGame4)
+            return true;
+        else
 			return false;
 	}
 
@@ -1431,7 +1430,6 @@ public class Test : MonoBehaviour
         for (int i = 0; i < pageNum.Length; i++)
         {
             pageNum[i].SetActive(true);
-            //pageNum[i].GetComponent<UI2DSpriteAnimation>().Play();
         }
     }
 
@@ -1484,16 +1482,16 @@ public class Test : MonoBehaviour
     public void SetMiniGame()
 	{
 		inMiniGameMode = true;
-		if (count >= 3)
+		if (count >= 15)
 			playedGame1 = true;
-		if (count >= 8)
+		if (count >= 27)
 			playedGame2 = true;
-		if (count >= 13)
+		if (count >= 33)
 			playedGame3 = true;
-		//if (count >= 18)
-		//    playedGame4 = true;
+        if (count >= 39)
+            playedGame4 = true;
 
-		DisableRobots();
+        DisableRobots();
 
 		audiosource.Stop();
 		mainCamera.gameObject.SetActive(false);
@@ -2210,6 +2208,9 @@ public class Test : MonoBehaviour
             EnableCharacters(page18);
             DisableCharacters(page19);
 
+            if (back)
+                AnimatePage(page18);
+
             audiosource.Stop();
             audiosource.clip = part36;
             audiosource.Play();
@@ -2233,7 +2234,7 @@ public class Test : MonoBehaviour
             count++;
             sprite.mainTexture = Resources.Load("image19") as Texture;
             StartCoroutine(FadeIn(sprite, 0.5f, startA));
-            message = "With Cat in tow, we meet Dudly Dog \n who is sad you see, ";
+            message = "Dudly says 'I need help my friends \n and I have a plan too!' ";
             StartCoroutine(TypeText(nextAlpha, coverAlpha));
         }
         else if (count == 36)
@@ -2241,13 +2242,16 @@ public class Test : MonoBehaviour
             EnableCharacters(page19);
             DisableCharacters(page20);
 
+            if (back)
+                AnimatePage(page19);
+
             audiosource.Stop();
             audiosource.clip = part38;
             audiosource.Play();
             count++;
             sprite.mainTexture = Resources.Load("image19") as Texture;
             StartCoroutine(FadeIn(sprite, 0.5f, startA));
-            message = "Because he wants to do things \n faster and more easily. ";
+            message = "'I'll put down each step \n called instructions for you.' ";
             StartCoroutine(TypeText(nextAlpha, coverAlpha));
         }
         else if (count == 37)
@@ -2264,7 +2268,7 @@ public class Test : MonoBehaviour
             count++;
             sprite.mainTexture = Resources.Load("image20") as Texture;
             StartCoroutine(FadeIn(sprite, 0.5f, startA));
-            message = "With Cat in tow, we meet Dudly Dog \n who is sad you see, ";
+            message = "Did you know everyone's computer \n can follow the same plan? ";
             StartCoroutine(TypeText(nextAlpha, coverAlpha));
         }
         else if (count == 38)
@@ -2272,13 +2276,16 @@ public class Test : MonoBehaviour
             EnableCharacters(page20);
             DisableCharacters(page21);
 
+            if (back)
+                AnimatePage(page20);
+
             audiosource.Stop();
             audiosource.clip = part40;
             audiosource.Play();
             count++;
             sprite.mainTexture = Resources.Load("image20") as Texture;
             StartCoroutine(FadeIn(sprite, 0.5f, startA));
-            message = "Because he wants to do things \n faster and more easily. ";
+            message = "Instructions make a program \n that can be used over and over again. ";
             StartCoroutine(TypeText(nextAlpha, coverAlpha));
         }
         else if (count == 39)
@@ -2295,7 +2302,7 @@ public class Test : MonoBehaviour
             count++;
             sprite.mainTexture = Resources.Load("image21") as Texture;
             StartCoroutine(FadeIn(sprite, 0.5f, startA));
-            message = "With Cat in tow, we meet Dudly Dog \n who is sad you see, ";
+            message = "With all of our friends, \n we have come to the end of the road ";
             StartCoroutine(TypeText(nextAlpha, coverAlpha));
         }
         else if (count == 40)
@@ -2303,13 +2310,16 @@ public class Test : MonoBehaviour
             EnableCharacters(page21);
             DisableCharacters(page22);
 
+            if (back)
+                AnimatePage(page21);
+
             audiosource.Stop();
             audiosource.clip = part42;
             audiosource.Play();
             count++;
             sprite.mainTexture = Resources.Load("image21") as Texture;
             StartCoroutine(FadeIn(sprite, 0.5f, startA));
-            message = "Because he wants to do things \n faster and more easily. ";
+            message = "And we've learned about words \n that are used when we code. ";
             StartCoroutine(TypeText(nextAlpha, coverAlpha));
         }
         else if (count == 41)
@@ -2326,13 +2336,16 @@ public class Test : MonoBehaviour
             count++;
             sprite.mainTexture = Resources.Load("image22") as Texture;
             StartCoroutine(FadeIn(sprite, 0.5f, startA));
-            message = "With Cat in tow, we meet Dudly Dog \n who is sad you see, ";
+            message = "See, with Tommy, \n you can use the same words too! ";
             StartCoroutine(TypeText(nextAlpha, coverAlpha));
         }
-        else if (count == 40)
+        else if (count == 42)
         {
             EnableCharacters(page22);
             DisableCharacters(page23);
+
+            if (back)
+                AnimatePage(page22);
 
             audiosource.Stop();
             audiosource.clip = part44;
@@ -2340,10 +2353,10 @@ public class Test : MonoBehaviour
             count++;
             sprite.mainTexture = Resources.Load("image22") as Texture;
             StartCoroutine(FadeIn(sprite, 0.5f, startA));
-            message = "Because he wants to do things \n faster and more easily. ";
+            message = "Jump, loop, count, and run \n lets you tell the computer what to do. ";
             StartCoroutine(TypeText(nextAlpha, coverAlpha));
         }
-        else if (count == 41)
+        else if (count == 43)
         {
             DisableCharacters(page22);
             EnableCharacters(page23);
@@ -2357,13 +2370,16 @@ public class Test : MonoBehaviour
             count++;
             sprite.mainTexture = Resources.Load("image23") as Texture;
             StartCoroutine(FadeIn(sprite, 0.5f, startA));
-            message = "With Cat in tow, we meet Dudly Dog \n who is sad you see, ";
+            message = "Tommy the Turtle has helped you \n learn to code. ";
             StartCoroutine(TypeText(nextAlpha, coverAlpha));
         }
-        else if (count == 42)
+        else if (count == 44)
         {
             EnableCharacters(page23);
             DisableCharacters(page24);
+
+            if (back)
+                AnimatePage(page23);
 
             audiosource.Stop();
             audiosource.clip = part46;
@@ -2371,10 +2387,10 @@ public class Test : MonoBehaviour
             count++;
             sprite.mainTexture = Resources.Load("image23") as Texture;
             StartCoroutine(FadeIn(sprite, 0.5f, startA));
-            message = "Because he wants to do things \n faster and more easily. ";
+            message = "Thank you for taking this trip \n with friends down the Code Road. ";
             StartCoroutine(TypeText(nextAlpha, coverAlpha));
         }
-        else if (count == 43)
+        else if (count == 45)
         {
             DisableCharacters(page23);
             EnableCharacters(page24);
@@ -2388,31 +2404,34 @@ public class Test : MonoBehaviour
             count++;
             sprite.mainTexture = Resources.Load("image24") as Texture;
             StartCoroutine(FadeIn(sprite, 0.5f, startA));
-            message = "With Cat in tow, we meet Dudly Dog \n who is sad you see, ";
+            message = "Congratulations on completeing \n the Code Road! ";
             StartCoroutine(TypeText(nextAlpha, coverAlpha));
         }
-        else if (count == 42)
-        {
-            EnableCharacters(page24);
+        //else if (count == 42)
+        //{
+        //    EnableCharacters(page24);
 
-            audiosource.Stop();
-            audiosource.clip = part48;
-            audiosource.Play();
-            count++;
-            sprite.mainTexture = Resources.Load("image24") as Texture;
-            StartCoroutine(FadeIn(sprite, 0.5f, startA));
-            message = "Because he wants to do things \n faster and more easily. ";
-            StartCoroutine(TypeText(nextAlpha, coverAlpha));
-        }
+        //    if (back)
+        //        AnimatePage(page24);
+
+        //    audiosource.Stop();
+        //    audiosource.clip = part48;
+        //    audiosource.Play();
+        //    count++;
+        //    sprite.mainTexture = Resources.Load("image24") as Texture;
+        //    StartCoroutine(FadeIn(sprite, 0.5f, startA));
+        //    message = "Because he wants to do things \n faster and more easily. ";
+        //    StartCoroutine(TypeText(nextAlpha, coverAlpha));
+        //}
 
 
-        else if (count == 43)
+        else if (count == 46)
         {
             DisableCharacters(page24);
             //ls.GetComponent<UIPanel>().alpha = 1f;
             storyView.alpha = 0f;
 
-            //SceneManager.LoadSceneAsync("LoadingScreen");
+            SceneManager.LoadSceneAsync("LoadingScreen", LoadSceneMode.Additive);
             StartCoroutine(DisplayScene());
         }
         //}
@@ -2495,7 +2514,6 @@ public class Test : MonoBehaviour
 		int spaces = 0;
 		if ((PlayerPrefs.GetInt("typing") == 1) && (PlayerPrefs.GetInt("highlight") == 0))
 		{
-            Debug.Log("testing...");
             label.text += "[FFFF00]";
 			foreach (char letter in message.ToCharArray())
 			{

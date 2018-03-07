@@ -1,309 +1,511 @@
-﻿using System.Collections;
+﻿using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 
-    [Header("Robot Controls")]
-    public float speed = 0.25f;
-    float spawnRate = 5f;
-    public bool fastMode = false;
-    public GameObject[] robotList; //Array of all available robots to pick from
-    public List<GameObject> tempList; //stores a list of random bots for each play session
-    private bool spawning = false;
-    int turnCount = 5;
-    [HideInInspector] public int totalTurns;
+    public GameObject player;
+    public Text move;
+    public Text showMoves;
+    public static string movesString;
+    public static List<string> movement = new List<string>();
+    public static bool loadedCode = false;
+    string size;
+    GameObject moveBackground;
 
-    [Header("Comparison Controls")]
-    public int correctNum = 0;
-    public int incorrectNum = 0;
-	Transform targetCheckBox;
-    Transform targetCompareBox;
-    GameObject targetRobot;
-    [HideInInspector] public GameObject pickedRobot;
-    float compareTime = 1f;
-    private bool checking;
-    private int giveTargetCount = 0;
-    private int targetCount = 0;
+    bool growthSwitch;
+    bool shrinkSwitch;
 
-    [Header("Gamestate Checks")]
-    public bool gameOver = false;
-    public bool isMainMenuGame;
-    UIManager uim;
+    bool facingRight;
+    bool turned;
 
-    [Header("Scrolling Ground Variables")]
-    GameObject ground;
-    float offset;
+    bool spinOrRoll;
 
-    [Header("Audio Elements")]
-    public AudioClip correctSound;
-    public AudioClip incorrectSound;
-    AudioSource audioSource;
+    bool jumpSwitch;
+    bool jumpReset;
+
+    public static int index;
+    int countTillLineSkip;
+
+    Vector3 resetAfterSpinOrRoll;
+    Vector3 resetAfterJump;
+
+    int saveStartLocation;
+    int countLoops;
+    public Text howManyTimesToLoop;
+    float loopsFromSlider;
+    public Slider myLoops;
+
+    string startFormat;
+    string endFormat;
+    int movementLengthCollection;
+    bool loopState;
+  
+    public AudioClip[] mySounds;
+
+    public Button[] myButtons;
+    int buttonCount;
 
     // Use this for initialization
-    void Start () {
-        if (!isMainMenuGame)
+    void Start()
+    {
+        moveBackground = GameObject.Find("MoveBackground");
+        switch(PlayerPrefs.GetInt("fontSizeIndex"))
         {
-            Scene scene = SceneManager.GetSceneByName("MiniGame_Story");
-            if (SceneManager.GetActiveScene() != scene)
-                SceneManager.SetActiveScene(scene);
+            case 0:
+                moveBackground.transform.localScale = new Vector2(1.0f, 1.0f);
+                showMoves.GetComponent<RectTransform>().sizeDelta = new Vector2(504, 145);
+                break;
+            case 1:
+                moveBackground.transform.localScale = new Vector2(1.0f, 1.2f);
+                showMoves.GetComponent<RectTransform>().sizeDelta = new Vector2(504, 190);
+                break;
+            case 2:
+                moveBackground.transform.localScale = new Vector2(1.0f, 1.5f);
+                showMoves.GetComponent<RectTransform>().sizeDelta = new Vector2(504, 210);
+                break;
         }
+        showMoves.fontSize = PlayerPrefs.GetInt("fontSize");
+        loopState = false;
+        loopsFromSlider = 2;
+        howManyTimesToLoop.text = "Times To Loop : " + loopsFromSlider;
+        countLoops = 0;
+        saveStartLocation = -1;
+        countTillLineSkip = 0;
+        growthSwitch = true;
+        shrinkSwitch = true;
 
-        turnCount = 5;
-        //turnCount = 1; //for testing purposes
-        totalTurns = turnCount;
-        speed = 0.25f;
-        correctNum = 0;
-        incorrectNum = 0;
-        gameOver = false;
+        turned = false;
+        facingRight = true;
 
-        targetCheckBox = GameObject.Find("CheckBox").transform;
-        targetCompareBox = GameObject.Find("CompareBox").transform;
+        spinOrRoll = false;
 
-        ground = GameObject.Find("Ground");
+        jumpSwitch = true;
+        jumpReset = false;
 
-        audioSource = GetComponent<AudioSource>();
-        uim = GetComponent<UIManager>();
-
-        //Needed for when replaying mini game
-        if (PlayerPrefs.GetInt("levelSelect") == 1)
-        {
-            spawnRate = 8f;
-            Debug.Log("Spawn Rate: " + spawnRate);
-            RandomArray(3);
-        }
-        else if (PlayerPrefs.GetInt("levelSelect") == 2)
-        {
-            spawnRate = 6.5f;
-            Debug.Log("Spawn Rate: " + spawnRate);
-            RandomArray(5);
-        }
-        else if (PlayerPrefs.GetInt("levelSelect") == 3)
-        {
-            spawnRate = 5f;
-            Debug.Log("Spawn Rate: " + spawnRate);
-            RandomArray(robotList.Length);
-        }
-
-        if (PlayerPrefs.GetInt("levelSelect") != 0)
-            RandomTarget();
-
-        SetDifficulty();
+        startFormat = "<b><color=#00ff00ff>";
+        endFormat = "</color></b>";
+        movementLengthCollection = 0;
+     
+        buttonCount = 0;
+        if (PlayerPrefs.GetInt("Scan") == 1) { StartCoroutine(scanner()); }
+        GameStatusEventHandler.gameWasStarted("freeplay");
     }
-	
-	// Update is called once per frame
-	void Update () {
-        if (PlayerPrefs.GetInt("levelSelect") != 0 )
+
+    IEnumerator scanner()
+    {
+        myButtons[buttonCount].GetComponent<Image>().color = Color.white;
+        yield return new WaitForSeconds(PlayerPrefs.GetFloat("scanSpeed"));
+        myButtons[buttonCount].GetComponent<Image>().color = new Color(0.258f, 0.941f, 0.090f, 1);
+
+        if(buttonCount == myButtons.Length -1) { buttonCount = 0; } else { buttonCount++; }
+        StartCoroutine(scanner());
+    }
+
+    void checkScanPosition()
+    {
+        if (buttonCount == 0) { addGrow(); }
+        else if (buttonCount == 1) { addShrink(); }
+        else if (buttonCount == 2) { addTurn(); }
+        else if (buttonCount == 3) { addSpin(); }
+        else if (buttonCount == 4) { addJump(); }
+        else if (buttonCount == 5) { addSing(); }
+        else if (buttonCount == 6) { addWalkForward(); }
+        else if (buttonCount == 7) { addWalkBackward(); }
+        else if (buttonCount == 8) { startLoop(); }
+        else if (buttonCount == 9) { endLoop(); }
+        else if (buttonCount == 10) { play(); }
+        else if (buttonCount == 11) { clearList(); }
+        else if (buttonCount == 12) { erase(); }
+        else if (buttonCount == 13) { mainMenu(); }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (showMoves.text != movesString)
         {
-            offset += (speed * Time.deltaTime) * 2f; // / 10.0f;
-            ground.GetComponent<Renderer>().material.SetTextureOffset("_MainTex", new Vector2(offset, 0.305f));
+            movesString = showMoves.text;
+        }
 
-            //Speed Controls
-            if (fastMode)
-                speed = 0.5f;
-            else
-                speed = 0.35f;
+        if (loadedCode)
+        {
 
-            //Game is Running
-            if (!gameOver)
+            Debug.Log("Made it here: " + movement.Count);
+            clearList();
+            foreach (string currMove in movement)
             {
-                if (!spawning)
+                Debug.Log("CurrentMove: " + currMove);
+                if (currMove != "")
                 {
-                    spawning = true;
-                    StartCoroutine(CreateRobots());
+                    showMoves.text += currMove + "...";
+                    lineSkip(4);
                 }
+            }
+            loadedCode = false;
+        }
 
-                if (turnCount <= 0)
+        if (Input.anyKeyDown)
+        {
+            if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1) || Input.GetMouseButtonDown(2)) return;
+
+            if ((PlayerPrefs.GetInt("Scan") == 1))
+            {
+                checkScanPosition();
+            }
+        }
+
+        if (move.text.Contains("Forward"))
+               {
+            if (facingRight)
+            {
+                if (player.transform.position.x < 6.7)
                 {
-                    Debug.Log("Game Over");
-                    gameOver = true;
-                    Destroy(pickedRobot);
-                    Destroy(targetRobot);
-                    pickedRobot = null;
-                    targetRobot = null;
+                    player.transform.position = Vector3.MoveTowards(player.transform.position, new Vector3(player.transform.position.x + 2, player.transform.position.y, 0), Time.deltaTime * 1);
+                }
+            }
+            else
+            {
+                if (player.transform.position.x > -7.4)
+                {
+                    player.transform.position = Vector3.MoveTowards(player.transform.position, new Vector3(player.transform.position.x - 2, player.transform.position.y, 0), Time.deltaTime * 1);
+                }
+            }          
+        }
+
+        if (move.text.Contains("Backward"))
+        {
+            if (facingRight)
+            {
+                if (player.transform.position.x > -7.4)
+                {
+                    player.transform.position = Vector3.MoveTowards(player.transform.position, new Vector3(player.transform.position.x - 2, player.transform.position.y, 0), Time.deltaTime * 1);                   
+                }
+            }
+            else
+            {
+                if (player.transform.position.x < 6.7)
+                {
+                    player.transform.position = Vector3.MoveTowards(player.transform.position, new Vector3(player.transform.position.x + 2, player.transform.position.y, 0), Time.deltaTime * 1);                  
+                }
+            }
+        }
+
+       
+        if (move.text.Contains("Spin")) { spinOrRoll = true;  player.transform.Rotate(0, Time.deltaTime * 370, 0); }
+
+        if (move.text.Contains("Grow") && growthSwitch)
+        {
+            if (player.transform.localScale.x < 3)
+            {
+                player.transform.localScale = new Vector3(player.transform.localScale.x + .5f, player.transform.localScale.y + .5f, player.transform.localScale.z + .5f);
+            }
+            growthSwitch = false;
+        }
+
+        if (move.text.Contains("Shrink") && shrinkSwitch)
+        {
+            if (player.transform.localScale.x > .5f)
+            {
+                player.transform.localScale = new Vector3(player.transform.localScale.x - .5f, player.transform.localScale.y - .5f, player.transform.localScale.z - .5f);
+            }
+            shrinkSwitch = false;
+        }
+
+        if (move.text.Contains("Jump"))
+        {
+            if (jumpSwitch)
+            {               
+                player.transform.position = Vector3.MoveTowards(player.transform.position, new Vector3(player.transform.position.x , player.transform.position.y + 2, 0), Time.deltaTime * 4);
+            }
+            else
+            {
+                player.transform.position = Vector3.MoveTowards(player.transform.position, new Vector3(player.transform.position.x , player.transform.position.y - 2, 0), Time.deltaTime * 4);
+            }
+       }
+
+        if (move.text.Contains("Turn"))
+        {
+            turned = true;
+             player.transform.Rotate(0, Time.deltaTime * 180, 0);         
+        }
+    }
+
+    public void addSpin() {  movement.Add("Spin"); showMoves.text = showMoves.text + "Spin..."; lineSkip(4); playSound(11); } 
+    public void addGrow() {movement.Add("Grow"); showMoves.text = showMoves.text + "Grow..."; lineSkip(4); playSound(5); } 
+    public void addShrink() {movement.Add("Shrink"); showMoves.text = showMoves.text + "Shrink..."; lineSkip(6); playSound(9); } 
+    public void addTurn() { movement.Add("Turn"); showMoves.text = showMoves.text + "Turn..."; lineSkip(4); playSound(13); } 
+    public void addJump() { movement.Add("Jump"); showMoves.text = showMoves.text + "Jump..."; lineSkip(4); playSound(6);  }
+    public void addWalkForward() {  movement.Add("Forward"); showMoves.text = showMoves.text + "Forward..."; lineSkip(7); playSound(4);  }
+    public void addWalkBackward() { movement.Add("Backward"); showMoves.text = showMoves.text + "Backward..."; lineSkip(8); playSound(0); }
+    public void addSing() {  movement.Add("Sing"); showMoves.text = showMoves.text + "Sing..."; lineSkip(4); playSound(10); }
+
+    public void erase() 
+    {
+        if (movement.Count >= 1)
+        {
+            playSound(14);
+            movement.RemoveAt(movement.Count - 1);
+
+            showMoves.text = "";
+            for (int i = 0; i < movement.Count; i++)
+            {
+                showMoves.text += movement[i] + "...";
+            }
+        }
+    }
+
+    public void startLoop()
+    {
+            if (!loopState)
+            {
+                movement.Add("Begin Loop"); showMoves.text = showMoves.text + "Begin Loop..."; lineSkip(10);
+                loopState = true;
+                playSound(1);
+            }        
+    }
+
+    public void endLoop()
+    {        
+            if (loopState)
+            {
+                movement.Add("End Loop"); showMoves.text = showMoves.text + "End Loop..."; lineSkip(8);
+                loopState = false;
+                playSound(3);
+            }        
+    }
+
+    void lineSkip(int counter)
+    {
+        countTillLineSkip += counter;
+        if(countTillLineSkip >= 60)
+        {
+            showMoves.text = showMoves.text + "\n";
+            countTillLineSkip = 0;
+        }
+    }
+
+    public void clearList()
+    {
+        loopState = false;
+        if (!loadedCode)
+        {
+            playSound(2);
+            movement.Clear();
+            move.text = "List Of Moves Cleared";
+        }
+        movementLengthCollection = 0;
+        showMoves.text = "";
+        player.transform.localScale = new Vector3(2, 2, 2);
+        player.transform.rotation = Quaternion.Euler(0, 90, 0);
+        player.transform.position = new Vector3(-2.64f,-3.72f,0.28f); 
+    }
+    public void play()
+    {
+        StartCoroutine(playStart());
+    }
+    public IEnumerator playStart()
+    {
+        playSound(8);
+        yield return new WaitForSeconds(1);
+        facingRight = true;
+        if (!loopState)
+        {
+            movementLengthCollection = 0;
+            player.transform.localScale = new Vector3(2, 2, 2);
+            player.transform.rotation = Quaternion.Euler(0, 90, 0);
+            player.transform.position = new Vector3(-2.64f, -3.72f, 0.28f);
+            StartCoroutine(playingMovement());
+        }
+        else { move.text = "Must Close All Loops To Play"; }
+    }
+
+    public void slider()
+    {
+        loopsFromSlider = myLoops.value;
+        howManyTimesToLoop.text = "Times To Loop : " + loopsFromSlider;
+    }
+
+    //Inserts rich text
+    void insertFormat(int i)
+    {
+        Debug.Log("Called insertFormat");
+        for (int h = 0; h < movement.Count; h++)
+        {
+            if (movement[h].Contains(startFormat))
+            {
+                if (movement[h].Contains("Right"))
+                {
+                    movement[h] = movement[h].Substring(startFormat.Length, 5);
+                }
+                else if (movement[h].Contains("Left") || movement[h].Contains("Turn") || movement[h].Contains("Spin") || movement[h].Contains("Jump") || movement[h].Contains("Grow") || movement[h].Contains("Sing"))
+                {
+                    movement[h] = movement[h].Substring(startFormat.Length, 4);
+                }
+                else if (movement[h].Contains("Shrink"))
+                {
+                    movement[h] = movement[h].Substring(startFormat.Length, 6);
+                }
+                else if (movement[h].Contains("Begin Loop"))
+                {
+                    movement[h] = movement[h].Substring(startFormat.Length, 10);
+                }
+                else if (movement[h].Contains("End Loop"))
+                {
+                    movement[h] = movement[h].Substring(startFormat.Length, 8);
+                }
+                else if(movement[h].Contains("Forward"))
+                {
+                    movement[h] = movement[h].Substring(startFormat.Length, 7);
+                }
+                else if (movement[h].Contains("Backward"))
+                {
+                    movement[h] = movement[h].Substring(startFormat.Length, 8);
+                }
+            }
+        }
+
+        showMoves.text = "";
+       
+        movement[i] = (startFormat + movement[i] + endFormat);
+        
+        for (int j = 0; j < movement.Count; j++)
+        {
+            showMoves.text += movement[j] + "...";
+        }       
+    }
+
+    void playMoveName(string move)
+    {
+        if (PlayerPrefs.GetInt("Voice") == 1)
+        {
+            if (move.Contains("Grow")) { GetComponent<AudioSource>().clip = mySounds[5]; }
+            if (move.Contains("Spin")) { GetComponent<AudioSource>().clip = mySounds[11]; }
+            if (move.Contains("Turn")) { GetComponent<AudioSource>().clip = mySounds[13]; }
+            if (move.Contains("Jump")) { GetComponent<AudioSource>().clip = mySounds[6]; }
+            if (move.Contains("Sing")) { GetComponent<AudioSource>().clip = mySounds[10]; }
+            if (move.Contains("Shrink")) { GetComponent<AudioSource>().clip = mySounds[9]; }
+            if (move.Contains("Forward")) { GetComponent<AudioSource>().clip = mySounds[4]; }
+            if (move.Contains("Backward")) { GetComponent<AudioSource>().clip = mySounds[0]; }
+            if (move.Contains("Begin")) { GetComponent<AudioSource>().clip = mySounds[1]; }
+            if (move.Contains("End")) { GetComponent<AudioSource>().clip = mySounds[3]; }
+
+            GetComponent<AudioSource>().Play();
+        }
+    }
+  
+    IEnumerator playingMovement()
+    {
+        for (int i = 0; i < movement.Count; i++)
+        {
+            if(movement[i].Contains("Begin Loop")) { 
+               /*i++;*/ saveStartLocation = i;
+            }
+            Debug.Log("startLocation: " + saveStartLocation);
+          
+            if (movement[i].Contains("End Loop")) {
+                countLoops++;
+                if (countLoops < loopsFromSlider) {
+                    i = saveStartLocation;
+                } else {
+                    countLoops = 0;
                 }
             }
 
-            //Compare Robots
-            if (pickedRobot && !checking)
+            if (movement[i].Contains("Roll") || movement[i].Contains("Spin"))
             {
-                checking = true;
-                StartCoroutine(PickRobot());
+                resetAfterSpinOrRoll = player.transform.eulerAngles;
+                AnimatePlayer.run = true;
             }
-        }
-    }
 
-    public void SetDifficulty ()
-    {
-        if (PlayerPrefs.GetInt("levelSelect") == 1)
-        {
-            targetCount = 1; //number of incorrect bots between matches
-            spawnRate = 8f;
-            Debug.Log("Spawn Rate: " + spawnRate);
-        }
-        else if (PlayerPrefs.GetInt("levelSelect") == 2)
-        {
-            targetCount = 2; //number of incorrect bots between matches
-            spawnRate = 6.5f;
-            Debug.Log("Spawn Rate: " + spawnRate);
-        }
-        else if (PlayerPrefs.GetInt("levelSelect") == 3)
-        {
-            targetCount = 2; //number of incorrect bots between matches; previously 3
-            spawnRate = 5f;
-            Debug.Log("Spawn Rate: " + spawnRate);
-        }
-    }
+            if (movement[i].Contains("Right") || movement[i].Contains("Left") || movement[i].Contains("Turn") || movement[i].Contains("Backward") || movement[i].Contains("Forward"))
+            {
+                AnimatePlayer.run = true;
+            }
 
-    GameObject PickRandom ()
-    {
-        int targetIndex;
-        GameObject targetObject;
-
-        //if (PlayerPrefs.GetInt("levelSelect") == 1)
-        //    targetIndex = Random.Range(0, 3);
-        //else
-            targetIndex = Random.Range(0, tempList.Count);
-
-        targetObject = tempList[targetIndex];
-        return targetObject;
-    }
-
-    public void RandomTarget ()
-    {
-        if (targetRobot == null)
-            targetRobot = Instantiate(PickRandom(), targetCheckBox.position, Quaternion.identity);
-        targetRobot.GetComponent<ConveyorRobot>().enabled = false;
-    }
-
-    public void RandomArray (int totalObjectCount)
-    {
-        tempList = new List<GameObject>();
-        tempList.Clear();
-        GameObject tempBot;
-
-        bool isDupe = false;
-
-        for (int i = 0; i < totalObjectCount; i++)
-        {
-            tempBot = robotList[Random.Range(0, robotList.Length)];
-
-            if (tempList.Contains(tempBot))
-                isDupe = true;
-
-            if (!isDupe)
-                tempList.Add(tempBot);
-            else
-                i -= 1;
-
-            isDupe = false;
-        }
-    }
-
-    IEnumerator CreateRobots ()
-    {
-        GameObject newRobot;
-		GameObject tempBot;
-
-        //Spawns randomly
-        if (giveTargetCount < targetCount)
-        {
-			tempBot = PickRandom ();
-
-			newRobot = Instantiate(tempBot, tempBot.transform.position, Quaternion.identity);
+            if (movement[i].Contains("Sing"))
+            {
+                AnimatePlayer.sing = true;                               
+            }
+          
+            if (movement[i].Contains("Jump"))
+            {
+                jumpReset = true; resetAfterJump = player.transform.position;
+                AnimatePlayer.jump = true;
+                StartCoroutine(jump());
+            }
+            insertFormat(i);
             
+            move.text = movement[i];
+            playMoveName(move.text);
 
-            ////These robots should not match the target, but still be randomized
-            ////This section may need to be reverted later based on feedback
-            //if (newRobot.GetComponent<ConveyorRobot>().ID == targetRobot.GetComponent<ConveyorRobot>().ID)
-            //{
-            //    Destroy(newRobot);
-            //    StartCoroutine(CreateRobots());
-            //    Debug.Log("wrong spawn");
-            //}
+            yield return new WaitForSeconds(1);
+            AnimatePlayer.run = false;
+            AnimatePlayer.jump = false;
+            AnimatePlayer.sing = false;
+            AnimatePlayer.playOnce = true;
+            jumpSwitch = true;
 
-            //else
-            giveTargetCount++;
-        }
-        else
-        {
-			int tempID = targetRobot.GetComponent<ConveyorRobot> ().ID;
-			tempBot = robotList [tempID];
-
-			newRobot = Instantiate(tempBot, tempBot.transform.position, Quaternion.identity);
-            newRobot.GetComponent<ConveyorRobot>().enabled = true;
-            giveTargetCount = 0;
-        }
-
-        yield return new WaitForSeconds((spawnRate / speed) * 0.25f);
-        spawning = false;
-    }
-
-    IEnumerator PickRobot ()
-    {
-        GameObject tempRobot = Instantiate(pickedRobot, targetCompareBox.position, Quaternion.identity);
-        tempRobot.transform.SetParent(targetCompareBox, true); //not really necissary, but keeps heirarchy clean
-        tempRobot.GetComponent<ConveyorRobot>().enabled = false;
-        Destroy(pickedRobot);
-        pickedRobot = tempRobot;
-        yield return new WaitForSeconds(compareTime);
-        CheckIfMatch();
-    }
-
-    void CheckIfMatch ()
-    {
-        if (pickedRobot.GetComponent<ConveyorRobot>().ID == targetRobot.GetComponent<ConveyorRobot>().ID && checking)
-        {
-            audioSource.clip = correctSound;
-            audioSource.Play();
-            uim.correct.alpha = 1f;
-            targetCompareBox.GetComponent<UISprite>().color = Color.green;
-            Debug.Log("Success!");
-            StartCoroutine(CheckReset(true));
-        }
-        else
-        {
-            audioSource.clip = incorrectSound;
-            audioSource.Play();
-            uim.incorrect.alpha = 1f;
-            targetCompareBox.GetComponent<UISprite>().color = Color.red;
-            Debug.Log("Try again!");
-            StartCoroutine(CheckReset(false));
-        }
-    }
-
-    IEnumerator CheckReset (bool isCorrect)
-    {
-        yield return new WaitForSeconds(1f);
-        if (isCorrect)
-        {
-            correctNum++;
-            turnCount--;
-            uim.turns.text = turnCount.ToString();
-            //giveTargetCount = 0;
-
-            Destroy(pickedRobot);
-            Destroy(targetRobot);
-            pickedRobot = null;
-            targetRobot = null;
-
-            if (!gameOver)
+            if (jumpReset)
             {
-                RandomTarget();
-                checking = false;
+                player.transform.position = resetAfterJump;
+                jumpReset = false;
             }
-        }
-        else
-        {
-            incorrectNum++;
-            Destroy(pickedRobot);
-            pickedRobot = null;
-            checking = false;
-        }
 
-        uim.correct.alpha = 0f;
-        uim.incorrect.alpha = 0f;
-        targetCompareBox.GetComponent<UISprite>().color = Color.white;
+            if (spinOrRoll)
+            {
+                player.transform.eulerAngles = resetAfterSpinOrRoll;
+                spinOrRoll = false;
+            }
+
+            if (!facingRight && turned)
+            {
+                player.transform.eulerAngles = new Vector3(0, 90, 0);
+                facingRight = true;
+            }
+            else if(facingRight && turned)
+            {
+                player.transform.eulerAngles = new Vector3(0, 270, 0);
+                facingRight = false;
+            }
+
+            growthSwitch = true;
+            shrinkSwitch = true;
+            turned = false;         
+        }
+      
+        move.text = "Done Moving";
+    }
+
+    IEnumerator jump()
+    {
+        yield return new WaitForSeconds(.5f);
+        jumpSwitch = false;       
+    }
+
+    void playSound(int num)
+    {
+        if (PlayerPrefs.GetInt("Voice") == 1)
+        {
+            GetComponent<AudioSource>().clip = mySounds[num];
+            GetComponent<AudioSource>().Play();
+        }
+    }
+   
+    public void mainMenu()
+    {
+        GameStatusEventHandler.gameWasStopped();
+        StartCoroutine(mainMenuStart());
+    }
+    IEnumerator mainMenuStart()
+    {
+        playSound(7);
+        yield return new WaitForSeconds(1.5f);
+        clearList();
+        LoadManager.level = "Title";
+        SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);
+        Application.LoadLevel("MenuScreen");
     }
 }
