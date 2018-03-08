@@ -102,4 +102,11 @@ public class PlayMiniGame : MonoBehaviour {
         background.mainTexture = Resources.Load("coderoad_opening") as Texture;
     }
 
+    public void Tutorial ()
+    {
+        ChallengeMenu.SetActive(false);
+        SceneManager.LoadSceneAsync("LoadingScreen", LoadSceneMode.Additive);
+        StartCoroutine(GoToScene("Tutorial"));
+    }
+
 }

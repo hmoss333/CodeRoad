@@ -580,10 +580,10 @@ public class Tutorial : MonoBehaviour
     IEnumerator mainMenuStart()
     {
         playSound(7);
-        yield return new WaitForSeconds(1.5f);
-        LoadManager.level = "Title";
         SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);
-        Application.LoadLevel("MenuScreen");
+        yield return new WaitForSeconds(1.5f);
+        //LoadManager.level = "MenuScreen";
+        SceneManager.LoadSceneAsync("MenuScreen");
     }
 
 }
