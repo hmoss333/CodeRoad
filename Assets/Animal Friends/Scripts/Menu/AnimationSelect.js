@@ -5,10 +5,10 @@ var sceneCamera : Camera;
 
 private var currentAnimation : String;
 
-var dog : GameObject;
-var cat : GameObject;
-var turtle : GameObject;
-var owl : GameObject;
+var lion : GameObject;
+var giraffe : GameObject;
+var elephant : GameObject;
+var crocodile : GameObject;
 
 var idleButton : Transform;
 var talkButton : Transform;
@@ -25,11 +25,11 @@ var selectedButton : Transform;
 private var selectedButtonScript : SelectedButton;
 
 function Start () {
-	dog.GetComponent.<Animation>().Play("Walk Dog");
-	cat.GetComponent.<Animation>().Play("Walk Cat");
-	turtle.GetComponent.<Animation>().Play("Walk Turtle");
-	owl.GetComponent.<Animation>().Play("Walk Owl");
-	
+	lion.GetComponent.<Animation>().Play("Walk Lion");
+	giraffe.GetComponent.<Animation>().Play("Walk Giraffe");
+	elephant.GetComponent.<Animation>().Play("Walk Elephant");
+	crocodile.GetComponent.<Animation>().Play("Walk Crocodile");
+
 	selectedButtonScript = selectedButton.GetComponent(SelectedButton);
 }
 
@@ -43,10 +43,10 @@ function Update () {
 					if(currentAnimation != "Idle"){
 						BlendAllCharactersToZero();
 						selectedButtonScript.SetAnimationStart(Time.time);
-						dog.GetComponent.<Animation>().Blend("Idle Dog");
-						cat.GetComponent.<Animation>().Blend("Idle Cat");
-						turtle.GetComponent.<Animation>().Blend("Idle Turtle");
-						owl.GetComponent.<Animation>().Blend("Idle Owl");
+						lion.GetComponent.<Animation>().Blend("Idle Lion");
+						giraffe.GetComponent.<Animation>().Blend("Idle Giraffe");
+						elephant.GetComponent.<Animation>().Blend("Idle Elephant");
+						crocodile.GetComponent.<Animation>().Blend("Idle Crocodile");
 						selectedButton.position = idleButton.position;
 						currentAnimation = "Idle";
 					}
@@ -55,10 +55,10 @@ function Update () {
 					if(currentAnimation != "Talk"){
 						BlendAllCharactersToZero();
 						selectedButtonScript.SetAnimationStart(Time.time);
-						dog.GetComponent.<Animation>().Blend("Talk Dog");
-						cat.GetComponent.<Animation>().Blend("Talk Cat");
-						turtle.GetComponent.<Animation>().Blend("Talk Turtle");
-						owl.GetComponent.<Animation>().Blend("Talk Owl");
+						lion.GetComponent.<Animation>().Blend("Talk Lion");
+						giraffe.GetComponent.<Animation>().Blend("Talk Giraffe");
+						elephant.GetComponent.<Animation>().Blend("Talk Elephant");
+						crocodile.GetComponent.<Animation>().Blend("Talk Crocodile");
 						selectedButton.position = talkButton.position;
 						currentAnimation = "Talk";
 					}
@@ -67,10 +67,10 @@ function Update () {
 					if(currentAnimation != "Rolling"){
 						BlendAllCharactersToZero();
 						selectedButtonScript.SetAnimationStart(Time.time);
-						dog.GetComponent.<Animation>().Blend("Rolling Dog");
-						cat.GetComponent.<Animation>().Blend("Rolling Cat");
-						turtle.GetComponent.<Animation>().Blend("Rolling Turtle");
-						owl.GetComponent.<Animation>().Blend("Rolling Owl");
+						lion.GetComponent.<Animation>().Blend("Rolling Lion");
+						giraffe.GetComponent.<Animation>().Blend("Rolling Giraffe");
+						elephant.GetComponent.<Animation>().Blend("Rolling Elephant");
+						crocodile.GetComponent.<Animation>().Blend("Rolling Crocodile");
 						selectedButton.position = rollingButton.position;
 						currentAnimation = "Rolling";
 					}
@@ -79,10 +79,10 @@ function Update () {
 					if(currentAnimation != "Success"){
 						BlendAllCharactersToZero();
 						selectedButtonScript.SetAnimationStart(Time.time);
-						dog.GetComponent.<Animation>().Blend("Success Dog");
-						cat.GetComponent.<Animation>().Blend("Success Cat");
-						turtle.GetComponent.<Animation>().Blend("Success Turtle");
-						owl.GetComponent.<Animation>().Blend("Success Owl");
+						lion.GetComponent.<Animation>().Blend("Success Lion");
+						giraffe.GetComponent.<Animation>().Blend("Success Giraffe");
+						elephant.GetComponent.<Animation>().Blend("Success Elephant");
+						crocodile.GetComponent.<Animation>().Blend("Success Crocodile");
 						selectedButton.position = successButton.position;
 						currentAnimation = "Success";
 					}
@@ -91,10 +91,10 @@ function Update () {
 					if(currentAnimation != "Jump"){
 						BlendAllCharactersToZero();
 						selectedButtonScript.SetAnimationStart(Time.time);
-						dog.GetComponent(JumpTest).enabled = true;
-						cat.GetComponent(JumpTest).enabled = true;
-						turtle.GetComponent(JumpTest).enabled = true;
-						owl.GetComponent(JumpTest).enabled = true;
+						lion.GetComponent(JumpTest).enabled = true;
+						giraffe.GetComponent(JumpTest).enabled = true;
+						elephant.GetComponent(JumpTest).enabled = true;
+						crocodile.GetComponent(JumpTest).enabled = true;
 						selectedButton.position = jumpButton.position;
 						currentAnimation = "Jump";
 					}
@@ -103,10 +103,10 @@ function Update () {
 					if(currentAnimation != "Idle 2"){
 						BlendAllCharactersToZero();
 						selectedButtonScript.SetAnimationStart(Time.time);
-						dog.GetComponent.<Animation>().Blend("Idle 2 Dog");
-						cat.GetComponent.<Animation>().Blend("Idle 2 Cat");
-						turtle.GetComponent.<Animation>().Blend("Idle 2 Turtle");
-						owl.GetComponent.<Animation>().Blend("Idle 2 Owl");
+						lion.GetComponent.<Animation>().Blend("Idle 2 Lion");
+						giraffe.GetComponent.<Animation>().Blend("Idle 2 Giraffe");
+						elephant.GetComponent.<Animation>().Blend("Idle 2 Elephant");
+						crocodile.GetComponent.<Animation>().Blend("Idle 2 Crocodile");
 						selectedButton.position = idle2Button.position;
 						currentAnimation = "Idle 2";
 					}
@@ -115,10 +115,10 @@ function Update () {
 					if(currentAnimation != "Run"){
 						BlendAllCharactersToZero();
 						selectedButtonScript.SetAnimationStart(Time.time);
-						dog.GetComponent.<Animation>().Blend("Run Dog");
-						cat.GetComponent.<Animation>().Blend("Run Cat");
-						turtle.GetComponent.<Animation>().Blend("Run Turtle");
-						owl.GetComponent.<Animation>().Blend("Run Owl");
+						lion.GetComponent.<Animation>().Blend("Run Lion");
+						giraffe.GetComponent.<Animation>().Blend("Run Giraffe");
+						elephant.GetComponent.<Animation>().Blend("Run Elephant");
+						crocodile.GetComponent.<Animation>().Blend("Run Crocodile");
 						selectedButton.position = runButton.position;
 						currentAnimation = "Run";
 					}
@@ -127,10 +127,10 @@ function Update () {
 					if(currentAnimation != "Failure"){
 						BlendAllCharactersToZero();
 						selectedButtonScript.SetAnimationStart(Time.time);
-						dog.GetComponent.<Animation>().Blend("Failure Dog");
-						cat.GetComponent.<Animation>().Blend("Failure Cat");
-						turtle.GetComponent.<Animation>().Blend("Failure Turtle");
-						owl.GetComponent.<Animation>().Blend("Failure Owl");
+						lion.GetComponent.<Animation>().Blend("Failure Lion");
+						giraffe.GetComponent.<Animation>().Blend("Failure Giraffe");
+						elephant.GetComponent.<Animation>().Blend("Failure Elephant");
+						crocodile.GetComponent.<Animation>().Blend("Failure Crocodile");
 						selectedButton.position = failureButton.position;
 						currentAnimation = "Failure";
 					}
@@ -139,10 +139,10 @@ function Update () {
 					if(currentAnimation != "Sleep"){
 						BlendAllCharactersToZero();
 						selectedButtonScript.SetAnimationStart(Time.time);
-						dog.GetComponent.<Animation>().Blend("Sleep Dog");
-						cat.GetComponent.<Animation>().Blend("Sleep Cat");
-						turtle.GetComponent.<Animation>().Blend("Sleep Turtle");
-						owl.GetComponent.<Animation>().Blend("Sleep Owl");
+						lion.GetComponent.<Animation>().Blend("Sleep Lion");
+						giraffe.GetComponent.<Animation>().Blend("Sleep Giraffe");
+						elephant.GetComponent.<Animation>().Blend("Sleep Elephant");
+						crocodile.GetComponent.<Animation>().Blend("Sleep Crocodile");
 						selectedButton.position = sleepButton.position;
 						currentAnimation = "Sleep";
 					}
@@ -151,10 +151,10 @@ function Update () {
 					if(currentAnimation != "Walk"){
 						BlendAllCharactersToZero();
 						selectedButtonScript.SetAnimationStart(Time.time);
-						dog.GetComponent.<Animation>().Blend("Walk Dog");
-						cat.GetComponent.<Animation>().Blend("Walk Cat");
-						turtle.GetComponent.<Animation>().Blend("Walk Turtle");
-						owl.GetComponent.<Animation>().Blend("Walk Owl");
+						lion.GetComponent.<Animation>().Blend("Walk Lion");
+						giraffe.GetComponent.<Animation>().Blend("Walk Giraffe");
+						elephant.GetComponent.<Animation>().Blend("Walk Elephant");
+						crocodile.GetComponent.<Animation>().Blend("Walk Crocodile");
 						selectedButton.position = walkButton.position;
 						currentAnimation = "Walk";
 					}
@@ -165,15 +165,15 @@ function Update () {
 }
 
 function BlendAllCharactersToZero(){
-	BlendAllToZero(dog);
-	BlendAllToZero(cat);
-	BlendAllToZero(turtle);
-	BlendAllToZero(owl);
-	
-	dog.GetComponent(JumpTest).enabled = false;
-	cat.GetComponent(JumpTest).enabled = false;
-	turtle.GetComponent(JumpTest).enabled = false;
-	owl.GetComponent(JumpTest).enabled = false;
+	BlendAllToZero(lion);
+	BlendAllToZero(giraffe);
+	BlendAllToZero(elephant);
+	BlendAllToZero(crocodile);
+
+	lion.GetComponent(JumpTest).enabled = false;
+	giraffe.GetComponent(JumpTest).enabled = false;
+	elephant.GetComponent(JumpTest).enabled = false;
+	crocodile.GetComponent(JumpTest).enabled = false;
 }
 
 function BlendAllToZero(character : GameObject){

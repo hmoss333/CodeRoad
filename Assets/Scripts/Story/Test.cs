@@ -1388,11 +1388,11 @@ public class Test : MonoBehaviour
 					if (!inMiniGameMode && CanPlay())
 					{
 						label.text = "";
-                        //SetMiniGame();
+                        SetMiniGame();
 
                         //==For Testing; Replace when minigame is ready==//
-                        Debug.Log("Minigame plays here");
-                        StartCoroutine(FadeOuter(sprite, 0.5f, nextAlpha, coverAlpha));
+                        //Debug.Log("Minigame plays here");
+                        //StartCoroutine(FadeOuter(sprite, 0.5f, nextAlpha, coverAlpha));
                     }
 					else
 					{
@@ -1482,14 +1482,6 @@ public class Test : MonoBehaviour
     public void SetMiniGame()
 	{
 		inMiniGameMode = true;
-		if (count >= 15)
-			playedGame1 = true;
-		if (count >= 27)
-			playedGame2 = true;
-		if (count >= 33)
-			playedGame3 = true;
-        if (count >= 39)
-            playedGame4 = true;
 
         DisableRobots();
 
@@ -1499,7 +1491,28 @@ public class Test : MonoBehaviour
         //ls.LoadScene("MiniGame_Story");
         //ls.ChangeText("Let's play...");
         SceneManager.LoadSceneAsync("LoadingScreen", LoadSceneMode.Additive);
-		StartCoroutine(GoToScene("MiniGame_Story"));
+
+        if (count >= 15 && !playedGame1)
+        {
+            playedGame1 = true;
+            StartCoroutine(GoToScene("StoryMovement"));
+        }
+        if (count >= 27 && !playedGame2)
+        {
+            playedGame2 = true;
+            StartCoroutine(GoToScene("StoryLoops"));
+        }
+        if (count >= 33 && !playedGame3)
+        {
+            playedGame3 = true;
+            StartCoroutine(GoToScene("StoryAbilities"));
+        }
+        if (count >= 39 && !playedGame4)
+        {
+            playedGame4 = true;
+            StartCoroutine(GoToScene("StoryCombos"));
+        }
+        //StartCoroutine(GoToScene("MiniGame_Story"));
 		//enabled = false;
 	}
 
@@ -1516,8 +1529,8 @@ public class Test : MonoBehaviour
 		{
 			StartCoroutine(GoToScene("Empty"));
 		}
-		SceneManager.UnloadSceneAsync("MiniGame_Story");
-		Resources.UnloadUnusedAssets();
+		//SceneManager.UnloadSceneAsync("MiniGame_Story");
+		//Resources.UnloadUnusedAssets();
 		//ls.ResetText();
 		//enabled = true;
 

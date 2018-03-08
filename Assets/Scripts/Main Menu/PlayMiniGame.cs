@@ -6,8 +6,10 @@ using UnityEngine.SceneManagement;
 public class PlayMiniGame : MonoBehaviour {
 
     public float timer = 0.1f;
-    public string levelToLoad = "1stScene";
+    //public string levelToLoad = "1stScene";
     //public string altLevelToLoad = "Tutorial";
+    public GameObject ChallengeMenu;
+    public UITexture background;
     private bool on = true;
 
     public UILabel loadingLabel;
@@ -23,6 +25,7 @@ public class PlayMiniGame : MonoBehaviour {
     void Start()
     {
         //ls = GameObject.Find("LoadingScreen").GetComponent<LoadingScreen>();
+        ChallengeMenu.SetActive(false);
 
         //if (PlayerPrefs.GetInt("MiniGameTutorial") == 0)
         //    tutorialMode = true;
@@ -35,13 +38,15 @@ public class PlayMiniGame : MonoBehaviour {
         if (on)
         {
             frontPanel.alpha = 0;
+            background.mainTexture = Resources.Load("background") as Texture;
+            ChallengeMenu.SetActive(true);
 
             //ls.LoadScene(levelToLoad);
             //ls.ChangeText("Let's play...");
-            SceneManager.LoadSceneAsync("LoadingScreen", LoadSceneMode.Additive);
-            Resources.UnloadUnusedAssets();
+            //SceneManager.LoadSceneAsync("LoadingScreen", LoadSceneMode.Additive);
+            //Resources.UnloadUnusedAssets();
 
-            StartCoroutine(GoToScene(levelToLoad));
+            //StartCoroutine(GoToScene(levelToLoad));
         }
     }
 
@@ -60,6 +65,41 @@ public class PlayMiniGame : MonoBehaviour {
 
         if (SceneManager.GetActiveScene().name == "LoadingScreen")
             SceneManager.UnloadSceneAsync("LoadingScreen");
+    }
+
+    public void ChallengeMovements ()
+    {
+        ChallengeMenu.SetActive(false);
+        SceneManager.LoadSceneAsync("LoadingScreen", LoadSceneMode.Additive);
+        StartCoroutine(GoToScene("Movement1"));
+    }
+
+    public void ChallengeAbilities()
+    {
+        ChallengeMenu.SetActive(false);
+        SceneManager.LoadSceneAsync("LoadingScreen", LoadSceneMode.Additive);
+        StartCoroutine(GoToScene("Abilities1"));
+    }
+
+    public void ChallengeLoops()
+    {
+        ChallengeMenu.SetActive(false);
+        SceneManager.LoadSceneAsync("LoadingScreen", LoadSceneMode.Additive);
+        StartCoroutine(GoToScene("Loops1"));
+    }
+
+    public void ChallengeCombos()
+    {
+        ChallengeMenu.SetActive(false);
+        SceneManager.LoadSceneAsync("LoadingScreen", LoadSceneMode.Additive);
+        StartCoroutine(GoToScene("Combos1"));
+    }
+
+    public void ChallengeBack ()
+    {
+        ChallengeMenu.SetActive(false);
+        frontPanel.alpha = 1f;
+        background.mainTexture = Resources.Load("coderoad_opening") as Texture;
     }
 
 }

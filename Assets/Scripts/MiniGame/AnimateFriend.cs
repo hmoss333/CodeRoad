@@ -15,7 +15,7 @@ public class AnimateFriend : MonoBehaviour {
     {
         win = false;
         if (Application.loadedLevelName.Equals("Abilities3")) { StartCoroutine(GrowShrink()); }
-        if (Application.loadedLevelName.Equals("Combos1")) { jumpSwitch = true; StartCoroutine(Combo1()); }
+        if (Application.loadedLevelName.Equals("Combos1") || Application.loadedLevelName.Equals("StoryCombos")) { jumpSwitch = true; StartCoroutine(Combo1()); }
     }
 
     	
@@ -25,12 +25,12 @@ public class AnimateFriend : MonoBehaviour {
         if (!win)
         {
 
-            if (Application.loadedLevelName.Equals("Abilities2"))
+            if (Application.loadedLevelName.Equals("Abilities2") || Application.loadedLevelName.Equals("StoryAbilities"))
             {
                 gameObject.transform.Rotate(0, Time.deltaTime * 370, 0);
             }
 
-            if (Application.loadedLevelName.Equals("Combos1"))
+            if (Application.loadedLevelName.Equals("Combos1") || Application.loadedLevelName.Equals("StoryCombos"))
             {
                 if (!spin)
                 {

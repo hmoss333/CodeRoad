@@ -13,6 +13,7 @@ var idleAnimation : AnimationClip;
 
 var multiplier : float = 1.0;
 var offset : float = 0.0;
+var timeOffset : float;
 
 private var verticalSpeed : float;
 private var previousYPosition : float;
@@ -29,8 +30,6 @@ private var landStartTime : float;
 
 private var isGrounded : boolean = false;
 
-private var storeHeight : float;
-
 function Start () {
 	GetComponent.<Animation>()[upAnimation.name].layer = 1;
 	GetComponent.<Animation>()[downAnimation.name].layer = 1;
@@ -39,16 +38,17 @@ function Start () {
 }
 
 function Update () {
-	transform.position.y = heightCurve.Evaluate(Time.time - startTime) * multiplier + offset;
+	transform.localPosition.y = heightCurve.Evaluate(Time.time - startTime + timeOffset) 	* multiplier + offset;
 	
-	verticalSpeed = (transform.position.y - previousYPosition) / Time.deltaTime;
-	previousYPosition = transform.position.y;
+	verticalSpeed = (transform.localPosition.y - previousYPosition) / Time.deltaTime;
+	previousYPosition = transform.localPosition.y;
 	
 	upDownBlend = Mathf.Clamp01((verticalSpeed + maxVerticalSpeed)/ (maxVerticalSpeed * 2));
 	
 	upDownBlend = upDownBlendCurve.Evaluate(upDownBlend);
 	
-	if(transform.position.y < .1 + offset) isGrounded = true;
+	//Is grounded.
+	if(transform.localPosition.y < .1 + offset) isGrounded = true;
 	else isGrounded = false;
 
 	
@@ -85,12 +85,4 @@ function OnGUI(){
 		GUILayout.Label("Up & Down Blend: " + upDownBlend.ToString());
 		GUILayout.Label("Idle & Land Blend: " + idleLandBlend.ToString());
 	}
-}
-
-function OnEnable(){
-	storeHeight = transform.position.y;
-}
-
-function OnDisable(){
-	transform.position.y = storeHeight;
 }

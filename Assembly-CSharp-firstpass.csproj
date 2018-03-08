@@ -114,20 +114,20 @@
  <Reference Include="UnityEngine.VR">
  <HintPath>C:/Program Files/Unity 5.6.1/Editor/Data/UnityExtensions/Unity/UnityVR/RuntimeEditor/UnityEngine.VR.dll</HintPath>
  </Reference>
- <Reference Include="ICSharpCode.SharpZipLib">
- <HintPath>C:/Users/HMoss.DESKTOP-LO6F45S/Documents/GitHub/CodeRoad/Assets/Plugins/ICSharpCode.SharpZipLib.dll</HintPath>
- </Reference>
- <Reference Include="UniRateWP">
- <HintPath>C:/Users/HMoss.DESKTOP-LO6F45S/Documents/GitHub/CodeRoad/Assets/Plugins/UniRateWP.dll</HintPath>
- </Reference>
  <Reference Include="OneSignalSDK_WP_WNS">
  <HintPath>C:/Users/HMoss.DESKTOP-LO6F45S/Documents/GitHub/CodeRoad/Assets/OneSignal/Platforms/OneSignalSDK_WP_WNS.dll</HintPath>
+ </Reference>
+ <Reference Include="clipper_library">
+ <HintPath>C:/Users/HMoss.DESKTOP-LO6F45S/Documents/GitHub/CodeRoad/Assets/Plugins/clipper_library.dll</HintPath>
+ </Reference>
+ <Reference Include="ICSharpCode.SharpZipLib">
+ <HintPath>C:/Users/HMoss.DESKTOP-LO6F45S/Documents/GitHub/CodeRoad/Assets/Plugins/ICSharpCode.SharpZipLib.dll</HintPath>
  </Reference>
  <Reference Include="Poly2Tri">
  <HintPath>C:/Users/HMoss.DESKTOP-LO6F45S/Documents/GitHub/CodeRoad/Assets/Plugins/Poly2Tri.dll</HintPath>
  </Reference>
- <Reference Include="clipper_library">
- <HintPath>C:/Users/HMoss.DESKTOP-LO6F45S/Documents/GitHub/CodeRoad/Assets/Plugins/clipper_library.dll</HintPath>
+ <Reference Include="UniRateWP">
+ <HintPath>C:/Users/HMoss.DESKTOP-LO6F45S/Documents/GitHub/CodeRoad/Assets/Plugins/UniRateWP.dll</HintPath>
  </Reference>
  <Reference Include="TextMeshPro">
  <HintPath>C:/Users/HMoss.DESKTOP-LO6F45S/Documents/GitHub/CodeRoad/Assets/TextMesh Pro/Plugins/Runtime DLL/TextMeshPro.dll</HintPath>

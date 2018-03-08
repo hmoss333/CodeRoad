@@ -250,38 +250,38 @@
  <Reference Include="JMOAssets">
  <HintPath>C:/Users/HMoss.DESKTOP-LO6F45S/Documents/GitHub/CodeRoad/Assets/JMO Assets/Editor/JMOAssets.dll</HintPath>
  </Reference>
- <Reference Include="ICSharpCode.SharpZipLib">
- <HintPath>C:/Users/HMoss.DESKTOP-LO6F45S/Documents/GitHub/CodeRoad/Assets/Plugins/ICSharpCode.SharpZipLib.dll</HintPath>
- </Reference>
- <Reference Include="UniRateWP">
- <HintPath>C:/Users/HMoss.DESKTOP-LO6F45S/Documents/GitHub/CodeRoad/Assets/Plugins/UniRateWP.dll</HintPath>
+ <Reference Include="OneSignalSDK_WP_WNS">
+ <HintPath>C:/Users/HMoss.DESKTOP-LO6F45S/Documents/GitHub/CodeRoad/Assets/OneSignal/Platforms/OneSignalSDK_WP_WNS.dll</HintPath>
  </Reference>
  <Reference Include="Google.IOSResolver">
  <HintPath>C:/Users/HMoss.DESKTOP-LO6F45S/Documents/GitHub/CodeRoad/Assets/PlayServicesResolver/Editor/Google.IOSResolver.dll</HintPath>
  </Reference>
- <Reference Include="OneSignalSDK_WP_WNS">
- <HintPath>C:/Users/HMoss.DESKTOP-LO6F45S/Documents/GitHub/CodeRoad/Assets/OneSignal/Platforms/OneSignalSDK_WP_WNS.dll</HintPath>
- </Reference>
- <Reference Include="Poly2Tri">
- <HintPath>C:/Users/HMoss.DESKTOP-LO6F45S/Documents/GitHub/CodeRoad/Assets/Plugins/Poly2Tri.dll</HintPath>
- </Reference>
  <Reference Include="Google.JarResolver">
  <HintPath>C:/Users/HMoss.DESKTOP-LO6F45S/Documents/GitHub/CodeRoad/Assets/PlayServicesResolver/Editor/Google.JarResolver.dll</HintPath>
  </Reference>
- <Reference Include="Lzma#">
- <HintPath>C:/Users/HMoss.DESKTOP-LO6F45S/Documents/GitHub/CodeRoad/Assets/Plugins/Editor/Lzma#.dll</HintPath>
+ <Reference Include="Google.VersionHandler">
+ <HintPath>C:/Users/HMoss.DESKTOP-LO6F45S/Documents/GitHub/CodeRoad/Assets/PlayServicesResolver/Editor/Google.VersionHandler.dll</HintPath>
  </Reference>
  <Reference Include="clipper_library">
  <HintPath>C:/Users/HMoss.DESKTOP-LO6F45S/Documents/GitHub/CodeRoad/Assets/Plugins/clipper_library.dll</HintPath>
  </Reference>
- <Reference Include="TextMeshPro">
- <HintPath>C:/Users/HMoss.DESKTOP-LO6F45S/Documents/GitHub/CodeRoad/Assets/TextMesh Pro/Plugins/Runtime DLL/TextMeshPro.dll</HintPath>
+ <Reference Include="ICSharpCode.SharpZipLib">
+ <HintPath>C:/Users/HMoss.DESKTOP-LO6F45S/Documents/GitHub/CodeRoad/Assets/Plugins/ICSharpCode.SharpZipLib.dll</HintPath>
+ </Reference>
+ <Reference Include="Poly2Tri">
+ <HintPath>C:/Users/HMoss.DESKTOP-LO6F45S/Documents/GitHub/CodeRoad/Assets/Plugins/Poly2Tri.dll</HintPath>
+ </Reference>
+ <Reference Include="UniRateWP">
+ <HintPath>C:/Users/HMoss.DESKTOP-LO6F45S/Documents/GitHub/CodeRoad/Assets/Plugins/UniRateWP.dll</HintPath>
+ </Reference>
+ <Reference Include="Lzma#">
+ <HintPath>C:/Users/HMoss.DESKTOP-LO6F45S/Documents/GitHub/CodeRoad/Assets/Plugins/Editor/Lzma#.dll</HintPath>
  </Reference>
  <Reference Include="TextMeshPro-Editor">
  <HintPath>C:/Users/HMoss.DESKTOP-LO6F45S/Documents/GitHub/CodeRoad/Assets/TextMesh Pro/Plugins/Editor/TextMeshPro-Editor.dll</HintPath>
  </Reference>
- <Reference Include="Google.VersionHandler">
- <HintPath>C:/Users/HMoss.DESKTOP-LO6F45S/Documents/GitHub/CodeRoad/Assets/PlayServicesResolver/Editor/Google.VersionHandler.dll</HintPath>
+ <Reference Include="TextMeshPro">
+ <HintPath>C:/Users/HMoss.DESKTOP-LO6F45S/Documents/GitHub/CodeRoad/Assets/TextMesh Pro/Plugins/Runtime DLL/TextMeshPro.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>
