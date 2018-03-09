@@ -550,10 +550,12 @@ public class Abilities4 : MonoBehaviour
     IEnumerator mainMenuStart()
     {
         playSound(7);
-        yield return new WaitForSeconds(1.5f);
-        LoadManager.level = "Title";
+        canvas.SetActive(false);
+        winCanvas.SetActive(false);
         SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);
-        Application.LoadLevel("MenuScreen");
+        yield return new WaitForSeconds(1.5f);
+        //LoadManager.level = "Title";
+        SceneManager.LoadSceneAsync("MenuScreen");
     }
 
     public void nextLevel()

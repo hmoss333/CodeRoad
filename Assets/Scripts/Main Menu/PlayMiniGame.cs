@@ -56,42 +56,27 @@ public class PlayMiniGame : MonoBehaviour {
 
     }
 
-    IEnumerator GoToScene(string sceneName)
-    {
-        //Camera.main.gameObject.SetActive(false);
-
-        yield return new WaitForSeconds(0.25f);
-        SceneManager.LoadSceneAsync(sceneName);
-
-        if (SceneManager.GetActiveScene().name == "LoadingScreen")
-            SceneManager.UnloadSceneAsync("LoadingScreen");
-    }
-
     public void ChallengeMovements ()
     {
         ChallengeMenu.SetActive(false);
-        SceneManager.LoadSceneAsync("LoadingScreen", LoadSceneMode.Additive);
         StartCoroutine(GoToScene("Movement1"));
     }
 
     public void ChallengeAbilities()
     {
         ChallengeMenu.SetActive(false);
-        SceneManager.LoadSceneAsync("LoadingScreen", LoadSceneMode.Additive);
         StartCoroutine(GoToScene("Abilities1"));
     }
 
     public void ChallengeLoops()
     {
         ChallengeMenu.SetActive(false);
-        SceneManager.LoadSceneAsync("LoadingScreen", LoadSceneMode.Additive);
         StartCoroutine(GoToScene("Loops1"));
     }
 
     public void ChallengeCombos()
     {
         ChallengeMenu.SetActive(false);
-        SceneManager.LoadSceneAsync("LoadingScreen", LoadSceneMode.Additive);
         StartCoroutine(GoToScene("Combos1"));
     }
 
@@ -105,8 +90,17 @@ public class PlayMiniGame : MonoBehaviour {
     public void Tutorial ()
     {
         ChallengeMenu.SetActive(false);
-        SceneManager.LoadSceneAsync("LoadingScreen", LoadSceneMode.Additive);
         StartCoroutine(GoToScene("Tutorial"));
+    }
+
+    IEnumerator GoToScene(string sceneName)
+    {
+        SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);
+        yield return new WaitForSeconds(1f);
+        SceneManager.LoadSceneAsync(sceneName);
+
+        if (SceneManager.GetActiveScene().name == "LoadingScreen")
+            SceneManager.UnloadSceneAsync("LoadingScreen");
     }
 
 }

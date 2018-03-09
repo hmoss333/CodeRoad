@@ -50,6 +50,8 @@ public class Tutorial : MonoBehaviour
 
     int tutorialCount;
 
+    public GameObject canvas;
+
     // Use this for initialization
     void Start()
     {
@@ -66,7 +68,7 @@ public class Tutorial : MonoBehaviour
                 moveBackground.transform.localScale = new Vector2(1.0f, 1.5f);
                 break;
         }
-        showMoves.fontSize = PlayerPrefs.GetInt("fontSize");
+        showMoves.fontSize = 25;// PlayerPrefs.GetInt("fontSize");
         tutorialCount = 0;
 
         loopState = false;
@@ -580,6 +582,7 @@ public class Tutorial : MonoBehaviour
     IEnumerator mainMenuStart()
     {
         playSound(7);
+        canvas.SetActive(false);
         SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);
         yield return new WaitForSeconds(1.5f);
         //LoadManager.level = "MenuScreen";

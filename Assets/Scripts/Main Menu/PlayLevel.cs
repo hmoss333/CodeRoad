@@ -104,7 +104,7 @@ public class PlayLevel : MonoBehaviour {
             //ls.ChangeText("Let's play...");
             //Resources.UnloadUnusedAssets();
 
-            SceneManager.LoadSceneAsync("LoadingScreen", LoadSceneMode.Additive);
+            SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);
             StartCoroutine(GoToScene(levelToLoad));
         }
 	}
@@ -175,7 +175,7 @@ public class PlayLevel : MonoBehaviour {
     {
         //Camera.main.gameObject.SetActive(false);
 
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(1f);
         SceneManager.LoadSceneAsync(sceneName);
 
         if (SceneManager.GetActiveScene().name == "LoadingScreen")

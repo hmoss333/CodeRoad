@@ -85,8 +85,8 @@ public class Combos2 : MonoBehaviour
                 showMoves.GetComponent<RectTransform>().sizeDelta = new Vector2(375, 210);
                 break;
         }
-        showMoves.fontSize = PlayerPrefs.GetInt("fontSize");
-        help.fontSize = PlayerPrefs.GetInt("fontSize")-5;
+        showMoves.fontSize = 25;// PlayerPrefs.GetInt("fontSize");
+        help.fontSize = 25;// PlayerPrefs.GetInt("fontSize")-5;
         singBetween = false;
         loopState = false;
         loopsFromSlider = 2;
@@ -550,15 +550,17 @@ public class Combos2 : MonoBehaviour
     IEnumerator mainMenuStart()
     {
         playSound(7);
-        yield return new WaitForSeconds(1.5f);
-        LoadManager.level = "Title";
+        canvas.SetActive(false);
+        winCanvas.SetActive(false);
         SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);
-        Application.LoadLevel("MenuScreen");
+        yield return new WaitForSeconds(1.5f);
+        //LoadManager.level = "Title";
+        SceneManager.LoadSceneAsync("MenuScreen");
     }
 
     public void nextLevel()
     {
-        Application.LoadLevel("Combos3");
+        SceneManager.LoadSceneAsync("Combos3");
     }
 
 }

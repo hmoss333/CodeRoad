@@ -265,7 +265,6 @@ public class Test : MonoBehaviour
 
 	public void exitClick()
 	{
-        SceneManager.LoadSceneAsync("LoadingScreen", LoadSceneMode.Additive);
         StartCoroutine(DisplayScene());
 	}
 
@@ -326,9 +325,7 @@ public class Test : MonoBehaviour
 		startAlpha = sprite.alpha;
 		sequence = 0;
 
-		DisableRobots();
-
-		//miniGameGUI.gameObject.SetActive(false);
+		//DisableRobots();
 
 		//float start = sprite.alpha;
 		//sprite.alpha = 0f;
@@ -1381,7 +1378,7 @@ public class Test : MonoBehaviour
 			//}
 
 			//every 5 levels, if minigame option is active, display minigame instead of going to next page
-			if (count == 15 || count == 27 || count == 33 || count == 39)
+			if (count == 9 || count == 15 || count == 27 || count == 39)
 			{
 				if (PlayerPrefs.GetInt("minigames") == 1)
 				{
@@ -1413,11 +1410,11 @@ public class Test : MonoBehaviour
 	//check which minigames have already been played
 	bool CanPlay ()
 	{
-		if (count >= 15 && !playedGame1)
+		if (count >= 9 && !playedGame1)
 			return true;
-		else if (count >= 27 && !playedGame2)
+		else if (count >= 15 && !playedGame2)
 			return true;
-		else if (count >= 33 && !playedGame3)
+		else if (count >= 27 && !playedGame3)
 			return true;
         else if (count >= 39 && !playedGame4)
             return true;
@@ -1483,34 +1480,32 @@ public class Test : MonoBehaviour
 	{
 		inMiniGameMode = true;
 
-        DisableRobots();
+        //DisableRobots();
 
-		audiosource.Stop();
+        SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);
+        audiosource.Stop();
 		mainCamera.gameObject.SetActive(false);
 		storyView.alpha = 0f;
-        //ls.LoadScene("MiniGame_Story");
-        //ls.ChangeText("Let's play...");
-        SceneManager.LoadSceneAsync("LoadingScreen", LoadSceneMode.Additive);
 
-        if (count >= 15 && !playedGame1)
+        if (count >= 9 && !playedGame1)
         {
             playedGame1 = true;
             StartCoroutine(GoToScene("StoryMovement"));
         }
-        if (count >= 27 && !playedGame2)
+        if (count >= 15 && !playedGame2)
         {
             playedGame2 = true;
-            StartCoroutine(GoToScene("StoryLoops"));
+            StartCoroutine(GoToScene("StoryAbilities"));
         }
-        if (count >= 33 && !playedGame3)
+        if (count >= 27 && !playedGame3)
         {
             playedGame3 = true;
-            StartCoroutine(GoToScene("StoryAbilities"));
+            StartCoroutine(GoToScene("StoryCombos"));
         }
         if (count >= 39 && !playedGame4)
         {
             playedGame4 = true;
-            StartCoroutine(GoToScene("StoryCombos"));
+            StartCoroutine(GoToScene("StoryLoops"));
         }
         //StartCoroutine(GoToScene("MiniGame_Story"));
 		//enabled = false;
@@ -1518,7 +1513,7 @@ public class Test : MonoBehaviour
 
 	IEnumerator GoToScene (string sceneName)
 	{
-		yield return new WaitForSeconds(0.25f);
+		yield return new WaitForSeconds(1f);
 		SceneManager.LoadSceneAsync(sceneName);
 	}
 
@@ -2444,7 +2439,7 @@ public class Test : MonoBehaviour
             //ls.GetComponent<UIPanel>().alpha = 1f;
             storyView.alpha = 0f;
 
-            SceneManager.LoadSceneAsync("LoadingScreen", LoadSceneMode.Additive);
+            //SceneManager.LoadSceneAsync("LoadingScreen", LoadSceneMode.Additive);
             StartCoroutine(DisplayScene());
         }
         //}
@@ -2857,6 +2852,8 @@ public class Test : MonoBehaviour
 
 	IEnumerator DisplayScene()
 	{
+        SceneManager.LoadSceneAsync("LoadingScreen", LoadSceneMode.Additive);
+
         mainCamera.gameObject.SetActive(false);
 
         yield return new WaitForSeconds(1);
