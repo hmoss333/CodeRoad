@@ -314,7 +314,7 @@ public class StoryCombos : MonoBehaviour {
         spinCount = 0;
         jumpCount = 0;
         shrinkCount = 0;
-        help.text = "Dog and Cat can <b><color=yellow>Jump</color></b>, and <b><color=yellow>Spin</color></b>! Enter the contest, can you win?";
+        help.text = "Lion and Elephant can <b><color=yellow>Jump</color></b>, and <b><color=yellow>Spin</color></b>! Enter the contest, can you win?";
         playSound(2);
         movementLengthCollection = 0;
         movement.Clear();
