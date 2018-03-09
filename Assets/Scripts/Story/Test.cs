@@ -348,54 +348,57 @@ public class Test : MonoBehaviour
 		//label.fontSize = (int)(34*PlayerPrefs.GetFloat("printSize")) + 34;
 		label.fontSize = (int)(27 * PlayerPrefs.GetFloat("printSize")) + 23; //+ 27;
 
-		//if (repeat == false)
-		//{
-		//	CFX_SpawnSystem.PreloadObject (specialAnimationEffect1,1);
-		//	CFX_SpawnSystem.PreloadObject (specialAnimationEffect2,1);
-		//	CFX_SpawnSystem.PreloadObject (specialAnimationEffect3,1);
-		//	CFX_SpawnSystem.PreloadObject (specialAnimationEffect4,1);
-		//	CFX_SpawnSystem.PreloadObject (specialAnimationEffect5,1);
-		//	CFX_SpawnSystem.PreloadObject (specialAnimationEffect6,1);
-		//	CFX_SpawnSystem.PreloadObject (specialAnimationEffect7,1);
-		//	CFX_SpawnSystem.PreloadObject (specialAnimationEffect8,1);
-		//	CFX_SpawnSystem.PreloadObject (specialAnimationEffect9,1);
-		//	CFX_SpawnSystem.PreloadObject (specialAnimationEffect10,1);
-		//	CFX_SpawnSystem.PreloadObject (specialAnimationEffect11,1);
-		//	CFX_SpawnSystem.PreloadObject (specialAnimationEffect12,1);
-		//	CFX_SpawnSystem.PreloadObject (specialAnimationEffect13,1);
-		//	CFX_SpawnSystem.PreloadObject (specialAnimationEffect14,1);
-		//	CFX_SpawnSystem.PreloadObject (specialAnimationEffect15,1);
-		//	CFX_SpawnSystem.PreloadObject (specialAnimationEffect16,1);
-		//	CFX_SpawnSystem.PreloadObject (specialAnimationEffect17,1);
-		//	CFX_SpawnSystem.PreloadObject (specialAnimationEffect18,1);
+        //if (repeat == false)
+        //{
+        //	CFX_SpawnSystem.PreloadObject (specialAnimationEffect1,1);
+        //	CFX_SpawnSystem.PreloadObject (specialAnimationEffect2,1);
+        //	CFX_SpawnSystem.PreloadObject (specialAnimationEffect3,1);
+        //	CFX_SpawnSystem.PreloadObject (specialAnimationEffect4,1);
+        //	CFX_SpawnSystem.PreloadObject (specialAnimationEffect5,1);
+        //	CFX_SpawnSystem.PreloadObject (specialAnimationEffect6,1);
+        //	CFX_SpawnSystem.PreloadObject (specialAnimationEffect7,1);
+        //	CFX_SpawnSystem.PreloadObject (specialAnimationEffect8,1);
+        //	CFX_SpawnSystem.PreloadObject (specialAnimationEffect9,1);
+        //	CFX_SpawnSystem.PreloadObject (specialAnimationEffect10,1);
+        //	CFX_SpawnSystem.PreloadObject (specialAnimationEffect11,1);
+        //	CFX_SpawnSystem.PreloadObject (specialAnimationEffect12,1);
+        //	CFX_SpawnSystem.PreloadObject (specialAnimationEffect13,1);
+        //	CFX_SpawnSystem.PreloadObject (specialAnimationEffect14,1);
+        //	CFX_SpawnSystem.PreloadObject (specialAnimationEffect15,1);
+        //	CFX_SpawnSystem.PreloadObject (specialAnimationEffect16,1);
+        //	CFX_SpawnSystem.PreloadObject (specialAnimationEffect17,1);
+        //	CFX_SpawnSystem.PreloadObject (specialAnimationEffect18,1);
 
-		//	repeat = true;
-		//}
+        //	repeat = true;
+        //}
 
 
-		if (PlayerPrefs.GetInt("voice") == 1)
-		{
-			part1 = null;
-			part2 = null;
-			part3 = null;
-			part4 = null;
-			part5 = null;
-			part6 = null;
-			part7 = null;
-			part8 = null;
-			part9 = null;
-			part10 = null;
-			part11 = null;
-			part12 = null;
-			part13 = null;
-			part14 = null;
-			part15 = null;
-			part16 = null;
-			part17 = null;
-			part18 = null;
-		}
+        //================================================//
+        ////Undo this later when audio has been provided////
+        //================================================//
+        //if (PlayerPrefs.GetInt("voice") == 1)
+        //{
+        part1 = null;
+        part2 = null;
+        part3 = null;
+        part4 = null;
+        part5 = null;
+        part6 = null;
+        part7 = null;
+        part8 = null;
+        part9 = null;
+        part10 = null;
+        part11 = null;
+        part12 = null;
+        part13 = null;
+        part14 = null;
+        part15 = null;
+        part16 = null;
+        part17 = null;
+        part18 = null;
+        //}
 
-		OnClick();
+        OnClick();
 
 		//If tutorial is finished, don't start; otherwise start normally
 		if (PlayerPrefs.GetInt("tutorial") != 0) { inTutorialMode = false; } else { inTutorialMode = true; }
