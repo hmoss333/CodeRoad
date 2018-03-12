@@ -98,8 +98,14 @@ public class Test : MonoBehaviour
 	public GameObject specialAnimationEffect16;
 	public GameObject specialAnimationEffect17;
 	public GameObject specialAnimationEffect18;
+    public GameObject specialAnimationEffect19;
+    public GameObject specialAnimationEffect20;
+    public GameObject specialAnimationEffect21;
+    public GameObject specialAnimationEffect22;
+    public GameObject specialAnimationEffect23;
+    public GameObject specialAnimationEffect24;
 
-	[Header("Story Audio")]
+    [Header("Story Audio")]
 	public AudioClip part1;
 	public AudioClip part2;
 	public AudioClip part3;
@@ -1133,89 +1139,89 @@ public class Test : MonoBehaviour
 	void playSpecialAnimationEffect()
 	{
 
-		if (PlayerPrefs.GetFloat("printSize") < 0.6f)
-		{
-			switch (count - 1)
-			{
-			case -1:
-				CFX_SpawnSystem.GetNextObject(specialAnimationEffect1, true);
-				specialAnimationEffect1.GetComponent<ParticleSystem>().Play();
-				break;
-			case 0:
-				CFX_SpawnSystem.GetNextObject(specialAnimationEffect2, true);
-				specialAnimationEffect2.GetComponent<ParticleSystem>().Play();
-				break;
-			case 1:
-				CFX_SpawnSystem.GetNextObject(specialAnimationEffect3, true);
-				specialAnimationEffect3.GetComponent<ParticleSystem>().Play();
-				break;
-			case 2:
-				CFX_SpawnSystem.GetNextObject(specialAnimationEffect4, true);
-				specialAnimationEffect4.GetComponent<ParticleSystem>().Play();
-				break;
-			case 3:
-				CFX_SpawnSystem.GetNextObject(specialAnimationEffect5, true);
-				specialAnimationEffect5.GetComponent<ParticleSystem>().Play();
-				break;
-			case 4:
-				CFX_SpawnSystem.GetNextObject(specialAnimationEffect6, true);
-				specialAnimationEffect6.GetComponent<ParticleSystem>().Play();
-				break;
-			case 5:
-				CFX_SpawnSystem.GetNextObject(specialAnimationEffect7, true);
-				specialAnimationEffect7.GetComponent<ParticleSystem>().Play();
-				break;
-			case 6:
-				CFX_SpawnSystem.GetNextObject(specialAnimationEffect8, true);
-				specialAnimationEffect8.GetComponent<ParticleSystem>().Play();
-				break;
-			case 7:
-				CFX_SpawnSystem.GetNextObject(specialAnimationEffect9, true);
-				specialAnimationEffect9.GetComponent<ParticleSystem>().Play();
-				break;
-			case 8:
-				CFX_SpawnSystem.GetNextObject(specialAnimationEffect10, true);
-				specialAnimationEffect10.GetComponent<ParticleSystem>().Play();
-				break;
-			case 9:
-				CFX_SpawnSystem.GetNextObject(specialAnimationEffect11, true);
-				specialAnimationEffect11.GetComponent<ParticleSystem>().Play();
-				break;
-			case 10:
-				CFX_SpawnSystem.GetNextObject(specialAnimationEffect12, true);
-				specialAnimationEffect12.GetComponent<ParticleSystem>().Play();
-				break;
-			case 11:
-				CFX_SpawnSystem.GetNextObject(specialAnimationEffect13, true);
-				specialAnimationEffect13.GetComponent<ParticleSystem>().Play();
-				break;
-			case 12:
-				CFX_SpawnSystem.GetNextObject(specialAnimationEffect14, true);
-				specialAnimationEffect14.GetComponent<ParticleSystem>().Play();
-				break;
-			case 13:
-				CFX_SpawnSystem.GetNextObject(specialAnimationEffect15, true);
-				specialAnimationEffect15.GetComponent<ParticleSystem>().Play();
-				break;
-			case 14:
-				CFX_SpawnSystem.GetNextObject(specialAnimationEffect16, true);
-				specialAnimationEffect16.GetComponent<ParticleSystem>().Play();
-				break;
-			case 15:
-				CFX_SpawnSystem.GetNextObject(specialAnimationEffect17, true);
-				specialAnimationEffect17.GetComponent<ParticleSystem>().Play();
-				break;
-			case 16:
-				CFX_SpawnSystem.GetNextObject(specialAnimationEffect18, true);
-				specialAnimationEffect18.GetComponent<ParticleSystem>().Play();
-				break;
-			default:
-				Debug.Log("This animation effect is not implemented");
-				break;
-			}
-		}
-		else
-		{
+  //      if (PlayerPrefs.GetFloat("printSize") < 0.6f)
+  //      {
+		//	switch (count - 1)
+		//	{
+		//	case -1:
+		//		CFX_SpawnSystem.GetNextObject(specialAnimationEffect1, true);
+		//		specialAnimationEffect1.GetComponent<ParticleSystem>().Play();
+		//		break;
+		//	case 0:
+		//		CFX_SpawnSystem.GetNextObject(specialAnimationEffect2, true);
+		//		specialAnimationEffect2.GetComponent<ParticleSystem>().Play();
+		//		break;
+		//	case 1:
+		//		CFX_SpawnSystem.GetNextObject(specialAnimationEffect3, true);
+		//		specialAnimationEffect3.GetComponent<ParticleSystem>().Play();
+		//		break;
+		//	case 2:
+		//		CFX_SpawnSystem.GetNextObject(specialAnimationEffect4, true);
+		//		specialAnimationEffect4.GetComponent<ParticleSystem>().Play();
+		//		break;
+		//	case 3:
+		//		CFX_SpawnSystem.GetNextObject(specialAnimationEffect5, true);
+		//		specialAnimationEffect5.GetComponent<ParticleSystem>().Play();
+		//		break;
+		//	case 4:
+		//		CFX_SpawnSystem.GetNextObject(specialAnimationEffect6, true);
+		//		specialAnimationEffect6.GetComponent<ParticleSystem>().Play();
+		//		break;
+		//	case 5:
+		//		CFX_SpawnSystem.GetNextObject(specialAnimationEffect7, true);
+		//		specialAnimationEffect7.GetComponent<ParticleSystem>().Play();
+		//		break;
+		//	case 6:
+		//		CFX_SpawnSystem.GetNextObject(specialAnimationEffect8, true);
+		//		specialAnimationEffect8.GetComponent<ParticleSystem>().Play();
+		//		break;
+		//	case 7:
+		//		CFX_SpawnSystem.GetNextObject(specialAnimationEffect9, true);
+		//		specialAnimationEffect9.GetComponent<ParticleSystem>().Play();
+		//		break;
+		//	case 8:
+		//		CFX_SpawnSystem.GetNextObject(specialAnimationEffect10, true);
+		//		specialAnimationEffect10.GetComponent<ParticleSystem>().Play();
+		//		break;
+		//	case 9:
+		//		CFX_SpawnSystem.GetNextObject(specialAnimationEffect11, true);
+		//		specialAnimationEffect11.GetComponent<ParticleSystem>().Play();
+		//		break;
+		//	case 10:
+		//		CFX_SpawnSystem.GetNextObject(specialAnimationEffect12, true);
+		//		specialAnimationEffect12.GetComponent<ParticleSystem>().Play();
+		//		break;
+		//	case 11:
+		//		CFX_SpawnSystem.GetNextObject(specialAnimationEffect13, true);
+		//		specialAnimationEffect13.GetComponent<ParticleSystem>().Play();
+		//		break;
+		//	case 12:
+		//		CFX_SpawnSystem.GetNextObject(specialAnimationEffect14, true);
+		//		specialAnimationEffect14.GetComponent<ParticleSystem>().Play();
+		//		break;
+		//	case 13:
+		//		CFX_SpawnSystem.GetNextObject(specialAnimationEffect15, true);
+		//		specialAnimationEffect15.GetComponent<ParticleSystem>().Play();
+		//		break;
+		//	case 14:
+		//		CFX_SpawnSystem.GetNextObject(specialAnimationEffect16, true);
+		//		specialAnimationEffect16.GetComponent<ParticleSystem>().Play();
+		//		break;
+		//	case 15:
+		//		CFX_SpawnSystem.GetNextObject(specialAnimationEffect17, true);
+		//		specialAnimationEffect17.GetComponent<ParticleSystem>().Play();
+		//		break;
+		//	case 16:
+		//		CFX_SpawnSystem.GetNextObject(specialAnimationEffect18, true);
+		//		specialAnimationEffect18.GetComponent<ParticleSystem>().Play();
+		//		break;
+		//	default:
+		//		Debug.Log("This animation effect is not implemented");
+		//		break;
+		//	}
+		//}
+		//else
+		//{
 			switch (count - 1)
 			{
 			case -1:
@@ -1308,11 +1314,45 @@ public class Test : MonoBehaviour
 				CFX_SpawnSystem.GetNextObject(specialAnimationEffect18, true);
 				specialAnimationEffect18.GetComponent<ParticleSystem>().Play();
 				break;
-			default:
+
+            //===Untested===//
+            case 35:
+            case 36:
+                CFX_SpawnSystem.GetNextObject(specialAnimationEffect19, true);
+                specialAnimationEffect19.GetComponent<ParticleSystem>().Play();
+                break;
+            case 37:
+            case 38:
+                CFX_SpawnSystem.GetNextObject(specialAnimationEffect20, true);
+                specialAnimationEffect20.GetComponent<ParticleSystem>().Play();
+                break;
+            case 39:
+            case 40:
+                CFX_SpawnSystem.GetNextObject(specialAnimationEffect21, true);
+                specialAnimationEffect21.GetComponent<ParticleSystem>().Play();
+                break;
+            case 41:
+            case 42:
+                CFX_SpawnSystem.GetNextObject(specialAnimationEffect22, true);
+                specialAnimationEffect22.GetComponent<ParticleSystem>().Play();
+                break;
+            case 43:
+            case 44:
+                CFX_SpawnSystem.GetNextObject(specialAnimationEffect23, true);
+                specialAnimationEffect23.GetComponent<ParticleSystem>().Play();
+                break;
+            case 45:
+            case 46:
+                CFX_SpawnSystem.GetNextObject(specialAnimationEffect24, true);
+                specialAnimationEffect24.GetComponent<ParticleSystem>().Play();
+                break;
+
+            //===Default===//
+            default:
 				Debug.Log("This animation effect is not implemented");
 				break;
 			}
-		}
+		//}
 	}
 
 	public void OnClick()
@@ -1360,28 +1400,34 @@ public class Test : MonoBehaviour
 			specialAnimationEffect16.GetComponent<ParticleSystem>().Stop();
 			specialAnimationEffect17.GetComponent<ParticleSystem>().Stop();
 			specialAnimationEffect18.GetComponent<ParticleSystem>().Stop();
+            specialAnimationEffect19.GetComponent<ParticleSystem>().Stop();
+            specialAnimationEffect20.GetComponent<ParticleSystem>().Stop();
+            specialAnimationEffect21.GetComponent<ParticleSystem>().Stop();
+            specialAnimationEffect22.GetComponent<ParticleSystem>().Stop();
+            specialAnimationEffect23.GetComponent<ParticleSystem>().Stop();
+            specialAnimationEffect24.GetComponent<ParticleSystem>().Stop();
 
 
 
-			//if (PlayerPrefs.GetFloat("printSize") < 0.6f)
-			//{
-			//    if (count == 3 || count == 1)
-			//    {
-			//        sprite.alpha = 1;
-			//        otherBackground.alpha = 0;
-			//    }
-			//}
-			//else
-			//{
-			//    if (count == 7 || count == 4)
-			//    {
-			//        sprite.alpha = 1;
-			//        otherBackground.alpha = 0;
-			//    }
-			//}
+            //if (PlayerPrefs.GetFloat("printSize") < 0.6f)
+            //{
+            //    if (count == 3 || count == 1)
+            //    {
+            //        sprite.alpha = 1;
+            //        otherBackground.alpha = 0;
+            //    }
+            //}
+            //else
+            //{
+            //    if (count == 7 || count == 4)
+            //    {
+            //        sprite.alpha = 1;
+            //        otherBackground.alpha = 0;
+            //    }
+            //}
 
-			//every 5 levels, if minigame option is active, display minigame instead of going to next page
-			if (count == 9 || count == 15 || count == 27 || count == 39)
+            //every 5 levels, if minigame option is active, display minigame instead of going to next page
+            if (count == 9 || count == 15 || count == 27 || count == 39)
 			{
 				if (PlayerPrefs.GetInt("minigames") == 1)
 				{
