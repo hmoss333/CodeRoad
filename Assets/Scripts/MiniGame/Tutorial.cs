@@ -52,6 +52,8 @@ public class Tutorial : MonoBehaviour
 
     public GameObject canvas;
 
+    Light directionalLight;
+
     // Use this for initialization
     void Start()
     {
@@ -91,6 +93,8 @@ public class Tutorial : MonoBehaviour
         startFormat = "<b><color=#00ff00ff>";
         endFormat = "</color></b>";
         movementLengthCollection = 0;
+
+        directionalLight = GameObject.FindObjectOfType<Light>();
 
         buttonChoosen = false;
         buttonCount = 0;
@@ -195,6 +199,9 @@ public class Tutorial : MonoBehaviour
             turned = true;
             player.transform.Rotate(0, Time.deltaTime * 180, 0);
         }
+
+        if (SceneManager.GetSceneByName("LoadingScreen").isLoaded)
+            directionalLight.gameObject.SetActive(false);
     }
 
     public void addSpin() { movement.Add("Spin"); showMoves.text = showMoves.text + "Spin..."; lineSkip(4); playSound(11); if (tutorialCount == 8) { tutorialCount++; } if (tutorialCount == 12) { tutorialCount++; } }
