@@ -100,11 +100,8 @@ public class PlayLevel : MonoBehaviour {
 		if (on) {
 			frontPanel.alpha = 0;
 
-            //ls.LoadScene(levelToLoad);
-            //ls.ChangeText("Let's play...");
-            //Resources.UnloadUnusedAssets();
-
-            SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);
+            if (!SceneManager.GetSceneByName("LoadingScreen").isLoaded)
+                SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);
             StartCoroutine(GoToScene(levelToLoad));
         }
 	}

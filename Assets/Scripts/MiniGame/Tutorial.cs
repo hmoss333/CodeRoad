@@ -583,7 +583,8 @@ public class Tutorial : MonoBehaviour
     {
         playSound(7);
         canvas.SetActive(false);
-        SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);
+        if (!SceneManager.GetSceneByName("LoadingScreen").isLoaded)
+            SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);
         yield return new WaitForSeconds(1.5f);
         //LoadManager.level = "MenuScreen";
         SceneManager.LoadSceneAsync("MenuScreen");

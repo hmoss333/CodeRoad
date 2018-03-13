@@ -57,6 +57,8 @@ public class StoryLoops : MonoBehaviour {
     public Button[] myButtons;
     int buttonCount;
 
+    Light directionalLight;
+
     // Use this for initialization
     void Start()
     {
@@ -111,6 +113,7 @@ public class StoryLoops : MonoBehaviour {
         if (PlayerPrefs.GetInt("Scan") == 1) { StartCoroutine(scanner()); }
         if (PlayerPrefs.GetInt("Voice") == 1) { narration.Play(); }
         story = GameObject.FindObjectOfType<Test>();
+        directionalLight = GameObject.FindObjectOfType<Light>();
         GameStatusEventHandler.gameWasStarted("challenge");
     }
 
@@ -240,6 +243,9 @@ public class StoryLoops : MonoBehaviour {
             turned = true;
             player.transform.Rotate(0, Time.deltaTime * 180, 0);
         }
+
+        if (SceneManager.GetSceneByName("LoadingScreen").isLoaded)
+            directionalLight.gameObject.SetActive(false);
     }
 
     public void addSpin() { movement.Add("Spin"); showMoves.text = showMoves.text + "Spin..."; lineSkip(4); playSound(11); }
@@ -556,7 +562,9 @@ public class StoryLoops : MonoBehaviour {
         playSound(7);
         canvas.SetActive(false);
         winCanvas.SetActive(false);
-        SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);
+        if (!SceneManager.GetSceneByName("LoadingScreen").isLoaded)
+            SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);
+        //directionalLight.gameObject.SetActive(false);
         yield return new WaitForSeconds(1.5f);
         //LoadManager.level = "Title";
         SceneManager.LoadSceneAsync("MainScreen");
@@ -564,8 +572,16 @@ public class StoryLoops : MonoBehaviour {
 
     public void nextLevel()
     {
+        StartCoroutine(nextLevetStart());
+    }
+    IEnumerator nextLevetStart()
+    {
         canvas.SetActive(false);
         winCanvas.SetActive(false);
+        if (!SceneManager.GetSceneByName("LoadingScreen").isLoaded)
+            SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);
+        //directionalLight.gameObject.SetActive(false);
+        yield return new WaitForSeconds(1f);
         story.EndMiniGame();
         SceneManager.UnloadSceneAsync("StoryLoops");
     }

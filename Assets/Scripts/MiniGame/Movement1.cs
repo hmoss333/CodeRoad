@@ -58,6 +58,8 @@ public class Movement1 : MonoBehaviour
     public Button[] myButtons;
     int buttonCount;
 
+    Light directionalLight;
+
     // Use this for initialization
     void Start()
     {
@@ -112,7 +114,7 @@ public class Movement1 : MonoBehaviour
         buttonCount = 0;
         if (PlayerPrefs.GetInt("Scan") == 1) { StartCoroutine(scanner()); }
         if (PlayerPrefs.GetInt("Voice") == 1) { narration.Play(); }
-
+        directionalLight = GameObject.FindObjectOfType<Light>();
         GameStatusEventHandler.gameWasStarted("challenge");
     }
      void narrationVoiceOverStop()
@@ -252,6 +254,9 @@ public class Movement1 : MonoBehaviour
             turned = true;
             player.transform.Rotate(0, Time.deltaTime * 180, 0);
         }
+
+        if (SceneManager.GetSceneByName("LoadingScreen").isLoaded)
+            directionalLight.gameObject.SetActive(false);
     }
 
     public void addSpin() { movement.Add("Spin"); showMoves.text = showMoves.text + "Spin..."; lineSkip(4); playSound(11); }
@@ -634,6 +639,7 @@ public class Movement1 : MonoBehaviour
         canvas.SetActive(false);
         winCanvas.SetActive(false);
         SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);
+        //directionalLight.gameObject.SetActive(false);
         yield return new WaitForSeconds(1.5f);
         //LoadManager.level = "Title";
         SceneManager.LoadSceneAsync("MenuScreen");

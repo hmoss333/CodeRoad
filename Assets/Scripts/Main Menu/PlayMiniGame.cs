@@ -95,7 +95,8 @@ public class PlayMiniGame : MonoBehaviour {
 
     IEnumerator GoToScene(string sceneName)
     {
-        SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);
+        if (!SceneManager.GetSceneByName("LoadingScreen").isLoaded)
+            SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);
         yield return new WaitForSeconds(1f);
         SceneManager.LoadSceneAsync(sceneName);
 

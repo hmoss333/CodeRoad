@@ -1531,7 +1531,8 @@ public class Test : MonoBehaviour
 
         //DisableRobots();
 
-        SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);
+        if (!SceneManager.GetSceneByName("LoadingScreen").isLoaded)
+            SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);
         audiosource.Stop();
 		mainCamera.gameObject.SetActive(false);
 		storyView.alpha = 0f;
@@ -2901,7 +2902,8 @@ public class Test : MonoBehaviour
 
 	IEnumerator DisplayScene()
 	{
-        SceneManager.LoadSceneAsync("LoadingScreen", LoadSceneMode.Additive);
+        if (!SceneManager.GetSceneByName("LoadingScreen").isLoaded)
+            SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);
 
         mainCamera.gameObject.SetActive(false);
 

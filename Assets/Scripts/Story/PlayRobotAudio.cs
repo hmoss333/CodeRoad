@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayRobotAudio : MonoBehaviour {
 
-    public AudioClip robotSound;
+    public AudioClip[] characterSounds;
     AudioSource specialAudiosource;
 
 
@@ -22,8 +22,18 @@ public class PlayRobotAudio : MonoBehaviour {
     void OnClick ()
     {
         specialAudiosource.Stop();
-        specialAudiosource.clip = robotSound;
+        specialAudiosource.clip = SelectRandomAudio(characterSounds);//robotSound;
         specialAudiosource.Play();
         Debug.Log("played robot audio");
+    }
+
+    AudioClip SelectRandomAudio (AudioClip[] audioList)
+    {
+        int randNum = (int)Random.Range(0.0f, (float)audioList.Length);
+        Debug.Log("RandNum: " + randNum);
+
+        AudioClip ac = audioList[randNum];
+
+        return ac;
     }
 }
