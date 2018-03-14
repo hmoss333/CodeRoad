@@ -577,7 +577,7 @@ public class StoryCombos : MonoBehaviour {
             SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);
         //directionalLight.gameObject.SetActive(false);
         yield return new WaitForSeconds(1f);
-        story.EndMiniGame();
-        SceneManager.UnloadSceneAsync("StoryCombos");
+        story.StartCoroutine("EndMiniGame");
+        //SceneManager.UnloadSceneAsync("StoryCombos");
     }
 }

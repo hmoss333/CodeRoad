@@ -88,8 +88,9 @@ public class StoryMovement : MonoBehaviour {
                 showMoves.GetComponent<RectTransform>().sizeDelta = new Vector2(375, 210);
                 break;
         }
-        showMoves.fontSize = 25;// PlayerPrefs.GetInt("fontSize");
-        help.fontSize = 25;// PlayerPrefs.GetInt("fontSize") - 5;
+        showMoves.fontSize = 25; //(int)((PlayerPrefs.GetFloat("printSize") + 0.05f) * 100); //can be too small to see
+        help.fontSize = 25; //(int)((PlayerPrefs.GetFloat("printSize") + 0.05f) * 100); //can't see a change in text size
+        Debug.Log("Help Font Size: " + help.fontSize);
         loopState = false;
         loopsFromSlider = 2;
         howManyTimesToLoop.text = "Times To Loop : " + loopsFromSlider;
@@ -665,7 +666,7 @@ public class StoryMovement : MonoBehaviour {
             SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);
         //directionalLight.gameObject.SetActive(false);
         yield return new WaitForSeconds(1f);
-        story.EndMiniGame();
-        SceneManager.UnloadSceneAsync("StoryMovement");
+        story.StartCoroutine("EndMiniGame");
+        //SceneManager.UnloadSceneAsync("StoryMovement");
     }
 }

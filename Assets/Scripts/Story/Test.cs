@@ -1434,7 +1434,7 @@ public class Test : MonoBehaviour
 					if (!inMiniGameMode && CanPlay())
 					{
 						label.text = "";
-                        SetMiniGame();
+                        StartCoroutine(SetMiniGame());
 
                         //==For Testing; Replace when minigame is ready==//
                         //Debug.Log("Minigame plays here");
@@ -1525,14 +1525,15 @@ public class Test : MonoBehaviour
     }
 
     //minigame logic here
-    public void SetMiniGame()
+    IEnumerator SetMiniGame()
 	{
 		inMiniGameMode = true;
 
         //DisableRobots();
 
-        if (!SceneManager.GetSceneByName("LoadingScreen").isLoaded)
+        //if (!SceneManager.GetSceneByName("LoadingScreen").isLoaded)
             SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);
+        yield return new WaitForSeconds(1f);
         audiosource.Stop();
 		mainCamera.gameObject.SetActive(false);
 		storyView.alpha = 0f;
@@ -1567,19 +1568,19 @@ public class Test : MonoBehaviour
 		SceneManager.LoadSceneAsync(sceneName);
 	}
 
-	public void EndMiniGame()
+	public IEnumerator EndMiniGame()
 	{
-		Scene scene = SceneManager.GetSceneByName("1stScene");
+        //yield return new WaitForSeconds(1f);
+
+        Scene scene = SceneManager.GetSceneByName("1stScene");
 		if ((scene != null) && (!scene.isLoaded))
 		{
 			StartCoroutine(GoToScene("Empty"));
 		}
-		//SceneManager.UnloadSceneAsync("MiniGame_Story");
-		//Resources.UnloadUnusedAssets();
-		//ls.ResetText();
-		//enabled = true;
 
-		StartCoroutine(TurnOnCamera());
+        yield return new WaitForSeconds(1f);
+
+        StartCoroutine(TurnOnCamera());
 	}
 
 	IEnumerator TurnOnCamera()

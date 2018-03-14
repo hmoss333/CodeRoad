@@ -582,7 +582,7 @@ public class StoryLoops : MonoBehaviour {
             SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);
         //directionalLight.gameObject.SetActive(false);
         yield return new WaitForSeconds(1f);
-        story.EndMiniGame();
-        SceneManager.UnloadSceneAsync("StoryLoops");
+        story.StartCoroutine("EndMiniGame");
+        //SceneManager.UnloadSceneAsync("StoryLoops");
     }
 }

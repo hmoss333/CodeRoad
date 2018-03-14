@@ -23,7 +23,7 @@ public class parentzoneScript : MonoBehaviour {
 	public UIPanel frontpanel;
 	public UIPanel optionspanel;
 	public UIPanel parentzonepanel;
-    public GameObject storePanel;
+    //public GameObject storePanel;
 
 	public AudioSource backgroundMusic;
     public AudioClip askVoice;
@@ -86,7 +86,7 @@ public class parentzoneScript : MonoBehaviour {
             }
             else if (bookClick)
             {
-                storePanel.SetActive(true);
+                //storePanel.SetActive(true);
                 background.mainTexture = Resources.Load("background") as Texture;
             }
 			
@@ -110,7 +110,7 @@ public class parentzoneScript : MonoBehaviour {
             }
             else if (bookClick)
             {
-                storePanel.SetActive(true);
+                //storePanel.SetActive(true);
                 background.mainTexture = Resources.Load("background") as Texture;
             }
         } else {
@@ -133,7 +133,7 @@ public class parentzoneScript : MonoBehaviour {
             }
             else if (bookClick)
             {
-                storePanel.SetActive(true);
+                //storePanel.SetActive(true);
                 background.mainTexture = Resources.Load("background") as Texture;
             }
         } else {
@@ -156,7 +156,7 @@ public class parentzoneScript : MonoBehaviour {
             }
             else if (bookClick)
             {
-                storePanel.SetActive(true);
+                //storePanel.SetActive(true);
                 background.mainTexture = Resources.Load("background") as Texture;
             }
         } else {
@@ -172,7 +172,7 @@ public class parentzoneScript : MonoBehaviour {
 	public void cancel() {
 		parentzonepanel.alpha = 0;
 		frontpanel.alpha = 1;
-        storePanel.SetActive(false);
+        //storePanel.SetActive(false);
         background.mainTexture = Resources.Load ("coderoad_opening") as Texture;
 		if (PlayerPrefs.GetInt("voice") == 0) 
 		{
