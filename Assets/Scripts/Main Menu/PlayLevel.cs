@@ -173,7 +173,8 @@ public class PlayLevel : MonoBehaviour {
         //Camera.main.gameObject.SetActive(false);
 
         yield return new WaitForSeconds(1f);
-        SceneManager.LoadSceneAsync(sceneName);
+        if (!SceneManager.GetSceneByName(sceneName).isLoaded)
+            SceneManager.LoadSceneAsync(sceneName);
 
         if (SceneManager.GetActiveScene().name == "LoadingScreen")
             SceneManager.UnloadSceneAsync("LoadingScreen");

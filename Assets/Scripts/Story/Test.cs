@@ -1568,36 +1568,32 @@ public class Test : MonoBehaviour
 		SceneManager.LoadSceneAsync(sceneName);
 	}
 
-	public IEnumerator EndMiniGame()
+	public void EndMiniGame()
 	{
-        //yield return new WaitForSeconds(1f);
-
-        Scene scene = SceneManager.GetSceneByName("1stScene");
-		if ((scene != null) && (!scene.isLoaded))
-		{
-			StartCoroutine(GoToScene("Empty"));
-		}
-
-        yield return new WaitForSeconds(1f);
+	    StartCoroutine(GoToScene("Empty"));
 
         StartCoroutine(TurnOnCamera());
 	}
 
 	IEnumerator TurnOnCamera()
 	{
-		if (SceneManager.GetActiveScene().name != "LoadingScreen") {
-			storyView.alpha = 1f;
-			mainCamera.gameObject.SetActive(true);
+        if (!SceneManager.GetSceneByName("LoadingScreen").isLoaded && SceneManager.GetSceneByName("Empty").isLoaded) {
+            //yield return new WaitForSeconds(0.25f);
+            //storyView.alpha = 1f;
+			//mainCamera.gameObject.SetActive(true);
 			enabled = true;
 			next.alpha = 1f;
 			cover.alpha = 1f;
 			OnClick();
-			Debug.Log("Level ready");
-		} else {
-			yield return new WaitForSeconds(0.5f);
-			StartCoroutine(TurnOnCamera());
-		}
-	}
+            storyView.alpha = 1f;
+            mainCamera.gameObject.SetActive(true);
+        }
+        else
+        {
+            yield return new WaitForSeconds(0.5f);
+            StartCoroutine(TurnOnCamera());
+        }
+    }
 
 	IEnumerator FadeOther(UIWidget w, float durationInSeconds)
 	{
@@ -2906,7 +2902,7 @@ public class Test : MonoBehaviour
         if (!SceneManager.GetSceneByName("LoadingScreen").isLoaded)
             SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);
 
-        mainCamera.gameObject.SetActive(false);
+        //mainCamera.gameObject.SetActive(false);
 
         yield return new WaitForSeconds(1);
 		SceneManager.LoadSceneAsync(1);

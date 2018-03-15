@@ -666,7 +666,7 @@ public class StoryMovement : MonoBehaviour {
             SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);
         //directionalLight.gameObject.SetActive(false);
         yield return new WaitForSeconds(1f);
-        story.StartCoroutine("EndMiniGame");
+        story.EndMiniGame();
         //SceneManager.UnloadSceneAsync("StoryMovement");
     }
 }
