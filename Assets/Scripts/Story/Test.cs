@@ -283,13 +283,13 @@ public class Test : MonoBehaviour
 	public void backClick()
 	{
 		back = true;
-		if (count == -1)
+		if (count == 0)
 		{
 			back = false;
 		}
 		else
 		{
-			count -= 1;
+			count -= 2;
 			OnClick();
 		}
 	}
@@ -442,29 +442,25 @@ public class Test : MonoBehaviour
 			{
 				key1Press = true;
 				objectApp = true;
-				setTap ();
-                //OnClick(); //trying this out
+				//setTap ();
 			}
 			if (Input.GetKeyDown("2") == true)
 			{
 				key2Press = true;
 				objectApp = true;
-				setTap ();
-                //OnClick(); //trying this out
+				//setTap ();
             }
 			if (Input.GetKeyDown("3") == true)
 			{
 				key3Press = true;
 				objectApp = true;
-				setTap ();
-                //OnClick(); //trying this out
+				//setTap ();
             }
 			if (Input.GetKeyDown("space") == true)
 			{
 				keyspacePress = true;
 				objectApp = true;
-				setTap ();
-                //OnClick(); //trying this out
+				//setTap ();
             }
 			if (e != null)
 			{
@@ -473,8 +469,7 @@ public class Test : MonoBehaviour
 					//if (Input.GetKeyDown(KeyCode.Return)) {
 					keyenterPress = true;
 					objectApp = true;
-					setTap ();
-                    //OnClick(); //trying this out
+					//setTap ();
                 }
 			}
 
