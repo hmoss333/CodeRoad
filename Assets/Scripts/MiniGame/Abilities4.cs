@@ -83,8 +83,8 @@ public class Abilities4 : MonoBehaviour
                 showMoves.GetComponent<RectTransform>().sizeDelta = new Vector2(375, 210);
                 break;
         }
-        showMoves.fontSize = PlayerPrefs.GetInt("fontSize");
-        help.fontSize = PlayerPrefs.GetInt("fontSize")-5;
+        showMoves.fontSize = 25;// PlayerPrefs.GetInt("fontSize");
+        help.fontSize = 25;// PlayerPrefs.GetInt("fontSize")-5;
         loopState = false;
         loopsFromSlider = 2;
         howManyTimesToLoop.text = "Times To Loop : " + loopsFromSlider;
