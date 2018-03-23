@@ -48,7 +48,7 @@ public class Movement1 : MonoBehaviour
     bool loopState;
 
     public AudioClip[] mySounds;
-    public AudioClip winSound;
+    public AudioClip[] winSound;
 
     int forwardCount;
     public Text help;
@@ -596,7 +596,8 @@ public class Movement1 : MonoBehaviour
     {
         canvas.SetActive(false);
         winCanvas.SetActive(true);
-        GetComponent<AudioSource>().clip = winSound;
+        GetComponent<AudioSource>().Stop();
+        GetComponent<AudioSource>().clip = winSound[UnityEngine.Random.Range(0, winSound.Length)];
         GetComponent<AudioSource>().Play();
         PointHandler.completedChallenges += 1.0f;
     }

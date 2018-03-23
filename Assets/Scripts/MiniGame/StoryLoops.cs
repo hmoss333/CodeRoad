@@ -47,7 +47,7 @@ public class StoryLoops : MonoBehaviour {
     bool loopState;
 
     public AudioClip[] mySounds;
-    public AudioClip winSound;
+    public AudioClip[] winSound;
 
     int shrinkCount;
     public Text help;
@@ -515,7 +515,8 @@ public class StoryLoops : MonoBehaviour {
     {
         canvas.SetActive(false);
         winCanvas.SetActive(true);
-        GetComponent<AudioSource>().clip = winSound;
+        GetComponent<AudioSource>().Stop();
+        GetComponent<AudioSource>().clip = winSound[UnityEngine.Random.Range(0, winSound.Length)];
         GetComponent<AudioSource>().Play();
         player.transform.eulerAngles = new Vector3(0, 180, 0);
         AnimatePlayer.win = true;

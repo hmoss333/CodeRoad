@@ -52,32 +52,6 @@ public class Test : MonoBehaviour
 	public UISprite backBack2;
 	public UILabel backLabel;
 
-    [Header("Characters")]
-    public GameObject[] page1;
-    public GameObject[] page2;
-    public GameObject[] page3;
-    public GameObject[] page4;
-    public GameObject[] page5;
-    public GameObject[] page6;
-    public GameObject[] page7;
-    public GameObject[] page8;
-    public GameObject[] page9;
-    public GameObject[] page10;
-    public GameObject[] page11;
-    public GameObject[] page12;
-    public GameObject[] page13;
-    public GameObject[] page14;
-    public GameObject[] page15;
-    public GameObject[] page16;
-    public GameObject[] page17;
-    public GameObject[] page18;
-    public GameObject[] page19;
-    public GameObject[] page20;
-    public GameObject[] page21;
-    public GameObject[] page22;
-    public GameObject[] page23;
-    public GameObject[] page24;
-
     [Header("Effects")]
 	public UISprite testobj;
 	public GameObject specialAnimationEffect1;
@@ -257,12 +231,14 @@ public class Test : MonoBehaviour
 	{
 		if (inTutorialMode)
 		{
-			if (Tutorial_1.activeInHierarchy)
-				Turotiral1OnClick();
-			else if (Tutorial_2.activeInHierarchy)
-				Turotiral2OnClick();
-			else if (Tutorial_3.activeInHierarchy)
-				Turotiral3OnClick();
+            if (Tutorial_1.activeInHierarchy)
+                Turotiral1OnClick();
+            else if (Tutorial_2.activeInHierarchy)
+                Turotiral2OnClick();
+            else if (Tutorial_3.activeInHierarchy)
+                Turotiral3OnClick();
+            else
+                inTutorialMode = false;
 		}
 
 		completetext = true;
@@ -426,16 +402,6 @@ public class Test : MonoBehaviour
 
 	void Update()
 	{
-		//if (Input.anyKey)
-		//{
-		//    if (Tutorial_1.activeInHierarchy)
-		//        Turotiral1OnClick();
-		//    else if (Tutorial_2.activeInHierarchy)
-		//        Turotiral2OnClick();
-		//    else if (Tutorial_3.activeInHierarchy)
-		//        Turotiral3OnClick();
-		//}
-
 		if (!inMiniGameMode) //should prevent any input from being read if in minigame mode
 		{
 			if (Input.GetKeyDown("1") == true)
@@ -472,6 +438,11 @@ public class Test : MonoBehaviour
 					//setTap ();
                 }
 			}
+
+            if (objectApp && inTutorialMode)
+            {
+                setTap();
+            }
 
 			if ((PlayerPrefs.GetInt("educationOn") == 1) && (PlayerPrefs.GetInt("therapyOn") == 0))
 			{
@@ -1352,9 +1323,6 @@ public class Test : MonoBehaviour
 
 	public void OnClick()
 	{
-		if (inTutorialMode && Tutorial_3.activeSelf)
-			Turotiral3OnClick();
-
 		if (enabled == true && (!inTutorialMode))
 		{
 			load = false;
@@ -1466,59 +1434,6 @@ public class Test : MonoBehaviour
 			return false;
 	}
 
-    void EnableCharacters(GameObject[] pageNum)
-    {
-        for (int i = 0; i < pageNum.Length; i++)
-        {
-            pageNum[i].SetActive(true);
-        }
-    }
-
-    void DisableCharacters(GameObject[] pageNum)
-    {
-        for (int i = 0; i < pageNum.Length; i++)
-        {
-            pageNum[i].SetActive(false);
-        }
-    }
-
-    void DisableRobots()
-	{
-        DisableCharacters(page1);
-        DisableCharacters(page2);
-        DisableCharacters(page3);
-        DisableCharacters(page4);
-        DisableCharacters(page5);
-        DisableCharacters(page6);
-        DisableCharacters(page7);
-        DisableCharacters(page8);
-        DisableCharacters(page9);
-        DisableCharacters(page10);
-        DisableCharacters(page11);
-        DisableCharacters(page12);
-        DisableCharacters(page13);
-        DisableCharacters(page14);
-        DisableCharacters(page15);
-        DisableCharacters(page16);
-        DisableCharacters(page17);
-        DisableCharacters(page18);
-        DisableCharacters(page19);
-        DisableCharacters(page20);
-        DisableCharacters(page21);
-        DisableCharacters(page22);
-        DisableCharacters(page23);
-        DisableCharacters(page24);
-    }
-
-    void AnimatePage(GameObject[] pageNum)
-    {
-        for (int i = 0; i < pageNum.Length; i++)
-        {
-            if (pageNum[i].GetComponent<UI2DSpriteAnimation>() != null)
-                pageNum[i].GetComponent<UI2DSpriteAnimation>().Play();
-        }
-    }
-
     //minigame logic here
     IEnumerator SetMiniGame()
 	{
@@ -1561,7 +1476,10 @@ public class Test : MonoBehaviour
 	{
 		yield return new WaitForSeconds(1f);
 		SceneManager.LoadSceneAsync(sceneName);
-	}
+
+        if (SceneManager.GetActiveScene().name == "LoadingScreen")
+            SceneManager.UnloadSceneAsync("LoadingScreen");
+    }
 
 	public void EndMiniGame()
 	{
@@ -1572,25 +1490,22 @@ public class Test : MonoBehaviour
 
 	IEnumerator TurnOnCamera()
 	{
-        if (!SceneManager.GetSceneByName("LoadingScreen").isLoaded && SceneManager.GetSceneByName("Empty").isLoaded) {
-            //yield return new WaitForSeconds(0.25f);
-            //storyView.alpha = 1f;
-			//mainCamera.gameObject.SetActive(true);
-			enabled = true;
-			next.alpha = 1f;
-			cover.alpha = 1f;
-			OnClick();
-            storyView.alpha = 1f;
-            mainCamera.gameObject.SetActive(true);
-        }
-        else
-        {
-            yield return new WaitForSeconds(0.5f);
-            StartCoroutine(TurnOnCamera());
-        }
+        yield return new WaitForSeconds(0.25f);
+        //if (ls.levelLoaded) {
+        storyView.alpha = 1f;
+        mainCamera.gameObject.SetActive(true);
+        enabled = true;
+        next.alpha = 1f;
+        cover.alpha = 1f;
+        OnClick();
+        //	Debug.Log("Level ready");
+        //} else {
+        //yield return new WaitForSeconds(0.5f);
+        //StartCoroutine(TurnOnCamera());
+        //}
     }
 
-	IEnumerator FadeOther(UIWidget w, float durationInSeconds)
+    IEnumerator FadeOther(UIWidget w, float durationInSeconds)
 	{
 		float startA = w.alpha;
 		float currentTime = 0f;
@@ -1610,61 +1525,25 @@ public class Test : MonoBehaviour
 
         float startA = w.alpha;
         label.text = "";
-        //float currentTime = 0f;
-        //if (PlayerPrefs.GetFloat("printSize") < 0.6f)
-        //{
-        //	if (count == 18)
-        //	{
-        //		label.text = "The planets are grand and my Wootzy friends too.\n Learning colors with friends was a fun thing to do. ";
-        //	}
-        //	else
-        //	{
-        //		label.text = "";
-        //	}
-        //}
-        //else
-        //{
-        //	if (count == 37)
-        //	{
-        //		label.text = "Learning colors with friends was a fun thing to do. ";
-        //	}
-        //	else
-        //	{
-        //		label.text = "";
-        //	}
-        //}
-        yield return null;
 
-        /*
-		if (PlayerPrefs.GetFloat("printSize") < 0.6f) {
-			if (((back == false) && ((count == 0) || (count == 1) || (count == 2) || (count == 3) || (count == 4))) || ((back == true) 
-			                                                                                                            && ((count == -1) || (count == 0) || (count == 1) || (count == 2) || (count == 3)))) {
-				while(currentTime < durationInSeconds)
-				{
-					w.alpha = Mathf.Lerp(startA,0f, currentTime / durationInSeconds);
-					currentTime += Time.deltaTime;
-					yield return null;
-				}
-			}
-		} else {
-			if (((back == false) && ((count == 1) || (count == 3) || (count == 5) || (count == 7) || (count == 9))) || ((back == true) 
-			                                                                                                            && ((count == 0) || (count == 2) || (count == 4) || (count == 6) || (count == 8)))) {
-				while(currentTime < durationInSeconds)
-				{
-					w.alpha = Mathf.Lerp(startA,0f, currentTime / durationInSeconds);
-					currentTime += Time.deltaTime;
-					yield return null;
-				}
-			}
-		}
-		*/
-        //cover.alpha = coverAlpha;
+        GameObject partPrefab;
+
+        //yield return null;
 
         //if (PlayerPrefs.GetFloat("printSize") < 0.6f)
         //{
         if (count == -1)
         {
-            EnableCharacters(page1);
+            //EnableCharacters(page1);
+
+            if (!back)
+            {
+                Destroy(GameObject.Find("Part (1)(Clone)"));
+
+                partPrefab = Instantiate(Resources.Load("Part (1)")) as GameObject;
+                partPrefab.transform.SetParent(storyView.transform);
+                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+            }
 
             audiosource.Stop();
             audiosource.clip = part1;
@@ -1677,11 +1556,21 @@ public class Test : MonoBehaviour
         }
         else if (count == 0)
         {
-            DisableCharacters(page2);
-            EnableCharacters(page1);
+            //DisableCharacters(page2);
+            //EnableCharacters(page1);
+
+            //if (back)
+            //    AnimatePage(page1);
 
             if (back)
-                AnimatePage(page1);
+            {
+                Destroy(GameObject.Find("Part (1)(Clone)"));
+                Destroy(GameObject.Find("Part (2)(Clone)"));
+
+                partPrefab = Instantiate(Resources.Load("Part (1)")) as GameObject;
+                partPrefab.transform.SetParent(storyView.transform);
+                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+            }
 
             audiosource.Stop();
             audiosource.clip = part2;
@@ -1694,11 +1583,21 @@ public class Test : MonoBehaviour
         }
         else if (count == 1)
         {
-            DisableCharacters(page1);
-            EnableCharacters(page2);
+            //DisableCharacters(page1);
+            //EnableCharacters(page2);
+
+            //if (!back)
+            //    AnimatePage(page2);
 
             if (!back)
-                AnimatePage(page2);
+            {
+                Destroy(GameObject.Find("Part (1)(Clone)"));
+                Destroy(GameObject.Find("Part (2)(Clone)"));
+
+                partPrefab = Instantiate(Resources.Load("Part (2)")) as GameObject;
+                partPrefab.transform.SetParent(storyView.transform);
+                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+            }
 
             audiosource.Stop();
             audiosource.clip = part3;
@@ -1711,11 +1610,21 @@ public class Test : MonoBehaviour
         }
         else if (count == 2)
         {
-            DisableCharacters(page3);
-            EnableCharacters(page2);
+            //DisableCharacters(page3);
+            //EnableCharacters(page2);
+
+            //if (back)
+            //    AnimatePage(page2);
 
             if (back)
-                AnimatePage(page2);
+            {
+                Destroy(GameObject.Find("Part (2)(Clone)"));
+                Destroy(GameObject.Find("Part (3)(Clone)"));
+
+                partPrefab = Instantiate(Resources.Load("Part (2)")) as GameObject;
+                partPrefab.transform.SetParent(storyView.transform);
+                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+            }
 
             audiosource.Stop();
             audiosource.clip = part4;
@@ -1728,11 +1637,21 @@ public class Test : MonoBehaviour
         }
         else if (count == 3)
         {
-            DisableCharacters(page2);
-            EnableCharacters(page3);
+            //DisableCharacters(page2);
+            //EnableCharacters(page3);
+
+            //if (!back)
+            //    AnimatePage(page3);
 
             if (!back)
-                AnimatePage(page3);
+            {
+                Destroy(GameObject.Find("Part (2)(Clone)"));
+                Destroy(GameObject.Find("Part (3)(Clone)"));
+
+                partPrefab = Instantiate(Resources.Load("Part (3)")) as GameObject;
+                partPrefab.transform.SetParent(storyView.transform);
+                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+            }
 
             audiosource.Stop();
             audiosource.clip = part5;
@@ -1745,11 +1664,21 @@ public class Test : MonoBehaviour
         }
         else if (count == 4)
         {
-            DisableCharacters(page4);
-            EnableCharacters(page3);
+            //DisableCharacters(page4);
+            //EnableCharacters(page3);
+
+            //if (back)
+            //    AnimatePage(page3);
 
             if (back)
-                AnimatePage(page3);
+            {
+                Destroy(GameObject.Find("Part (3)(Clone)"));
+                Destroy(GameObject.Find("Part (4)(Clone)"));
+
+                partPrefab = Instantiate(Resources.Load("Part (3)")) as GameObject;
+                partPrefab.transform.SetParent(storyView.transform);
+                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+            }
 
             audiosource.Stop();
             audiosource.clip = part6;
@@ -1762,11 +1691,21 @@ public class Test : MonoBehaviour
         }
         else if (count == 5)
         {
-            DisableCharacters(page3);
-            EnableCharacters(page4);
+            //DisableCharacters(page3);
+            //EnableCharacters(page4);
+
+            //if (!back)
+            //    AnimatePage(page4);
 
             if (!back)
-                AnimatePage(page4);
+            {
+                Destroy(GameObject.Find("Part (3)(Clone)"));
+                Destroy(GameObject.Find("Part (4)(Clone)"));
+
+                partPrefab = Instantiate(Resources.Load("Part (4)")) as GameObject;
+                partPrefab.transform.SetParent(storyView.transform);
+                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+            }
 
             audiosource.Stop();
             audiosource.clip = part7;
@@ -1779,11 +1718,21 @@ public class Test : MonoBehaviour
         }
         else if (count == 6)
         {
-            DisableCharacters(page5);
-            EnableCharacters(page4);
+            //DisableCharacters(page5);
+            //EnableCharacters(page4);
+
+            //if (back)
+            //    AnimatePage(page4);
 
             if (back)
-                AnimatePage(page4);
+            {
+                Destroy(GameObject.Find("Part (4)(Clone)"));
+                Destroy(GameObject.Find("Part (5)(Clone)"));
+
+                partPrefab = Instantiate(Resources.Load("Part (4)")) as GameObject;
+                partPrefab.transform.SetParent(storyView.transform);
+                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+            }
 
             audiosource.Stop();
             audiosource.clip = part8;
@@ -1796,11 +1745,21 @@ public class Test : MonoBehaviour
         }
         else if (count == 7)
         {
-            DisableCharacters(page4);
-            EnableCharacters(page5);
+            //DisableCharacters(page4);
+            //EnableCharacters(page5);
+
+            //if (!back)
+            //    AnimatePage(page5);
 
             if (!back)
-                AnimatePage(page5);
+            {
+                Destroy(GameObject.Find("Part (4)(Clone)"));
+                Destroy(GameObject.Find("Part (5)(Clone)"));
+
+                partPrefab = Instantiate(Resources.Load("Part (5)")) as GameObject;
+                partPrefab.transform.SetParent(storyView.transform);
+                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+            }
 
             audiosource.Stop();
             audiosource.clip = part9;
@@ -1813,11 +1772,21 @@ public class Test : MonoBehaviour
         }
         else if (count == 8)
         {
-            EnableCharacters(page5);
-            DisableCharacters(page6);
+            //EnableCharacters(page5);
+            //DisableCharacters(page6);
+
+            //if (back)
+            //    AnimatePage(page5);
 
             if (back)
-                AnimatePage(page5);
+            {
+                Destroy(GameObject.Find("Part (5)(Clone)"));
+                Destroy(GameObject.Find("Part (6)(Clone)"));
+
+                partPrefab = Instantiate(Resources.Load("Part (5)")) as GameObject;
+                partPrefab.transform.SetParent(storyView.transform);
+                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+            }
 
             audiosource.Stop();
             audiosource.clip = part10;
@@ -1830,11 +1799,21 @@ public class Test : MonoBehaviour
         }
         else if (count == 9)
         {
-            DisableCharacters(page5);
-            EnableCharacters(page6);
+            //DisableCharacters(page5);
+            //EnableCharacters(page6);
+
+            //if (!back)
+            //    AnimatePage(page6);
 
             if (!back)
-                AnimatePage(page6);
+            {
+                Destroy(GameObject.Find("Part (5)(Clone)"));
+                Destroy(GameObject.Find("Part (6)(Clone)"));
+
+                partPrefab = Instantiate(Resources.Load("Part (6)")) as GameObject;
+                partPrefab.transform.SetParent(storyView.transform);
+                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+            }
 
             audiosource.Stop();
             audiosource.clip = part11;
@@ -1847,11 +1826,21 @@ public class Test : MonoBehaviour
         }
         else if (count == 10)
         {
-            EnableCharacters(page6);
-            DisableCharacters(page7);
+            //EnableCharacters(page6);
+            //DisableCharacters(page7);
+
+            //if (back)
+            //    AnimatePage(page6);
 
             if (back)
-                AnimatePage(page6);
+            {
+                Destroy(GameObject.Find("Part (6)(Clone)"));
+                Destroy(GameObject.Find("Part (7)(Clone)"));
+
+                partPrefab = Instantiate(Resources.Load("Part (6)")) as GameObject;
+                partPrefab.transform.SetParent(storyView.transform);
+                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+            }
 
             audiosource.Stop();
             audiosource.clip = part12;
@@ -1864,11 +1853,21 @@ public class Test : MonoBehaviour
         }
         else if (count == 11)
         {
-            DisableCharacters(page6);
-            EnableCharacters(page7);
+            //DisableCharacters(page6);
+            //EnableCharacters(page7);
+
+            //if (!back)
+            //    AnimatePage(page7);
 
             if (!back)
-                AnimatePage(page7);
+            {
+                Destroy(GameObject.Find("Part (6)(Clone)"));
+                Destroy(GameObject.Find("Part (7)(Clone)"));
+
+                partPrefab = Instantiate(Resources.Load("Part (7)")) as GameObject;
+                partPrefab.transform.SetParent(storyView.transform);
+                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+            }
 
             audiosource.Stop();
             audiosource.clip = part13;
@@ -1881,11 +1880,21 @@ public class Test : MonoBehaviour
         }
         else if (count == 12)
         {
-            EnableCharacters(page7);
-            DisableCharacters(page8);
+            //EnableCharacters(page7);
+            //DisableCharacters(page8);
+
+            //if (back)
+            //    AnimatePage(page7);
 
             if (back)
-                AnimatePage(page7);
+            {
+                Destroy(GameObject.Find("Part (7)(Clone)"));
+                Destroy(GameObject.Find("Part (8)(Clone)"));
+
+                partPrefab = Instantiate(Resources.Load("Part (7)")) as GameObject;
+                partPrefab.transform.SetParent(storyView.transform);
+                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+            }
 
             audiosource.Stop();
             audiosource.clip = part14;
@@ -1898,11 +1907,21 @@ public class Test : MonoBehaviour
         }
         else if (count == 13)
         {
-            DisableCharacters(page7);
-            EnableCharacters(page8);
+            //DisableCharacters(page7);
+            //EnableCharacters(page8);
+
+            //if (!back)
+            //    AnimatePage(page8);
 
             if (!back)
-                AnimatePage(page8);
+            {
+                Destroy(GameObject.Find("Part (7)(Clone)"));
+                Destroy(GameObject.Find("Part (8)(Clone)"));
+
+                partPrefab = Instantiate(Resources.Load("Part (8)")) as GameObject;
+                partPrefab.transform.SetParent(storyView.transform);
+                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+            }
 
             audiosource.Stop();
             audiosource.clip = part15;
@@ -1915,11 +1934,21 @@ public class Test : MonoBehaviour
         }
         else if (count == 14)
         {
-            EnableCharacters(page8);
-            DisableCharacters(page9);
+            //EnableCharacters(page8);
+            //DisableCharacters(page9);
+
+            //if (back)
+            //    AnimatePage(page8);
 
             if (back)
-                AnimatePage(page8);
+            {
+                Destroy(GameObject.Find("Part (8)(Clone)"));
+                Destroy(GameObject.Find("Part (9)(Clone)"));
+
+                partPrefab = Instantiate(Resources.Load("Part (8)")) as GameObject;
+                partPrefab.transform.SetParent(storyView.transform);
+                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+            }
 
             audiosource.Stop();
             audiosource.clip = part16;
@@ -1932,11 +1961,21 @@ public class Test : MonoBehaviour
         }
         else if (count == 15)
         {
-            DisableCharacters(page8);
-            EnableCharacters(page9);
+            //DisableCharacters(page8);
+            //EnableCharacters(page9);
+
+            //if (!back)
+            //    AnimatePage(page9);
 
             if (!back)
-                AnimatePage(page9);
+            {
+                Destroy(GameObject.Find("Part (8)(Clone)"));
+                Destroy(GameObject.Find("Part (9)(Clone)"));
+
+                partPrefab = Instantiate(Resources.Load("Part (9)")) as GameObject;
+                partPrefab.transform.SetParent(storyView.transform);
+                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+            }
 
             audiosource.Stop();
             audiosource.clip = part17;
@@ -1949,11 +1988,21 @@ public class Test : MonoBehaviour
         }
         else if (count == 16)
         {
-            DisableCharacters(page10);
-            EnableCharacters(page9);
+            //DisableCharacters(page10);
+            //EnableCharacters(page9);
+
+            //if (back)
+            //    AnimatePage(page9);
 
             if (back)
-                AnimatePage(page9);
+            {
+                Destroy(GameObject.Find("Part (9)(Clone)"));
+                Destroy(GameObject.Find("Part (10)(Clone)"));
+
+                partPrefab = Instantiate(Resources.Load("Part (9)")) as GameObject;
+                partPrefab.transform.SetParent(storyView.transform);
+                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+            }
 
             audiosource.Stop();
             audiosource.clip = part18;
@@ -1966,11 +2015,21 @@ public class Test : MonoBehaviour
         }
         else if (count == 17)
         {
-            DisableCharacters(page9);
-            EnableCharacters(page10);
+            //DisableCharacters(page9);
+            //EnableCharacters(page10);
+
+            //if (!back)
+            //    AnimatePage(page10);
 
             if (!back)
-                AnimatePage(page10);
+            {
+                Destroy(GameObject.Find("Part (9)(Clone)"));
+                Destroy(GameObject.Find("Part (10)(Clone)"));
+
+                partPrefab = Instantiate(Resources.Load("Part (10)")) as GameObject;
+                partPrefab.transform.SetParent(storyView.transform);
+                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+            }
 
             audiosource.Stop();
             audiosource.clip = part19;
@@ -1983,11 +2042,21 @@ public class Test : MonoBehaviour
         }
         else if (count == 18)
         {
-            DisableCharacters(page11);
-            EnableCharacters(page10);
+            //DisableCharacters(page11);
+            //EnableCharacters(page10);
+
+            //if (back)
+            //    AnimatePage(page10);
 
             if (back)
-                AnimatePage(page10);
+            {
+                Destroy(GameObject.Find("Part (10)(Clone)"));
+                Destroy(GameObject.Find("Part (11)(Clone)"));
+
+                partPrefab = Instantiate(Resources.Load("Part (10)")) as GameObject;
+                partPrefab.transform.SetParent(storyView.transform);
+                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+            }
 
             audiosource.Stop();
             audiosource.clip = part20;
@@ -2000,11 +2069,21 @@ public class Test : MonoBehaviour
         }
         else if (count == 19)
         {
-            DisableCharacters(page10);
-            EnableCharacters(page11);
+            //DisableCharacters(page10);
+            //EnableCharacters(page11);
+
+            //if (!back)
+            //    AnimatePage(page11);
 
             if (!back)
-                AnimatePage(page11);
+            {
+                Destroy(GameObject.Find("Part (10)(Clone)"));
+                Destroy(GameObject.Find("Part (11)(Clone)"));
+
+                partPrefab = Instantiate(Resources.Load("Part (11)")) as GameObject;
+                partPrefab.transform.SetParent(storyView.transform);
+                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+            }
 
             audiosource.Stop();
             audiosource.clip = part21;
@@ -2017,11 +2096,21 @@ public class Test : MonoBehaviour
         }
         else if (count == 20)
         {
-            DisableCharacters(page12);
-            EnableCharacters(page11);
+            //DisableCharacters(page12);
+            //EnableCharacters(page11);
+
+            //if (back)
+            //    AnimatePage(page11);
 
             if (back)
-                AnimatePage(page11);
+            {
+                Destroy(GameObject.Find("Part (11)(Clone)"));
+                Destroy(GameObject.Find("Part (12)(Clone)"));
+
+                partPrefab = Instantiate(Resources.Load("Part (11)")) as GameObject;
+                partPrefab.transform.SetParent(storyView.transform);
+                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+            }
 
             audiosource.Stop();
             audiosource.clip = part22;
@@ -2034,11 +2123,21 @@ public class Test : MonoBehaviour
         }
         else if (count == 21)
         {
-            DisableCharacters(page11);
-            EnableCharacters(page12);
+            //DisableCharacters(page11);
+            //EnableCharacters(page12);
+
+            //if (!back)
+            //    AnimatePage(page12);
 
             if (!back)
-                AnimatePage(page12);
+            {
+                Destroy(GameObject.Find("Part (11)(Clone)"));
+                Destroy(GameObject.Find("Part (12)(Clone)"));
+
+                partPrefab = Instantiate(Resources.Load("Part (12)")) as GameObject;
+                partPrefab.transform.SetParent(storyView.transform);
+                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+            }
 
             audiosource.Stop();
             audiosource.clip = part23;
@@ -2051,11 +2150,21 @@ public class Test : MonoBehaviour
         }
         else if (count == 22)
         {
-            DisableCharacters(page13);
-            EnableCharacters(page12);
+            //DisableCharacters(page13);
+            //EnableCharacters(page12);
+
+            //if (back)
+            //    AnimatePage(page12);
 
             if (back)
-                AnimatePage(page12);
+            {
+                Destroy(GameObject.Find("Part (12)(Clone)"));
+                Destroy(GameObject.Find("Part (13)(Clone)"));
+
+                partPrefab = Instantiate(Resources.Load("Part (12)")) as GameObject;
+                partPrefab.transform.SetParent(storyView.transform);
+                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+            }
 
             audiosource.Stop();
             audiosource.clip = part24;
@@ -2068,11 +2177,21 @@ public class Test : MonoBehaviour
         }
         else if (count == 23)
         {
-            DisableCharacters(page12);
-            EnableCharacters(page13);
+            //DisableCharacters(page12);
+            //EnableCharacters(page13);
+
+            //if (!back)
+            //    AnimatePage(page13);
 
             if (!back)
-                AnimatePage(page13);
+            {
+                Destroy(GameObject.Find("Part (12)(Clone)"));
+                Destroy(GameObject.Find("Part (13)(Clone)"));
+
+                partPrefab = Instantiate(Resources.Load("Part (13)")) as GameObject;
+                partPrefab.transform.SetParent(storyView.transform);
+                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+            }
 
             audiosource.Stop();
             audiosource.clip = part25;
@@ -2085,11 +2204,21 @@ public class Test : MonoBehaviour
         }
         else if (count == 24)
         {
-            DisableCharacters(page14);
-            EnableCharacters(page13);
+            //DisableCharacters(page14);
+            //EnableCharacters(page13);
+
+            //if (back)
+            //    AnimatePage(page13);
 
             if (back)
-                AnimatePage(page13);
+            {
+                Destroy(GameObject.Find("Part (13)(Clone)"));
+                Destroy(GameObject.Find("Part (14)(Clone)"));
+
+                partPrefab = Instantiate(Resources.Load("Part (13)")) as GameObject;
+                partPrefab.transform.SetParent(storyView.transform);
+                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+            }
 
             audiosource.Stop();
             audiosource.clip = part26;
@@ -2102,11 +2231,21 @@ public class Test : MonoBehaviour
         }
         else if (count == 25)
         {
-            DisableCharacters(page13);
-            EnableCharacters(page14);
+            //DisableCharacters(page13);
+            //EnableCharacters(page14);
+
+            //if (!back)
+            //    AnimatePage(page14);
 
             if (!back)
-                AnimatePage(page14);
+            {
+                Destroy(GameObject.Find("Part (13)(Clone)"));
+                Destroy(GameObject.Find("Part (14)(Clone)"));
+
+                partPrefab = Instantiate(Resources.Load("Part (14)")) as GameObject;
+                partPrefab.transform.SetParent(storyView.transform);
+                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+            }
 
             audiosource.Stop();
             audiosource.clip = part27;
@@ -2119,11 +2258,21 @@ public class Test : MonoBehaviour
         }
         else if (count == 26)
         {
-            DisableCharacters(page15);
-            EnableCharacters(page14);
+            //DisableCharacters(page15);
+            //EnableCharacters(page14);
+
+            //if (back)
+            //    AnimatePage(page14);
 
             if (back)
-                AnimatePage(page14);
+            {
+                Destroy(GameObject.Find("Part (14)(Clone)"));
+                Destroy(GameObject.Find("Part (15)(Clone)"));
+
+                partPrefab = Instantiate(Resources.Load("Part (14)")) as GameObject;
+                partPrefab.transform.SetParent(storyView.transform);
+                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+            }
 
             audiosource.Stop();
             audiosource.clip = part28;
@@ -2136,11 +2285,21 @@ public class Test : MonoBehaviour
         }
         else if (count == 27)
         {
-            DisableCharacters(page14);
-            EnableCharacters(page15);
+            //DisableCharacters(page14);
+            //EnableCharacters(page15);
+
+            //if (!back)
+            //    AnimatePage(page15);
 
             if (!back)
-                AnimatePage(page15);
+            {
+                Destroy(GameObject.Find("Part (14)(Clone)"));
+                Destroy(GameObject.Find("Part (15)(Clone)"));
+
+                partPrefab = Instantiate(Resources.Load("Part (15)")) as GameObject;
+                partPrefab.transform.SetParent(storyView.transform);
+                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+            }
 
             audiosource.Stop();
             audiosource.clip = part29;
@@ -2153,11 +2312,21 @@ public class Test : MonoBehaviour
         }
         else if (count == 28)
         {
-            DisableCharacters(page16);
-            EnableCharacters(page15);
+            //DisableCharacters(page16);
+            //EnableCharacters(page15);
+
+            //if (back)
+            //    AnimatePage(page15);
 
             if (back)
-                AnimatePage(page15);
+            {
+                Destroy(GameObject.Find("Part (15)(Clone)"));
+                Destroy(GameObject.Find("Part (16)(Clone)"));
+
+                partPrefab = Instantiate(Resources.Load("Part (15)")) as GameObject;
+                partPrefab.transform.SetParent(storyView.transform);
+                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+            }
 
             audiosource.Stop();
             audiosource.clip = part30;
@@ -2170,11 +2339,21 @@ public class Test : MonoBehaviour
         }
         else if (count == 29)
         {
-            DisableCharacters(page15);
-            EnableCharacters(page16);
+            //DisableCharacters(page15);
+            //EnableCharacters(page16);
+
+            //if (!back)
+            //    AnimatePage(page16);
 
             if (!back)
-                AnimatePage(page16);
+            {
+                Destroy(GameObject.Find("Part (15)(Clone)"));
+                Destroy(GameObject.Find("Part (16)(Clone)"));
+
+                partPrefab = Instantiate(Resources.Load("Part (16)")) as GameObject;
+                partPrefab.transform.SetParent(storyView.transform);
+                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+            }
 
             audiosource.Stop();
             audiosource.clip = part31;
@@ -2187,11 +2366,21 @@ public class Test : MonoBehaviour
         }
         else if (count == 30)
         {
-            DisableCharacters(page17);
-            EnableCharacters(page16);
+            //DisableCharacters(page17);
+            //EnableCharacters(page16);
+
+            //if (back)
+            //    AnimatePage(page16);
 
             if (back)
-                AnimatePage(page16);
+            {
+                Destroy(GameObject.Find("Part (16)(Clone)"));
+                Destroy(GameObject.Find("Part (17)(Clone)"));
+
+                partPrefab = Instantiate(Resources.Load("Part (16)")) as GameObject;
+                partPrefab.transform.SetParent(storyView.transform);
+                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+            }
 
             audiosource.Stop();
             audiosource.clip = part32;
@@ -2204,11 +2393,21 @@ public class Test : MonoBehaviour
         }
         else if (count == 31)
         {
-            DisableCharacters(page16);
-            EnableCharacters(page17);
+            //DisableCharacters(page16);
+            //EnableCharacters(page17);
+
+            //if (!back)
+            //    AnimatePage(page17);
 
             if (!back)
-                AnimatePage(page17);
+            {
+                Destroy(GameObject.Find("Part (16)(Clone)"));
+                Destroy(GameObject.Find("Part (17)(Clone)"));
+
+                partPrefab = Instantiate(Resources.Load("Part (17)")) as GameObject;
+                partPrefab.transform.SetParent(storyView.transform);
+                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+            }
 
             audiosource.Stop();
             audiosource.clip = part33;
@@ -2221,11 +2420,21 @@ public class Test : MonoBehaviour
         }
         else if (count == 32)
         {
-            DisableCharacters(page18);
-            EnableCharacters(page17);
+            //DisableCharacters(page18);
+            //EnableCharacters(page17);
+
+            //if (back)
+            //    AnimatePage(page17);
 
             if (back)
-                AnimatePage(page17);
+            {
+                Destroy(GameObject.Find("Part (17)(Clone)"));
+                Destroy(GameObject.Find("Part (18)(Clone)"));
+
+                partPrefab = Instantiate(Resources.Load("Part (17)")) as GameObject;
+                partPrefab.transform.SetParent(storyView.transform);
+                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+            }
 
             audiosource.Stop();
             audiosource.clip = part34;
@@ -2238,11 +2447,21 @@ public class Test : MonoBehaviour
         }
         else if (count == 33)
         {
-            DisableCharacters(page17);
-            EnableCharacters(page18);
+            //DisableCharacters(page17);
+            //EnableCharacters(page18);
+
+            //if (!back)
+            //    AnimatePage(page18);
 
             if (!back)
-                AnimatePage(page18);
+            {
+                Destroy(GameObject.Find("Part (17)(Clone)"));
+                Destroy(GameObject.Find("Part (18)(Clone)"));
+
+                partPrefab = Instantiate(Resources.Load("Part (18)")) as GameObject;
+                partPrefab.transform.SetParent(storyView.transform);
+                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+            }
 
             audiosource.Stop();
             audiosource.clip = part35;
@@ -2255,11 +2474,21 @@ public class Test : MonoBehaviour
         }
         else if (count == 34)
         {
-            EnableCharacters(page18);
-            DisableCharacters(page19);
+            //EnableCharacters(page18);
+            //DisableCharacters(page19);
+
+            //if (back)
+            //    AnimatePage(page18);
 
             if (back)
-                AnimatePage(page18);
+            {
+                Destroy(GameObject.Find("Part (18)(Clone)"));
+                Destroy(GameObject.Find("Part (19)(Clone)"));
+
+                partPrefab = Instantiate(Resources.Load("Part (18)")) as GameObject;
+                partPrefab.transform.SetParent(storyView.transform);
+                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+            }
 
             audiosource.Stop();
             audiosource.clip = part36;
@@ -2272,11 +2501,21 @@ public class Test : MonoBehaviour
         }
         else if (count == 35)
         {
-            DisableCharacters(page18);
-            EnableCharacters(page19);
+            //DisableCharacters(page18);
+            //EnableCharacters(page19);
+
+            //if (!back)
+            //    AnimatePage(page19);
 
             if (!back)
-                AnimatePage(page19);
+            {
+                Destroy(GameObject.Find("Part (18)(Clone)"));
+                Destroy(GameObject.Find("Part (19)(Clone)"));
+
+                partPrefab = Instantiate(Resources.Load("Part (19)")) as GameObject;
+                partPrefab.transform.SetParent(storyView.transform);
+                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+            }
 
             audiosource.Stop();
             audiosource.clip = part37;
@@ -2289,11 +2528,21 @@ public class Test : MonoBehaviour
         }
         else if (count == 36)
         {
-            EnableCharacters(page19);
-            DisableCharacters(page20);
+            //EnableCharacters(page19);
+            //DisableCharacters(page20);
+
+            //if (back)
+            //    AnimatePage(page19);
 
             if (back)
-                AnimatePage(page19);
+            {
+                Destroy(GameObject.Find("Part (19)(Clone)"));
+                Destroy(GameObject.Find("Part (20)(Clone)"));
+
+                partPrefab = Instantiate(Resources.Load("Part (19)")) as GameObject;
+                partPrefab.transform.SetParent(storyView.transform);
+                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+            }
 
             audiosource.Stop();
             audiosource.clip = part38;
@@ -2306,11 +2555,21 @@ public class Test : MonoBehaviour
         }
         else if (count == 37)
         {
-            DisableCharacters(page19);
-            EnableCharacters(page20);
+            //DisableCharacters(page19);
+            //EnableCharacters(page20);
+
+            //if (!back)
+            //    AnimatePage(page20);
 
             if (!back)
-                AnimatePage(page20);
+            {
+                Destroy(GameObject.Find("Part (19)(Clone)"));
+                Destroy(GameObject.Find("Part (20)(Clone)"));
+
+                partPrefab = Instantiate(Resources.Load("Part (20)")) as GameObject;
+                partPrefab.transform.SetParent(storyView.transform);
+                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+            }
 
             audiosource.Stop();
             audiosource.clip = part39;
@@ -2323,11 +2582,21 @@ public class Test : MonoBehaviour
         }
         else if (count == 38)
         {
-            EnableCharacters(page20);
-            DisableCharacters(page21);
+            //EnableCharacters(page20);
+            //DisableCharacters(page21);
+
+            //if (back)
+            //    AnimatePage(page20);
 
             if (back)
-                AnimatePage(page20);
+            {
+                Destroy(GameObject.Find("Part (20)(Clone)"));
+                Destroy(GameObject.Find("Part (21)(Clone)"));
+
+                partPrefab = Instantiate(Resources.Load("Part (20)")) as GameObject;
+                partPrefab.transform.SetParent(storyView.transform);
+                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+            }
 
             audiosource.Stop();
             audiosource.clip = part40;
@@ -2340,11 +2609,21 @@ public class Test : MonoBehaviour
         }
         else if (count == 39)
         {
-            DisableCharacters(page20);
-            EnableCharacters(page21);
+            //DisableCharacters(page20);
+            //EnableCharacters(page21);
+
+            //if (!back)
+            //    AnimatePage(page21);
 
             if (!back)
-                AnimatePage(page21);
+            {
+                Destroy(GameObject.Find("Part (20)(Clone)"));
+                Destroy(GameObject.Find("Part (21)(Clone)"));
+
+                partPrefab = Instantiate(Resources.Load("Part (21)")) as GameObject;
+                partPrefab.transform.SetParent(storyView.transform);
+                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+            }
 
             audiosource.Stop();
             audiosource.clip = part41;
@@ -2357,11 +2636,21 @@ public class Test : MonoBehaviour
         }
         else if (count == 40)
         {
-            EnableCharacters(page21);
-            DisableCharacters(page22);
+            //EnableCharacters(page21);
+            //DisableCharacters(page22);
+
+            //if (back)
+            //    AnimatePage(page21);
 
             if (back)
-                AnimatePage(page21);
+            {
+                Destroy(GameObject.Find("Part (21)(Clone)"));
+                Destroy(GameObject.Find("Part (22)(Clone)"));
+
+                partPrefab = Instantiate(Resources.Load("Part (21)")) as GameObject;
+                partPrefab.transform.SetParent(storyView.transform);
+                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+            }
 
             audiosource.Stop();
             audiosource.clip = part42;
@@ -2374,11 +2663,21 @@ public class Test : MonoBehaviour
         }
         else if (count == 41)
         {
-            DisableCharacters(page21);
-            EnableCharacters(page22);
+            //DisableCharacters(page21);
+            //EnableCharacters(page22);
+
+            //if (!back)
+            //    AnimatePage(page22);
 
             if (!back)
-                AnimatePage(page22);
+            {
+                Destroy(GameObject.Find("Part (21)(Clone)"));
+                Destroy(GameObject.Find("Part (22)(Clone)"));
+
+                partPrefab = Instantiate(Resources.Load("Part (22)")) as GameObject;
+                partPrefab.transform.SetParent(storyView.transform);
+                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+            }
 
             audiosource.Stop();
             audiosource.clip = part43;
@@ -2391,11 +2690,21 @@ public class Test : MonoBehaviour
         }
         else if (count == 42)
         {
-            EnableCharacters(page22);
-            DisableCharacters(page23);
+            //EnableCharacters(page22);
+            //DisableCharacters(page23);
+
+            //if (back)
+            //    AnimatePage(page22);
 
             if (back)
-                AnimatePage(page22);
+            {
+                Destroy(GameObject.Find("Part (22)(Clone)"));
+                Destroy(GameObject.Find("Part (23)(Clone)"));
+
+                partPrefab = Instantiate(Resources.Load("Part (22)")) as GameObject;
+                partPrefab.transform.SetParent(storyView.transform);
+                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+            }
 
             audiosource.Stop();
             audiosource.clip = part44;
@@ -2408,11 +2717,21 @@ public class Test : MonoBehaviour
         }
         else if (count == 43)
         {
-            DisableCharacters(page22);
-            EnableCharacters(page23);
+            //DisableCharacters(page22);
+            //EnableCharacters(page23);
+
+            //if (!back)
+            //    AnimatePage(page23);
 
             if (!back)
-                AnimatePage(page23);
+            {
+                Destroy(GameObject.Find("Part (22)(Clone)"));
+                Destroy(GameObject.Find("Part (23)(Clone)"));
+
+                partPrefab = Instantiate(Resources.Load("Part (23)")) as GameObject;
+                partPrefab.transform.SetParent(storyView.transform);
+                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+            }
 
             audiosource.Stop();
             audiosource.clip = part45;
@@ -2425,11 +2744,21 @@ public class Test : MonoBehaviour
         }
         else if (count == 44)
         {
-            EnableCharacters(page23);
-            DisableCharacters(page24);
+            //EnableCharacters(page23);
+            //DisableCharacters(page24);
+
+            //if (back)
+            //    AnimatePage(page23);
 
             if (back)
-                AnimatePage(page23);
+            {
+                Destroy(GameObject.Find("Part (23)(Clone)"));
+                Destroy(GameObject.Find("Part (24)(Clone)"));
+
+                partPrefab = Instantiate(Resources.Load("Part (23)")) as GameObject;
+                partPrefab.transform.SetParent(storyView.transform);
+                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+            }
 
             audiosource.Stop();
             audiosource.clip = part46;
@@ -2442,11 +2771,21 @@ public class Test : MonoBehaviour
         }
         else if (count == 45)
         {
-            DisableCharacters(page23);
-            EnableCharacters(page24);
+            //DisableCharacters(page23);
+            //EnableCharacters(page24);
+
+            //if (!back)
+            //    AnimatePage(page24);
 
             if (!back)
-                AnimatePage(page24);
+            {
+                Destroy(GameObject.Find("Part (23)(Clone)"));
+                Destroy(GameObject.Find("Part (24)(Clone)"));
+
+                partPrefab = Instantiate(Resources.Load("Part (24)")) as GameObject;
+                partPrefab.transform.SetParent(storyView.transform);
+                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+            }
 
             audiosource.Stop();
             audiosource.clip = part47;
@@ -2477,8 +2816,7 @@ public class Test : MonoBehaviour
 
         else if (count == 46)
         {
-            DisableCharacters(page24);
-            //ls.GetComponent<UIPanel>().alpha = 1f;
+            //DisableCharacters(page24);
             storyView.alpha = 0f;
 
             //SceneManager.LoadSceneAsync("LoadingScreen", LoadSceneMode.Additive);
@@ -2487,6 +2825,8 @@ public class Test : MonoBehaviour
         //}
 
         back = false;
+
+        yield return new WaitForSeconds(0f);
     }
 
     IEnumerator FadeIn(UIWidget w, float durationInSeconds, float a)
@@ -2935,7 +3275,7 @@ public class Test : MonoBehaviour
 	public void Turotiral3OnClick()
 	{
 		Tutorial_3.SetActive(false);
-		inTutorialMode = false;
+		//inTutorialMode = false;
 		//Set finish tutorial
 		PlayerPrefs.SetInt("tutorial", 3);
 	}
