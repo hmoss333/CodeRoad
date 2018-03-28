@@ -114,9 +114,6 @@
  <Reference Include="UnityEngine.VR">
  <HintPath>C:/Program Files/Unity 5.6.1/Editor/Data/UnityExtensions/Unity/UnityVR/RuntimeEditor/UnityEngine.VR.dll</HintPath>
  </Reference>
- <Reference Include="OneSignalSDK_WP_WNS">
- <HintPath>C:/Users/HMoss.DESKTOP-LO6F45S/Documents/GitHub/CodeRoad/Assets/OneSignal/Platforms/OneSignalSDK_WP_WNS.dll</HintPath>
- </Reference>
  <Reference Include="clipper_library">
  <HintPath>C:/Users/HMoss.DESKTOP-LO6F45S/Documents/GitHub/CodeRoad/Assets/Plugins/clipper_library.dll</HintPath>
  </Reference>

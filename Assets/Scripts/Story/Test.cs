@@ -127,7 +127,7 @@ public class Test : MonoBehaviour
     public AudioClip part45;
     public AudioClip part46;
     public AudioClip part47;
-    public AudioClip part48;
+    //public AudioClip part48;
 
     [Header("Audio")]
 	public AudioClip robotSound1;
@@ -360,24 +360,24 @@ public class Test : MonoBehaviour
         //================================================//
         //if (PlayerPrefs.GetInt("voice") == 1)
         //{
-        part1 = null;
-        part2 = null;
-        part3 = null;
-        part4 = null;
-        part5 = null;
-        part6 = null;
-        part7 = null;
-        part8 = null;
-        part9 = null;
-        part10 = null;
-        part11 = null;
-        part12 = null;
-        part13 = null;
-        part14 = null;
-        part15 = null;
-        part16 = null;
-        part17 = null;
-        part18 = null;
+        //    part1 = null;
+        //    part2 = null;
+        //    part3 = null;
+        //    part4 = null;
+        //    part5 = null;
+        //    part6 = null;
+        //    part7 = null;
+        //    part8 = null;
+        //    part9 = null;
+        //    part10 = null;
+        //    part11 = null;
+        //    part12 = null;
+        //    part13 = null;
+        //    part14 = null;
+        //    part15 = null;
+        //    part16 = null;
+        //    part17 = null;
+        //    part18 = null;
         //}
 
         OnClick();
@@ -1451,24 +1451,29 @@ public class Test : MonoBehaviour
         if (count >= 9 && !playedGame1)
         {
             playedGame1 = true;
-            StartCoroutine(GoToScene("StoryMovement"));
+            MiniGame.currentLevel = MiniGame.Level.Story1;
+            //StartCoroutine(GoToScene("StoryMovement"));
         }
         if (count >= 15 && !playedGame2)
         {
             playedGame2 = true;
-            StartCoroutine(GoToScene("StoryAbilities"));
+            MiniGame.currentLevel = MiniGame.Level.Story2;
+            //StartCoroutine(GoToScene("StoryAbilities"));
         }
         if (count >= 27 && !playedGame3)
         {
             playedGame3 = true;
-            StartCoroutine(GoToScene("StoryCombos"));
+            MiniGame.currentLevel = MiniGame.Level.Story3;
+            //StartCoroutine(GoToScene("StoryCombos"));
         }
         if (count >= 39 && !playedGame4)
         {
             playedGame4 = true;
-            StartCoroutine(GoToScene("StoryLoops"));
+            MiniGame.currentLevel = MiniGame.Level.Story4;
+            //StartCoroutine(GoToScene("StoryLoops"));
         }
-        //StartCoroutine(GoToScene("MiniGame_Story"));
+
+        StartCoroutine(GoToScene("MiniGame"));
 		//enabled = false;
 	}
 
@@ -1476,33 +1481,25 @@ public class Test : MonoBehaviour
 	{
 		yield return new WaitForSeconds(1f);
 		SceneManager.LoadSceneAsync(sceneName);
-
-        if (SceneManager.GetActiveScene().name == "LoadingScreen")
-            SceneManager.UnloadSceneAsync("LoadingScreen");
     }
 
 	public void EndMiniGame()
 	{
-	    StartCoroutine(GoToScene("Empty"));
-
         StartCoroutine(TurnOnCamera());
-	}
+    }
 
 	IEnumerator TurnOnCamera()
 	{
-        yield return new WaitForSeconds(0.25f);
-        //if (ls.levelLoaded) {
+        yield return new WaitForSeconds(1f);
+        SceneManager.LoadSceneAsync("Empty");
+
+        //yield return new WaitForSeconds(0.15f);
         storyView.alpha = 1f;
         mainCamera.gameObject.SetActive(true);
         enabled = true;
         next.alpha = 1f;
         cover.alpha = 1f;
         OnClick();
-        //	Debug.Log("Level ready");
-        //} else {
-        //yield return new WaitForSeconds(0.5f);
-        //StartCoroutine(TurnOnCamera());
-        //}
     }
 
     IEnumerator FadeOther(UIWidget w, float durationInSeconds)
@@ -1540,7 +1537,7 @@ public class Test : MonoBehaviour
             {
                 Destroy(GameObject.Find("Part (1)(Clone)"));
 
-                partPrefab = Instantiate(Resources.Load("Part (1)")) as GameObject;
+                partPrefab = Instantiate(Resources.Load("StoryParts/Part (1)")) as GameObject;
                 partPrefab.transform.SetParent(storyView.transform);
                 partPrefab.transform.localScale = new Vector3(1, 1, 1);
             }
@@ -1567,7 +1564,7 @@ public class Test : MonoBehaviour
                 Destroy(GameObject.Find("Part (1)(Clone)"));
                 Destroy(GameObject.Find("Part (2)(Clone)"));
 
-                partPrefab = Instantiate(Resources.Load("Part (1)")) as GameObject;
+                partPrefab = Instantiate(Resources.Load("StoryParts/Part (1)")) as GameObject;
                 partPrefab.transform.SetParent(storyView.transform);
                 partPrefab.transform.localScale = new Vector3(1, 1, 1);
             }
@@ -1594,7 +1591,7 @@ public class Test : MonoBehaviour
                 Destroy(GameObject.Find("Part (1)(Clone)"));
                 Destroy(GameObject.Find("Part (2)(Clone)"));
 
-                partPrefab = Instantiate(Resources.Load("Part (2)")) as GameObject;
+                partPrefab = Instantiate(Resources.Load("StoryParts/Part (2)")) as GameObject;
                 partPrefab.transform.SetParent(storyView.transform);
                 partPrefab.transform.localScale = new Vector3(1, 1, 1);
             }
@@ -1621,7 +1618,7 @@ public class Test : MonoBehaviour
                 Destroy(GameObject.Find("Part (2)(Clone)"));
                 Destroy(GameObject.Find("Part (3)(Clone)"));
 
-                partPrefab = Instantiate(Resources.Load("Part (2)")) as GameObject;
+                partPrefab = Instantiate(Resources.Load("StoryParts/Part (2)")) as GameObject;
                 partPrefab.transform.SetParent(storyView.transform);
                 partPrefab.transform.localScale = new Vector3(1, 1, 1);
             }
@@ -1648,7 +1645,7 @@ public class Test : MonoBehaviour
                 Destroy(GameObject.Find("Part (2)(Clone)"));
                 Destroy(GameObject.Find("Part (3)(Clone)"));
 
-                partPrefab = Instantiate(Resources.Load("Part (3)")) as GameObject;
+                partPrefab = Instantiate(Resources.Load("StoryParts/Part (3)")) as GameObject;
                 partPrefab.transform.SetParent(storyView.transform);
                 partPrefab.transform.localScale = new Vector3(1, 1, 1);
             }
@@ -1675,7 +1672,7 @@ public class Test : MonoBehaviour
                 Destroy(GameObject.Find("Part (3)(Clone)"));
                 Destroy(GameObject.Find("Part (4)(Clone)"));
 
-                partPrefab = Instantiate(Resources.Load("Part (3)")) as GameObject;
+                partPrefab = Instantiate(Resources.Load("StoryParts/Part (3)")) as GameObject;
                 partPrefab.transform.SetParent(storyView.transform);
                 partPrefab.transform.localScale = new Vector3(1, 1, 1);
             }
@@ -1702,7 +1699,7 @@ public class Test : MonoBehaviour
                 Destroy(GameObject.Find("Part (3)(Clone)"));
                 Destroy(GameObject.Find("Part (4)(Clone)"));
 
-                partPrefab = Instantiate(Resources.Load("Part (4)")) as GameObject;
+                partPrefab = Instantiate(Resources.Load("StoryParts/Part (4)")) as GameObject;
                 partPrefab.transform.SetParent(storyView.transform);
                 partPrefab.transform.localScale = new Vector3(1, 1, 1);
             }
@@ -1729,7 +1726,7 @@ public class Test : MonoBehaviour
                 Destroy(GameObject.Find("Part (4)(Clone)"));
                 Destroy(GameObject.Find("Part (5)(Clone)"));
 
-                partPrefab = Instantiate(Resources.Load("Part (4)")) as GameObject;
+                partPrefab = Instantiate(Resources.Load("StoryParts/Part (4)")) as GameObject;
                 partPrefab.transform.SetParent(storyView.transform);
                 partPrefab.transform.localScale = new Vector3(1, 1, 1);
             }
@@ -1756,7 +1753,7 @@ public class Test : MonoBehaviour
                 Destroy(GameObject.Find("Part (4)(Clone)"));
                 Destroy(GameObject.Find("Part (5)(Clone)"));
 
-                partPrefab = Instantiate(Resources.Load("Part (5)")) as GameObject;
+                partPrefab = Instantiate(Resources.Load("StoryParts/Part (5)")) as GameObject;
                 partPrefab.transform.SetParent(storyView.transform);
                 partPrefab.transform.localScale = new Vector3(1, 1, 1);
             }
@@ -1783,7 +1780,7 @@ public class Test : MonoBehaviour
                 Destroy(GameObject.Find("Part (5)(Clone)"));
                 Destroy(GameObject.Find("Part (6)(Clone)"));
 
-                partPrefab = Instantiate(Resources.Load("Part (5)")) as GameObject;
+                partPrefab = Instantiate(Resources.Load("StoryParts/Part (5)")) as GameObject;
                 partPrefab.transform.SetParent(storyView.transform);
                 partPrefab.transform.localScale = new Vector3(1, 1, 1);
             }
@@ -1810,7 +1807,7 @@ public class Test : MonoBehaviour
                 Destroy(GameObject.Find("Part (5)(Clone)"));
                 Destroy(GameObject.Find("Part (6)(Clone)"));
 
-                partPrefab = Instantiate(Resources.Load("Part (6)")) as GameObject;
+                partPrefab = Instantiate(Resources.Load("StoryParts/Part (6)")) as GameObject;
                 partPrefab.transform.SetParent(storyView.transform);
                 partPrefab.transform.localScale = new Vector3(1, 1, 1);
             }
@@ -1837,7 +1834,7 @@ public class Test : MonoBehaviour
                 Destroy(GameObject.Find("Part (6)(Clone)"));
                 Destroy(GameObject.Find("Part (7)(Clone)"));
 
-                partPrefab = Instantiate(Resources.Load("Part (6)")) as GameObject;
+                partPrefab = Instantiate(Resources.Load("StoryParts/Part (6)")) as GameObject;
                 partPrefab.transform.SetParent(storyView.transform);
                 partPrefab.transform.localScale = new Vector3(1, 1, 1);
             }
@@ -1864,7 +1861,7 @@ public class Test : MonoBehaviour
                 Destroy(GameObject.Find("Part (6)(Clone)"));
                 Destroy(GameObject.Find("Part (7)(Clone)"));
 
-                partPrefab = Instantiate(Resources.Load("Part (7)")) as GameObject;
+                partPrefab = Instantiate(Resources.Load("StoryParts/Part (7)")) as GameObject;
                 partPrefab.transform.SetParent(storyView.transform);
                 partPrefab.transform.localScale = new Vector3(1, 1, 1);
             }
@@ -1891,7 +1888,7 @@ public class Test : MonoBehaviour
                 Destroy(GameObject.Find("Part (7)(Clone)"));
                 Destroy(GameObject.Find("Part (8)(Clone)"));
 
-                partPrefab = Instantiate(Resources.Load("Part (7)")) as GameObject;
+                partPrefab = Instantiate(Resources.Load("StoryParts/Part (7)")) as GameObject;
                 partPrefab.transform.SetParent(storyView.transform);
                 partPrefab.transform.localScale = new Vector3(1, 1, 1);
             }
@@ -1918,7 +1915,7 @@ public class Test : MonoBehaviour
                 Destroy(GameObject.Find("Part (7)(Clone)"));
                 Destroy(GameObject.Find("Part (8)(Clone)"));
 
-                partPrefab = Instantiate(Resources.Load("Part (8)")) as GameObject;
+                partPrefab = Instantiate(Resources.Load("StoryParts/Part (8)")) as GameObject;
                 partPrefab.transform.SetParent(storyView.transform);
                 partPrefab.transform.localScale = new Vector3(1, 1, 1);
             }
@@ -1945,7 +1942,7 @@ public class Test : MonoBehaviour
                 Destroy(GameObject.Find("Part (8)(Clone)"));
                 Destroy(GameObject.Find("Part (9)(Clone)"));
 
-                partPrefab = Instantiate(Resources.Load("Part (8)")) as GameObject;
+                partPrefab = Instantiate(Resources.Load("StoryParts/Part (8)")) as GameObject;
                 partPrefab.transform.SetParent(storyView.transform);
                 partPrefab.transform.localScale = new Vector3(1, 1, 1);
             }
@@ -1972,7 +1969,7 @@ public class Test : MonoBehaviour
                 Destroy(GameObject.Find("Part (8)(Clone)"));
                 Destroy(GameObject.Find("Part (9)(Clone)"));
 
-                partPrefab = Instantiate(Resources.Load("Part (9)")) as GameObject;
+                partPrefab = Instantiate(Resources.Load("StoryParts/Part (9)")) as GameObject;
                 partPrefab.transform.SetParent(storyView.transform);
                 partPrefab.transform.localScale = new Vector3(1, 1, 1);
             }
@@ -1999,7 +1996,7 @@ public class Test : MonoBehaviour
                 Destroy(GameObject.Find("Part (9)(Clone)"));
                 Destroy(GameObject.Find("Part (10)(Clone)"));
 
-                partPrefab = Instantiate(Resources.Load("Part (9)")) as GameObject;
+                partPrefab = Instantiate(Resources.Load("StoryParts/Part (9)")) as GameObject;
                 partPrefab.transform.SetParent(storyView.transform);
                 partPrefab.transform.localScale = new Vector3(1, 1, 1);
             }
@@ -2026,7 +2023,7 @@ public class Test : MonoBehaviour
                 Destroy(GameObject.Find("Part (9)(Clone)"));
                 Destroy(GameObject.Find("Part (10)(Clone)"));
 
-                partPrefab = Instantiate(Resources.Load("Part (10)")) as GameObject;
+                partPrefab = Instantiate(Resources.Load("StoryParts/Part (10)")) as GameObject;
                 partPrefab.transform.SetParent(storyView.transform);
                 partPrefab.transform.localScale = new Vector3(1, 1, 1);
             }
@@ -2053,7 +2050,7 @@ public class Test : MonoBehaviour
                 Destroy(GameObject.Find("Part (10)(Clone)"));
                 Destroy(GameObject.Find("Part (11)(Clone)"));
 
-                partPrefab = Instantiate(Resources.Load("Part (10)")) as GameObject;
+                partPrefab = Instantiate(Resources.Load("StoryParts/Part (10)")) as GameObject;
                 partPrefab.transform.SetParent(storyView.transform);
                 partPrefab.transform.localScale = new Vector3(1, 1, 1);
             }
@@ -2080,7 +2077,7 @@ public class Test : MonoBehaviour
                 Destroy(GameObject.Find("Part (10)(Clone)"));
                 Destroy(GameObject.Find("Part (11)(Clone)"));
 
-                partPrefab = Instantiate(Resources.Load("Part (11)")) as GameObject;
+                partPrefab = Instantiate(Resources.Load("StoryParts/Part (11)")) as GameObject;
                 partPrefab.transform.SetParent(storyView.transform);
                 partPrefab.transform.localScale = new Vector3(1, 1, 1);
             }
@@ -2107,7 +2104,7 @@ public class Test : MonoBehaviour
                 Destroy(GameObject.Find("Part (11)(Clone)"));
                 Destroy(GameObject.Find("Part (12)(Clone)"));
 
-                partPrefab = Instantiate(Resources.Load("Part (11)")) as GameObject;
+                partPrefab = Instantiate(Resources.Load("StoryParts/Part (11)")) as GameObject;
                 partPrefab.transform.SetParent(storyView.transform);
                 partPrefab.transform.localScale = new Vector3(1, 1, 1);
             }
@@ -2134,7 +2131,7 @@ public class Test : MonoBehaviour
                 Destroy(GameObject.Find("Part (11)(Clone)"));
                 Destroy(GameObject.Find("Part (12)(Clone)"));
 
-                partPrefab = Instantiate(Resources.Load("Part (12)")) as GameObject;
+                partPrefab = Instantiate(Resources.Load("StoryParts/Part (12)")) as GameObject;
                 partPrefab.transform.SetParent(storyView.transform);
                 partPrefab.transform.localScale = new Vector3(1, 1, 1);
             }
@@ -2161,7 +2158,7 @@ public class Test : MonoBehaviour
                 Destroy(GameObject.Find("Part (12)(Clone)"));
                 Destroy(GameObject.Find("Part (13)(Clone)"));
 
-                partPrefab = Instantiate(Resources.Load("Part (12)")) as GameObject;
+                partPrefab = Instantiate(Resources.Load("StoryParts/Part (12)")) as GameObject;
                 partPrefab.transform.SetParent(storyView.transform);
                 partPrefab.transform.localScale = new Vector3(1, 1, 1);
             }
@@ -2188,7 +2185,7 @@ public class Test : MonoBehaviour
                 Destroy(GameObject.Find("Part (12)(Clone)"));
                 Destroy(GameObject.Find("Part (13)(Clone)"));
 
-                partPrefab = Instantiate(Resources.Load("Part (13)")) as GameObject;
+                partPrefab = Instantiate(Resources.Load("StoryParts/Part (13)")) as GameObject;
                 partPrefab.transform.SetParent(storyView.transform);
                 partPrefab.transform.localScale = new Vector3(1, 1, 1);
             }
@@ -2215,7 +2212,7 @@ public class Test : MonoBehaviour
                 Destroy(GameObject.Find("Part (13)(Clone)"));
                 Destroy(GameObject.Find("Part (14)(Clone)"));
 
-                partPrefab = Instantiate(Resources.Load("Part (13)")) as GameObject;
+                partPrefab = Instantiate(Resources.Load("StoryParts/Part (13)")) as GameObject;
                 partPrefab.transform.SetParent(storyView.transform);
                 partPrefab.transform.localScale = new Vector3(1, 1, 1);
             }
@@ -2242,7 +2239,7 @@ public class Test : MonoBehaviour
                 Destroy(GameObject.Find("Part (13)(Clone)"));
                 Destroy(GameObject.Find("Part (14)(Clone)"));
 
-                partPrefab = Instantiate(Resources.Load("Part (14)")) as GameObject;
+                partPrefab = Instantiate(Resources.Load("StoryParts/Part (14)")) as GameObject;
                 partPrefab.transform.SetParent(storyView.transform);
                 partPrefab.transform.localScale = new Vector3(1, 1, 1);
             }
@@ -2269,7 +2266,7 @@ public class Test : MonoBehaviour
                 Destroy(GameObject.Find("Part (14)(Clone)"));
                 Destroy(GameObject.Find("Part (15)(Clone)"));
 
-                partPrefab = Instantiate(Resources.Load("Part (14)")) as GameObject;
+                partPrefab = Instantiate(Resources.Load("StoryParts/Part (14)")) as GameObject;
                 partPrefab.transform.SetParent(storyView.transform);
                 partPrefab.transform.localScale = new Vector3(1, 1, 1);
             }
@@ -2296,7 +2293,7 @@ public class Test : MonoBehaviour
                 Destroy(GameObject.Find("Part (14)(Clone)"));
                 Destroy(GameObject.Find("Part (15)(Clone)"));
 
-                partPrefab = Instantiate(Resources.Load("Part (15)")) as GameObject;
+                partPrefab = Instantiate(Resources.Load("StoryParts/Part (15)")) as GameObject;
                 partPrefab.transform.SetParent(storyView.transform);
                 partPrefab.transform.localScale = new Vector3(1, 1, 1);
             }
@@ -2323,7 +2320,7 @@ public class Test : MonoBehaviour
                 Destroy(GameObject.Find("Part (15)(Clone)"));
                 Destroy(GameObject.Find("Part (16)(Clone)"));
 
-                partPrefab = Instantiate(Resources.Load("Part (15)")) as GameObject;
+                partPrefab = Instantiate(Resources.Load("StoryParts/Part (15)")) as GameObject;
                 partPrefab.transform.SetParent(storyView.transform);
                 partPrefab.transform.localScale = new Vector3(1, 1, 1);
             }
@@ -2350,7 +2347,7 @@ public class Test : MonoBehaviour
                 Destroy(GameObject.Find("Part (15)(Clone)"));
                 Destroy(GameObject.Find("Part (16)(Clone)"));
 
-                partPrefab = Instantiate(Resources.Load("Part (16)")) as GameObject;
+                partPrefab = Instantiate(Resources.Load("StoryParts/Part (16)")) as GameObject;
                 partPrefab.transform.SetParent(storyView.transform);
                 partPrefab.transform.localScale = new Vector3(1, 1, 1);
             }
@@ -2377,7 +2374,7 @@ public class Test : MonoBehaviour
                 Destroy(GameObject.Find("Part (16)(Clone)"));
                 Destroy(GameObject.Find("Part (17)(Clone)"));
 
-                partPrefab = Instantiate(Resources.Load("Part (16)")) as GameObject;
+                partPrefab = Instantiate(Resources.Load("StoryParts/Part (16)")) as GameObject;
                 partPrefab.transform.SetParent(storyView.transform);
                 partPrefab.transform.localScale = new Vector3(1, 1, 1);
             }
@@ -2404,7 +2401,7 @@ public class Test : MonoBehaviour
                 Destroy(GameObject.Find("Part (16)(Clone)"));
                 Destroy(GameObject.Find("Part (17)(Clone)"));
 
-                partPrefab = Instantiate(Resources.Load("Part (17)")) as GameObject;
+                partPrefab = Instantiate(Resources.Load("StoryParts/Part (17)")) as GameObject;
                 partPrefab.transform.SetParent(storyView.transform);
                 partPrefab.transform.localScale = new Vector3(1, 1, 1);
             }
@@ -2431,7 +2428,7 @@ public class Test : MonoBehaviour
                 Destroy(GameObject.Find("Part (17)(Clone)"));
                 Destroy(GameObject.Find("Part (18)(Clone)"));
 
-                partPrefab = Instantiate(Resources.Load("Part (17)")) as GameObject;
+                partPrefab = Instantiate(Resources.Load("StoryParts/Part (17)")) as GameObject;
                 partPrefab.transform.SetParent(storyView.transform);
                 partPrefab.transform.localScale = new Vector3(1, 1, 1);
             }
@@ -2458,7 +2455,7 @@ public class Test : MonoBehaviour
                 Destroy(GameObject.Find("Part (17)(Clone)"));
                 Destroy(GameObject.Find("Part (18)(Clone)"));
 
-                partPrefab = Instantiate(Resources.Load("Part (18)")) as GameObject;
+                partPrefab = Instantiate(Resources.Load("StoryParts/Part (18)")) as GameObject;
                 partPrefab.transform.SetParent(storyView.transform);
                 partPrefab.transform.localScale = new Vector3(1, 1, 1);
             }
@@ -2485,7 +2482,7 @@ public class Test : MonoBehaviour
                 Destroy(GameObject.Find("Part (18)(Clone)"));
                 Destroy(GameObject.Find("Part (19)(Clone)"));
 
-                partPrefab = Instantiate(Resources.Load("Part (18)")) as GameObject;
+                partPrefab = Instantiate(Resources.Load("StoryParts/Part (18)")) as GameObject;
                 partPrefab.transform.SetParent(storyView.transform);
                 partPrefab.transform.localScale = new Vector3(1, 1, 1);
             }
@@ -2512,7 +2509,7 @@ public class Test : MonoBehaviour
                 Destroy(GameObject.Find("Part (18)(Clone)"));
                 Destroy(GameObject.Find("Part (19)(Clone)"));
 
-                partPrefab = Instantiate(Resources.Load("Part (19)")) as GameObject;
+                partPrefab = Instantiate(Resources.Load("StoryParts/Part (19)")) as GameObject;
                 partPrefab.transform.SetParent(storyView.transform);
                 partPrefab.transform.localScale = new Vector3(1, 1, 1);
             }
@@ -2539,7 +2536,7 @@ public class Test : MonoBehaviour
                 Destroy(GameObject.Find("Part (19)(Clone)"));
                 Destroy(GameObject.Find("Part (20)(Clone)"));
 
-                partPrefab = Instantiate(Resources.Load("Part (19)")) as GameObject;
+                partPrefab = Instantiate(Resources.Load("StoryParts/Part (19)")) as GameObject;
                 partPrefab.transform.SetParent(storyView.transform);
                 partPrefab.transform.localScale = new Vector3(1, 1, 1);
             }
@@ -2566,7 +2563,7 @@ public class Test : MonoBehaviour
                 Destroy(GameObject.Find("Part (19)(Clone)"));
                 Destroy(GameObject.Find("Part (20)(Clone)"));
 
-                partPrefab = Instantiate(Resources.Load("Part (20)")) as GameObject;
+                partPrefab = Instantiate(Resources.Load("StoryParts/Part (20)")) as GameObject;
                 partPrefab.transform.SetParent(storyView.transform);
                 partPrefab.transform.localScale = new Vector3(1, 1, 1);
             }
@@ -2593,7 +2590,7 @@ public class Test : MonoBehaviour
                 Destroy(GameObject.Find("Part (20)(Clone)"));
                 Destroy(GameObject.Find("Part (21)(Clone)"));
 
-                partPrefab = Instantiate(Resources.Load("Part (20)")) as GameObject;
+                partPrefab = Instantiate(Resources.Load("StoryParts/Part (20)")) as GameObject;
                 partPrefab.transform.SetParent(storyView.transform);
                 partPrefab.transform.localScale = new Vector3(1, 1, 1);
             }
@@ -2620,7 +2617,7 @@ public class Test : MonoBehaviour
                 Destroy(GameObject.Find("Part (20)(Clone)"));
                 Destroy(GameObject.Find("Part (21)(Clone)"));
 
-                partPrefab = Instantiate(Resources.Load("Part (21)")) as GameObject;
+                partPrefab = Instantiate(Resources.Load("StoryParts/Part (21)")) as GameObject;
                 partPrefab.transform.SetParent(storyView.transform);
                 partPrefab.transform.localScale = new Vector3(1, 1, 1);
             }
@@ -2647,7 +2644,7 @@ public class Test : MonoBehaviour
                 Destroy(GameObject.Find("Part (21)(Clone)"));
                 Destroy(GameObject.Find("Part (22)(Clone)"));
 
-                partPrefab = Instantiate(Resources.Load("Part (21)")) as GameObject;
+                partPrefab = Instantiate(Resources.Load("StoryParts/Part (21)")) as GameObject;
                 partPrefab.transform.SetParent(storyView.transform);
                 partPrefab.transform.localScale = new Vector3(1, 1, 1);
             }
@@ -2674,7 +2671,7 @@ public class Test : MonoBehaviour
                 Destroy(GameObject.Find("Part (21)(Clone)"));
                 Destroy(GameObject.Find("Part (22)(Clone)"));
 
-                partPrefab = Instantiate(Resources.Load("Part (22)")) as GameObject;
+                partPrefab = Instantiate(Resources.Load("StoryParts/Part (22)")) as GameObject;
                 partPrefab.transform.SetParent(storyView.transform);
                 partPrefab.transform.localScale = new Vector3(1, 1, 1);
             }
@@ -2701,7 +2698,7 @@ public class Test : MonoBehaviour
                 Destroy(GameObject.Find("Part (22)(Clone)"));
                 Destroy(GameObject.Find("Part (23)(Clone)"));
 
-                partPrefab = Instantiate(Resources.Load("Part (22)")) as GameObject;
+                partPrefab = Instantiate(Resources.Load("StoryParts/Part (22)")) as GameObject;
                 partPrefab.transform.SetParent(storyView.transform);
                 partPrefab.transform.localScale = new Vector3(1, 1, 1);
             }
@@ -2728,7 +2725,7 @@ public class Test : MonoBehaviour
                 Destroy(GameObject.Find("Part (22)(Clone)"));
                 Destroy(GameObject.Find("Part (23)(Clone)"));
 
-                partPrefab = Instantiate(Resources.Load("Part (23)")) as GameObject;
+                partPrefab = Instantiate(Resources.Load("StoryParts/Part (23)")) as GameObject;
                 partPrefab.transform.SetParent(storyView.transform);
                 partPrefab.transform.localScale = new Vector3(1, 1, 1);
             }
@@ -2755,7 +2752,7 @@ public class Test : MonoBehaviour
                 Destroy(GameObject.Find("Part (23)(Clone)"));
                 Destroy(GameObject.Find("Part (24)(Clone)"));
 
-                partPrefab = Instantiate(Resources.Load("Part (23)")) as GameObject;
+                partPrefab = Instantiate(Resources.Load("StoryParts/Part (23)")) as GameObject;
                 partPrefab.transform.SetParent(storyView.transform);
                 partPrefab.transform.localScale = new Vector3(1, 1, 1);
             }
@@ -2782,7 +2779,7 @@ public class Test : MonoBehaviour
                 Destroy(GameObject.Find("Part (23)(Clone)"));
                 Destroy(GameObject.Find("Part (24)(Clone)"));
 
-                partPrefab = Instantiate(Resources.Load("Part (24)")) as GameObject;
+                partPrefab = Instantiate(Resources.Load("StoryParts/Part (24)")) as GameObject;
                 partPrefab.transform.SetParent(storyView.transform);
                 partPrefab.transform.localScale = new Vector3(1, 1, 1);
             }
@@ -3237,8 +3234,6 @@ public class Test : MonoBehaviour
         if (!SceneManager.GetSceneByName("LoadingScreen").isLoaded)
             SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);
 
-        //mainCamera.gameObject.SetActive(false);
-
         yield return new WaitForSeconds(1);
 		SceneManager.LoadSceneAsync(1);
 		Destroy(storyParent);
@@ -3251,8 +3246,6 @@ public class Test : MonoBehaviour
 	{
 		yield return new WaitForSeconds(0);
 		SceneManager.LoadScene("1stScene");
-
-		//LoadingScreen loadingTemp = Instantiate(ls);
 
 		Destroy(storyParent);
 

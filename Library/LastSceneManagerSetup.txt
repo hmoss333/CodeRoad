@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/Minigames/Abilities1.unity
+- path: Assets/Scenes/MenuScreen.unity
   isLoaded: 1
   isActive: 1

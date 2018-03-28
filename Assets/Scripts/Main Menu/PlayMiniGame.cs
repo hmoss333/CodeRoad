@@ -59,25 +59,37 @@ public class PlayMiniGame : MonoBehaviour {
     public void ChallengeMovements ()
     {
         ChallengeMenu.SetActive(false);
-        StartCoroutine(GoToScene("Movement1"));
+        MiniGame.isMainMenuGame = true;
+        MiniGame.currentLevel = MiniGame.Level.Movement1;
+        StartCoroutine(GoToScene("MiniGame"));
+        //StartCoroutine(GoToScene("Movement1"));
     }
 
     public void ChallengeAbilities()
     {
         ChallengeMenu.SetActive(false);
-        StartCoroutine(GoToScene("Abilities1"));
+        MiniGame.isMainMenuGame = true;
+        MiniGame.currentLevel = MiniGame.Level.Abilities1;
+        StartCoroutine(GoToScene("MiniGame"));
+        //StartCoroutine(GoToScene("Abilities1"));
     }
 
     public void ChallengeLoops()
     {
         ChallengeMenu.SetActive(false);
-        StartCoroutine(GoToScene("Loops1"));
+        MiniGame.isMainMenuGame = true;
+        MiniGame.currentLevel = MiniGame.Level.Loops1;
+        StartCoroutine(GoToScene("MiniGame"));
+        //StartCoroutine(GoToScene("Loops1"));
     }
 
     public void ChallengeCombos()
     {
         ChallengeMenu.SetActive(false);
-        StartCoroutine(GoToScene("Combos1"));
+        MiniGame.isMainMenuGame = true;
+        MiniGame.currentLevel = MiniGame.Level.Combos1;
+        StartCoroutine(GoToScene("MiniGame"));
+        //StartCoroutine(GoToScene("Combos1"));
     }
 
     public void ChallengeBack ()

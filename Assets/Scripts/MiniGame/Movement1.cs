@@ -648,7 +648,9 @@ public class Movement1 : MonoBehaviour
 
     public void nextLevel()
     {
-        SceneManager.LoadSceneAsync("Movement2");
+        //SceneManager.LoadSceneAsync("Movement2");
+        MiniGame.UnloadScene(MiniGame.Level.Movement1);
+        MiniGame.LoadScene(MiniGame.Level.Movement2);
     }
 }
 

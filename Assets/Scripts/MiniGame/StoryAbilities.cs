@@ -656,7 +656,7 @@ public class StoryAbilities : MonoBehaviour {
         //directionalLight.gameObject.SetActive(false);
         yield return new WaitForSeconds(1f);
         story.EndMiniGame();
-        //SceneManager.UnloadSceneAsync("StoryAbilities");
+        SceneManager.UnloadSceneAsync("MiniGame");
     }
 
 }

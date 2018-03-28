@@ -558,7 +558,9 @@ public class Abilities1 : MonoBehaviour
 
     public void nextLevel()
     {
-        SceneManager.LoadSceneAsync("Abilities2");
+        //SceneManager.LoadSceneAsync("Abilities2");
+        MiniGame.UnloadScene(MiniGame.Level.Abilities1);
+        MiniGame.LoadScene(MiniGame.Level.Abilities2);
     }
 
 }

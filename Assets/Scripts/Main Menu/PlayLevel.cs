@@ -98,6 +98,7 @@ public class PlayLevel : MonoBehaviour {
 
 	public void OnClick() {
 		if (on) {
+            MiniGame.isMainMenuGame = false;
 			frontPanel.alpha = 0;
 
             if (!SceneManager.GetSceneByName("LoadingScreen").isLoaded)

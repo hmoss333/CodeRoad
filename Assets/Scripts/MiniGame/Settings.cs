@@ -916,10 +916,10 @@ public class Settings : MonoBehaviour {
 
     void initOneSignal()
     {
-        OneSignal.StartInit("c21d4781-77a2-4df3-adfc-52dcfbcbcd9d")
-                .InFocusDisplaying(OneSignal.OSInFocusDisplayOption.None)
-                .HandleNotificationReceived(HandleNotificationReceived)
-                .EndInit();
+        //OneSignal.StartInit("c21d4781-77a2-4df3-adfc-52dcfbcbcd9d")
+        //        .InFocusDisplaying(OneSignal.OSInFocusDisplayOption.None)
+        //        .HandleNotificationReceived(HandleNotificationReceived)
+        //        .EndInit();
     }
 
     void initSTEMDash()
@@ -962,7 +962,7 @@ public class Settings : MonoBehaviour {
             logoutBtn.SetActive(true);
             STEMDashBtn.SetActive(false);
             string[] parentName = SaveAndLoad.dashEmail.Split('@');
-            OneSignal.SendTag(SaveAndLoad.dashEmail, parentName[0]);
+            //OneSignal.SendTag(SaveAndLoad.dashEmail, parentName[0]);
         } else
         {
             if (SaveAndLoad.dashEmail != "")
@@ -1006,13 +1006,13 @@ public class Settings : MonoBehaviour {
     //Called when your app is in focus and a notificaiton is recieved.
     // The name of the method can be anything as long as the signature matches.
     // Method must be static or this object should be marked as DontDestroyOnLoad
-    private static void HandleNotificationReceived(OSNotification notification) {
-        OSNotificationPayload payload = notification.payload;
-        string message = payload.body;
+    //private static void HandleNotificationReceived(OSNotification notification) {
+    //    OSNotificationPayload payload = notification.payload;
+    //    string message = payload.body;
 
-        print("GameControllerExample:HandleNotificationReceived: " + message);
-        print("displayType: " + notification.displayType);
-    }
+    //    print("GameControllerExample:HandleNotificationReceived: " + message);
+    //    print("displayType: " + notification.displayType);
+    //}
 
     void showAddingChildStatus()
     {
@@ -1343,7 +1343,7 @@ public class Settings : MonoBehaviour {
         if (LoginToPortal.Instance.justLoggedIn)
         {
             string [] parentName = SaveAndLoad.dashEmail.Split('@');
-            OneSignal.SendTag(SaveAndLoad.dashEmail, parentName[0]);
+            //OneSignal.SendTag(SaveAndLoad.dashEmail, parentName[0]);
             if (SaveAndLoad.listOfPlayers.Count > 0)
             {
                 Debug.Log("Just logged in called");

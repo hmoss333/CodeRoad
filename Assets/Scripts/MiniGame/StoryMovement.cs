@@ -668,6 +668,6 @@ public class StoryMovement : MonoBehaviour {
         //directionalLight.gameObject.SetActive(false);
         yield return new WaitForSeconds(1f);
         story.EndMiniGame();
-        //SceneManager.UnloadSceneAsync("StoryMovement");
+        SceneManager.UnloadSceneAsync("MiniGame");
     }
 }

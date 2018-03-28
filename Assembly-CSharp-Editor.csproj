@@ -133,7 +133,6 @@
      <Compile Include="Assets\NGUI\Scripts\Editor\UIWidgetContainerEditor.cs" />
      <Compile Include="Assets\NGUI\Scripts\Editor\UIWidgetInspector.cs" />
      <Compile Include="Assets\NGUI\Scripts\Editor\UIWrapContentEditor.cs" />
-     <Compile Include="Assets\OneSignal\Editor\OneSignalEditorScript.cs" />
      <None Include="Assets\NGUI\Examples\Shaders\Unlit - Depth Cutout.shader" />
      <None Include="Assets\NGUI\ReadMe - 3.8.0.txt" />
      <None Include="Assets\Standard Assets\Effects\ToonShading\Shaders\ToonBasic.shader" />
@@ -249,9 +248,6 @@
  </Reference>
  <Reference Include="JMOAssets">
  <HintPath>C:/Users/HMoss.DESKTOP-LO6F45S/Documents/GitHub/CodeRoad/Assets/JMO Assets/Editor/JMOAssets.dll</HintPath>
- </Reference>
- <Reference Include="OneSignalSDK_WP_WNS">
- <HintPath>C:/Users/HMoss.DESKTOP-LO6F45S/Documents/GitHub/CodeRoad/Assets/OneSignal/Platforms/OneSignalSDK_WP_WNS.dll</HintPath>
  </Reference>
  <Reference Include="Google.IOSResolver">
  <HintPath>C:/Users/HMoss.DESKTOP-LO6F45S/Documents/GitHub/CodeRoad/Assets/PlayServicesResolver/Editor/Google.IOSResolver.dll</HintPath>

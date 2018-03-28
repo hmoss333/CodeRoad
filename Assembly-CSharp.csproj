@@ -216,13 +216,6 @@
      <Compile Include="Assets\NGUI\Scripts\UI\UITexture.cs" />
      <Compile Include="Assets\NGUI\Scripts\UI\UITooltip.cs" />
      <Compile Include="Assets\NGUI\Scripts\UI\UIViewport.cs" />
-     <Compile Include="Assets\OneSignal\Example\GameControllerExample.cs" />
-     <Compile Include="Assets\OneSignal\src\MiniJSON.cs" />
-     <Compile Include="Assets\OneSignal\src\OneSignal.cs" />
-     <Compile Include="Assets\OneSignal\src\OneSignalAndroid.cs" />
-     <Compile Include="Assets\OneSignal\src\OneSignalIOS.cs" />
-     <Compile Include="Assets\OneSignal\src\OneSignalPlatform.cs" />
-     <Compile Include="Assets\OneSignal\src\OneSignalWPWNS.cs" />
      <Compile Include="Assets\OutlineEffect\Demo\OutlineAnimation.cs" />
      <Compile Include="Assets\OutlineEffect\Demo\Rotate.cs" />
      <Compile Include="Assets\OutlineEffect\Demo\Toggle.cs" />
@@ -303,6 +296,8 @@
      <Compile Include="Assets\Scripts\MiniGame\LoadManager.cs" />
      <Compile Include="Assets\Scripts\MiniGame\Loops1.cs" />
      <Compile Include="Assets\Scripts\MiniGame\Loops2.cs" />
+     <Compile Include="Assets\Scripts\MiniGame\MiniGame.cs" />
+     <Compile Include="Assets\Scripts\MiniGame\MiniGame_Story.cs" />
      <Compile Include="Assets\Scripts\MiniGame\Movement1.cs" />
      <Compile Include="Assets\Scripts\MiniGame\Movement2.cs" />
      <Compile Include="Assets\Scripts\MiniGame\Movement3.cs" />
@@ -431,9 +426,6 @@
  </Reference>
  <Reference Include="UnityEngine.VR">
  <HintPath>C:/Program Files/Unity 5.6.1/Editor/Data/UnityExtensions/Unity/UnityVR/RuntimeEditor/UnityEngine.VR.dll</HintPath>
- </Reference>
- <Reference Include="OneSignalSDK_WP_WNS">
- <HintPath>C:/Users/HMoss.DESKTOP-LO6F45S/Documents/GitHub/CodeRoad/Assets/OneSignal/Platforms/OneSignalSDK_WP_WNS.dll</HintPath>
  </Reference>
  <Reference Include="clipper_library">
  <HintPath>C:/Users/HMoss.DESKTOP-LO6F45S/Documents/GitHub/CodeRoad/Assets/Plugins/clipper_library.dll</HintPath>

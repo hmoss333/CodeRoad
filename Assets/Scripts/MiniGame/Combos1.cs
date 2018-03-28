@@ -564,6 +564,8 @@ public class Combos1 : MonoBehaviour
 
     public void nextLevel()
     {
-        SceneManager.LoadSceneAsync("Combos2");
+        //SceneManager.LoadSceneAsync("Combos2");
+        MiniGame.UnloadScene(MiniGame.Level.Combos1);
+        MiniGame.LoadScene(MiniGame.Level.Combos2);
     }
 }

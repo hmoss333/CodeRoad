@@ -563,7 +563,9 @@ public class Loops1 : MonoBehaviour
 
     public void nextLevel()
     {
-        SceneManager.LoadSceneAsync("Loops2");
+        //SceneManager.LoadSceneAsync("Loops2");
+        MiniGame.UnloadScene(MiniGame.Level.Loops1);
+        MiniGame.LoadScene(MiniGame.Level.Loops2);
     }
 
 }
