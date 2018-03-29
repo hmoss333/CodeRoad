@@ -358,27 +358,56 @@ public class Test : MonoBehaviour
         //================================================//
         ////Undo this later when audio has been provided////
         //================================================//
-        //if (PlayerPrefs.GetInt("voice") == 1)
-        //{
-        //    part1 = null;
-        //    part2 = null;
-        //    part3 = null;
-        //    part4 = null;
-        //    part5 = null;
-        //    part6 = null;
-        //    part7 = null;
-        //    part8 = null;
-        //    part9 = null;
-        //    part10 = null;
-        //    part11 = null;
-        //    part12 = null;
-        //    part13 = null;
-        //    part14 = null;
-        //    part15 = null;
-        //    part16 = null;
-        //    part17 = null;
-        //    part18 = null;
-        //}
+        if (PlayerPrefs.GetInt("voice") == 1)
+        {
+            part1 = null;
+            part2 = null;
+            part3 = null;
+            part4 = null;
+            part5 = null;
+            part6 = null;
+            part7 = null;
+            part8 = null;
+            part9 = null;
+            part10 = null;
+            part11 = null;
+            part12 = null;
+            part13 = null;
+            part14 = null;
+            part15 = null;
+            part16 = null;
+            part17 = null;
+            part18 = null;
+            part19 = null;
+            part20 = null;
+            part21 = null;
+            part22 = null;
+            part23 = null;
+            part24 = null;
+            part25 = null;
+            part26 = null;
+            part27 = null;
+            part28 = null;
+            part29 = null;
+            part30 = null;
+            part31 = null;
+            part32 = null;
+            part33 = null;
+            part34 = null;
+            part35 = null;
+            part36 = null;
+            part37 = null;
+            part38 = null;
+            part39 = null;
+            part40 = null;
+            part41 = null;
+            part42 = null;
+            part43 = null;
+            part44 = null;
+            part45 = null;
+            part46 = null;
+            part47 = null;
+        }
 
         OnClick();
 
@@ -1439,42 +1468,34 @@ public class Test : MonoBehaviour
 	{
 		inMiniGameMode = true;
 
-        //DisableRobots();
-
-        //if (!SceneManager.GetSceneByName("LoadingScreen").isLoaded)
-            SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);
-        yield return new WaitForSeconds(1f);
-        audiosource.Stop();
-		mainCamera.gameObject.SetActive(false);
-		storyView.alpha = 0f;
-
         if (count >= 9 && !playedGame1)
         {
             playedGame1 = true;
             MiniGame.currentLevel = MiniGame.Level.Story1;
-            //StartCoroutine(GoToScene("StoryMovement"));
         }
         if (count >= 15 && !playedGame2)
         {
             playedGame2 = true;
             MiniGame.currentLevel = MiniGame.Level.Story2;
-            //StartCoroutine(GoToScene("StoryAbilities"));
         }
         if (count >= 27 && !playedGame3)
         {
             playedGame3 = true;
             MiniGame.currentLevel = MiniGame.Level.Story3;
-            //StartCoroutine(GoToScene("StoryCombos"));
         }
         if (count >= 39 && !playedGame4)
         {
             playedGame4 = true;
             MiniGame.currentLevel = MiniGame.Level.Story4;
-            //StartCoroutine(GoToScene("StoryLoops"));
         }
 
+        SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);
+        yield return new WaitForSeconds(1f);
+        audiosource.Stop();
+		mainCamera.gameObject.SetActive(false);
+		storyView.alpha = 0f;
+
         StartCoroutine(GoToScene("MiniGame"));
-		//enabled = false;
 	}
 
 	IEnumerator GoToScene (string sceneName)
@@ -2356,7 +2377,8 @@ public class Test : MonoBehaviour
             audiosource.clip = part31;
             audiosource.Play();
             count++;
-            sprite.mainTexture = Resources.Load("image16") as Texture;
+            sprite.mainTexture = Resources.Load("image15") as Texture;
+            //sprite.mainTexture = Resources.Load("image16") as Texture;
             StartCoroutine(FadeIn(sprite, 0.5f, startA));
             message = "Cathy says 'I'm looping, \n looping don't you see?' ";
             StartCoroutine(TypeText(nextAlpha, coverAlpha));
@@ -2383,7 +2405,8 @@ public class Test : MonoBehaviour
             audiosource.clip = part32;
             audiosource.Play();
             count++;
-            sprite.mainTexture = Resources.Load("image16") as Texture;
+            sprite.mainTexture = Resources.Load("image15") as Texture;
+            //sprite.mainTexture = Resources.Load("image16") as Texture;
             StartCoroutine(FadeIn(sprite, 0.5f, startA));
             message = "'I loop and I loop. \n Its really fun for me.' ";
             StartCoroutine(TypeText(nextAlpha, coverAlpha));
@@ -2410,7 +2433,8 @@ public class Test : MonoBehaviour
             audiosource.clip = part33;
             audiosource.Play();
             count++;
-            sprite.mainTexture = Resources.Load("image17") as Texture;
+            sprite.mainTexture = Resources.Load("image15") as Texture;
+            //sprite.mainTexture = Resources.Load("image17") as Texture;
             StartCoroutine(FadeIn(sprite, 0.5f, startA));
             message = "Our computers use looping \n in just the same way ";
             StartCoroutine(TypeText(nextAlpha, coverAlpha));
@@ -2437,7 +2461,8 @@ public class Test : MonoBehaviour
             audiosource.clip = part34;
             audiosource.Play();
             count++;
-            sprite.mainTexture = Resources.Load("image17") as Texture;
+            sprite.mainTexture = Resources.Load("image15") as Texture;
+            //sprite.mainTexture = Resources.Load("image17") as Texture;
             StartCoroutine(FadeIn(sprite, 0.5f, startA));
             message = "By doing the same thing \n a million times a day. ";
             StartCoroutine(TypeText(nextAlpha, coverAlpha));
@@ -2518,7 +2543,8 @@ public class Test : MonoBehaviour
             audiosource.clip = part37;
             audiosource.Play();
             count++;
-            sprite.mainTexture = Resources.Load("image19") as Texture;
+            sprite.mainTexture = Resources.Load("image18") as Texture;
+            //sprite.mainTexture = Resources.Load("image19") as Texture;
             StartCoroutine(FadeIn(sprite, 0.5f, startA));
             message = "Dudly says 'I need help my friends \n and I have a plan too!' ";
             StartCoroutine(TypeText(nextAlpha, coverAlpha));
@@ -2545,7 +2571,8 @@ public class Test : MonoBehaviour
             audiosource.clip = part38;
             audiosource.Play();
             count++;
-            sprite.mainTexture = Resources.Load("image19") as Texture;
+            sprite.mainTexture = Resources.Load("image18") as Texture;
+            //sprite.mainTexture = Resources.Load("image19") as Texture;
             StartCoroutine(FadeIn(sprite, 0.5f, startA));
             message = "'I'll put down each step \n called instructions for you.' ";
             StartCoroutine(TypeText(nextAlpha, coverAlpha));
@@ -2572,7 +2599,8 @@ public class Test : MonoBehaviour
             audiosource.clip = part39;
             audiosource.Play();
             count++;
-            sprite.mainTexture = Resources.Load("image20") as Texture;
+            sprite.mainTexture = Resources.Load("image18") as Texture;
+            //sprite.mainTexture = Resources.Load("image20") as Texture;
             StartCoroutine(FadeIn(sprite, 0.5f, startA));
             message = "Did you know everyone's computer \n can follow the same plan? ";
             StartCoroutine(TypeText(nextAlpha, coverAlpha));
@@ -2599,7 +2627,8 @@ public class Test : MonoBehaviour
             audiosource.clip = part40;
             audiosource.Play();
             count++;
-            sprite.mainTexture = Resources.Load("image20") as Texture;
+            sprite.mainTexture = Resources.Load("image18") as Texture;
+            //sprite.mainTexture = Resources.Load("image20") as Texture;
             StartCoroutine(FadeIn(sprite, 0.5f, startA));
             message = "Instructions make a program \n that can be used over and over again. ";
             StartCoroutine(TypeText(nextAlpha, coverAlpha));
@@ -2680,7 +2709,8 @@ public class Test : MonoBehaviour
             audiosource.clip = part43;
             audiosource.Play();
             count++;
-            sprite.mainTexture = Resources.Load("image22") as Texture;
+            sprite.mainTexture = Resources.Load("image21") as Texture;
+            //sprite.mainTexture = Resources.Load("image22") as Texture;
             StartCoroutine(FadeIn(sprite, 0.5f, startA));
             message = "See, with Tommy, \n you can use the same words too! ";
             StartCoroutine(TypeText(nextAlpha, coverAlpha));
@@ -2707,7 +2737,8 @@ public class Test : MonoBehaviour
             audiosource.clip = part44;
             audiosource.Play();
             count++;
-            sprite.mainTexture = Resources.Load("image22") as Texture;
+            sprite.mainTexture = Resources.Load("image21") as Texture;
+            //sprite.mainTexture = Resources.Load("image22") as Texture;
             StartCoroutine(FadeIn(sprite, 0.5f, startA));
             message = "Jump, loop, count, and run \n lets you tell the computer what to do. ";
             StartCoroutine(TypeText(nextAlpha, coverAlpha));

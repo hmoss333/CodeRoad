@@ -102,7 +102,10 @@ public class PlayMiniGame : MonoBehaviour {
     public void Tutorial ()
     {
         ChallengeMenu.SetActive(false);
-        StartCoroutine(GoToScene("Tutorial"));
+        MiniGame.isMainMenuGame = true;
+        MiniGame.currentLevel = MiniGame.Level.Tutorial;
+        StartCoroutine(GoToScene("MiniGame"));
+        //StartCoroutine(GoToScene("Tutorial"));
     }
 
     IEnumerator GoToScene(string sceneName)

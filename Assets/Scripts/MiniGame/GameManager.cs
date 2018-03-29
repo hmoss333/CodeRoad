@@ -91,7 +91,7 @@ public class GameManager : MonoBehaviour {
      
         buttonCount = 0;
         if (PlayerPrefs.GetInt("Scan") == 1) { StartCoroutine(scanner()); }
-        GameStatusEventHandler.gameWasStarted("freeplay");
+       //GameStatusEventHandler.gameWasStarted("freeplay");
     }
 
     IEnumerator scanner()
@@ -496,7 +496,7 @@ public class GameManager : MonoBehaviour {
    
     public void mainMenu()
     {
-        GameStatusEventHandler.gameWasStopped();
+       //GameStatusEventHandler.gameWasStopped();
         StartCoroutine(mainMenuStart());
     }
     IEnumerator mainMenuStart()

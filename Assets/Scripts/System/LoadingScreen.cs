@@ -22,45 +22,14 @@ public class LoadingScreen : MonoBehaviour {
 
     public Light light;
 
-    // Use this for initialization
-    //private void Awake()
-    //{
-    //    panel = gameObject.GetComponent<UIPanel>();
-    //    loadingText = gameObject.GetComponentInChildren<UILabel>();
-
-    //    if (!cameras)
-    //        cameras = GameObject.Find("Cameras");        
-
-    //    TurnOffAvatars();
-    //    TurnOffCameras();
-    //}
-
     void Start() {
-        //if (!cameras)
-        //    cameras = GameObject.Find("Cameras");
-
-        //string currentScene = SceneManager.GetActiveScene().name;
-        //if (currentScene != "LoadingSceen")
-        //    SceneManager.UnloadSceneAsync(currentScene);
-
-        //selectRand = true;
         TurnOffAvatars();
         ShowAvatar();
-        //TurnOffCameras();
     }
 
     // Update is called once per frame
     void Update() {
-        //if (loading)
-        //{
-        //    Debug.Log(defaultText);
-        //    levelLoaded = false;
-        //    isOn = false;
-        //    TurnOnCameras();
-        //    ShowAvatar();
-        //    StartCoroutine(CheckIfLoaded(sceneToLoad));
-        //    loading = false;
-        //}
+
     }
 
     public void LoadScene (string targetScene)
@@ -73,9 +42,43 @@ public class LoadingScreen : MonoBehaviour {
     {
         if (!isOn)
         {
-            int rand = Random.Range(0, characters.Length);
+            if (!MiniGame.isMainMenuGame)
+            {
+                switch (MiniGame.currentLevel)
+                {
+                    case MiniGame.Level.Story1:
+                        characters[0].SetActive(true);
+                        break;
+                    case MiniGame.Level.Story2:
+                        characters[1].SetActive(true);
+                        break;
+                    case MiniGame.Level.Story3:
+                        characters[2].SetActive(true);
+                        break;
+                    case MiniGame.Level.Story4:
+                        characters[3].SetActive(true);
+                        break;
+                    case MiniGame.Level.Story5:
+                        characters[4].SetActive(true);
+                        break;
+                    case MiniGame.Level.Story6:
+                        characters[5].SetActive(true);
+                        break;
+                    case MiniGame.Level.Story7:
+                        characters[0].SetActive(true);
+                        break;
+                    default:
+                        characters[0].SetActive(true);
+                        break;
+                }
+            }
 
-            characters[rand].SetActive(true); //any animations should be set to play automatically on awake, looping
+            else
+            {
+                int rand = Random.Range(0, characters.Length);
+
+                characters[rand].SetActive(true); //any animations should be set to play automatically on awake, looping
+            }
 
             isOn = true;
         }

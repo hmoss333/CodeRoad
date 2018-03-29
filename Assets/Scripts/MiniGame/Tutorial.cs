@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class Tutorial : MonoBehaviour
 {
+    Test story;
+
     public GameObject player;
     GameObject moveBackground;
     public Text move;
@@ -94,19 +96,21 @@ public class Tutorial : MonoBehaviour
         endFormat = "</color></b>";
         movementLengthCollection = 0;
 
+        if (!MiniGame.isMainMenuGame)
+            story = GameObject.FindObjectOfType<Test>();
         directionalLight = GameObject.FindObjectOfType<Light>();
 
         buttonChoosen = false;
         buttonCount = 0;
         playSound(15);
         StartCoroutine(buttonFlash());
-       }
+    }
 
   
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(tutorialCount);
+        //Debug.Log(tutorialCount);
         if (Input.anyKeyDown)
         {
             if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1) || Input.GetMouseButtonDown(2)) return;
@@ -120,7 +124,7 @@ public class Tutorial : MonoBehaviour
                     if (tutorialCount == 4) { addWalkBackward(); }else
                     if (tutorialCount == 5) { play(); }else
                     if (tutorialCount == 6) { clearList(); }else
-                    if (tutorialCount == 7) { mainMenu(); }                
+                    if (tutorialCount == 7) { mainMenu(); }
             }
         }
 
@@ -338,7 +342,7 @@ public class Tutorial : MonoBehaviour
             showMoves.text = "Tap <b><color=yellow>Begin Loop</color></b>.\nTap a command.\nTap <b><color=yellow>End Loop</color></b> and then <b><color=yellow>Play</color></b>.\nTommy moves many times over and over again. ";
             tutorialCount++;
         }
-    
+
     }
     public void play()
     {
@@ -594,7 +598,15 @@ public class Tutorial : MonoBehaviour
             SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);
         yield return new WaitForSeconds(1.5f);
         //LoadManager.level = "MenuScreen";
-        SceneManager.LoadSceneAsync("MenuScreen");
+        if (!MiniGame.isMainMenuGame)
+        {
+            story.EndMiniGame();
+            SceneManager.UnloadSceneAsync("MiniGame");
+        }
+        else
+        {
+            SceneManager.LoadSceneAsync("MenuScreen");
+        }
     }
 
 }

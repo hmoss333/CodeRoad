@@ -111,13 +111,13 @@ public class Abilities2 : MonoBehaviour
 
         buttonCount = 0;
         if (PlayerPrefs.GetInt("Scan") == 1) { StartCoroutine(scanner()); }
-        if (PlayerPrefs.GetInt("Voice") == 1) { narration.Play(); }
+        if (PlayerPrefs.GetInt("Voice") == 0) { narration.Play(); }
         directionalLight = GameObject.FindObjectOfType<Light>();
-        GameStatusEventHandler.gameWasStarted("challenge");
+        //GameStatusEventHandler.gameWasStarted("challenge");
     }
     void narrationVoiceOverStop()
     {
-        if (PlayerPrefs.GetInt("Voice") == 1)
+        if (PlayerPrefs.GetInt("Voice") == 0)
         {
             if (incorrectVoiceOver.isPlaying)
                 incorrectVoiceOver.Stop();
@@ -326,7 +326,7 @@ public class Abilities2 : MonoBehaviour
     IEnumerator playNarration()
     {
         yield return new WaitForSeconds(1.0f);
-        if (PlayerPrefs.GetInt("Voice") == 1)
+        if (PlayerPrefs.GetInt("Voice") == 0)
             narration.Play();
     }
 
@@ -422,7 +422,7 @@ public class Abilities2 : MonoBehaviour
 
     void playMoveName(string move)
     {
-        if (PlayerPrefs.GetInt("Voice") == 1)
+        if (PlayerPrefs.GetInt("Voice") == 0)
         {
             if (move.Contains("Grow")) { GetComponent<AudioSource>().clip = mySounds[5]; }
             if (move.Contains("Spin")) { GetComponent<AudioSource>().clip = mySounds[11]; }
@@ -593,7 +593,7 @@ public class Abilities2 : MonoBehaviour
     void displayErrorMessage()
     {
         help.text = "Good try! Press Clear To Try Again";
-        if (PlayerPrefs.GetInt("Voice") == 1)
+        if (PlayerPrefs.GetInt("Voice") == 0)
         {
             incorrectVoiceOver.Play();
             if (narration.isPlaying)
@@ -610,7 +610,7 @@ public class Abilities2 : MonoBehaviour
 
     void playSound(int num)
     {
-        if (PlayerPrefs.GetInt("Voice") == 1)
+        if (PlayerPrefs.GetInt("Voice") == 0)
         {
             narrationVoiceOverStop();
             GetComponent<AudioSource>().clip = mySounds[num];
@@ -620,7 +620,7 @@ public class Abilities2 : MonoBehaviour
 
     public void mainMenu()
     {
-        GameStatusEventHandler.gameWasStopped();
+        //GameStatusEventHandler.gameWasStopped();
         StartCoroutine(mainMenuStart());
     }
     IEnumerator mainMenuStart()
