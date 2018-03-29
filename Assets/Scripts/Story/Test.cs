@@ -229,18 +229,6 @@ public class Test : MonoBehaviour
 
 	public void setTap()
 	{
-		if (inTutorialMode)
-		{
-            if (Tutorial_1.activeInHierarchy)
-                Turotiral1OnClick();
-            else if (Tutorial_2.activeInHierarchy)
-                Turotiral2OnClick();
-            else if (Tutorial_3.activeInHierarchy)
-                Turotiral3OnClick();
-            else
-                inTutorialMode = false;
-		}
-
 		completetext = true;
 		audiosource.Stop();
 	}
@@ -1446,7 +1434,17 @@ public class Test : MonoBehaviour
 				StartCoroutine(FadeOuter(sprite, 0.5f, nextAlpha, coverAlpha));
 			}
 		}
-	}
+
+        else
+        {
+            if (Tutorial_1.activeInHierarchy)
+                Turotiral1OnClick();
+            else if (Tutorial_2.activeInHierarchy)
+                Turotiral2OnClick();
+            else if (Tutorial_3.activeInHierarchy)
+                Turotiral3OnClick();
+        }
+    }
 
 	//check which minigames have already been played
 	bool CanPlay ()
@@ -3299,7 +3297,7 @@ public class Test : MonoBehaviour
 	public void Turotiral3OnClick()
 	{
 		Tutorial_3.SetActive(false);
-		//inTutorialMode = false;
+		inTutorialMode = false;
 		//Set finish tutorial
 		PlayerPrefs.SetInt("tutorial", 3);
 	}

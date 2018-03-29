@@ -601,6 +601,7 @@ public class Tutorial : MonoBehaviour
         if (!MiniGame.isMainMenuGame)
         {
             story.EndMiniGame();
+            //MiniGame.UnloadScene(MiniGame.currentLevel);
             SceneManager.UnloadSceneAsync("MiniGame");
         }
         else
