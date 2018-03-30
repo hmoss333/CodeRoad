@@ -276,6 +276,7 @@
      <Compile Include="Assets\Scripts\MiniGame\SplashScreen_.cs" />
      <Compile Include="Assets\Scripts\MiniGame\StoryAbilities.cs" />
      <Compile Include="Assets\Scripts\MiniGame\StoryCombos.cs" />
+     <Compile Include="Assets\Scripts\MiniGame\StoryFinal.cs" />
      <Compile Include="Assets\Scripts\MiniGame\StoryLoops.cs" />
      <Compile Include="Assets\Scripts\MiniGame\StoryMovement.cs" />
      <Compile Include="Assets\Scripts\MiniGame\TitleAnimation.cs" />

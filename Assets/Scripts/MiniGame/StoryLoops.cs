@@ -313,7 +313,7 @@ public class StoryLoops : MonoBehaviour {
     public void clearList()
     {
         shrinkCount = 0;
-        help.text = "Tommy wants a <b><color=yellow>Loop</color></b> with a <b><color=yellow>Spin</color></b> and <b><color=yellow>Grow</color></b>. Increase <b><color=yellow>Times</color></b> to <b><color=yellow>Loop</color></b> and see him go.";
+        help.text = "Show Cathy how to <b><color=yellow>Loop</color></b> with a <b><color=yellow>Spin</color></b> and <b><color=yellow>Grow</color></b>. Increase <b><color=yellow>Times</color></b> to <b><color=yellow>Loop</color></b> and give it a go.";
         playSound(2);
         movementLengthCollection = 0;
         movement.Clear();

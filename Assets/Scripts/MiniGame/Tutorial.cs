@@ -102,7 +102,7 @@ public class Tutorial : MonoBehaviour
 
         buttonChoosen = false;
         buttonCount = 0;
-        playSound(15);
+        //playSound(15);
         StartCoroutine(buttonFlash());
     }
 
@@ -331,14 +331,14 @@ public class Tutorial : MonoBehaviour
 
         if (tutorialCount == 2)
         {
-           playSound(17);
+           //playSound(17);
            showMoves.text = "Tap <b><color=yellow>Forward</color></b>, <b><color=yellow>Backward</color></b>, and then <b><color=yellow>Play</color></b>. Make Tommy move to where he began.";
            tutorialCount++;
         }
 
         if (tutorialCount == 6)
         {
-            playSound(18);
+            //playSound(18);
             showMoves.text = "Tap <b><color=yellow>Begin Loop</color></b>.\nTap a command.\nTap <b><color=yellow>End Loop</color></b> and then <b><color=yellow>Play</color></b>.\nTommy moves many times over and over again. ";
             tutorialCount++;
         }
@@ -421,7 +421,7 @@ public class Tutorial : MonoBehaviour
 
     void playMoveName(string move)
     {
-        if (PlayerPrefs.GetInt("Voice") == 1)
+        if (PlayerPrefs.GetInt("Voice") == 0)
         {
             if (move.Contains("Grow")) { GetComponent<AudioSource>().clip = mySounds[5]; }
             if (move.Contains("Spin")) { GetComponent<AudioSource>().clip = mySounds[11]; }
@@ -521,7 +521,7 @@ public class Tutorial : MonoBehaviour
         {
             tutorialCount++;
             showMoves.text = "Tap <b><color=yellow>Play</color></b> to make Tommy move again.\n\nTap <b><color=yellow>Clear</color></b> for the next learn to code lesson.";
-            playSound(16);
+            //playSound(16);
         }
         if (tutorialCount == 5)
         {
@@ -532,14 +532,14 @@ public class Tutorial : MonoBehaviour
          {
             showMoves.text = "Tap 2 commands and then Tap <b><color=yellow>Erase</color></b>.\n<b><color=yellow>Erase</color></b> takes away the last command.";
             tutorialCount++;
-            playSound(19);
+            //playSound(19);
          }
 
          if(tutorialCount == 14) 
          {
             showMoves.text = "You did it! Congratulations! Time to practice your coding skills in Free Play or Challenge.";
             tutorialCount++;
-            playSound(20);
+            //playSound(20);
         }
     }
 
@@ -579,7 +579,7 @@ public class Tutorial : MonoBehaviour
 
     void playSound(int num)
     {
-        if (PlayerPrefs.GetInt("Voice") == 1)
+        if (PlayerPrefs.GetInt("Voice") == 0)
         {
             GetComponent<AudioSource>().clip = mySounds[num];
             GetComponent<AudioSource>().Play();
@@ -592,7 +592,7 @@ public class Tutorial : MonoBehaviour
     }
     IEnumerator mainMenuStart()
     {
-        playSound(7);
+        //playSound(7);
         canvas.SetActive(false);
         if (!SceneManager.GetSceneByName("LoadingScreen").isLoaded)
             SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);

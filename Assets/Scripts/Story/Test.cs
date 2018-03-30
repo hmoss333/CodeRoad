@@ -5,7 +5,7 @@ using System.Collections;
 public class Test : MonoBehaviour
 {
 	[Header("Variables")]
-	private bool enabled = true;
+	//private bool enabled = true;
 	//public bool isOn = false; // Clicking will toggle the button on and off. Starts off
 	public int count = -1;
 	string message;
@@ -161,8 +161,11 @@ public class Test : MonoBehaviour
 	private bool playedGame2;
 	private bool playedGame3;
 	private bool playedGame4;
+    private bool playedGame5;
+    private bool playedGame6;
+    private bool playedGame7;
 
-	[Header("Tutorial")]
+    [Header("Tutorial")]
 	public GameObject Tutorial_1;
 	public GameObject Tutorial_2;
 	public GameObject Tutorial_3;
@@ -291,8 +294,12 @@ public class Test : MonoBehaviour
 		playedGame1 = false;
 		playedGame2 = false;
 		playedGame3 = false;
+        playedGame4 = false;
+        playedGame5 = false;
+        playedGame6 = false;
+        playedGame7 = false;
 
-		startAlpha = sprite.alpha;
+        startAlpha = sprite.alpha;
 		sequence = 0;
 
 		//DisableRobots();
@@ -1340,10 +1347,10 @@ public class Test : MonoBehaviour
 
 	public void OnClick()
 	{
-		if (enabled == true && (!inTutorialMode))
+		if (!inTutorialMode)
 		{
 			load = false;
-			enabled = false;
+			//enabled = false;
 			float nextAlpha = next.alpha;
 			float coverAlpha = cover.alpha;
 			play.text = "";
@@ -1388,26 +1395,8 @@ public class Test : MonoBehaviour
             specialAnimationEffect24.GetComponent<ParticleSystem>().Stop();
 
 
-
-            //if (PlayerPrefs.GetFloat("printSize") < 0.6f)
-            //{
-            //    if (count == 3 || count == 1)
-            //    {
-            //        sprite.alpha = 1;
-            //        otherBackground.alpha = 0;
-            //    }
-            //}
-            //else
-            //{
-            //    if (count == 7 || count == 4)
-            //    {
-            //        sprite.alpha = 1;
-            //        otherBackground.alpha = 0;
-            //    }
-            //}
-
             //every 5 levels, if minigame option is active, display minigame instead of going to next page
-            if (count == 9 || count == 15 || count == 27 || count == 39)
+            if (count == 9 || count == 15 || count == 21 || count == 27 || count == 33 || count == 39 || count == 43)
 			{
 				if (PlayerPrefs.GetInt("minigames") == 1)
 				{
@@ -1415,14 +1404,9 @@ public class Test : MonoBehaviour
 					{
 						label.text = "";
                         StartCoroutine(SetMiniGame());
-
-                        //==For Testing; Replace when minigame is ready==//
-                        //Debug.Log("Minigame plays here");
-                        //StartCoroutine(FadeOuter(sprite, 0.5f, nextAlpha, coverAlpha));
                     }
 					else
 					{
-						//inMiniGameMode = false;
 						StartCoroutine(FadeOuter(sprite, 0.5f, nextAlpha, coverAlpha));
 					}
 				}
@@ -1449,13 +1433,19 @@ public class Test : MonoBehaviour
 	//check which minigames have already been played
 	bool CanPlay ()
 	{
-		if (count >= 9 && !playedGame1)
+        if (count >= 9 && !playedGame1)
 			return true;
 		else if (count >= 15 && !playedGame2)
 			return true;
-		else if (count >= 27 && !playedGame3)
+        else if (count >= 21 && !playedGame3)
+            return true;
+        else if (count >= 27 && !playedGame4)
 			return true;
-        else if (count >= 39 && !playedGame4)
+        else if (count >= 33 && !playedGame5)
+            return true;
+        else if (count >= 39 && !playedGame6)
+            return true;
+        else if (count >= 43 && !playedGame7)
             return true;
         else
 			return false;
@@ -1466,25 +1456,57 @@ public class Test : MonoBehaviour
 	{
 		inMiniGameMode = true;
 
-        if (count >= 9 && !playedGame1)
+        switch(count)
         {
-            playedGame1 = true;
-            MiniGame.currentLevel = MiniGame.Level.Story1;
-        }
-        if (count >= 15 && !playedGame2)
-        {
-            playedGame2 = true;
-            MiniGame.currentLevel = MiniGame.Level.Story2;
-        }
-        if (count >= 27 && !playedGame3)
-        {
-            playedGame3 = true;
-            MiniGame.currentLevel = MiniGame.Level.Story3;
-        }
-        if (count >= 39 && !playedGame4)
-        {
-            playedGame4 = true;
-            MiniGame.currentLevel = MiniGame.Level.Story4;
+            case 9:
+                if (!playedGame1)
+                {
+                    playedGame1 = true;
+                    MiniGame.currentLevel = MiniGame.Level.Story1;
+                }
+                break;
+            case 15:
+                if (!playedGame2)
+                {
+                    playedGame2 = true;
+                    MiniGame.currentLevel = MiniGame.Level.Story2;
+                }
+                break;
+            case 21:
+                if (!playedGame3)
+                {
+                    playedGame3 = true;
+                    MiniGame.currentLevel = MiniGame.Level.Story3;
+                }
+                break;
+            case 27:
+                if (!playedGame4)
+                {
+                    playedGame4 = true;
+                    MiniGame.currentLevel = MiniGame.Level.Story4;
+                }
+                break;
+            case 33:
+                if (!playedGame5)
+                {
+                    playedGame5 = true;
+                    MiniGame.currentLevel = MiniGame.Level.Story5;
+                }
+                break;
+            case 39:
+                if (!playedGame6)
+                {
+                    playedGame6 = true;
+                    MiniGame.currentLevel = MiniGame.Level.Story6;
+                }
+                break;
+            case 43:
+                if (!playedGame7)
+                {
+                    playedGame7 = true;
+                    MiniGame.currentLevel = MiniGame.Level.Story7;
+                }
+                break;
         }
 
         SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);
@@ -1506,16 +1528,16 @@ public class Test : MonoBehaviour
 	{
         StartCoroutine(TurnOnCamera());
     }
-
 	IEnumerator TurnOnCamera()
 	{
         yield return new WaitForSeconds(1f);
         SceneManager.LoadSceneAsync("Empty");
 
         //yield return new WaitForSeconds(0.15f);
+        inMiniGameMode = false;
         storyView.alpha = 1f;
         mainCamera.gameObject.SetActive(true);
-        enabled = true;
+        //enabled = true;
         next.alpha = 1f;
         cover.alpha = 1f;
         OnClick();
@@ -1537,17 +1559,11 @@ public class Test : MonoBehaviour
 
     IEnumerator FadeOuter(UIWidget w, float durationInSeconds, float nextAlpha, float coverAlpha)
     {
-        inMiniGameMode = false; //ensures the scene has changed before OnClick checks if minigame is active; update OnClick so this isn't necissary
-
         float startA = w.alpha;
         label.text = "";
 
         GameObject partPrefab;
 
-        //yield return null;
-
-        //if (PlayerPrefs.GetFloat("printSize") < 0.6f)
-        //{
         if (count == -1)
         {
             //EnableCharacters(page1);
@@ -1605,6 +1621,8 @@ public class Test : MonoBehaviour
             //if (!back)
             //    AnimatePage(page2);
 
+            yield return null;
+
             if (!back)
             {
                 Destroy(GameObject.Find("Part (1)(Clone)"));
@@ -1658,6 +1676,8 @@ public class Test : MonoBehaviour
 
             //if (!back)
             //    AnimatePage(page3);
+
+            yield return null;
 
             if (!back)
             {
@@ -1713,6 +1733,8 @@ public class Test : MonoBehaviour
             //if (!back)
             //    AnimatePage(page4);
 
+            yield return null;
+
             if (!back)
             {
                 Destroy(GameObject.Find("Part (3)(Clone)"));
@@ -1767,6 +1789,8 @@ public class Test : MonoBehaviour
             //if (!back)
             //    AnimatePage(page5);
 
+            yield return null;
+
             if (!back)
             {
                 Destroy(GameObject.Find("Part (4)(Clone)"));
@@ -1813,13 +1837,16 @@ public class Test : MonoBehaviour
             message = "Time for an adventure with Tommy \n who will show you now. ";
             StartCoroutine(TypeText(nextAlpha, coverAlpha));
         }
-        else if (count == 9)
+    /**/else if (count == 9)
         {
             //DisableCharacters(page5);
             //EnableCharacters(page6);
 
             //if (!back)
             //    AnimatePage(page6);
+
+            if (PlayerPrefs.GetInt("minigames") != 1)
+                yield return null;
 
             if (!back)
             {
@@ -1875,6 +1902,8 @@ public class Test : MonoBehaviour
             //if (!back)
             //    AnimatePage(page7);
 
+            yield return null;
+
             if (!back)
             {
                 Destroy(GameObject.Find("Part (6)(Clone)"));
@@ -1929,6 +1958,8 @@ public class Test : MonoBehaviour
             //if (!back)
             //    AnimatePage(page8);
 
+            yield return null;
+
             if (!back)
             {
                 Destroy(GameObject.Find("Part (7)(Clone)"));
@@ -1975,13 +2006,16 @@ public class Test : MonoBehaviour
             message = "When a simple command runs \n it makes the computer play. ";
             StartCoroutine(TypeText(nextAlpha, coverAlpha));
         }
-        else if (count == 15)
+    /**/else if (count == 15)
         {
             //DisableCharacters(page8);
             //EnableCharacters(page9);
 
             //if (!back)
             //    AnimatePage(page9);
+
+            if (PlayerPrefs.GetInt("minigames") != 1)
+                yield return null;
 
             if (!back)
             {
@@ -2037,6 +2071,8 @@ public class Test : MonoBehaviour
             //if (!back)
             //    AnimatePage(page10);
 
+            yield return null;
+
             if (!back)
             {
                 Destroy(GameObject.Find("Part (9)(Clone)"));
@@ -2091,6 +2127,8 @@ public class Test : MonoBehaviour
             //if (!back)
             //    AnimatePage(page11);
 
+            yield return null;
+
             if (!back)
             {
                 Destroy(GameObject.Find("Part (10)(Clone)"));
@@ -2137,13 +2175,16 @@ public class Test : MonoBehaviour
             message = "Over the steps called coding \n that tells it what to do. ";
             StartCoroutine(TypeText(nextAlpha, coverAlpha));
         }
-        else if (count == 21)
+    /**/else if (count == 21)
         {
             //DisableCharacters(page11);
             //EnableCharacters(page12);
 
             //if (!back)
             //    AnimatePage(page12);
+
+            if (PlayerPrefs.GetInt("minigames") != 1)
+                yield return null;
 
             if (!back)
             {
@@ -2199,6 +2240,8 @@ public class Test : MonoBehaviour
             //if (!back)
             //    AnimatePage(page13);
 
+            yield return null;
+
             if (!back)
             {
                 Destroy(GameObject.Find("Part (12)(Clone)"));
@@ -2253,6 +2296,8 @@ public class Test : MonoBehaviour
             //if (!back)
             //    AnimatePage(page14);
 
+            yield return null;
+
             if (!back)
             {
                 Destroy(GameObject.Find("Part (13)(Clone)"));
@@ -2299,13 +2344,16 @@ public class Test : MonoBehaviour
             message = "To make sure it does \n exactly what we say. ";
             StartCoroutine(TypeText(nextAlpha, coverAlpha));
         }
-        else if (count == 27)
+    /**/else if (count == 27)
         {
             //DisableCharacters(page14);
             //EnableCharacters(page15);
 
             //if (!back)
             //    AnimatePage(page15);
+
+            if (PlayerPrefs.GetInt("minigames") != 1)
+                yield return null;
 
             if (!back)
             {
@@ -2360,6 +2408,8 @@ public class Test : MonoBehaviour
 
             //if (!back)
             //    AnimatePage(page16);
+
+            yield return null;
 
             if (!back)
             {
@@ -2417,6 +2467,8 @@ public class Test : MonoBehaviour
             //if (!back)
             //    AnimatePage(page17);
 
+            yield return null;
+
             if (!back)
             {
                 Destroy(GameObject.Find("Part (16)(Clone)"));
@@ -2465,13 +2517,16 @@ public class Test : MonoBehaviour
             message = "By doing the same thing \n a million times a day. ";
             StartCoroutine(TypeText(nextAlpha, coverAlpha));
         }
-        else if (count == 33)
+    /**/else if (count == 33)
         {
             //DisableCharacters(page17);
             //EnableCharacters(page18);
 
             //if (!back)
             //    AnimatePage(page18);
+
+            if (PlayerPrefs.GetInt("minigames") != 1)
+                yield return null;
 
             if (!back)
             {
@@ -2526,6 +2581,8 @@ public class Test : MonoBehaviour
 
             //if (!back)
             //    AnimatePage(page19);
+
+            yield return null;
 
             if (!back)
             {
@@ -2583,6 +2640,8 @@ public class Test : MonoBehaviour
             //if (!back)
             //    AnimatePage(page20);
 
+            yield return null;
+
             if (!back)
             {
                 Destroy(GameObject.Find("Part (19)(Clone)"));
@@ -2631,13 +2690,16 @@ public class Test : MonoBehaviour
             message = "Instructions make a program \n that can be used over and over again. ";
             StartCoroutine(TypeText(nextAlpha, coverAlpha));
         }
-        else if (count == 39)
+    /**/else if (count == 39)
         {
             //DisableCharacters(page20);
             //EnableCharacters(page21);
 
             //if (!back)
             //    AnimatePage(page21);
+
+            if (PlayerPrefs.GetInt("minigames") != 1)
+                yield return null;
 
             if (!back)
             {
@@ -2693,6 +2755,8 @@ public class Test : MonoBehaviour
             //if (!back)
             //    AnimatePage(page22);
 
+            yield return null;
+
             if (!back)
             {
                 Destroy(GameObject.Find("Part (21)(Clone)"));
@@ -2741,13 +2805,16 @@ public class Test : MonoBehaviour
             message = "Jump, loop, count, and run \n lets you tell the computer what to do. ";
             StartCoroutine(TypeText(nextAlpha, coverAlpha));
         }
-        else if (count == 43)
+    /**/else if (count == 43)
         {
             //DisableCharacters(page22);
             //EnableCharacters(page23);
 
             //if (!back)
             //    AnimatePage(page23);
+
+            if (PlayerPrefs.GetInt("minigames") != 1)
+                yield return null;
 
             if (!back)
             {
@@ -2803,6 +2870,8 @@ public class Test : MonoBehaviour
             //if (!back)
             //    AnimatePage(page24);
 
+            yield return null;
+
             if (!back)
             {
                 Destroy(GameObject.Find("Part (23)(Clone)"));
@@ -2822,37 +2891,17 @@ public class Test : MonoBehaviour
             message = "Congratulations on completeing \n the Code Road! ";
             StartCoroutine(TypeText(nextAlpha, coverAlpha));
         }
-        //else if (count == 42)
-        //{
-        //    EnableCharacters(page24);
-
-        //    if (back)
-        //        AnimatePage(page24);
-
-        //    audiosource.Stop();
-        //    audiosource.clip = part48;
-        //    audiosource.Play();
-        //    count++;
-        //    sprite.mainTexture = Resources.Load("image24") as Texture;
-        //    StartCoroutine(FadeIn(sprite, 0.5f, startA));
-        //    message = "Because he wants to do things \n faster and more easily. ";
-        //    StartCoroutine(TypeText(nextAlpha, coverAlpha));
-        //}
-
-
         else if (count == 46)
         {
             //DisableCharacters(page24);
             storyView.alpha = 0f;
 
-            //SceneManager.LoadSceneAsync("LoadingScreen", LoadSceneMode.Additive);
             StartCoroutine(DisplayScene());
         }
-        //}
 
         back = false;
 
-        yield return new WaitForSeconds(0f);
+        yield return null;
     }
 
     IEnumerator FadeIn(UIWidget w, float durationInSeconds, float a)
@@ -2901,32 +2950,7 @@ public class Test : MonoBehaviour
 	{
 		load = true;
 		completetext = false;
-		/*
-		strings = new string[message.Length];
-		int track = 0;
-		int prev = 0;
-		for (int i = 0;i < message.Length;i++)
-		{
-			Debug.Log(message.Length);
-			if (message[i] == ' ') {
-				Debug.Log("a");
-				strings[track] = message.Substring(prev,i-prev+1);
-			}
-			prev = i+1;
-			track = track+1;
-		}
-		for (int i = 0;i < strings.Length;i++)
-		{
-			Debug.Log(strings.Length);
-			if (strings[i] != null) {
-				label.text += strings[i];
-			}
-			yield return 0;
-			yield return new WaitForSeconds(0.05f);
-		}
-		*/
-		//if (PlayerPrefs.GetFloat ("printSize") == 1f)
-		//	message = message.Replace ("Wootzy","WOOTZY");
+		
 		int spaces = 0;
 		if ((PlayerPrefs.GetInt("typing") == 1) && (PlayerPrefs.GetInt("highlight") == 0))
 		{
@@ -2939,10 +2963,6 @@ public class Test : MonoBehaviour
 					break;
 				}
 				label.text += letter;
-				//if (sound)
-				//{
-				//    //AudioSource.PlayClipAtPoint(sound, Camera.main.transform.position);
-				//}
 				if (letter == ' ')
 				{
 					spaces++;
@@ -2963,10 +2983,6 @@ public class Test : MonoBehaviour
 						break;
 					}
 					label.text += letter;
-					//if (sound)
-					//{
-					//    //AudioSource.PlayClipAtPoint(sound, Camera.main.transform.position);
-					//}
 					yield return 0;
 					yield return new WaitForSeconds(0.038f);
 				}
@@ -3071,152 +3087,8 @@ public class Test : MonoBehaviour
 			}
 		}
 
-		/*
-		foreach (char letter in message.ToCharArray()) 
-		{
-			if (completetext == true) 
-			{
-				label.text = message;
-				break;
-			}
-			label.text += letter;
-			if (sound)
-			{
-				//AudioSource.PlayClipAtPoint(sound, Camera.main.transform.position);
-			}
-			yield return 0;
-            if (PlayerPrefs.GetFloat("printSize") < 0.6f) {
-				if (count == 3) {
-					yield return new WaitForSeconds (0.05f);
-				} else if (count == 6) {
-					yield return new WaitForSeconds (0.025f);
-				} else if (count == 7) {
-					yield return new WaitForSeconds (0.035f);
-				} else {
-					yield return new WaitForSeconds (0.045f);
-				}
-			} else {
-				if (count == 6) {
-					yield return new WaitForSeconds (0.08f);
-				} else if ((count == 10) || (count == 13)) {
-					yield return new WaitForSeconds (0.03f);
-				} else {
-					yield return new WaitForSeconds (0.045f);
-				}
-			}
+        //yield return new WaitForSeconds(0.1f);
 
-		}  
-		*/
-
-		/*
-		int numSpaces = 0;
-		foreach (char letter in message.ToCharArray()) 
-		{
-			if (letter == ' ') 
-			{
-				numSpaces++;
-			}
-		}
-		int times = 0;
-		int equals = 0;
-
-		label.text += "[FFFF00]";
-		foreach (char letter in message.ToCharArray()) 
-		{
-			if (completetext == true) 
-			{
-				label.text = message;
-				break;
-			}
-			label.text += letter;
-			if (letter == ' ') {
-				label.text += "[-]";
-			}
-		}
-		yield return 0;
-		if (PlayerPrefs.GetFloat("printSize") < 0.6f) {
-			if (count != 7) {
-				yield return new WaitForSeconds (0.25f);
-			} else {
-				yield return new WaitForSeconds (0.22f);
-			}
-			if (count == 2) {
-				yield return new WaitForSeconds (0.06f);
-			} else if (count == 3) {
-				yield return new WaitForSeconds (0.08f);
-			} else if (count == 4) {
-				yield return new WaitForSeconds (0.12f);
-			} else if (count == 5) {
-				yield return new WaitForSeconds (0.04f);
-			} 
-		} else {
-			yield return new WaitForSeconds (0.25f);
-			if (count == 6) {
-				yield return new WaitForSeconds (0.15f);
-			} else if (count == 7 || count == 8) {
-				yield return new WaitForSeconds (0.11f);
-			} else if (count == 10) {
-				yield return new WaitForSeconds (0.03f);
-			} else {
-				yield return new WaitForSeconds (0.04f);
-			}
-		}
-
-		while (equals != numSpaces)
-		{
-			times = 0;
-			label.text = "";
-			foreach (char letter in message.ToCharArray()) 
-			{
-				label.text += letter;
-				if (letter == ' ' && times == equals) {
-					label.text += "[FFFF00]";
-					times++;
-				} else if (letter == ' ' && times == equals+1) {
-					label.text += "[-]";
-					times++;
-				} else if (letter == ' ') {
-					times++;
-				}
-			}  
-			if (completetext == true) 
-			{
-				label.text = message;
-				break;
-			}
-			equals++;
-			yield return 0;
-			if (PlayerPrefs.GetFloat("printSize") < 0.6f) {
-				if (count != 7) {
-					yield return new WaitForSeconds (0.25f);
-				} else {
-					yield return new WaitForSeconds (0.22f);
-				}
-				if (count == 2) {
-					yield return new WaitForSeconds (0.06f);
-				} else if (count == 3) {
-					yield return new WaitForSeconds (0.08f);
-				} else if (count == 4) {
-					yield return new WaitForSeconds (0.12f);
-				} else if (count == 5) {
-					yield return new WaitForSeconds (0.04f);
-				} 
-			} else {
-				yield return new WaitForSeconds (0.25f);
-				if (count == 6) {
-					yield return new WaitForSeconds (0.15f);
-				} else if (count == 7 || count == 8) {
-					yield return new WaitForSeconds (0.11f);
-				} else if (count == 10) {
-					yield return new WaitForSeconds (0.03f);
-				} else if ((count == 12) || (count == 13)) { 
-
-				} else {
-					yield return new WaitForSeconds (0.04f);
-				}
-			}
-		}
-		*/
 		completetext = true;
 		next.alpha = nextAlpha;
 		//cover.alpha = coverAlpha;
@@ -3239,7 +3111,7 @@ public class Test : MonoBehaviour
 		{
 			//play.text = "Play";
 		}
-		enabled = true;
+		//enabled = true;
 
 		if (backPage)
 		{
@@ -3270,7 +3142,6 @@ public class Test : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "LoadingScreen")
             SceneManager.UnloadSceneAsync("LoadingScreen");
     }
-
 	IEnumerable RepeatScene()
 	{
 		yield return new WaitForSeconds(0);

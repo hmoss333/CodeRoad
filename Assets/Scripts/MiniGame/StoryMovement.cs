@@ -338,7 +338,7 @@ public class StoryMovement : MonoBehaviour {
     public void clearList()
     {
         forwardCount = 0;
-        help.text = "Help Tommy say hello to Owl. Walk <b><color=yellow>Forward</color></b> until close enough to say hello.";
+        help.text = "Help Tommy say hello to Eleanor. Walk <b><color=yellow>Forward</color></b> 2, then <b><color=yellow>Backward</color></b> 4.";
         narrationVoiceOverStop();
         playSound(2);
         movementLengthCollection = 0;
@@ -347,7 +347,7 @@ public class StoryMovement : MonoBehaviour {
         showMoves.text = "";
         player.transform.localScale = new Vector3(2, 2, 2);
         player.transform.rotation = Quaternion.Euler(0, 90, 0);
-        player.transform.position = new Vector3(-2.64f, -3.72f, 0.28f);
+        player.transform.position = new Vector3(1.19f, -3.72f, 0f);
         loopState = false;
         numberOfLoops = 0;
         loopCounts.Clear();
@@ -369,7 +369,7 @@ public class StoryMovement : MonoBehaviour {
             movementLengthCollection = 0;
             player.transform.localScale = new Vector3(2, 2, 2);
             player.transform.rotation = Quaternion.Euler(0, 90, 0);
-            player.transform.position = new Vector3(-2.64f, -3.72f, 0.28f);
+            player.transform.position = new Vector3(1.19f, -3.72f, 0f);
             StartCoroutine(playingMovement());
         }
         else { move.text = "Must Close All Loops To Play"; }
@@ -583,13 +583,46 @@ public class StoryMovement : MonoBehaviour {
         return false;
     }
 
+    //No loops, just forward and backward
+    bool answerIsCorrect(int forwardEndIndex, int backwardEndIndex)
+    {
+        try
+        {
+            int forwardCount = 0, backwardCount = 0;
+
+            for (int i = 0; i < forwardEndIndex; i++)
+            {
+                if (movement[i].Equals("Forward"))
+                    forwardCount++;
+            }
+            for (int i = forwardEndIndex; i < backwardEndIndex; i++)
+            {
+                if (movement[i].Equals("Backward"))
+                    backwardCount++;
+            }
+            if (movement[backwardEndIndex].Equals(startFormat + "Backward" + endFormat))
+                backwardCount++;
+
+            Debug.Log(forwardCount);
+            Debug.Log(backwardCount);
+            Func<bool> patternOne = () => (movement.Count == 6 && forwardCount == 2 && backwardCount == 4);
+            //Func<bool> patternTwo = () => (movement.Count == 8 && forwardCount == 2 && backwardCount == 6);
+            if (patternOne())// || patternTwo())
+                return true;
+
+            return false;
+        }
+        catch (ArgumentOutOfRangeException ex)
+        {
+            Debug.Log(ex.ToString());
+            return false;
+        }
+    }
+
+
     void checkCorrect()
     {
-        if (showMoves.text.Equals("Forward...Forward...Forward..." + startFormat + "Forward" + endFormat + "..."))
-        {
-            displayWinScreen();
-        }
-        else if (loopAnswerCorrect())
+        if (answerIsCorrect(2, 5))
         {
             displayWinScreen();
         }

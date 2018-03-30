@@ -24,13 +24,11 @@ public class PlayRobotAudio : MonoBehaviour {
         specialAudiosource.Stop();
         specialAudiosource.clip = SelectRandomAudio(characterSounds);//robotSound;
         specialAudiosource.Play();
-        Debug.Log("played robot audio");
     }
 
     AudioClip SelectRandomAudio (AudioClip[] audioList)
     {
         int randNum = (int)Random.Range(0.0f, (float)audioList.Length);
-        Debug.Log("RandNum: " + randNum);
 
         AudioClip ac = audioList[randNum];
 

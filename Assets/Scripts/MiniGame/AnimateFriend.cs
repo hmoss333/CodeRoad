@@ -25,7 +25,7 @@ public class AnimateFriend : MonoBehaviour {
         if (!win)
         {
 
-            if (MiniGame.currentLevel == MiniGame.Level.Abilities2 || MiniGame.currentLevel == MiniGame.Level.Story2)
+            if (MiniGame.currentLevel == MiniGame.Level.Abilities2 || MiniGame.currentLevel == MiniGame.Level.Story2 || MiniGame.currentLevel == MiniGame.Level.Story5)
             {
                 gameObject.transform.Rotate(0, Time.deltaTime * 370, 0);
             }

@@ -34,9 +34,4 @@ public class MiniGame : MonoBehaviour {
     {
         Destroy(GameObject.Find(levelName.ToString() + "(Clone)"));
     }
-
-    public static void DisableCamera (Level levelName)
-    {
-        GameObject.Find(levelName.ToString() + "(Clone)").GetComponentInChildren<Camera>().enabled = false;
-    }
 }
