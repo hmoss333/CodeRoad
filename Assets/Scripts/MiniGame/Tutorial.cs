@@ -116,7 +116,7 @@ public class Tutorial : MonoBehaviour
             if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1) || Input.GetMouseButtonDown(2)) return;
 
             if ((PlayerPrefs.GetInt("Scan") == 1))
-            {                                  
+            {
                     if (tutorialCount == 0) { addWalkForward(); }else
                     if (tutorialCount == 1) { play(); }else
                     if (tutorialCount == 2) { clearList(); }else
@@ -338,9 +338,18 @@ public class Tutorial : MonoBehaviour
 
         if (tutorialCount == 6)
         {
-            //playSound(18);
-            showMoves.text = "Tap <b><color=yellow>Begin Loop</color></b>.\nTap a command.\nTap <b><color=yellow>End Loop</color></b> and then <b><color=yellow>Play</color></b>.\nTommy moves many times over and over again. ";
-            tutorialCount++;
+            //If in story mode, skip Looping and go straight to end
+            if (!MiniGame.isMainMenuGame)
+            {
+                tutorialCount = 14;
+                checkTutorial();
+            }
+            else
+            {
+                //playSound(18);
+                showMoves.text = "Tap <b><color=yellow>Begin Loop</color></b>.\nTap a command.\nTap <b><color=yellow>End Loop</color></b> and then <b><color=yellow>Play</color></b>.\nTommy moves many times over and over again. ";
+                tutorialCount++;
+            }
         }
 
     }
@@ -532,12 +541,15 @@ public class Tutorial : MonoBehaviour
          {
             showMoves.text = "Tap 2 commands and then Tap <b><color=yellow>Erase</color></b>.\n<b><color=yellow>Erase</color></b> takes away the last command.";
             tutorialCount++;
-            //playSound(19);
+            playSound(19);
          }
 
          if(tutorialCount == 14) 
          {
-            showMoves.text = "You did it! Congratulations! Time to practice your coding skills in Free Play or Challenge.";
+            if (!MiniGame.isMainMenuGame)
+                showMoves.text = "You did it! Congratulations! Lets see what else we can learn on the Code Road!";
+            else
+                showMoves.text = "You did it! Congratulations! Time to practice your coding skills in Free Play or Challenge.";
             tutorialCount++;
             //playSound(20);
         }

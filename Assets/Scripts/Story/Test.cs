@@ -2888,7 +2888,7 @@ public class Test : MonoBehaviour
             count++;
             sprite.mainTexture = Resources.Load("image24") as Texture;
             StartCoroutine(FadeIn(sprite, 0.5f, startA));
-            message = "Congratulations on completeing \n the Code Road! ";
+            message = "Congratulations on completing \n the Code Road! ";
             StartCoroutine(TypeText(nextAlpha, coverAlpha));
         }
         else if (count == 46)
