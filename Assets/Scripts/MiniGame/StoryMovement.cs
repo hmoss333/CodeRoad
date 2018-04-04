@@ -603,8 +603,6 @@ public class StoryMovement : MonoBehaviour {
             if (movement[backwardEndIndex].Equals(startFormat + "Backward" + endFormat))
                 backwardCount++;
 
-            Debug.Log(forwardCount);
-            Debug.Log(backwardCount);
             Func<bool> patternOne = () => (movement.Count == 6 && forwardCount == 2 && backwardCount == 4);
             //Func<bool> patternTwo = () => (movement.Count == 8 && forwardCount == 2 && backwardCount == 6);
             if (patternOne())// || patternTwo())

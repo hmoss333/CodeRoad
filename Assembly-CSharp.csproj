@@ -278,6 +278,7 @@
      <Compile Include="Assets\Scripts\MiniGame\StoryCombos.cs" />
      <Compile Include="Assets\Scripts\MiniGame\StoryFinal.cs" />
      <Compile Include="Assets\Scripts\MiniGame\StoryLoops.cs" />
+     <Compile Include="Assets\Scripts\MiniGame\StoryLoops2.cs" />
      <Compile Include="Assets\Scripts\MiniGame\StoryMovement.cs" />
      <Compile Include="Assets\Scripts\MiniGame\TitleAnimation.cs" />
      <Compile Include="Assets\Scripts\MiniGame\Tutorial.cs" />
