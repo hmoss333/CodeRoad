@@ -1621,7 +1621,7 @@ public class Test : MonoBehaviour
             //if (!back)
             //    AnimatePage(page2);
 
-            yield return null;
+            yield return new WaitForSeconds(0);
 
             if (!back)
             {
@@ -1677,7 +1677,7 @@ public class Test : MonoBehaviour
             //if (!back)
             //    AnimatePage(page3);
 
-            yield return null;
+            yield return new WaitForSeconds(0);
 
             if (!back)
             {
@@ -1733,7 +1733,7 @@ public class Test : MonoBehaviour
             //if (!back)
             //    AnimatePage(page4);
 
-            yield return null;
+            yield return new WaitForSeconds(0);
 
             if (!back)
             {
@@ -1789,7 +1789,7 @@ public class Test : MonoBehaviour
             //if (!back)
             //    AnimatePage(page5);
 
-            yield return null;
+            yield return new WaitForSeconds(0);
 
             if (!back)
             {
@@ -1846,7 +1846,7 @@ public class Test : MonoBehaviour
             //    AnimatePage(page6);
 
             if (PlayerPrefs.GetInt("minigames") != 1)
-                yield return null;
+                yield return new WaitForSeconds(0);
 
             if (!back)
             {
@@ -1902,7 +1902,7 @@ public class Test : MonoBehaviour
             //if (!back)
             //    AnimatePage(page7);
 
-            yield return null;
+            yield return new WaitForSeconds(0);
 
             if (!back)
             {
@@ -1958,7 +1958,7 @@ public class Test : MonoBehaviour
             //if (!back)
             //    AnimatePage(page8);
 
-            yield return null;
+            yield return new WaitForSeconds(0);
 
             if (!back)
             {
@@ -2015,7 +2015,7 @@ public class Test : MonoBehaviour
             //    AnimatePage(page9);
 
             if (PlayerPrefs.GetInt("minigames") != 1)
-                yield return null;
+                yield return new WaitForSeconds(0);
 
             if (!back)
             {
@@ -2071,7 +2071,7 @@ public class Test : MonoBehaviour
             //if (!back)
             //    AnimatePage(page10);
 
-            yield return null;
+            yield return new WaitForSeconds(0);
 
             if (!back)
             {
@@ -2127,7 +2127,7 @@ public class Test : MonoBehaviour
             //if (!back)
             //    AnimatePage(page11);
 
-            yield return null;
+            yield return new WaitForSeconds(0);
 
             if (!back)
             {
@@ -2184,7 +2184,7 @@ public class Test : MonoBehaviour
             //    AnimatePage(page12);
 
             if (PlayerPrefs.GetInt("minigames") != 1)
-                yield return null;
+                yield return new WaitForSeconds(0);
 
             if (!back)
             {
@@ -2240,7 +2240,7 @@ public class Test : MonoBehaviour
             //if (!back)
             //    AnimatePage(page13);
 
-            yield return null;
+            yield return new WaitForSeconds(0);
 
             if (!back)
             {
@@ -2296,7 +2296,7 @@ public class Test : MonoBehaviour
             //if (!back)
             //    AnimatePage(page14);
 
-            yield return null;
+            yield return new WaitForSeconds(0);
 
             if (!back)
             {
@@ -2353,7 +2353,7 @@ public class Test : MonoBehaviour
             //    AnimatePage(page15);
 
             if (PlayerPrefs.GetInt("minigames") != 1)
-                yield return null;
+                yield return new WaitForSeconds(0);
 
             if (!back)
             {
@@ -2409,7 +2409,7 @@ public class Test : MonoBehaviour
             //if (!back)
             //    AnimatePage(page16);
 
-            yield return null;
+            yield return new WaitForSeconds(0);
 
             if (!back)
             {
@@ -2467,7 +2467,7 @@ public class Test : MonoBehaviour
             //if (!back)
             //    AnimatePage(page17);
 
-            yield return null;
+            yield return new WaitForSeconds(0);
 
             if (!back)
             {
@@ -2526,7 +2526,7 @@ public class Test : MonoBehaviour
             //    AnimatePage(page18);
 
             if (PlayerPrefs.GetInt("minigames") != 1)
-                yield return null;
+                yield return new WaitForSeconds(0);
 
             if (!back)
             {
@@ -2582,7 +2582,7 @@ public class Test : MonoBehaviour
             //if (!back)
             //    AnimatePage(page19);
 
-            yield return null;
+            yield return new WaitForSeconds(0);
 
             if (!back)
             {
@@ -2640,7 +2640,7 @@ public class Test : MonoBehaviour
             //if (!back)
             //    AnimatePage(page20);
 
-            yield return null;
+            yield return new WaitForSeconds(0);
 
             if (!back)
             {
@@ -2699,7 +2699,7 @@ public class Test : MonoBehaviour
             //    AnimatePage(page21);
 
             if (PlayerPrefs.GetInt("minigames") != 1)
-                yield return null;
+                yield return new WaitForSeconds(0);
 
             if (!back)
             {
@@ -2755,7 +2755,7 @@ public class Test : MonoBehaviour
             //if (!back)
             //    AnimatePage(page22);
 
-            yield return null;
+            yield return new WaitForSeconds(0);
 
             if (!back)
             {
@@ -2814,7 +2814,7 @@ public class Test : MonoBehaviour
             //    AnimatePage(page23);
 
             if (PlayerPrefs.GetInt("minigames") != 1)
-                yield return null;
+                yield return new WaitForSeconds(0);
 
             if (!back)
             {
@@ -2870,7 +2870,7 @@ public class Test : MonoBehaviour
             //if (!back)
             //    AnimatePage(page24);
 
-            yield return null;
+            yield return new WaitForSeconds(0);
 
             if (!back)
             {
@@ -2900,8 +2900,6 @@ public class Test : MonoBehaviour
         }
 
         back = false;
-
-        yield return null;
     }
 
     IEnumerator FadeIn(UIWidget w, float durationInSeconds, float a)
