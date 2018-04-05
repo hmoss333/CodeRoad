@@ -9,6 +9,7 @@ using UnityEngine.SceneManagement;
 public class StoryFinal : MonoBehaviour {
 
     Test story;
+    int stepCount;
 
     public GameObject player;
     public Text move;
@@ -96,6 +97,7 @@ public class StoryFinal : MonoBehaviour {
         countTillLineSkip = 0;
         growthSwitch = true;
         shrinkSwitch = true;
+        stepCount = 0;
 
         turned = false;
         facingRight = true;
@@ -116,6 +118,8 @@ public class StoryFinal : MonoBehaviour {
         story = GameObject.FindObjectOfType<Test>();
         directionalLight = GameObject.FindObjectOfType<Light>();
         //GameStatusEventHandler.gameWasStarted("challenge");
+
+        StartCoroutine(buttonFlash());
     }
 
     void narrationVoiceOverStop()
@@ -249,14 +253,44 @@ public class StoryFinal : MonoBehaviour {
             directionalLight.gameObject.SetActive(false);
     }
 
-    public void addSpin() { movement.Add("Spin"); showMoves.text = showMoves.text + "Spin..."; lineSkip(4); playSound(11); }
-    public void addGrow() { movement.Add("Grow"); showMoves.text = showMoves.text + "Grow..."; lineSkip(4); playSound(5); }
-    public void addShrink() { movement.Add("Shrink"); showMoves.text = showMoves.text + "Shrink..."; lineSkip(6); playSound(9); shrinkCount += 1; }
-    public void addTurn() { movement.Add("Turn"); showMoves.text = showMoves.text + "Turn..."; lineSkip(4); playSound(13); }
-    public void addJump() { movement.Add("Jump"); showMoves.text = showMoves.text + "Jump..."; lineSkip(4); playSound(6); }
+    public void addSpin() {
+        movement.Add("Spin"); showMoves.text = showMoves.text + "Spin..."; lineSkip(4); playSound(11);
+
+        if (stepCount == 1)
+            stepCount++;
+    }
+    public void addGrow() {
+        movement.Add("Grow"); showMoves.text = showMoves.text + "Grow..."; lineSkip(4); playSound(5);
+
+        if (stepCount == 0)
+            stepCount++;
+    }
+    public void addShrink() {
+        movement.Add("Shrink"); showMoves.text = showMoves.text + "Shrink..."; lineSkip(6); playSound(9); shrinkCount += 1;
+
+        if (stepCount == 5)
+            stepCount++;
+    }
+    public void addTurn() {
+        movement.Add("Turn"); showMoves.text = showMoves.text + "Turn..."; lineSkip(4); playSound(13);
+
+        if (stepCount == 2)
+            stepCount++;
+    }
+    public void addJump() {
+        movement.Add("Jump"); showMoves.text = showMoves.text + "Jump..."; lineSkip(4); playSound(6);
+
+        if (stepCount == 3)
+            stepCount++;
+    }
     public void addWalkForward() { movement.Add("Forward"); showMoves.text = showMoves.text + "Forward..."; lineSkip(7); playSound(4); }
     public void addWalkBackward() { movement.Add("Backward"); showMoves.text = showMoves.text + "Backward..."; lineSkip(8); playSound(0); }
-    public void addSing() { movement.Add("Sing"); showMoves.text = showMoves.text + "Sing..."; lineSkip(4); playSound(10); }
+    public void addSing() {
+        movement.Add("Sing"); showMoves.text = showMoves.text + "Sing..."; lineSkip(4); playSound(10);
+
+        if (stepCount == 4)
+            stepCount++;
+    }
 
     public void erase()
     {
@@ -313,6 +347,7 @@ public class StoryFinal : MonoBehaviour {
 
     public void clearList()
     {
+        stepCount = 0;
         shrinkCount = 0;
         help.text = "Try coding in this order!\n<b><color=yellow>Grow, Spin, Turn, Jump, Sing, Shrink</color></b>";
         playSound(2);
@@ -552,6 +587,24 @@ public class StoryFinal : MonoBehaviour {
             GetComponent<AudioSource>().clip = mySounds[num];
             GetComponent<AudioSource>().Play();
         }
+    }
+
+    IEnumerator buttonFlash()
+    {
+        int buttonToFlash = 0;
+        if (stepCount == 0) { buttonToFlash = 0; }
+        if (stepCount == 1) { buttonToFlash = 3; }
+        if (stepCount == 2) { buttonToFlash = 2; }
+        if (stepCount == 3) { buttonToFlash = 4; }
+        if (stepCount == 4) { buttonToFlash = 5; }
+        if (stepCount == 5) { buttonToFlash = 1; }
+        if (stepCount == 6) { buttonToFlash = 10; }
+
+        myButtons[buttonToFlash].GetComponent<Image>().color = Color.white;
+        yield return new WaitForSeconds(0.5f);
+        myButtons[buttonToFlash].GetComponent<Image>().color = new Color(0.258f, 0.941f, 0.090f, 1);
+        yield return new WaitForSeconds(0.5f);
+        StartCoroutine(buttonFlash());
     }
 
     public void mainMenu()

@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 public class StoryAbilities : MonoBehaviour {
 
     Test story;
+    int stepCount;
 
     public GameObject player;
     public Text move;
@@ -97,6 +98,7 @@ public class StoryAbilities : MonoBehaviour {
         countTillLineSkip = 0;
         growthSwitch = true;
         shrinkSwitch = true;
+        stepCount = 0;
 
         turned = false;
         facingRight = true;
@@ -116,7 +118,9 @@ public class StoryAbilities : MonoBehaviour {
         if (PlayerPrefs.GetInt("Voice") == 0) { narration.Play(); }
         story = GameObject.FindObjectOfType<Test>();
         directionalLight = GameObject.FindObjectOfType<Light>();
-       //GameStatusEventHandler.gameWasStarted("challenge");
+        //GameStatusEventHandler.gameWasStarted("challenge");
+
+        StartCoroutine(buttonFlash());
     }
     void narrationVoiceOverStop()
     {
@@ -260,7 +264,14 @@ public class StoryAbilities : MonoBehaviour {
             directionalLight.gameObject.SetActive(false);
     }
 
-    public void addSpin() { movement.Add("Spin"); showMoves.text = showMoves.text + "Spin..."; lineSkip(4); playSound(11); spinCount += 1; }
+    public void addSpin() {
+        movement.Add("Spin"); showMoves.text = showMoves.text + "Spin..."; lineSkip(4); playSound(11); spinCount += 1;
+
+        if (stepCount != 4)
+        {
+            stepCount++;
+        }
+    }
     public void addGrow() { movement.Add("Grow"); showMoves.text = showMoves.text + "Grow..."; lineSkip(4); playSound(5); }
     public void addShrink() { movement.Add("Shrink"); showMoves.text = showMoves.text + "Shrink..."; lineSkip(6); playSound(9); }
     public void addTurn() { movement.Add("Turn"); showMoves.text = showMoves.text + "Turn..."; lineSkip(4); playSound(13); }
@@ -335,6 +346,7 @@ public class StoryAbilities : MonoBehaviour {
 
     public void clearList()
     {
+        stepCount = 0;
         spinCount = 0;
         help.text = "Don't get dizzy spinning like your friend! <b><color=yellow>Spin</color></b> 3 times, again and again!";
         playSound(2);
@@ -623,6 +635,21 @@ public class StoryAbilities : MonoBehaviour {
             GetComponent<AudioSource>().clip = mySounds[num];
             GetComponent<AudioSource>().Play();
         }
+    }
+
+    IEnumerator buttonFlash()
+    {
+        int buttonToFlash = 0;
+        if (stepCount == 0) { buttonToFlash = 3; }
+        if (stepCount == 1) { buttonToFlash = 3; }
+        if (stepCount == 2) { buttonToFlash = 3; }
+        if (stepCount == 3) { buttonToFlash = 10; }
+
+        myButtons[buttonToFlash].GetComponent<Image>().color = Color.white;
+        yield return new WaitForSeconds(0.5f);
+        myButtons[buttonToFlash].GetComponent<Image>().color = new Color(0.258f, 0.941f, 0.090f, 1);
+        yield return new WaitForSeconds(0.5f);
+        StartCoroutine(buttonFlash());
     }
 
     public void mainMenu()

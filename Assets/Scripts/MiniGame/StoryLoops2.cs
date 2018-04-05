@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 public class StoryLoops2 : MonoBehaviour {
 
     Test story;
+    int stepCount;
 
     public GameObject player;
     public Text move;
@@ -95,6 +96,7 @@ public class StoryLoops2 : MonoBehaviour {
         countTillLineSkip = 0;
         growthSwitch = true;
         shrinkSwitch = true;
+        stepCount = 0;
 
         turned = false;
         facingRight = true;
@@ -115,6 +117,8 @@ public class StoryLoops2 : MonoBehaviour {
         story = GameObject.FindObjectOfType<Test>();
         directionalLight = GameObject.FindObjectOfType<Light>();
         //GameStatusEventHandler.gameWasStarted("challenge");
+
+        StartCoroutine(buttonFlash());
     }
 
     void narrationVoiceOverStop()
@@ -252,10 +256,20 @@ public class StoryLoops2 : MonoBehaviour {
     public void addGrow() { movement.Add("Grow"); showMoves.text = showMoves.text + "Grow..."; lineSkip(4); playSound(5); }
     public void addShrink() { movement.Add("Shrink"); showMoves.text = showMoves.text + "Shrink..."; lineSkip(6); playSound(9); shrinkCount += 1; }
     public void addTurn() { movement.Add("Turn"); showMoves.text = showMoves.text + "Turn..."; lineSkip(4); playSound(13); }
-    public void addJump() { movement.Add("Jump"); showMoves.text = showMoves.text + "Jump..."; lineSkip(4); playSound(6); }
+    public void addJump() {
+        movement.Add("Jump"); showMoves.text = showMoves.text + "Jump..."; lineSkip(4); playSound(6);
+
+        if (stepCount == 1)
+            stepCount++;
+    }
     public void addWalkForward() { movement.Add("Forward"); showMoves.text = showMoves.text + "Forward..."; lineSkip(7); playSound(4); }
     public void addWalkBackward() { movement.Add("Backward"); showMoves.text = showMoves.text + "Backward..."; lineSkip(8); playSound(0); }
-    public void addSing() { movement.Add("Sing"); showMoves.text = showMoves.text + "Sing..."; lineSkip(4); playSound(10); }
+    public void addSing() {
+        movement.Add("Sing"); showMoves.text = showMoves.text + "Sing..."; lineSkip(4); playSound(10);
+
+        if (stepCount == 2)
+            stepCount++;
+    }
 
     public void erase()
     {
@@ -282,6 +296,9 @@ public class StoryLoops2 : MonoBehaviour {
             loopState = true;
             playSound(1);
         }
+
+        if (stepCount == 0)
+            stepCount++;
     }
     public void endLoop()
     {
@@ -291,6 +308,9 @@ public class StoryLoops2 : MonoBehaviour {
             loopState = false;
             playSound(3);
         }
+
+        if (stepCount == 3)
+            stepCount++;
     }
 
     void lineSkip(int counter)
@@ -312,6 +332,7 @@ public class StoryLoops2 : MonoBehaviour {
 
     public void clearList()
     {
+        stepCount = 0;
         shrinkCount = 0;
         help.text = "Show Dudley how to <b><color=yellow>Loop</color></b> by making Tommy <b><color=yellow>Jump</color></b> and <b><color=yellow>Sing</color></b>. Increase <b><color=yellow>Times</color></b> to <b><color=yellow>Loop</color></b>. You can do anything!";
         playSound(2);
@@ -551,6 +572,22 @@ public class StoryLoops2 : MonoBehaviour {
             GetComponent<AudioSource>().clip = mySounds[num];
             GetComponent<AudioSource>().Play();
         }
+    }
+
+    IEnumerator buttonFlash()
+    {
+        int buttonToFlash = 0;
+        if (stepCount == 0) { buttonToFlash = 8; }
+        if (stepCount == 1) { buttonToFlash = 4; }
+        if (stepCount == 2) { buttonToFlash = 5; }
+        if (stepCount == 3) { buttonToFlash = 9; }
+        if (stepCount == 4) { buttonToFlash = 10; }
+
+        myButtons[buttonToFlash].GetComponent<Image>().color = Color.white;
+        yield return new WaitForSeconds(0.5f);
+        myButtons[buttonToFlash].GetComponent<Image>().color = new Color(0.258f, 0.941f, 0.090f, 1);
+        yield return new WaitForSeconds(0.5f);
+        StartCoroutine(buttonFlash());
     }
 
     public void mainMenu()

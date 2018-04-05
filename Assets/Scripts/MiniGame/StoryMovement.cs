@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 public class StoryMovement : MonoBehaviour {
 
     Test story;
+    int stepCount;
 
     public GameObject player;
     public Text move;
@@ -98,6 +99,7 @@ public class StoryMovement : MonoBehaviour {
         countTillLineSkip = 0;
         growthSwitch = true;
         shrinkSwitch = true;
+        stepCount = 0;
 
         turned = false;
         facingRight = true;
@@ -119,6 +121,8 @@ public class StoryMovement : MonoBehaviour {
         story = GameObject.FindObjectOfType<Test>();
         directionalLight = GameObject.FindObjectOfType<Light>();
         //GameStatusEventHandler.gameWasStarted("challenge");
+
+        StartCoroutine(buttonFlash());
     }
     void narrationVoiceOverStop()
     {
@@ -267,8 +271,18 @@ public class StoryMovement : MonoBehaviour {
     public void addShrink() { movement.Add("Shrink"); showMoves.text = showMoves.text + "Shrink..."; lineSkip(6); playSound(9); }
     public void addTurn() { movement.Add("Turn"); showMoves.text = showMoves.text + "Turn..."; lineSkip(4); playSound(13); }
     public void addJump() { movement.Add("Jump"); showMoves.text = showMoves.text + "Jump..."; lineSkip(4); playSound(6); }
-    public void addWalkForward() { movement.Add("Forward"); showMoves.text = showMoves.text + "Forward..."; lineSkip(7); playSound(4); forwardCount += 1; }
-    public void addWalkBackward() { movement.Add("Backward"); showMoves.text = showMoves.text + "Backward..."; lineSkip(8); playSound(0); }
+    public void addWalkForward() {
+        movement.Add("Forward"); showMoves.text = showMoves.text + "Forward..."; lineSkip(7); playSound(4); forwardCount += 1;
+
+        if (stepCount < 2)
+            stepCount++;
+    }
+    public void addWalkBackward() {
+        movement.Add("Backward"); showMoves.text = showMoves.text + "Backward..."; lineSkip(8); playSound(0);
+
+        if (stepCount >= 2 && stepCount < 6)
+            stepCount++;
+    }
     public void addSing() { movement.Add("Sing"); showMoves.text = showMoves.text + "Sing..."; lineSkip(4); playSound(10); }
 
     public void erase()
@@ -337,6 +351,7 @@ public class StoryMovement : MonoBehaviour {
 
     public void clearList()
     {
+        stepCount = 0;
         forwardCount = 0;
         help.text = "Help Tommy say hello to Eleanor. Walk <b><color=yellow>Forward</color></b> 2, then <b><color=yellow>Backward</color></b> 4.";
         narrationVoiceOverStop();
@@ -665,6 +680,24 @@ public class StoryMovement : MonoBehaviour {
             GetComponent<AudioSource>().clip = mySounds[num];
             GetComponent<AudioSource>().Play();
         }
+    }
+
+    IEnumerator buttonFlash()
+    {
+        int buttonToFlash = 0;
+        if (stepCount == 0) { buttonToFlash = 6; }
+        if (stepCount == 1) { buttonToFlash = 6; }
+        if (stepCount == 2) { buttonToFlash = 7; }
+        if (stepCount == 3) { buttonToFlash = 7; }
+        if (stepCount == 4) { buttonToFlash = 7; }
+        if (stepCount == 5) { buttonToFlash = 7; }
+        if (stepCount == 6) { buttonToFlash = 10; }
+
+        myButtons[buttonToFlash].GetComponent<Image>().color = Color.white;
+        yield return new WaitForSeconds(0.5f);
+        myButtons[buttonToFlash].GetComponent<Image>().color = new Color(0.258f, 0.941f, 0.090f, 1);
+        yield return new WaitForSeconds(0.5f);
+        StartCoroutine(buttonFlash());
     }
 
     public void mainMenu()

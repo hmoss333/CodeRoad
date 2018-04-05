@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 public class StoryLoops : MonoBehaviour {
 
     Test story;
+    int stepCount;
 
     public GameObject player;
     public Text move;
@@ -95,6 +96,7 @@ public class StoryLoops : MonoBehaviour {
         countTillLineSkip = 0;
         growthSwitch = true;
         shrinkSwitch = true;
+        stepCount = 0;
 
         turned = false;
         facingRight = true;
@@ -114,7 +116,9 @@ public class StoryLoops : MonoBehaviour {
         if (PlayerPrefs.GetInt("Voice") == 0) { narration.Play(); }
         story = GameObject.FindObjectOfType<Test>();
         directionalLight = GameObject.FindObjectOfType<Light>();
-       //GameStatusEventHandler.gameWasStarted("challenge");
+        //GameStatusEventHandler.gameWasStarted("challenge");
+
+        StartCoroutine(buttonFlash());
     }
 
     void narrationVoiceOverStop()
@@ -248,7 +252,12 @@ public class StoryLoops : MonoBehaviour {
             directionalLight.gameObject.SetActive(false);
     }
 
-    public void addSpin() { movement.Add("Spin"); showMoves.text = showMoves.text + "Spin..."; lineSkip(4); playSound(11); }
+    public void addSpin() {
+        movement.Add("Spin"); showMoves.text = showMoves.text + "Spin..."; lineSkip(4); playSound(11);
+
+        if (stepCount == 1)
+            stepCount++;
+    }
     public void addGrow() { movement.Add("Grow"); showMoves.text = showMoves.text + "Grow..."; lineSkip(4); playSound(5); }
     public void addShrink() { movement.Add("Shrink"); showMoves.text = showMoves.text + "Shrink..."; lineSkip(6); playSound(9); shrinkCount += 1; }
     public void addTurn() { movement.Add("Turn"); showMoves.text = showMoves.text + "Turn..."; lineSkip(4); playSound(13); }
@@ -282,6 +291,9 @@ public class StoryLoops : MonoBehaviour {
             loopState = true;
             playSound(1);
         }
+
+        if (stepCount == 0)
+            stepCount++;
     }
     public void endLoop()
     {
@@ -291,6 +303,9 @@ public class StoryLoops : MonoBehaviour {
             loopState = false;
             playSound(3);
         }
+
+        if (stepCount == 2)
+            stepCount++;
     }
 
     void lineSkip(int counter)
@@ -312,6 +327,7 @@ public class StoryLoops : MonoBehaviour {
 
     public void clearList()
     {
+        stepCount = 0;
         shrinkCount = 0;
         help.text = "Show Cathy how to <b><color=yellow>Loop</color></b> with a <b><color=yellow>Spin</color></b>. Increase <b><color=yellow>Times</color></b> to <b><color=yellow>Loop</color></b> and give it a go.";
         playSound(2);
@@ -551,6 +567,21 @@ public class StoryLoops : MonoBehaviour {
             GetComponent<AudioSource>().clip = mySounds[num];
             GetComponent<AudioSource>().Play();
         }
+    }
+
+    IEnumerator buttonFlash()
+    {
+        int buttonToFlash = 0;
+        if (stepCount == 0) { buttonToFlash = 8; }
+        if (stepCount == 1) { buttonToFlash = 3; }
+        if (stepCount == 2) { buttonToFlash = 9; }
+        if (stepCount == 3) { buttonToFlash = 10; }
+
+        myButtons[buttonToFlash].GetComponent<Image>().color = Color.white;
+        yield return new WaitForSeconds(0.5f);
+        myButtons[buttonToFlash].GetComponent<Image>().color = new Color(0.258f, 0.941f, 0.090f, 1);
+        yield return new WaitForSeconds(0.5f);
+        StartCoroutine(buttonFlash());
     }
 
     public void mainMenu()
