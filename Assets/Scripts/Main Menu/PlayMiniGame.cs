@@ -8,7 +8,8 @@ public class PlayMiniGame : MonoBehaviour {
     public float timer = 0.1f;
     //public string levelToLoad = "1stScene";
     //public string altLevelToLoad = "Tutorial";
-    public GameObject ChallengeMenu;
+    public GameObject challengeMenu;
+    public GameObject challengeAvatar;
     public UITexture background;
     private bool on = true;
 
@@ -25,7 +26,8 @@ public class PlayMiniGame : MonoBehaviour {
     void Start()
     {
         //ls = GameObject.Find("LoadingScreen").GetComponent<LoadingScreen>();
-        ChallengeMenu.SetActive(false);
+        challengeMenu.SetActive(false);
+        challengeAvatar.SetActive(false);
 
         //if (PlayerPrefs.GetInt("MiniGameTutorial") == 0)
         //    tutorialMode = true;
@@ -39,7 +41,8 @@ public class PlayMiniGame : MonoBehaviour {
         {
             frontPanel.alpha = 0;
             background.mainTexture = Resources.Load("background") as Texture;
-            ChallengeMenu.SetActive(true);
+            challengeMenu.SetActive(true);
+            challengeAvatar.SetActive(true);
 
             //ls.LoadScene(levelToLoad);
             //ls.ChangeText("Let's play...");
@@ -58,7 +61,8 @@ public class PlayMiniGame : MonoBehaviour {
 
     public void ChallengeMovements ()
     {
-        ChallengeMenu.SetActive(false);
+        challengeMenu.SetActive(false);
+        challengeAvatar.SetActive(false);
         MiniGame.isMainMenuGame = true;
         MiniGame.currentLevel = MiniGame.Level.Movement1;
         StartCoroutine(GoToScene("MiniGame"));
@@ -67,7 +71,8 @@ public class PlayMiniGame : MonoBehaviour {
 
     public void ChallengeAbilities()
     {
-        ChallengeMenu.SetActive(false);
+        challengeMenu.SetActive(false);
+        challengeAvatar.SetActive(false);
         MiniGame.isMainMenuGame = true;
         MiniGame.currentLevel = MiniGame.Level.Abilities1;
         StartCoroutine(GoToScene("MiniGame"));
@@ -76,7 +81,8 @@ public class PlayMiniGame : MonoBehaviour {
 
     public void ChallengeLoops()
     {
-        ChallengeMenu.SetActive(false);
+        challengeMenu.SetActive(false);
+        challengeAvatar.SetActive(false);
         MiniGame.isMainMenuGame = true;
         MiniGame.currentLevel = MiniGame.Level.Loops1;
         StartCoroutine(GoToScene("MiniGame"));
@@ -85,7 +91,8 @@ public class PlayMiniGame : MonoBehaviour {
 
     public void ChallengeCombos()
     {
-        ChallengeMenu.SetActive(false);
+        challengeMenu.SetActive(false);
+        challengeAvatar.SetActive(false);
         MiniGame.isMainMenuGame = true;
         MiniGame.currentLevel = MiniGame.Level.Combos1;
         StartCoroutine(GoToScene("MiniGame"));
@@ -94,14 +101,16 @@ public class PlayMiniGame : MonoBehaviour {
 
     public void ChallengeBack ()
     {
-        ChallengeMenu.SetActive(false);
+        challengeMenu.SetActive(false);
+        challengeAvatar.SetActive(false);
         frontPanel.alpha = 1f;
         background.mainTexture = Resources.Load("coderoad_opening") as Texture;
     }
 
     public void Tutorial ()
     {
-        ChallengeMenu.SetActive(false);
+        challengeMenu.SetActive(false);
+        challengeAvatar.SetActive(false);
         MiniGame.isMainMenuGame = true;
         MiniGame.currentLevel = MiniGame.Level.Tutorial;
         StartCoroutine(GoToScene("MiniGame"));

@@ -1864,7 +1864,7 @@ public class Test : MonoBehaviour
             count++;
             sprite.mainTexture = Resources.Load("image6") as Texture;
             StartCoroutine(FadeIn(sprite, 0.5f, startA));
-            message = "First on the road, \n we meet Ollie Owl sitting in a tree. ";
+            message = "First on the road, we meet Ollie Owl \nsitting in a tree. ";
             StartCoroutine(TypeText(nextAlpha, coverAlpha));
         }
         else if (count == 10)
@@ -1891,7 +1891,7 @@ public class Test : MonoBehaviour
             count++;
             sprite.mainTexture = Resources.Load("image6") as Texture;
             StartCoroutine(FadeIn(sprite, 0.5f, startA));
-            message = "Ollie is laughing \n and singing with glee. ";
+            message = "Ollie is laughing and \nsinging with glee. ";
             StartCoroutine(TypeText(nextAlpha, coverAlpha));
         }
         else if (count == 11)
@@ -2033,7 +2033,7 @@ public class Test : MonoBehaviour
             count++;
             sprite.mainTexture = Resources.Load("image9") as Texture;
             StartCoroutine(FadeIn(sprite, 0.5f, startA));
-            message = "As we travel down the road, \n we see Leo Lion slinking along. ";
+            message = "As we travel down the road, we see \nLeo Lion slinking along. ";
             StartCoroutine(TypeText(nextAlpha, coverAlpha));
         }
         else if (count == 16)
@@ -2060,7 +2060,7 @@ public class Test : MonoBehaviour
             count++;
             sprite.mainTexture = Resources.Load("image9") as Texture;
             StartCoroutine(FadeIn(sprite, 0.5f, startA));
-            message = "All of a sudden he takes a big, high jump \n right off of the ground. ";
+            message = "All of a sudden he takes a big, \nhigh jump right off of the ground. ";
             StartCoroutine(TypeText(nextAlpha, coverAlpha));
         }
         else if (count == 17)
@@ -2314,7 +2314,7 @@ public class Test : MonoBehaviour
             count++;
             sprite.mainTexture = Resources.Load("image14") as Texture;
             StartCoroutine(FadeIn(sprite, 0.5f, startA));
-            message = "Our computers also count \n each step along their way, ";
+            message = "Our computers also count each step \nalong their way, ";
             StartCoroutine(TypeText(nextAlpha, coverAlpha));
         }
         else if (count == 26)
@@ -2341,7 +2341,7 @@ public class Test : MonoBehaviour
             count++;
             sprite.mainTexture = Resources.Load("image14") as Texture;
             StartCoroutine(FadeIn(sprite, 0.5f, startA));
-            message = "To make sure it does \n exactly what we say. ";
+            message = "To make sure it does exactly \nwhat we say. ";
             StartCoroutine(TypeText(nextAlpha, coverAlpha));
         }
     /**/else if (count == 27)
@@ -2571,7 +2571,7 @@ public class Test : MonoBehaviour
             count++;
             sprite.mainTexture = Resources.Load("image18") as Texture;
             StartCoroutine(FadeIn(sprite, 0.5f, startA));
-            message = "Because he wants to do things \n faster and more easily. ";
+            message = "Because he wants to do things faster \nand more easily. ";
             StartCoroutine(TypeText(nextAlpha, coverAlpha));
         }
         else if (count == 35)
@@ -2774,7 +2774,7 @@ public class Test : MonoBehaviour
             sprite.mainTexture = Resources.Load("image21") as Texture;
             //sprite.mainTexture = Resources.Load("image22") as Texture;
             StartCoroutine(FadeIn(sprite, 0.5f, startA));
-            message = "See, with Tommy, \n you can use the same words too! ";
+            message = "See, with Tommy, you can use \nthe same words too! ";
             StartCoroutine(TypeText(nextAlpha, coverAlpha));
         }
         else if (count == 42)
@@ -2859,7 +2859,7 @@ public class Test : MonoBehaviour
             count++;
             sprite.mainTexture = Resources.Load("image23") as Texture;
             StartCoroutine(FadeIn(sprite, 0.5f, startA));
-            message = "Thank you for taking this trip \n with friends down the Code Road. ";
+            message = "Thank you for taking this trip with friends \ndown the Code Road. ";
             StartCoroutine(TypeText(nextAlpha, coverAlpha));
         }
         else if (count == 45)
@@ -3009,30 +3009,13 @@ public class Test : MonoBehaviour
 					yield return 0;
 					for (int i = 0; i < 22; i++)
 					{
-						//if (PlayerPrefs.GetFloat("printSize") > 0.6f)
-						//{
-						//    yield return new WaitForSeconds(0.15f);
-						//}
-						//else
-						//{//if too long
-						if (count == 0 || count == 1 || count == 8 || count == 14 || count == 16)
-						{
-							yield return new WaitForSeconds(0.1f);
-						}
-						else if (count == 3 || count == 5 || count == 9 || count == 11 || count == 13 || count == 15)
-						{// if short 
-							yield return new WaitForSeconds(0.24f);
-						}
-						else
-						{
-							yield return new WaitForSeconds(0.17f);
-						}
-						//}
-						if (completetext == true)
-						{
-							break;
-						}
-					}
+                        yield return new WaitForSeconds((audiosource.clip.length / 2) / 20);
+
+                        if (completetext == true)
+                        {
+                            break;
+                        }
+                    }
 					label.text = parts[1];
 				}
 				yield return 0;
@@ -3040,42 +3023,13 @@ public class Test : MonoBehaviour
 				{
 					for (int i = 0; i < 22; i++)
 					{
-						//if (PlayerPrefs.GetFloat("printSize") > 0.6f)
-						//{
-						if (count == 6 || count == 8 || count == 9 || count == 10 || count == 11 || count == 18 || count == 22 || count == 23 || count == 24 || count == 26 || count == 27 || count == 28 || count == 30 || count == 31 || count == 34 || count == 36 || count == 37)
-						{
-							yield return new WaitForSeconds(0.20f);
-						}
-						else if (count == 11)
-						{
-							yield return new WaitForSeconds(0.24f);
-						}
-						else if (count == 0)
-						{
-							yield return new WaitForSeconds(0.1f);
-						}
-						else
-						{
-							yield return new WaitForSeconds(0.15f);
-						}
-						//Debug.Log(count);
-						//}
-						//else
-						//{
-						//    if (count == 8 || count == 14 || count == 16 || count == 18)
-						//    {
-						//        yield return new WaitForSeconds(0.26f);//
-						//    }
-						//    else
-						//    {
-						//        yield return new WaitForSeconds(0.15f);
-						//    }
-						//}
-						if (completetext == true)
-						{
-							break;
-						}
-					}
+                        yield return new WaitForSeconds((audiosource.clip.length / 2) / 20);
+
+                        if (completetext == true)
+                        {
+                            break;
+                        }
+                    }
 				}
 				label.text = message;
 			}
@@ -3084,8 +3038,6 @@ public class Test : MonoBehaviour
 				label.text = message;
 			}
 		}
-
-        //yield return new WaitForSeconds(0.1f);
 
 		completetext = true;
 		next.alpha = nextAlpha;
