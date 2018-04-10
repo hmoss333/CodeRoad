@@ -22,8 +22,9 @@ public class PlayLevel : MonoBehaviour {
 
 	public UILabel loadingLabel;
 	public UIPanel frontPanel;
+    public UICamera uiCam;
 
-	private Event e;
+    private Event e;
 
     //LoadingScreen ls;
 
@@ -101,8 +102,6 @@ public class PlayLevel : MonoBehaviour {
             MiniGame.isMainMenuGame = false;
 			frontPanel.alpha = 0;
 
-            if (!SceneManager.GetSceneByName("LoadingScreen").isLoaded)
-                SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);
             StartCoroutine(GoToScene(levelToLoad));
         }
 	}
@@ -171,13 +170,12 @@ public class PlayLevel : MonoBehaviour {
 
     IEnumerator GoToScene(string sceneName)
     {
-        //Camera.main.gameObject.SetActive(false);
-
+        uiCam.enabled = false;
+        SceneManager.LoadSceneAsync("LoadingScreen", LoadSceneMode.Additive);
         yield return new WaitForSeconds(1f);
-        if (!SceneManager.GetSceneByName(sceneName).isLoaded)
-            SceneManager.LoadSceneAsync(sceneName);
+        SceneManager.LoadSceneAsync(sceneName);
 
-        if (SceneManager.GetActiveScene().name == "LoadingScreen")
+        if (SceneManager.GetSceneByName("LoadingScreen").isLoaded)
             SceneManager.UnloadSceneAsync("LoadingScreen");
     }
 

@@ -15,6 +15,7 @@ public class PlayMiniGame : MonoBehaviour {
 
     public UILabel loadingLabel;
     public UIPanel frontPanel;
+    public UICamera uiCam;
 
     //LoadingScreen ls;
 
@@ -119,12 +120,12 @@ public class PlayMiniGame : MonoBehaviour {
 
     IEnumerator GoToScene(string sceneName)
     {
-        if (!SceneManager.GetSceneByName("LoadingScreen").isLoaded)
-            SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);
+        uiCam.enabled = false;
+        SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);
         yield return new WaitForSeconds(1f);
         SceneManager.LoadSceneAsync(sceneName);
 
-        if (SceneManager.GetActiveScene().name == "LoadingScreen")
+        if (SceneManager.GetSceneByName("LoadingScreen").isLoaded)
             SceneManager.UnloadSceneAsync("LoadingScreen");
     }
 

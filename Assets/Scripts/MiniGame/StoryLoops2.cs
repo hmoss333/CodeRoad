@@ -616,7 +616,8 @@ public class StoryLoops2 : MonoBehaviour {
     {
         canvas.SetActive(false);
         winCanvas.SetActive(false);
-        if (!SceneManager.GetSceneByName("LoadingScreen").isLoaded)
+        GetComponent<Camera>().enabled = false;
+        //if (!SceneManager.GetSceneByName("LoadingScreen").isLoaded)
             SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);
         //directionalLight.gameObject.SetActive(false);
         yield return new WaitForSeconds(1f);

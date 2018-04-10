@@ -533,6 +533,9 @@ public class StoryCombos : MonoBehaviour {
         GetComponent<AudioSource>().Stop();
         GetComponent<AudioSource>().clip = winSound[UnityEngine.Random.Range(0, winSound.Length)];
         GetComponent<AudioSource>().Play();
+        player.transform.eulerAngles = new Vector3(0, 180, 0);
+        AnimatePlayer.win = true;
+        AnimateFriend.win = true;
         PointHandler.completedChallenges += 1.0f;
     }
     void displayErrorMessage()
@@ -603,7 +606,8 @@ public class StoryCombos : MonoBehaviour {
     {
         canvas.SetActive(false);
         winCanvas.SetActive(false);
-        if (!SceneManager.GetSceneByName("LoadingScreen").isLoaded)
+        GetComponent<Camera>().enabled = false;
+        //if (!SceneManager.GetSceneByName("LoadingScreen").isLoaded)
             SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);
         //directionalLight.gameObject.SetActive(false);
         yield return new WaitForSeconds(1f);

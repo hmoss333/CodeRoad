@@ -1490,19 +1490,18 @@ public class Test : MonoBehaviour
                 break;
         }
 
+        yield return new WaitForSeconds(0.1f);
+        mainCamera.gameObject.SetActive(false);
         SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);
-        yield return new WaitForSeconds(1f);
+        //yield return new WaitForSeconds(1f);
         audiosource.Stop();
-		mainCamera.gameObject.SetActive(false);
 		storyView.alpha = 0f;
 
-        StartCoroutine(GoToScene("MiniGame"));
-	}
+        yield return new WaitForSeconds(1f);
+        SceneManager.LoadSceneAsync("MiniGame");
 
-	IEnumerator GoToScene (string sceneName)
-	{
-		yield return new WaitForSeconds(1f);
-		SceneManager.LoadSceneAsync(sceneName);
+        if (SceneManager.GetSceneByName("LoadingScreen").isLoaded)
+            SceneManager.UnloadSceneAsync("LoadingScreen");
     }
 
 	public void EndMiniGame()
@@ -1511,16 +1510,19 @@ public class Test : MonoBehaviour
     }
 	IEnumerator TurnOnCamera()
 	{
-        yield return new WaitForSeconds(1f);
         SceneManager.LoadSceneAsync("Empty");
 
-        //yield return new WaitForSeconds(0.15f);
+        while (!SceneManager.GetSceneByName("Empty").isLoaded)
+            yield return null;
+
+        if (SceneManager.GetSceneByName("LoadingScreen").isLoaded)
+            SceneManager.UnloadSceneAsync("LoadingScreen");
+
         inMiniGameMode = false;
         storyView.alpha = 1f;
         mainCamera.gameObject.SetActive(true);
-        //enabled = true;
         next.alpha = 1f;
-        cover.alpha = 1f;
+        //cover.alpha = 1f;
         OnClick();
     }
 
@@ -3083,15 +3085,12 @@ public class Test : MonoBehaviour
 
 	IEnumerator DisplayScene()
 	{
-        if (!SceneManager.GetSceneByName("LoadingScreen").isLoaded)
-            SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);
+        mainCamera.gameObject.SetActive(false);
+        SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);
 
         yield return new WaitForSeconds(1);
 		SceneManager.LoadSceneAsync(1);
 		Destroy(storyParent);
-
-        if (SceneManager.GetActiveScene().name == "LoadingScreen")
-            SceneManager.UnloadSceneAsync("LoadingScreen");
     }
 	IEnumerable RepeatScene()
 	{
