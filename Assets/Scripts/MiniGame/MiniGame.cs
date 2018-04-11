@@ -10,22 +10,29 @@ public class MiniGame : MonoBehaviour {
     public static Level currentLevel;
 
     public static bool isMainMenuGame;
+    public GameObject[] levelObjects;
+
+    static MiniGame mg;
 
     private void Start()
     {
+        mg = GetComponent<MiniGame>();
         LoadScene(currentLevel);
     }
 
     public static void LoadScene (Level levelName)
     {
+        int levelNum = (int)levelName;
         GameObject sceneToload;
-        if (!isMainMenuGame)
-            sceneToload = Instantiate(Resources.Load("StoryGames/" + levelName.ToString())) as GameObject;
-        else
-            sceneToload = Instantiate(Resources.Load("Challenges/" + levelName.ToString())) as GameObject;
 
-        if (sceneToload == null)
+        try
+        {
+            sceneToload = Instantiate(mg.levelObjects[levelNum]);
+        }
+        catch
+        {
             Debug.Log("Something broke");
+        }
 
         currentLevel = levelName;
     }

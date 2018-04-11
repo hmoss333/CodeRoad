@@ -79,7 +79,7 @@ public class Test : MonoBehaviour
     public GameObject specialAnimationEffect23;
     public GameObject specialAnimationEffect24;
 
-    //[Header("Story Parts")]
+    [Header("Story Parts")]
     //public GameObject Part1;
     //public GameObject Part2;
     //public GameObject Part3;
@@ -329,16 +329,6 @@ public class Test : MonoBehaviour
         startAlpha = sprite.alpha;
 		sequence = 0;
 
-		//DisableRobots();
-
-		//float start = sprite.alpha;
-		//sprite.alpha = 0f;
-		//sprite.spriteName = "scene1";
-
-		//StartCoroutine(FadeIn(sprite, 0.5f, start));
-		//label.text = "Shapes are here to show us the way.";
-		//StartCoroutine(TypeText(next.alpha,play.alpha));
-
 		//This is needed to activate the iCade plugin. Deactivate it by using iCadeInput.Activate(false)
 		#if UNITY_IOS
 		iCadeInput.Activate(true);
@@ -352,35 +342,9 @@ public class Test : MonoBehaviour
 		//label.fontSize = (int)(34*PlayerPrefs.GetFloat("printSize")) + 34;
 		label.fontSize = (int)(27 * PlayerPrefs.GetFloat("printSize")) + 23; //+ 27;
 
-        //if (repeat == false)
-        //{
-        //	CFX_SpawnSystem.PreloadObject (specialAnimationEffect1,1);
-        //	CFX_SpawnSystem.PreloadObject (specialAnimationEffect2,1);
-        //	CFX_SpawnSystem.PreloadObject (specialAnimationEffect3,1);
-        //	CFX_SpawnSystem.PreloadObject (specialAnimationEffect4,1);
-        //	CFX_SpawnSystem.PreloadObject (specialAnimationEffect5,1);
-        //	CFX_SpawnSystem.PreloadObject (specialAnimationEffect6,1);
-        //	CFX_SpawnSystem.PreloadObject (specialAnimationEffect7,1);
-        //	CFX_SpawnSystem.PreloadObject (specialAnimationEffect8,1);
-        //	CFX_SpawnSystem.PreloadObject (specialAnimationEffect9,1);
-        //	CFX_SpawnSystem.PreloadObject (specialAnimationEffect10,1);
-        //	CFX_SpawnSystem.PreloadObject (specialAnimationEffect11,1);
-        //	CFX_SpawnSystem.PreloadObject (specialAnimationEffect12,1);
-        //	CFX_SpawnSystem.PreloadObject (specialAnimationEffect13,1);
-        //	CFX_SpawnSystem.PreloadObject (specialAnimationEffect14,1);
-        //	CFX_SpawnSystem.PreloadObject (specialAnimationEffect15,1);
-        //	CFX_SpawnSystem.PreloadObject (specialAnimationEffect16,1);
-        //	CFX_SpawnSystem.PreloadObject (specialAnimationEffect17,1);
-        //	CFX_SpawnSystem.PreloadObject (specialAnimationEffect18,1);
-
-        //	repeat = true;
-        //}
-
-
         //================================================//
         if (PlayerPrefs.GetInt("voice") == 1)
         {
-            //bkgdaudiosource.volume = 0;
             audiosource.volume = 0;
             specialAudiosource.volume = 0;
         }
@@ -407,7 +371,7 @@ public class Test : MonoBehaviour
 
 	void Update()
 	{
-		if (!inMiniGameMode) //should prevent any input from being read if in minigame mode
+        if (!inMiniGameMode) //should prevent any input from being read if in minigame mode
 		{
 			if (Input.GetKeyDown("1") == true)
 			{
@@ -1580,6 +1544,8 @@ public class Test : MonoBehaviour
 
             if (back)
             {
+                yield return new WaitForSeconds(0);
+
                 Destroy(GameObject.Find("Part (1)(Clone)"));
                 Destroy(GameObject.Find("Part (2)(Clone)"));
 
@@ -1606,10 +1572,10 @@ public class Test : MonoBehaviour
             //if (!back)
             //    AnimatePage(page2);
 
-            yield return new WaitForSeconds(0);
-
             if (!back)
             {
+                yield return new WaitForSeconds(0);
+
                 Destroy(GameObject.Find("Part (1)(Clone)"));
                 Destroy(GameObject.Find("Part (2)(Clone)"));
 
@@ -1638,6 +1604,8 @@ public class Test : MonoBehaviour
 
             if (back)
             {
+                yield return new WaitForSeconds(0);
+
                 Destroy(GameObject.Find("Part (2)(Clone)"));
                 Destroy(GameObject.Find("Part (3)(Clone)"));
 
@@ -1664,10 +1632,10 @@ public class Test : MonoBehaviour
             //if (!back)
             //    AnimatePage(page3);
 
-            yield return new WaitForSeconds(0);
-
             if (!back)
             {
+                yield return new WaitForSeconds(0);
+
                 Destroy(GameObject.Find("Part (2)(Clone)"));
                 Destroy(GameObject.Find("Part (3)(Clone)"));
 
@@ -1696,6 +1664,8 @@ public class Test : MonoBehaviour
 
             if (back)
             {
+                yield return new WaitForSeconds(0);
+
                 Destroy(GameObject.Find("Part (3)(Clone)"));
                 Destroy(GameObject.Find("Part (4)(Clone)"));
 
@@ -1722,10 +1692,10 @@ public class Test : MonoBehaviour
             //if (!back)
             //    AnimatePage(page4);
 
-            yield return new WaitForSeconds(0);
-
             if (!back)
             {
+                yield return new WaitForSeconds(0);
+
                 Destroy(GameObject.Find("Part (3)(Clone)"));
                 Destroy(GameObject.Find("Part (4)(Clone)"));
 
@@ -1746,14 +1716,10 @@ public class Test : MonoBehaviour
         }
         else if (count == 6)
         {
-            //DisableCharacters(page5);
-            //EnableCharacters(page4);
-
-            //if (back)
-            //    AnimatePage(page4);
-
             if (back)
             {
+                yield return new WaitForSeconds(0);
+
                 Destroy(GameObject.Find("Part (4)(Clone)"));
                 Destroy(GameObject.Find("Part (5)(Clone)"));
 
@@ -1774,16 +1740,10 @@ public class Test : MonoBehaviour
         }
         else if (count == 7)
         {
-            //DisableCharacters(page4);
-            //EnableCharacters(page5);
-
-            //if (!back)
-            //    AnimatePage(page5);
-
-            yield return new WaitForSeconds(0);
-
             if (!back)
             {
+                yield return new WaitForSeconds(0);
+
                 Destroy(GameObject.Find("Part (4)(Clone)"));
                 Destroy(GameObject.Find("Part (5)(Clone)"));
 
@@ -1804,14 +1764,10 @@ public class Test : MonoBehaviour
         }
         else if (count == 8)
         {
-            //EnableCharacters(page5);
-            //DisableCharacters(page6);
-
-            //if (back)
-            //    AnimatePage(page5);
-
             if (back)
             {
+                yield return new WaitForSeconds(0);
+
                 Destroy(GameObject.Find("Part (5)(Clone)"));
                 Destroy(GameObject.Find("Part (6)(Clone)"));
 
@@ -1832,17 +1788,11 @@ public class Test : MonoBehaviour
         }
     /**/else if (count == 9)
         {
-            //DisableCharacters(page5);
-            //EnableCharacters(page6);
-
-            //if (!back)
-            //    AnimatePage(page6);
-
-            if (PlayerPrefs.GetInt("minigames") != 1)
-                yield return new WaitForSeconds(0);
-
             if (!back)
             {
+                if (PlayerPrefs.GetInt("minigames") != 1)
+                    yield return new WaitForSeconds(0);
+
                 Destroy(GameObject.Find("Part (5)(Clone)"));
                 Destroy(GameObject.Find("Part (6)(Clone)"));
 
@@ -1863,14 +1813,10 @@ public class Test : MonoBehaviour
         }
         else if (count == 10)
         {
-            //EnableCharacters(page6);
-            //DisableCharacters(page7);
-
-            //if (back)
-            //    AnimatePage(page6);
-
             if (back)
             {
+                yield return new WaitForSeconds(0);
+
                 Destroy(GameObject.Find("Part (6)(Clone)"));
                 Destroy(GameObject.Find("Part (7)(Clone)"));
 
@@ -1891,16 +1837,10 @@ public class Test : MonoBehaviour
         }
         else if (count == 11)
         {
-            //DisableCharacters(page6);
-            //EnableCharacters(page7);
-
-            //if (!back)
-            //    AnimatePage(page7);
-
-            yield return new WaitForSeconds(0);
-
             if (!back)
             {
+                yield return new WaitForSeconds(0);
+
                 Destroy(GameObject.Find("Part (6)(Clone)"));
                 Destroy(GameObject.Find("Part (7)(Clone)"));
 
@@ -1921,14 +1861,10 @@ public class Test : MonoBehaviour
         }
         else if (count == 12)
         {
-            //EnableCharacters(page7);
-            //DisableCharacters(page8);
-
-            //if (back)
-            //    AnimatePage(page7);
-
             if (back)
             {
+                yield return new WaitForSeconds(0);
+
                 Destroy(GameObject.Find("Part (7)(Clone)"));
                 Destroy(GameObject.Find("Part (8)(Clone)"));
 
@@ -1949,16 +1885,10 @@ public class Test : MonoBehaviour
         }
         else if (count == 13)
         {
-            //DisableCharacters(page7);
-            //EnableCharacters(page8);
-
-            //if (!back)
-            //    AnimatePage(page8);
-
-            yield return new WaitForSeconds(0);
-
             if (!back)
             {
+                yield return new WaitForSeconds(0);
+
                 Destroy(GameObject.Find("Part (7)(Clone)"));
                 Destroy(GameObject.Find("Part (8)(Clone)"));
 
@@ -1979,14 +1909,10 @@ public class Test : MonoBehaviour
         }
         else if (count == 14)
         {
-            //EnableCharacters(page8);
-            //DisableCharacters(page9);
-
-            //if (back)
-            //    AnimatePage(page8);
-
             if (back)
             {
+                yield return new WaitForSeconds(0);
+
                 Destroy(GameObject.Find("Part (8)(Clone)"));
                 Destroy(GameObject.Find("Part (9)(Clone)"));
 
@@ -2007,17 +1933,11 @@ public class Test : MonoBehaviour
         }
     /**/else if (count == 15)
         {
-            //DisableCharacters(page8);
-            //EnableCharacters(page9);
-
-            //if (!back)
-            //    AnimatePage(page9);
-
-            if (PlayerPrefs.GetInt("minigames") != 1)
-                yield return new WaitForSeconds(0);
-
             if (!back)
             {
+                if (PlayerPrefs.GetInt("minigames") != 1)
+                    yield return new WaitForSeconds(0);
+
                 Destroy(GameObject.Find("Part (8)(Clone)"));
                 Destroy(GameObject.Find("Part (9)(Clone)"));
 
@@ -2038,14 +1958,10 @@ public class Test : MonoBehaviour
         }
         else if (count == 16)
         {
-            //DisableCharacters(page10);
-            //EnableCharacters(page9);
-
-            //if (back)
-            //    AnimatePage(page9);
-
             if (back)
             {
+                yield return new WaitForSeconds(0);
+
                 Destroy(GameObject.Find("Part (9)(Clone)"));
                 Destroy(GameObject.Find("Part (10)(Clone)"));
 
@@ -2066,16 +1982,10 @@ public class Test : MonoBehaviour
         }
         else if (count == 17)
         {
-            //DisableCharacters(page9);
-            //EnableCharacters(page10);
-
-            //if (!back)
-            //    AnimatePage(page10);
-
-            yield return new WaitForSeconds(0);
-
             if (!back)
             {
+                yield return new WaitForSeconds(0);
+
                 Destroy(GameObject.Find("Part (9)(Clone)"));
                 Destroy(GameObject.Find("Part (10)(Clone)"));
 
@@ -2096,14 +2006,10 @@ public class Test : MonoBehaviour
         }
         else if (count == 18)
         {
-            //DisableCharacters(page11);
-            //EnableCharacters(page10);
-
-            //if (back)
-            //    AnimatePage(page10);
-
             if (back)
             {
+                yield return new WaitForSeconds(0);
+
                 Destroy(GameObject.Find("Part (10)(Clone)"));
                 Destroy(GameObject.Find("Part (11)(Clone)"));
 
@@ -2124,16 +2030,10 @@ public class Test : MonoBehaviour
         }
         else if (count == 19)
         {
-            //DisableCharacters(page10);
-            //EnableCharacters(page11);
-
-            //if (!back)
-            //    AnimatePage(page11);
-
-            yield return new WaitForSeconds(0);
-
             if (!back)
             {
+                yield return new WaitForSeconds(0);
+
                 Destroy(GameObject.Find("Part (10)(Clone)"));
                 Destroy(GameObject.Find("Part (11)(Clone)"));
 
@@ -2154,14 +2054,10 @@ public class Test : MonoBehaviour
         }
         else if (count == 20)
         {
-            //DisableCharacters(page12);
-            //EnableCharacters(page11);
-
-            //if (back)
-            //    AnimatePage(page11);
-
             if (back)
             {
+                yield return new WaitForSeconds(0);
+
                 Destroy(GameObject.Find("Part (11)(Clone)"));
                 Destroy(GameObject.Find("Part (12)(Clone)"));
 
@@ -2182,17 +2078,11 @@ public class Test : MonoBehaviour
         }
     /**/else if (count == 21)
         {
-            //DisableCharacters(page11);
-            //EnableCharacters(page12);
-
-            //if (!back)
-            //    AnimatePage(page12);
-
-            if (PlayerPrefs.GetInt("minigames") != 1)
-                yield return new WaitForSeconds(0);
-
             if (!back)
             {
+                if (PlayerPrefs.GetInt("minigames") != 1)
+                    yield return new WaitForSeconds(0);
+
                 Destroy(GameObject.Find("Part (11)(Clone)"));
                 Destroy(GameObject.Find("Part (12)(Clone)"));
 
@@ -2213,14 +2103,10 @@ public class Test : MonoBehaviour
         }
         else if (count == 22)
         {
-            //DisableCharacters(page13);
-            //EnableCharacters(page12);
-
-            //if (back)
-            //    AnimatePage(page12);
-
             if (back)
             {
+                yield return new WaitForSeconds(0);
+
                 Destroy(GameObject.Find("Part (12)(Clone)"));
                 Destroy(GameObject.Find("Part (13)(Clone)"));
 
@@ -2241,16 +2127,10 @@ public class Test : MonoBehaviour
         }
         else if (count == 23)
         {
-            //DisableCharacters(page12);
-            //EnableCharacters(page13);
-
-            //if (!back)
-            //    AnimatePage(page13);
-
-            yield return new WaitForSeconds(0);
-
             if (!back)
             {
+                yield return new WaitForSeconds(0);
+
                 Destroy(GameObject.Find("Part (12)(Clone)"));
                 Destroy(GameObject.Find("Part (13)(Clone)"));
 
@@ -2271,14 +2151,10 @@ public class Test : MonoBehaviour
         }
         else if (count == 24)
         {
-            //DisableCharacters(page14);
-            //EnableCharacters(page13);
-
-            //if (back)
-            //    AnimatePage(page13);
-
             if (back)
             {
+                yield return new WaitForSeconds(0);
+
                 Destroy(GameObject.Find("Part (13)(Clone)"));
                 Destroy(GameObject.Find("Part (14)(Clone)"));
 
@@ -2299,16 +2175,10 @@ public class Test : MonoBehaviour
         }
         else if (count == 25)
         {
-            //DisableCharacters(page13);
-            //EnableCharacters(page14);
-
-            //if (!back)
-            //    AnimatePage(page14);
-
-            yield return new WaitForSeconds(0);
-
             if (!back)
             {
+                yield return new WaitForSeconds(0);
+
                 Destroy(GameObject.Find("Part (13)(Clone)"));
                 Destroy(GameObject.Find("Part (14)(Clone)"));
 
@@ -2329,14 +2199,10 @@ public class Test : MonoBehaviour
         }
         else if (count == 26)
         {
-            //DisableCharacters(page15);
-            //EnableCharacters(page14);
-
-            //if (back)
-            //    AnimatePage(page14);
-
             if (back)
             {
+                yield return new WaitForSeconds(0);
+
                 Destroy(GameObject.Find("Part (14)(Clone)"));
                 Destroy(GameObject.Find("Part (15)(Clone)"));
 
@@ -2357,17 +2223,11 @@ public class Test : MonoBehaviour
         }
     /**/else if (count == 27)
         {
-            //DisableCharacters(page14);
-            //EnableCharacters(page15);
-
-            //if (!back)
-            //    AnimatePage(page15);
-
-            if (PlayerPrefs.GetInt("minigames") != 1)
-                yield return new WaitForSeconds(0);
-
             if (!back)
             {
+                if (PlayerPrefs.GetInt("minigames") != 1)
+                    yield return new WaitForSeconds(0);
+
                 Destroy(GameObject.Find("Part (14)(Clone)"));
                 Destroy(GameObject.Find("Part (15)(Clone)"));
 
@@ -2388,14 +2248,10 @@ public class Test : MonoBehaviour
         }
         else if (count == 28)
         {
-            //DisableCharacters(page16);
-            //EnableCharacters(page15);
-
-            //if (back)
-            //    AnimatePage(page15);
-
             if (back)
             {
+                yield return new WaitForSeconds(0);
+
                 Destroy(GameObject.Find("Part (15)(Clone)"));
                 Destroy(GameObject.Find("Part (16)(Clone)"));
 
@@ -2416,16 +2272,10 @@ public class Test : MonoBehaviour
         }
         else if (count == 29)
         {
-            //DisableCharacters(page15);
-            //EnableCharacters(page16);
-
-            //if (!back)
-            //    AnimatePage(page16);
-
-            yield return new WaitForSeconds(0);
-
             if (!back)
             {
+                yield return new WaitForSeconds(0);
+
                 Destroy(GameObject.Find("Part (15)(Clone)"));
                 Destroy(GameObject.Find("Part (16)(Clone)"));
 
@@ -2440,21 +2290,17 @@ public class Test : MonoBehaviour
             audiosource.Play();
             count++;
             sprite.mainTexture = Resources.Load("image15") as Texture;
-            //sprite.mainTexture = Resources.Load("image16") as Texture;
+            //sprite.mainTexture = Resources.Load("image16")) as Texture;
             StartCoroutine(FadeIn(sprite, 0.5f, startA));
             message = "Cathy says 'I'm looping, \n looping don't you see?' ";
             StartCoroutine(TypeText(nextAlpha, coverAlpha));
         }
         else if (count == 30)
         {
-            //DisableCharacters(page17);
-            //EnableCharacters(page16);
-
-            //if (back)
-            //    AnimatePage(page16);
-
             if (back)
             {
+                yield return new WaitForSeconds(0);
+
                 Destroy(GameObject.Find("Part (16)(Clone)"));
                 Destroy(GameObject.Find("Part (17)(Clone)"));
 
@@ -2469,23 +2315,17 @@ public class Test : MonoBehaviour
             audiosource.Play();
             count++;
             sprite.mainTexture = Resources.Load("image15") as Texture;
-            //sprite.mainTexture = Resources.Load("image16") as Texture;
+            //sprite.mainTexture = Resources.Load("image16")) as Texture;
             StartCoroutine(FadeIn(sprite, 0.5f, startA));
             message = "'I loop and I loop. \n Its really fun for me.' ";
             StartCoroutine(TypeText(nextAlpha, coverAlpha));
         }
         else if (count == 31)
         {
-            //DisableCharacters(page16);
-            //EnableCharacters(page17);
-
-            //if (!back)
-            //    AnimatePage(page17);
-
-            yield return new WaitForSeconds(0);
-
             if (!back)
             {
+                yield return new WaitForSeconds(0);
+
                 Destroy(GameObject.Find("Part (16)(Clone)"));
                 Destroy(GameObject.Find("Part (17)(Clone)"));
 
@@ -2500,21 +2340,17 @@ public class Test : MonoBehaviour
             audiosource.Play();
             count++;
             sprite.mainTexture = Resources.Load("image15") as Texture;
-            //sprite.mainTexture = Resources.Load("image17") as Texture;
+            //sprite.mainTexture = Resources.Load("image17")) as Texture;
             StartCoroutine(FadeIn(sprite, 0.5f, startA));
             message = "Our computers use looping \n in just the same way ";
             StartCoroutine(TypeText(nextAlpha, coverAlpha));
         }
         else if (count == 32)
         {
-            //DisableCharacters(page18);
-            //EnableCharacters(page17);
-
-            //if (back)
-            //    AnimatePage(page17);
-
             if (back)
             {
+                yield return new WaitForSeconds(0);
+
                 Destroy(GameObject.Find("Part (17)(Clone)"));
                 Destroy(GameObject.Find("Part (18)(Clone)"));
 
@@ -2529,24 +2365,18 @@ public class Test : MonoBehaviour
             audiosource.Play();
             count++;
             sprite.mainTexture = Resources.Load("image15") as Texture;
-            //sprite.mainTexture = Resources.Load("image17") as Texture;
+            //sprite.mainTexture = Resources.Load("image17")) as Texture;
             StartCoroutine(FadeIn(sprite, 0.5f, startA));
             message = "By doing the same thing \n a million times a day. ";
             StartCoroutine(TypeText(nextAlpha, coverAlpha));
         }
     /**/else if (count == 33)
         {
-            //DisableCharacters(page17);
-            //EnableCharacters(page18);
-
-            //if (!back)
-            //    AnimatePage(page18);
-
-            if (PlayerPrefs.GetInt("minigames") != 1)
-                yield return new WaitForSeconds(0);
-
             if (!back)
             {
+                if (PlayerPrefs.GetInt("minigames") != 1)
+                    yield return new WaitForSeconds(0);
+
                 Destroy(GameObject.Find("Part (17)(Clone)"));
                 Destroy(GameObject.Find("Part (18)(Clone)"));
 
@@ -2567,14 +2397,10 @@ public class Test : MonoBehaviour
         }
         else if (count == 34)
         {
-            //EnableCharacters(page18);
-            //DisableCharacters(page19);
-
-            //if (back)
-            //    AnimatePage(page18);
-
             if (back)
             {
+                yield return new WaitForSeconds(0);
+
                 Destroy(GameObject.Find("Part (18)(Clone)"));
                 Destroy(GameObject.Find("Part (19)(Clone)"));
 
@@ -2595,16 +2421,10 @@ public class Test : MonoBehaviour
         }
         else if (count == 35)
         {
-            //DisableCharacters(page18);
-            //EnableCharacters(page19);
-
-            //if (!back)
-            //    AnimatePage(page19);
-
-            yield return new WaitForSeconds(0);
-
             if (!back)
             {
+                yield return new WaitForSeconds(0);
+
                 Destroy(GameObject.Find("Part (18)(Clone)"));
                 Destroy(GameObject.Find("Part (19)(Clone)"));
 
@@ -2619,21 +2439,17 @@ public class Test : MonoBehaviour
             audiosource.Play();
             count++;
             sprite.mainTexture = Resources.Load("image18") as Texture;
-            //sprite.mainTexture = Resources.Load("image19") as Texture;
+            //sprite.mainTexture = Resources.Load("image19")) as Texture;
             StartCoroutine(FadeIn(sprite, 0.5f, startA));
             message = "Dudly says 'I need help my friends \n and I have a plan too!' ";
             StartCoroutine(TypeText(nextAlpha, coverAlpha));
         }
         else if (count == 36)
         {
-            //EnableCharacters(page19);
-            //DisableCharacters(page20);
-
-            //if (back)
-            //    AnimatePage(page19);
-
             if (back)
             {
+                yield return new WaitForSeconds(0);
+
                 Destroy(GameObject.Find("Part (19)(Clone)"));
                 Destroy(GameObject.Find("Part (20)(Clone)"));
 
@@ -2648,23 +2464,17 @@ public class Test : MonoBehaviour
             audiosource.Play();
             count++;
             sprite.mainTexture = Resources.Load("image18") as Texture;
-            //sprite.mainTexture = Resources.Load("image19") as Texture;
+            //sprite.mainTexture = Resources.Load("image19")) as Texture;
             StartCoroutine(FadeIn(sprite, 0.5f, startA));
             message = "'I'll put down each step \n called instructions for you.' ";
             StartCoroutine(TypeText(nextAlpha, coverAlpha));
         }
         else if (count == 37)
         {
-            //DisableCharacters(page19);
-            //EnableCharacters(page20);
-
-            //if (!back)
-            //    AnimatePage(page20);
-
-            yield return new WaitForSeconds(0);
-
             if (!back)
             {
+                yield return new WaitForSeconds(0);
+
                 Destroy(GameObject.Find("Part (19)(Clone)"));
                 Destroy(GameObject.Find("Part (20)(Clone)"));
 
@@ -2679,21 +2489,17 @@ public class Test : MonoBehaviour
             audiosource.Play();
             count++;
             sprite.mainTexture = Resources.Load("image18") as Texture;
-            //sprite.mainTexture = Resources.Load("image20") as Texture;
+            //sprite.mainTexture = Resources.Load("image20")) as Texture;
             StartCoroutine(FadeIn(sprite, 0.5f, startA));
             message = "Did you know everyone's computer \n can follow the same plan? ";
             StartCoroutine(TypeText(nextAlpha, coverAlpha));
         }
         else if (count == 38)
         {
-            //EnableCharacters(page20);
-            //DisableCharacters(page21);
-
-            //if (back)
-            //    AnimatePage(page20);
-
             if (back)
             {
+                yield return new WaitForSeconds(0);
+
                 Destroy(GameObject.Find("Part (20)(Clone)"));
                 Destroy(GameObject.Find("Part (21)(Clone)"));
 
@@ -2708,24 +2514,18 @@ public class Test : MonoBehaviour
             audiosource.Play();
             count++;
             sprite.mainTexture = Resources.Load("image18") as Texture;
-            //sprite.mainTexture = Resources.Load("image20") as Texture;
+            //sprite.mainTexture = Resources.Load("image20")) as Texture;
             StartCoroutine(FadeIn(sprite, 0.5f, startA));
             message = "Instructions make a program \n that can be used over and over again. ";
             StartCoroutine(TypeText(nextAlpha, coverAlpha));
         }
     /**/else if (count == 39)
         {
-            //DisableCharacters(page20);
-            //EnableCharacters(page21);
-
-            //if (!back)
-            //    AnimatePage(page21);
-
-            if (PlayerPrefs.GetInt("minigames") != 1)
-                yield return new WaitForSeconds(0);
-
             if (!back)
             {
+                if (PlayerPrefs.GetInt("minigames") != 1)
+                    yield return new WaitForSeconds(0);
+
                 Destroy(GameObject.Find("Part (20)(Clone)"));
                 Destroy(GameObject.Find("Part (21)(Clone)"));
 
@@ -2746,14 +2546,10 @@ public class Test : MonoBehaviour
         }
         else if (count == 40)
         {
-            //EnableCharacters(page21);
-            //DisableCharacters(page22);
-
-            //if (back)
-            //    AnimatePage(page21);
-
             if (back)
             {
+                yield return new WaitForSeconds(0);
+
                 Destroy(GameObject.Find("Part (21)(Clone)"));
                 Destroy(GameObject.Find("Part (22)(Clone)"));
 
@@ -2774,16 +2570,10 @@ public class Test : MonoBehaviour
         }
         else if (count == 41)
         {
-            //DisableCharacters(page21);
-            //EnableCharacters(page22);
-
-            //if (!back)
-            //    AnimatePage(page22);
-
-            yield return new WaitForSeconds(0);
-
             if (!back)
             {
+                yield return new WaitForSeconds(0);
+
                 Destroy(GameObject.Find("Part (21)(Clone)"));
                 Destroy(GameObject.Find("Part (22)(Clone)"));
 
@@ -2798,21 +2588,17 @@ public class Test : MonoBehaviour
             audiosource.Play();
             count++;
             sprite.mainTexture = Resources.Load("image21") as Texture;
-            //sprite.mainTexture = Resources.Load("image22") as Texture;
+            //sprite.mainTexture = Resources.Load("image22")) as Texture;
             StartCoroutine(FadeIn(sprite, 0.5f, startA));
             message = "See, with Tommy, you can use \nthe same words too! ";
             StartCoroutine(TypeText(nextAlpha, coverAlpha));
         }
         else if (count == 42)
         {
-            //EnableCharacters(page22);
-            //DisableCharacters(page23);
-
-            //if (back)
-            //    AnimatePage(page22);
-
             if (back)
             {
+                yield return new WaitForSeconds(0);
+
                 Destroy(GameObject.Find("Part (22)(Clone)"));
                 Destroy(GameObject.Find("Part (23)(Clone)"));
 
@@ -2827,24 +2613,18 @@ public class Test : MonoBehaviour
             audiosource.Play();
             count++;
             sprite.mainTexture = Resources.Load("image21") as Texture;
-            //sprite.mainTexture = Resources.Load("image22") as Texture;
+            //sprite.mainTexture = Resources.Load("image22")) as Texture;
             StartCoroutine(FadeIn(sprite, 0.5f, startA));
             message = "Jump, loop, count, and run \n lets you tell the computer what to do. ";
             StartCoroutine(TypeText(nextAlpha, coverAlpha));
         }
     /**/else if (count == 43)
         {
-            //DisableCharacters(page22);
-            //EnableCharacters(page23);
-
-            //if (!back)
-            //    AnimatePage(page23);
-
-            if (PlayerPrefs.GetInt("minigames") != 1)
-                yield return new WaitForSeconds(0);
-
             if (!back)
             {
+                if (PlayerPrefs.GetInt("minigames") != 1)
+                    yield return new WaitForSeconds(0);
+
                 Destroy(GameObject.Find("Part (22)(Clone)"));
                 Destroy(GameObject.Find("Part (23)(Clone)"));
 
@@ -2865,14 +2645,10 @@ public class Test : MonoBehaviour
         }
         else if (count == 44)
         {
-            //EnableCharacters(page23);
-            //DisableCharacters(page24);
-
-            //if (back)
-            //    AnimatePage(page23);
-
             if (back)
             {
+                yield return new WaitForSeconds(0);
+
                 Destroy(GameObject.Find("Part (23)(Clone)"));
                 Destroy(GameObject.Find("Part (24)(Clone)"));
 
@@ -2893,16 +2669,10 @@ public class Test : MonoBehaviour
         }
         else if (count == 45)
         {
-            //DisableCharacters(page23);
-            //EnableCharacters(page24);
-
-            //if (!back)
-            //    AnimatePage(page24);
-
-            yield return new WaitForSeconds(0);
-
             if (!back)
             {
+                yield return new WaitForSeconds(0);
+
                 Destroy(GameObject.Find("Part (23)(Clone)"));
                 Destroy(GameObject.Find("Part (24)(Clone)"));
 
