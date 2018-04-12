@@ -2855,6 +2855,7 @@ public class Test : MonoBehaviour
 
 	IEnumerator DisplayScene()
 	{
+        Resources.UnloadUnusedAssets();
         mainCamera.gameObject.SetActive(false);
         SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);
 

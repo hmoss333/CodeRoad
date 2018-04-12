@@ -4,11 +4,8 @@ using System.Collections;
 
 public class PlayLevel : MonoBehaviour {
 
-	public float timer = 0.1f;
 	public string levelToLoad = "1stScene";
-    //public string altLevelToLoad = "Tutorial";
 	private bool on = true;
-    //private bool tutorialMode;
 
     //public bool storyMode;
 
@@ -129,8 +126,6 @@ public class PlayLevel : MonoBehaviour {
 		}
 		if (e != null) {
 		if (e.keyCode.ToString() == "10" && e.type == EventType.keyDown) {
-				//Debug.Log("hello");
-//		if (Input.GetKeyDown(KeyCode.Return)) {
 		    keyenterPress = true;
 			objectApp = true;
 		}
@@ -172,7 +167,7 @@ public class PlayLevel : MonoBehaviour {
     {
         uiCam.enabled = false;
         SceneManager.LoadSceneAsync("LoadingScreen", LoadSceneMode.Additive);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
         SceneManager.LoadSceneAsync(sceneName);
 
         if (SceneManager.GetSceneByName("LoadingScreen").isLoaded)
