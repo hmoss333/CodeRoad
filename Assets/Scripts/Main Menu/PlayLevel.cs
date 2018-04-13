@@ -16,6 +16,7 @@ public class PlayLevel : MonoBehaviour {
 	private bool keyenterPress = false;
 
 	private bool objectApp = false;
+    private bool loading = false;
 
 	public UILabel loadingLabel;
 	public UIPanel frontPanel;
@@ -99,7 +100,11 @@ public class PlayLevel : MonoBehaviour {
             MiniGame.isMainMenuGame = false;
 			frontPanel.alpha = 0;
 
-            StartCoroutine(GoToScene(levelToLoad));
+            if (!loading)
+            {
+                StartCoroutine(GoToScene(levelToLoad));
+                loading = true;
+            }
         }
 	}
 	
@@ -166,12 +171,9 @@ public class PlayLevel : MonoBehaviour {
     IEnumerator GoToScene(string sceneName)
     {
         uiCam.enabled = false;
-        SceneManager.LoadSceneAsync("LoadingScreen", LoadSceneMode.Additive);
-        yield return new WaitForSeconds(0.5f);
+        SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);
+        yield return new WaitForSeconds(1.5f);
         SceneManager.LoadSceneAsync(sceneName);
-
-        if (SceneManager.GetSceneByName("LoadingScreen").isLoaded)
-            SceneManager.UnloadSceneAsync("LoadingScreen");
     }
 
 }

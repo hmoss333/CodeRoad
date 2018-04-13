@@ -12,6 +12,7 @@ public class PlayMiniGame : MonoBehaviour {
     public GameObject challengeAvatar;
     public UITexture background;
     private bool on = true;
+    private bool loading = false;
 
     public UILabel loadingLabel;
     public UIPanel frontPanel;
@@ -64,50 +65,60 @@ public class PlayMiniGame : MonoBehaviour {
     {
         MiniGame.isMainMenuGame = true;
         MiniGame.currentLevel = MiniGame.Level.Movement1;
-        //challengeMenu.SetActive(false);
-        //challengeAvatar.SetActive(false);
-        StartCoroutine(GoToScene("MiniGame"));
-        //StartCoroutine(GoToScene("Movement1"));
+
+        if (!loading)
+        {
+            StartCoroutine(GoToScene("MiniGame"));
+            loading = true;
+        }
     }
 
     public void ChallengeAbilities()
     {
         MiniGame.isMainMenuGame = true;
         MiniGame.currentLevel = MiniGame.Level.Abilities1;
-        //challengeMenu.SetActive(false);
-        //challengeAvatar.SetActive(false);
-        StartCoroutine(GoToScene("MiniGame"));
-        //StartCoroutine(GoToScene("Abilities1"));
+
+        if (!loading)
+        {
+            StartCoroutine(GoToScene("MiniGame"));
+            loading = true;
+        }
     }
 
     public void ChallengeLoops()
     {
         MiniGame.isMainMenuGame = true;
         MiniGame.currentLevel = MiniGame.Level.Loops1;
-        //challengeMenu.SetActive(false);
-        //challengeAvatar.SetActive(false);
-        StartCoroutine(GoToScene("MiniGame"));
-        //StartCoroutine(GoToScene("Loops1"));
+
+        if (!loading)
+        {
+            StartCoroutine(GoToScene("MiniGame"));
+            loading = true;
+        }
     }
 
     public void ChallengeCombos()
     {
         MiniGame.isMainMenuGame = true;
         MiniGame.currentLevel = MiniGame.Level.Combos1;
-        //challengeMenu.SetActive(false);
-        //challengeAvatar.SetActive(false);
-        StartCoroutine(GoToScene("MiniGame"));
-        //StartCoroutine(GoToScene("Combos1"));
+
+        if (!loading)
+        {
+            StartCoroutine(GoToScene("MiniGame"));
+            loading = true;
+        }
     }
 
     public void Tutorial()
     {
         MiniGame.isMainMenuGame = true;
         MiniGame.currentLevel = MiniGame.Level.Tutorial;
-        //challengeMenu.SetActive(false);
-        //challengeAvatar.SetActive(false);
-        StartCoroutine(GoToScene("MiniGame"));
-        //StartCoroutine(GoToScene("Tutorial"));
+
+        if (!loading)
+        {
+            StartCoroutine(GoToScene("MiniGame"));
+            loading = true;
+        }
     }
 
     public void ChallengeBack ()
@@ -121,14 +132,11 @@ public class PlayMiniGame : MonoBehaviour {
     IEnumerator GoToScene(string sceneName)
     {
         uiCam.enabled = false;
-        SceneManager.LoadSceneAsync("LoadingScreen", LoadSceneMode.Additive);
+        SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);
         challengeMenu.SetActive(false);
         challengeAvatar.SetActive(false);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1.5f);
         SceneManager.LoadSceneAsync(sceneName);
-
-        if (SceneManager.GetSceneByName("LoadingScreen").isLoaded)
-            SceneManager.UnloadSceneAsync("LoadingScreen");
     }
 
 }

@@ -1479,8 +1479,8 @@ public class Test : MonoBehaviour
         while (!SceneManager.GetSceneByName("Empty").isLoaded)
             yield return null;
 
-        if (SceneManager.GetSceneByName("LoadingScreen").isLoaded)
-            SceneManager.UnloadSceneAsync("LoadingScreen");
+        //if (SceneManager.GetSceneByName("LoadingScreen").isLoaded)
+        //    SceneManager.UnloadSceneAsync("LoadingScreen");
 
         inMiniGameMode = false;
         storyView.alpha = 1f;
@@ -1490,19 +1490,19 @@ public class Test : MonoBehaviour
         OnClick();
     }
 
-    IEnumerator FadeOther(UIWidget w, float durationInSeconds)
-	{
-		float startA = w.alpha;
-		float currentTime = 0f;
-		while (currentTime < durationInSeconds)
-		{
-			w.alpha = Mathf.Lerp(startA, 0f, currentTime / durationInSeconds);
-			currentTime += Time.deltaTime;
-			yield return null;
-		}
-		sprite.mainTexture = Resources.Load("image1") as Texture;
-		StartCoroutine(FadeIn(sprite, 0.5f, startA));
-	}
+ //   IEnumerator FadeOther(UIWidget w, float durationInSeconds)
+	//{
+	//	float startA = w.alpha;
+	//	float currentTime = 0f;
+	//	while (currentTime < durationInSeconds)
+	//	{
+	//		w.alpha = Mathf.Lerp(startA, 0f, currentTime / durationInSeconds);
+	//		currentTime += Time.deltaTime;
+	//		yield return null;
+	//	}
+	//	sprite.mainTexture = Resources.Load("image1") as Texture;
+	//	StartCoroutine(FadeIn(sprite, 0.5f, startA));
+	//}
 
     IEnumerator FadeOuter(UIWidget w, float durationInSeconds, float nextAlpha, float coverAlpha)
     {
@@ -1513,8 +1513,6 @@ public class Test : MonoBehaviour
 
         if (count == -1)
         {
-            //EnableCharacters(page1);
-
             if (!back)
             {
                 Destroy(GameObject.Find("Part (1)(Clone)"));
@@ -1536,12 +1534,6 @@ public class Test : MonoBehaviour
         }
         else if (count == 0)
         {
-            //DisableCharacters(page2);
-            //EnableCharacters(page1);
-
-            //if (back)
-            //    AnimatePage(page1);
-
             if (back)
             {
                 yield return new WaitForSeconds(0);
@@ -1566,12 +1558,6 @@ public class Test : MonoBehaviour
         }
         else if (count == 1)
         {
-            //DisableCharacters(page1);
-            //EnableCharacters(page2);
-
-            //if (!back)
-            //    AnimatePage(page2);
-
             if (!back)
             {
                 yield return new WaitForSeconds(0);
@@ -1596,12 +1582,6 @@ public class Test : MonoBehaviour
         }
         else if (count == 2)
         {
-            //DisableCharacters(page3);
-            //EnableCharacters(page2);
-
-            //if (back)
-            //    AnimatePage(page2);
-
             if (back)
             {
                 yield return new WaitForSeconds(0);
@@ -1626,12 +1606,6 @@ public class Test : MonoBehaviour
         }
         else if (count == 3)
         {
-            //DisableCharacters(page2);
-            //EnableCharacters(page3);
-
-            //if (!back)
-            //    AnimatePage(page3);
-
             if (!back)
             {
                 yield return new WaitForSeconds(0);
@@ -1656,12 +1630,6 @@ public class Test : MonoBehaviour
         }
         else if (count == 4)
         {
-            //DisableCharacters(page4);
-            //EnableCharacters(page3);
-
-            //if (back)
-            //    AnimatePage(page3);
-
             if (back)
             {
                 yield return new WaitForSeconds(0);
@@ -1686,12 +1654,6 @@ public class Test : MonoBehaviour
         }
         else if (count == 5)
         {
-            //DisableCharacters(page3);
-            //EnableCharacters(page4);
-
-            //if (!back)
-            //    AnimatePage(page4);
-
             if (!back)
             {
                 yield return new WaitForSeconds(0);
@@ -2047,7 +2009,7 @@ public class Test : MonoBehaviour
             audiosource.clip = part21;
             audiosource.Play();
             count++;
-            sprite.mainTexture = Resources.Load("image11") as Texture;
+            sprite.mainTexture = Resources.Load("image10") as Texture;
             StartCoroutine(FadeIn(sprite, 0.5f, startA));
             message = "See-our computer can do that- \n make a jump too, ";
             StartCoroutine(TypeText(nextAlpha, coverAlpha));
@@ -2071,7 +2033,7 @@ public class Test : MonoBehaviour
             audiosource.clip = part22;
             audiosource.Play();
             count++;
-            sprite.mainTexture = Resources.Load("image11") as Texture;
+            sprite.mainTexture = Resources.Load("image10") as Texture;
             StartCoroutine(FadeIn(sprite, 0.5f, startA));
             message = "Over the steps called coding \n that tells it what to do. ";
             StartCoroutine(TypeText(nextAlpha, coverAlpha));
@@ -2650,7 +2612,7 @@ public class Test : MonoBehaviour
                 yield return new WaitForSeconds(0);
 
                 Destroy(GameObject.Find("Part (23)(Clone)"));
-                Destroy(GameObject.Find("Part (24)(Clone)"));
+                //Destroy(GameObject.Find("Part (24)(Clone)"));
 
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (23)")) as GameObject;
                 //partPrefab = Instantiate(Part23);
@@ -2667,7 +2629,7 @@ public class Test : MonoBehaviour
             message = "Thank you for taking this trip with friends \ndown the Code Road. ";
             StartCoroutine(TypeText(nextAlpha, coverAlpha));
         }
-        else if (count == 45)
+        /*else if (count == 45)
         {
             if (!back)
             {
@@ -2690,15 +2652,16 @@ public class Test : MonoBehaviour
             StartCoroutine(FadeIn(sprite, 0.5f, startA));
             message = "Congratulations on completing \n the Code Road! ";
             StartCoroutine(TypeText(nextAlpha, coverAlpha));
-        }
-        else if (count == 46)
+        }*/
+        else if (count == 45)//46)
         {
-            //DisableCharacters(page24);
+            //Destroy(GameObject.Find("Part (23)(Clone)"));
             storyView.alpha = 0f;
 
             StartCoroutine(DisplayScene());
         }
 
+        yield return null;
         back = false;
         Resources.UnloadUnusedAssets();
     }
@@ -2721,6 +2684,8 @@ public class Test : MonoBehaviour
 		load = true;
 		completetext = false;
         label.text = "";
+
+        yield return null;
 
         int spaces = 0;
 		if ((PlayerPrefs.GetInt("typing") == 1) && (PlayerPrefs.GetInt("highlight") == 0))

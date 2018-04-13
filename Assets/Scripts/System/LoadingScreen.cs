@@ -5,6 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class LoadingScreen : MonoBehaviour {
 
+
+    public enum ScenesToLoad { main, story, minigame };
+    public static ScenesToLoad scenes;
+
     public GameObject[] characters;
 
     private bool loading = false;
@@ -12,6 +16,7 @@ public class LoadingScreen : MonoBehaviour {
     public static bool levelLoaded = false;
 
     void Start() {
+        //SelectScenes();
         SetAvatars();
     }
 
@@ -22,8 +27,9 @@ public class LoadingScreen : MonoBehaviour {
 
     public void LoadScene (string targetScene)
     {
-        sceneToLoad = targetScene;
-        loading = true;
+        //sceneToLoad = targetScene;
+        //loading = true;
+        SceneManager.LoadSceneAsync(targetScene);
     }
 
     private void SetAvatars()
@@ -71,8 +77,21 @@ public class LoadingScreen : MonoBehaviour {
         }
     }
 
-    public static void WaitForSceneToLoad (string sceneName)
+    void SelectScenes()
     {
-
+        switch (scenes)
+        {
+            case ScenesToLoad.main:               
+                LoadScene("MenuScreen");
+                break;
+            case ScenesToLoad.story:
+                LoadScene("1stScene");
+                break;
+            case ScenesToLoad.minigame:
+                LoadScene("MiniGame");
+                break;
+            default:
+                break;
+        }
     }
 }
