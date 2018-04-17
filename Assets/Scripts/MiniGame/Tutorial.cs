@@ -45,6 +45,7 @@ public class Tutorial : MonoBehaviour
     bool loopState;
 
     public AudioClip[] mySounds;
+    public AudioClip[] winSound;
 
     public Button[] myButtons;
     int buttonCount;
@@ -53,6 +54,7 @@ public class Tutorial : MonoBehaviour
     int tutorialCount;
 
     public GameObject canvas;
+    public GameObject winCanvas;
 
     Light directionalLight;
 
@@ -338,18 +340,18 @@ public class Tutorial : MonoBehaviour
 
         if (tutorialCount == 6)
         {
-            //If in story mode, skip Looping and go straight to end
-            if (!MiniGame.isMainMenuGame)
-            {
-                tutorialCount = 14;
-                checkTutorial();
-            }
-            else
-            {
+            ////If in story mode, skip Looping and go straight to end
+            //if (!MiniGame.isMainMenuGame)
+            //{
+            //    tutorialCount = 14;
+            //    checkTutorial();
+            //}
+            //else
+            //{
                 //playSound(18);
                 showMoves.text = "Tap <b><color=yellow>Begin Loop</color></b>.\nTap a command.\nTap <b><color=yellow>End Loop</color></b> and then <b><color=yellow>Play</color></b>.\nTommy moves many times over and over again. ";
                 tutorialCount++;
-            }
+            //}
         }
 
     }
@@ -528,9 +530,20 @@ public class Tutorial : MonoBehaviour
     {
         if (tutorialCount == 1)
         {
-            tutorialCount++;
-            showMoves.text = "Tap <b><color=yellow>Play</color></b> to make Tommy move again.\n\nTap <b><color=yellow>Clear</color></b> for the next learn to code lesson.";
-            //playSound(16);
+            //If in story mode, skip Looping and go straight to end
+            if (!MiniGame.isMainMenuGame)
+            {
+                //tutorialCount = 14;
+                //checkTutorial();
+                StopCoroutine(buttonFlash());
+                displayWinScreen();
+            }
+            else
+            {
+                tutorialCount++;
+                showMoves.text = "Tap <b><color=yellow>Play</color></b> to make Tommy move again.\n\nTap <b><color=yellow>Clear</color></b> for the next learn to code lesson.";
+                //playSound(16);
+            }
         }
         if (tutorialCount == 5)
         {
@@ -553,6 +566,18 @@ public class Tutorial : MonoBehaviour
             tutorialCount++;
             //playSound(20);
         }
+    }
+    void displayWinScreen()
+    {
+        canvas.SetActive(false);
+        winCanvas.SetActive(true);
+        GetComponent<AudioSource>().Stop();
+        GetComponent<AudioSource>().clip = winSound[UnityEngine.Random.Range(0, winSound.Length)];
+        GetComponent<AudioSource>().Play();
+        player.transform.eulerAngles = new Vector3(0, 180, 0);
+        AnimatePlayer.win = true;
+        AnimateFriend.win = true;
+        PointHandler.completedChallenges += 1.0f;
     }
 
     IEnumerator buttonFlash()
@@ -612,6 +637,7 @@ public class Tutorial : MonoBehaviour
         directionalLight.gameObject.SetActive(false);
         if (!MiniGame.isMainMenuGame)
         {
+            winCanvas.SetActive(false);
             LoadingScreen.LoadScene("Empty");
             yield return new WaitForSeconds(1.5f);
             story.EndMiniGame();

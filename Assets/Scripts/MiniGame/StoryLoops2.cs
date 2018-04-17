@@ -252,7 +252,12 @@ public class StoryLoops2 : MonoBehaviour {
         //    directionalLight.gameObject.SetActive(false);
     }
 
-    public void addSpin() { movement.Add("Spin"); showMoves.text = showMoves.text + "Spin..."; lineSkip(4); playSound(11); }
+    public void addSpin() {
+        movement.Add("Spin"); showMoves.text = showMoves.text + "Spin..."; lineSkip(4); playSound(11);
+
+        if (stepCount == 2)
+            stepCount++;
+    }
     public void addGrow() { movement.Add("Grow"); showMoves.text = showMoves.text + "Grow..."; lineSkip(4); playSound(5); }
     public void addShrink() { movement.Add("Shrink"); showMoves.text = showMoves.text + "Shrink..."; lineSkip(6); playSound(9); shrinkCount += 1; }
     public void addTurn() { movement.Add("Turn"); showMoves.text = showMoves.text + "Turn..."; lineSkip(4); playSound(13); }
@@ -264,12 +269,7 @@ public class StoryLoops2 : MonoBehaviour {
     }
     public void addWalkForward() { movement.Add("Forward"); showMoves.text = showMoves.text + "Forward..."; lineSkip(7); playSound(4); }
     public void addWalkBackward() { movement.Add("Backward"); showMoves.text = showMoves.text + "Backward..."; lineSkip(8); playSound(0); }
-    public void addSing() {
-        movement.Add("Sing"); showMoves.text = showMoves.text + "Sing..."; lineSkip(4); playSound(10);
-
-        if (stepCount == 2)
-            stepCount++;
-    }
+    public void addSing() { movement.Add("Sing"); showMoves.text = showMoves.text + "Sing..."; lineSkip(4); playSound(10); }
 
     public void erase()
     {
@@ -334,7 +334,7 @@ public class StoryLoops2 : MonoBehaviour {
     {
         stepCount = 0;
         shrinkCount = 0;
-        help.text = "Show Dudley how to <b><color=yellow>Loop</color></b> by making Tommy <b><color=yellow>Jump</color></b> and <b><color=yellow>Sing</color></b>. Increase <b><color=yellow>Times</color></b> to <b><color=yellow>Loop</color></b>. You can do anything!";
+        help.text = "Show Dudley how to <b><color=yellow>Loop</color></b> by making Tommy <b><color=yellow>Jump</color></b> and <b><color=yellow>Spin</color></b>. Its fun to do it over and over again.";
         playSound(2);
         movementLengthCollection = 0;
         movement.Clear();
@@ -518,7 +518,7 @@ public class StoryLoops2 : MonoBehaviour {
     {
         try
         {
-            if (movement[0].Equals("Begin Loop") && movement[1].Equals("Jump") && movement[2].Equals("Sing") && movement[3].Equals(startFormat + "End Loop" + endFormat))
+            if (movement[0].Equals("Begin Loop") && movement[1].Equals("Jump") && movement[2].Equals("Spin") && movement[3].Equals(startFormat + "End Loop" + endFormat))
             {
                 displayWinScreen();
             }
@@ -579,7 +579,7 @@ public class StoryLoops2 : MonoBehaviour {
         int buttonToFlash = 0;
         if (stepCount == 0) { buttonToFlash = 8; }
         if (stepCount == 1) { buttonToFlash = 4; }
-        if (stepCount == 2) { buttonToFlash = 5; }
+        if (stepCount == 2) { buttonToFlash = 3; }
         if (stepCount == 3) { buttonToFlash = 9; }
         if (stepCount == 4) { buttonToFlash = 10; }
 
