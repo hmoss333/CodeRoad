@@ -19,7 +19,8 @@ public class SplashScreen_ : MonoBehaviour {
         Handheld.PlayFullScreenMovie(videoName, Color.black, FullScreenMovieControlMode.Hidden, FullScreenMovieScalingMode.Fill);
         yield return new WaitForEndOfFrame();
         LoadManager.level = "Title";
-        SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);
+        LoadingScreen.LoadScene("MenuScreen");
+        //SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);
         Application.LoadLevel("MenuScreen");
     }
 }

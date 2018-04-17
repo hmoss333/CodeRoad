@@ -5,33 +5,61 @@ using UnityEngine.SceneManagement;
 
 public class LoadingScreen : MonoBehaviour {
 
-
-    public enum ScenesToLoad { main, story, minigame };
-    public static ScenesToLoad scenes;
-
     public GameObject[] characters;
 
-    private bool loading = false;
-    private string sceneToLoad;
+    private static bool loading = false;
+    private static string sceneToLoad;
     public static bool levelLoaded = false;
 
+    public GameObject cameras;
+    public UIPanel loadingPanel;
+    //public UIPanel scenePanel;
+
+    private void Awake()
+    {
+        DontDestroyOnLoad(this.gameObject);
+
+        loadingPanel = gameObject.GetComponent<UIPanel>();
+
+        if (!cameras)
+            cameras = GameObject.Find("Cameras");
+
+        TurnOffCameras();
+        TurnOffAvatars();
+    }
+
     void Start() {
-        //SelectScenes();
-        SetAvatars();
+        if (!cameras)
+            cameras = GameObject.Find("Cameras");
+
+        TurnOffCameras();
+        TurnOffAvatars();
     }
 
     // Update is called once per frame
     void Update() {
+        if (loading)
+        {
+            levelLoaded = false;
+            TurnOnCameras();
+            SetAvatars();
 
+            Coroutine co = StartCoroutine(CheckIfLoaded(sceneToLoad));
+            loading = false;
+        }
     }
 
-    public void LoadScene (string targetScene)
+    public static void LoadScene (string targetScene)
     {
-        //sceneToLoad = targetScene;
-        //loading = true;
-        SceneManager.LoadSceneAsync(targetScene);
+        sceneToLoad = targetScene;
+        loading = true;
     }
 
+    private void TurnOffAvatars()
+    {
+        foreach (GameObject avatar in characters)
+            avatar.SetActive(false);
+    }
     private void SetAvatars()
     {
         for (int i = 0; i < characters.Length; i++)
@@ -77,21 +105,27 @@ public class LoadingScreen : MonoBehaviour {
         }
     }
 
-    void SelectScenes()
+    private void TurnOffCameras()
     {
-        switch (scenes)
-        {
-            case ScenesToLoad.main:               
-                LoadScene("MenuScreen");
-                break;
-            case ScenesToLoad.story:
-                LoadScene("1stScene");
-                break;
-            case ScenesToLoad.minigame:
-                LoadScene("MiniGame");
-                break;
-            default:
-                break;
-        }
+        loadingPanel.alpha = 0f;
+        if (cameras)
+            cameras.SetActive(false);
+    }
+    private void TurnOnCameras()
+    {
+        loadingPanel.alpha = 1f;
+        if (cameras)
+            cameras.SetActive(true);
+    }
+
+    IEnumerator CheckIfLoaded(string SceneToLoad)
+    {
+        while (!SceneManager.GetSceneByName(SceneToLoad).isLoaded)
+            yield return null;
+
+        TurnOffAvatars();
+        TurnOffCameras();
+        levelLoaded = true;
+        sceneToLoad = null;
     }
 }

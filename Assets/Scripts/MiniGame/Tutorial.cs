@@ -204,8 +204,8 @@ public class Tutorial : MonoBehaviour
             player.transform.Rotate(0, Time.deltaTime * 180, 0);
         }
 
-        if (SceneManager.GetSceneByName("LoadingScreen").isLoaded)
-            directionalLight.gameObject.SetActive(false);
+        //if (SceneManager.GetSceneByName("LoadingScreen").isLoaded)
+        //    directionalLight.gameObject.SetActive(false);
     }
 
     public void addSpin() { movement.Add("Spin"); showMoves.text = showMoves.text + "Spin..."; lineSkip(4); playSound(11); if (tutorialCount == 8) { tutorialCount++; } if (tutorialCount == 12) { tutorialCount++; } }
@@ -606,18 +606,22 @@ public class Tutorial : MonoBehaviour
     {
         //playSound(7);
         canvas.SetActive(false);
-        if (!SceneManager.GetSceneByName("LoadingScreen").isLoaded)
-            SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);
-        yield return new WaitForSeconds(1.5f);
+        //if (!SceneManager.GetSceneByName("LoadingScreen").isLoaded)
+        //    SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);
         //LoadManager.level = "MenuScreen";
+        directionalLight.gameObject.SetActive(false);
         if (!MiniGame.isMainMenuGame)
         {
+            LoadingScreen.LoadScene("Empty");
+            yield return new WaitForSeconds(1.5f);
             story.EndMiniGame();
             //MiniGame.UnloadScene(MiniGame.currentLevel);
             SceneManager.UnloadSceneAsync("MiniGame");
         }
         else
         {
+            LoadingScreen.LoadScene("MenuScreen");
+            yield return new WaitForSeconds(1.5f);
             SceneManager.LoadSceneAsync("MenuScreen");
         }
     }

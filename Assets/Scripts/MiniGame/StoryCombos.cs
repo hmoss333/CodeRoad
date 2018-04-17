@@ -253,8 +253,8 @@ public class StoryCombos : MonoBehaviour {
             player.transform.Rotate(0, Time.deltaTime * 180, 0);
         }
 
-        if (SceneManager.GetSceneByName("LoadingScreen").isLoaded)
-            directionalLight.gameObject.SetActive(false);
+        //if (SceneManager.GetSceneByName("LoadingScreen").isLoaded)
+        //    directionalLight.gameObject.SetActive(false);
     }
 
     public void addSpin() {
@@ -590,8 +590,10 @@ public class StoryCombos : MonoBehaviour {
         playSound(7);
         canvas.SetActive(false);
         winCanvas.SetActive(false);
-        if (!SceneManager.GetSceneByName("LoadingScreen").isLoaded)
-            SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);
+        //if (!SceneManager.GetSceneByName("LoadingScreen").isLoaded)
+        //    SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);
+        directionalLight.gameObject.SetActive(false);
+        LoadingScreen.LoadScene("MenuScreen");
         //directionalLight.gameObject.SetActive(false);
         yield return new WaitForSeconds(1.5f);
         //LoadManager.level = "Title";
@@ -608,7 +610,9 @@ public class StoryCombos : MonoBehaviour {
         winCanvas.SetActive(false);
         GetComponent<Camera>().enabled = false;
         //if (!SceneManager.GetSceneByName("LoadingScreen").isLoaded)
-            SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);
+        //SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);
+        directionalLight.gameObject.SetActive(false);
+        LoadingScreen.LoadScene("Empty");
         //directionalLight.gameObject.SetActive(false);
         yield return new WaitForSeconds(1f);
         story.EndMiniGame();

@@ -259,8 +259,8 @@ public class Movement3 : MonoBehaviour
             player.transform.Rotate(0, Time.deltaTime * 180, 0);
         }
 
-        if (SceneManager.GetSceneByName("LoadingScreen").isLoaded)
-            directionalLight.gameObject.SetActive(false);
+        //if (SceneManager.GetSceneByName("LoadingScreen").isLoaded)
+        //    directionalLight.gameObject.SetActive(false);
     }
 
     public void addSpin() { movement.Add("Spin"); showMoves.text = showMoves.text + "Spin..."; lineSkip(4); playSound(11); }
@@ -855,7 +855,9 @@ public class Movement3 : MonoBehaviour
         playSound(7);
         canvas.SetActive(false);
         winCanvas.SetActive(false);
-        SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);
+        directionalLight.gameObject.SetActive(false);
+        LoadingScreen.LoadScene("MenuScreen");
+        //SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);
         //directionalLight.gameObject.SetActive(false);
         yield return new WaitForSeconds(1.5f);
         //LoadManager.level = "Title";

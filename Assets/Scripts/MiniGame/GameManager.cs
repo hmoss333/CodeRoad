@@ -505,7 +505,8 @@ public class GameManager : MonoBehaviour {
         yield return new WaitForSeconds(1.5f);
         clearList();
         LoadManager.level = "Title";
-        SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);
+        LoadingScreen.LoadScene("MenuScreen");
+        //SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);
         Application.LoadLevel("MenuScreen");
     }
 }

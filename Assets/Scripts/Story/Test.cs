@@ -1456,7 +1456,8 @@ public class Test : MonoBehaviour
 
         yield return new WaitForSeconds(0.1f);
         mainCamera.gameObject.SetActive(false);
-        SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);
+        LoadingScreen.LoadScene("MiniGame");
+        //SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);
         //yield return new WaitForSeconds(1f);
         audiosource.Stop();
 		storyView.alpha = 0f;
@@ -1464,8 +1465,8 @@ public class Test : MonoBehaviour
         yield return new WaitForSeconds(1f);
         SceneManager.LoadSceneAsync("MiniGame");
 
-        if (SceneManager.GetSceneByName("LoadingScreen").isLoaded)
-            SceneManager.UnloadSceneAsync("LoadingScreen");
+        //if (SceneManager.GetSceneByName("LoadingScreen").isLoaded)
+        //    SceneManager.UnloadSceneAsync("LoadingScreen");
     }
 
 	public void EndMiniGame()
@@ -1476,18 +1477,22 @@ public class Test : MonoBehaviour
 	{
         SceneManager.LoadSceneAsync("Empty");
 
-        while (!SceneManager.GetSceneByName("Empty").isLoaded)
-            yield return null;
+        //while (!SceneManager.GetSceneByName("Empty").isLoaded)
+        //    yield return null;
 
-        //if (SceneManager.GetSceneByName("LoadingScreen").isLoaded)
-        //    SceneManager.UnloadSceneAsync("LoadingScreen");
+        //while (!LoadingScreen.levelLoaded)
+        //    yield return new WaitForSeconds(0.01f);
+
+        yield return new WaitForSeconds(0.1f);
 
         inMiniGameMode = false;
-        storyView.alpha = 1f;
-        mainCamera.gameObject.SetActive(true);
+        //storyView.alpha = 1f;
+        //mainCamera.gameObject.SetActive(true);
         next.alpha = 1f;
         //cover.alpha = 1f;
         OnClick();
+        storyView.alpha = 1f;
+        mainCamera.gameObject.SetActive(true);
     }
 
  //   IEnumerator FadeOther(UIWidget w, float durationInSeconds)
@@ -1507,14 +1512,21 @@ public class Test : MonoBehaviour
     IEnumerator FadeOuter(UIWidget w, float durationInSeconds, float nextAlpha, float coverAlpha)
     {
         float startA = w.alpha;
+        //cover.alpha = coverAlpha;
         //label.text = "";
 
         GameObject partPrefab = null;
+
+        //while (!LoadingScreen.levelLoaded)
+        //    yield return new WaitForSeconds(0.05f);
 
         if (count == -1)
         {
             if (!back)
             {
+                //while (!LoadingScreen.levelLoaded)
+                //    yield return new WaitForSeconds(0.01f);
+
                 Destroy(GameObject.Find("Part (1)(Clone)"));
 
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (1)")) as GameObject;
@@ -2670,12 +2682,12 @@ public class Test : MonoBehaviour
 	{
 		float startA = w.alpha;
 		float currentTime = 0f;
-		while (currentTime < durationInSeconds)
+        while (currentTime < durationInSeconds)
 		{
 			w.alpha = Mathf.Lerp(startA, a, currentTime / durationInSeconds);
 			currentTime += Time.deltaTime;
-			yield return null;
-		}
+            yield return null;
+        }
         w.alpha = startAlpha;
 	}
 
@@ -2777,9 +2789,12 @@ public class Test : MonoBehaviour
 			}
 		}
 
-		completetext = true;
+        //while (!LoadingScreen.levelLoaded)
+            yield return null;
+
+        completetext = true;
 		next.alpha = nextAlpha;
-		//cover.alpha = coverAlpha;
+		cover.alpha = coverAlpha;
 		//play.text = "Next";
 
 		exitBack.GetComponent<Collider>().enabled = true;
@@ -2822,7 +2837,8 @@ public class Test : MonoBehaviour
 	{
         Resources.UnloadUnusedAssets();
         mainCamera.gameObject.SetActive(false);
-        SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);
+        LoadingScreen.LoadScene("MenuScreen");
+        //SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);
 
         yield return new WaitForSeconds(1);
 		SceneManager.LoadSceneAsync(1);
@@ -2835,8 +2851,8 @@ public class Test : MonoBehaviour
 
 		Destroy(storyParent);
 
-        if (SceneManager.GetActiveScene().name == "LoadingScreen")
-            SceneManager.UnloadSceneAsync("LoadingScreen");
+        //if (SceneManager.GetActiveScene().name == "LoadingScreen")
+        //    SceneManager.UnloadSceneAsync("LoadingScreen");
     }
 
 	public void Turotiral1OnClick()
