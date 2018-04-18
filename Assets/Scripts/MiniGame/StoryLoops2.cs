@@ -118,7 +118,8 @@ public class StoryLoops2 : MonoBehaviour {
         directionalLight = GameObject.FindObjectOfType<Light>();
         //GameStatusEventHandler.gameWasStarted("challenge");
 
-        StartCoroutine(buttonFlash());
+        if (MiniGame.tutorialMode)
+            StartCoroutine(buttonFlash());
     }
 
     void narrationVoiceOverStop()
@@ -355,15 +356,24 @@ public class StoryLoops2 : MonoBehaviour {
         playSound(8);
         yield return new WaitForSeconds(1);
         facingRight = true;
-        if (!loopState)
-        {
-            movementLengthCollection = 0;
-            player.transform.localScale = new Vector3(2, 2, 2);
-            player.transform.rotation = Quaternion.Euler(0, 90, 0);
-            player.transform.position = new Vector3(-2.64f, -3.72f, 0.28f);
-            StartCoroutine(playingMovement());
-        }
-        else { move.text = "Must Close All Loops To Play"; }
+        //if (!loopState)
+        //{
+        //    movementLengthCollection = 0;
+        //    player.transform.localScale = new Vector3(2, 2, 2);
+        //    player.transform.rotation = Quaternion.Euler(0, 90, 0);
+        //    player.transform.position = new Vector3(-2.64f, -3.72f, 0.28f);
+        //    StartCoroutine(playingMovement());
+        //}
+        //else { move.text = "Must Close All Loops To Play"; }
+
+        if (loopState)
+            endLoop();
+
+        movementLengthCollection = 0;
+        player.transform.localScale = new Vector3(2, 2, 2);
+        player.transform.rotation = Quaternion.Euler(0, 90, 0);
+        player.transform.position = new Vector3(-2.64f, -3.72f, 0.28f);
+        StartCoroutine(playingMovement());
     }
 
     public void slider()
@@ -580,8 +590,8 @@ public class StoryLoops2 : MonoBehaviour {
         if (stepCount == 0) { buttonToFlash = 8; }
         if (stepCount == 1) { buttonToFlash = 4; }
         if (stepCount == 2) { buttonToFlash = 3; }
-        if (stepCount == 3) { buttonToFlash = 9; }
-        if (stepCount == 4) { buttonToFlash = 10; }
+        //if (stepCount == 3) { buttonToFlash = 9; }
+        if (stepCount == 3) { buttonToFlash = 10; }
 
         myButtons[buttonToFlash].GetComponent<Image>().color = Color.white;
         yield return new WaitForSeconds(0.5f);

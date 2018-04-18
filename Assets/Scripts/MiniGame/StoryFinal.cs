@@ -119,7 +119,8 @@ public class StoryFinal : MonoBehaviour {
         directionalLight = GameObject.FindObjectOfType<Light>();
         //GameStatusEventHandler.gameWasStarted("challenge");
 
-        StartCoroutine(buttonFlash());
+        if (MiniGame.tutorialMode)
+            StartCoroutine(buttonFlash());
     }
 
     void narrationVoiceOverStop()
@@ -256,41 +257,31 @@ public class StoryFinal : MonoBehaviour {
     public void addSpin() {
         movement.Add("Spin"); showMoves.text = showMoves.text + "Spin..."; lineSkip(4); playSound(11);
 
-        if (stepCount == 1)
+        if (stepCount == 3)
             stepCount++;
     }
     public void addGrow() {
         movement.Add("Grow"); showMoves.text = showMoves.text + "Grow..."; lineSkip(4); playSound(5);
 
-        if (stepCount == 0)
-            stepCount++;
-    }
-    public void addShrink() {
-        movement.Add("Shrink"); showMoves.text = showMoves.text + "Shrink..."; lineSkip(6); playSound(9); shrinkCount += 1;
-
-        if (stepCount == 5)
-            stepCount++;
-    }
-    public void addTurn() {
-        movement.Add("Turn"); showMoves.text = showMoves.text + "Turn..."; lineSkip(4); playSound(13);
-
         if (stepCount == 2)
             stepCount++;
     }
+    public void addShrink() { movement.Add("Shrink"); showMoves.text = showMoves.text + "Shrink..."; lineSkip(6); playSound(9); shrinkCount += 1; }
+    public void addTurn() { movement.Add("Turn"); showMoves.text = showMoves.text + "Turn..."; lineSkip(4); playSound(13); }
     public void addJump() {
         movement.Add("Jump"); showMoves.text = showMoves.text + "Jump..."; lineSkip(4); playSound(6);
-
-        if (stepCount == 3)
-            stepCount++;
-    }
-    public void addWalkForward() { movement.Add("Forward"); showMoves.text = showMoves.text + "Forward..."; lineSkip(7); playSound(4); }
-    public void addWalkBackward() { movement.Add("Backward"); showMoves.text = showMoves.text + "Backward..."; lineSkip(8); playSound(0); }
-    public void addSing() {
-        movement.Add("Sing"); showMoves.text = showMoves.text + "Sing..."; lineSkip(4); playSound(10);
 
         if (stepCount == 4)
             stepCount++;
     }
+    public void addWalkForward() {
+        movement.Add("Forward"); showMoves.text = showMoves.text + "Forward..."; lineSkip(7); playSound(4);
+
+        if (stepCount == 1)
+            stepCount++;
+    }
+    public void addWalkBackward() { movement.Add("Backward"); showMoves.text = showMoves.text + "Backward..."; lineSkip(8); playSound(0); }
+    public void addSing() { movement.Add("Sing"); showMoves.text = showMoves.text + "Sing..."; lineSkip(4); playSound(10); }
 
     public void erase()
     {
@@ -317,6 +308,9 @@ public class StoryFinal : MonoBehaviour {
             loopState = true;
             playSound(1);
         }
+
+        if (stepCount == 0)
+            stepCount++;
     }
     public void endLoop()
     {
@@ -326,6 +320,9 @@ public class StoryFinal : MonoBehaviour {
             loopState = false;
             playSound(3);
         }
+
+        if (stepCount == 5)
+            stepCount++;
     }
 
     void lineSkip(int counter)
@@ -349,7 +346,7 @@ public class StoryFinal : MonoBehaviour {
     {
         stepCount = 0;
         shrinkCount = 0;
-        help.text = "Try coding in this order!\n<b><color=yellow>Grow, Spin, Turn, Jump, Sing, Shrink</color></b>";
+        help.text = "Try coding in this order! <b><color=yellow>Loop, Forward, Grow, Spin, Jump</color></b>";
         playSound(2);
         movementLengthCollection = 0;
         movement.Clear();
@@ -370,15 +367,24 @@ public class StoryFinal : MonoBehaviour {
         playSound(8);
         yield return new WaitForSeconds(1);
         facingRight = true;
-        if (!loopState)
-        {
-            movementLengthCollection = 0;
-            player.transform.localScale = new Vector3(2, 2, 2);
-            player.transform.rotation = Quaternion.Euler(0, 90, 0);
-            player.transform.position = new Vector3(-2.64f, -3.72f, 0.28f);
-            StartCoroutine(playingMovement());
-        }
-        else { move.text = "Must Close All Loops To Play"; }
+        //if (!loopState)
+        //{
+        //    movementLengthCollection = 0;
+        //    player.transform.localScale = new Vector3(2, 2, 2);
+        //    player.transform.rotation = Quaternion.Euler(0, 90, 0);
+        //    player.transform.position = new Vector3(-2.64f, -3.72f, 0.28f);
+        //    StartCoroutine(playingMovement());
+        //}
+        //else { move.text = "Must Close All Loops To Play"; }
+
+        if (loopState)
+            endLoop();
+
+        movementLengthCollection = 0;
+        player.transform.localScale = new Vector3(2, 2, 2);
+        player.transform.rotation = Quaternion.Euler(0, 90, 0);
+        player.transform.position = new Vector3(-2.64f, -3.72f, 0.28f);
+        StartCoroutine(playingMovement());
     }
 
     public void slider()
@@ -533,7 +539,7 @@ public class StoryFinal : MonoBehaviour {
     {
         try
         {
-            if (movement[0].Equals("Grow") && movement[1].Equals("Spin") && movement[2].Equals("Turn") && movement[3].Equals("Jump") && movement[4].Equals("Sing") && movement[5].Equals(startFormat + "Shrink" + endFormat))
+            if (movement[0].Equals("Begin Loop") && movement[1].Equals("Forward") && movement[2].Equals("Grow") && movement[3].Equals("Spin") && movement[4].Equals("Jump") && movement[5].Equals(startFormat + "End Loop" + endFormat))
             {
                 displayWinScreen();
             }
@@ -592,13 +598,13 @@ public class StoryFinal : MonoBehaviour {
     IEnumerator buttonFlash()
     {
         int buttonToFlash = 0;
-        if (stepCount == 0) { buttonToFlash = 0; }
-        if (stepCount == 1) { buttonToFlash = 3; }
-        if (stepCount == 2) { buttonToFlash = 2; }
-        if (stepCount == 3) { buttonToFlash = 4; }
-        if (stepCount == 4) { buttonToFlash = 5; }
-        if (stepCount == 5) { buttonToFlash = 1; }
-        if (stepCount == 6) { buttonToFlash = 10; }
+        if (stepCount == 0) { buttonToFlash = 8; }
+        if (stepCount == 1) { buttonToFlash = 6; }
+        if (stepCount == 2) { buttonToFlash = 0; }
+        if (stepCount == 3) { buttonToFlash = 3; }
+        if (stepCount == 4) { buttonToFlash = 4; }
+        //if (stepCount == 5) { buttonToFlash = 9; }
+        if (stepCount == 5) { buttonToFlash = 10; }
 
         myButtons[buttonToFlash].GetComponent<Image>().color = Color.white;
         yield return new WaitForSeconds(0.5f);

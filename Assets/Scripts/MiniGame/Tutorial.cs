@@ -55,6 +55,7 @@ public class Tutorial : MonoBehaviour
 
     public GameObject canvas;
     public GameObject winCanvas;
+    public GameObject tutorialCanvas;
 
     Light directionalLight;
 
@@ -105,7 +106,15 @@ public class Tutorial : MonoBehaviour
         buttonChoosen = false;
         buttonCount = 0;
         //playSound(15);
-        StartCoroutine(buttonFlash());
+
+        if (!MiniGame.isMainMenuGame)
+        {
+            //launch tutorial on/off screen to set the buttonFlash
+            canvas.SetActive(false);
+            tutorialCanvas.SetActive(true);
+        }
+        else
+            StartCoroutine(buttonFlash());
     }
 
   
@@ -246,8 +255,6 @@ public class Tutorial : MonoBehaviour
         }
         if (tutorialCount == 8) { tutorialCount++; }
     }
-
-
     public void addWalkBackward()
     {
         movement.Add("Backward");
@@ -607,6 +614,19 @@ public class Tutorial : MonoBehaviour
         StartCoroutine(buttonFlash());
     }
 
+    public void TutorialOn ()
+    {
+        MiniGame.tutorialMode = true;
+        tutorialCanvas.SetActive(false);
+        canvas.SetActive(true);
+        StartCoroutine(buttonFlash());
+    }
+    public void TutorialOff ()
+    {
+        MiniGame.tutorialMode = false;
+        tutorialCanvas.SetActive(false);
+        canvas.SetActive(true);
+    }
 
     IEnumerator jump()
     {

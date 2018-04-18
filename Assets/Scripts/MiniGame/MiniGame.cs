@@ -12,6 +12,9 @@ public class MiniGame : MonoBehaviour {
     public static bool isMainMenuGame;
     public GameObject[] levelObjects;
 
+    //public enum TutorialMode { on, off, notSet };
+    public static bool tutorialMode;
+
     static MiniGame mg;
 
     private void Start()

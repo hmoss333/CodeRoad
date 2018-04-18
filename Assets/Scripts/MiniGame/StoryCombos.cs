@@ -123,7 +123,8 @@ public class StoryCombos : MonoBehaviour {
         directionalLight = GameObject.FindObjectOfType<Light>();
         //GameStatusEventHandler.gameWasStarted("challenge");
 
-        StartCoroutine(buttonFlash());
+        if (MiniGame.tutorialMode)
+            StartCoroutine(buttonFlash());
     }
 
     void narrationVoiceOverStop()

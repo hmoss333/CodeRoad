@@ -118,7 +118,8 @@ public class StoryLoops : MonoBehaviour {
         directionalLight = GameObject.FindObjectOfType<Light>();
         //GameStatusEventHandler.gameWasStarted("challenge");
 
-        StartCoroutine(buttonFlash());
+        if (MiniGame.tutorialMode)
+            StartCoroutine(buttonFlash());
     }
 
     void narrationVoiceOverStop()
@@ -304,8 +305,8 @@ public class StoryLoops : MonoBehaviour {
             playSound(3);
         }
 
-        if (stepCount == 2)
-            stepCount++;
+        //if (stepCount == 2)
+        //    stepCount++;
     }
 
     void lineSkip(int counter)
@@ -329,7 +330,7 @@ public class StoryLoops : MonoBehaviour {
     {
         stepCount = 0;
         shrinkCount = 0;
-        help.text = "Show Cathy how to <b><color=yellow>Loop</color></b> with a <b><color=yellow>Spin</color></b>. Increase <b><color=yellow>Times</color></b> to <b><color=yellow>Loop</color></b> and give it a go.";
+        help.text = "Show Cathy how to <b><color=yellow>Loop</color></b> with a <b><color=yellow>Spin</color></b>.";
         playSound(2);
         movementLengthCollection = 0;
         movement.Clear();
@@ -350,15 +351,26 @@ public class StoryLoops : MonoBehaviour {
         playSound(8);
         yield return new WaitForSeconds(1);
         facingRight = true;
-        if (!loopState)
+        //if (!loopState)
+        //{
+        //    movementLengthCollection = 0;
+        //    player.transform.localScale = new Vector3(2, 2, 2);
+        //    player.transform.rotation = Quaternion.Euler(0, 90, 0);
+        //    player.transform.position = new Vector3(-2.64f, -3.72f, 0.28f);
+        //    StartCoroutine(playingMovement());
+        //}
+        //else { move.text = "Must Close All Loops To Play"; }
+
+        if (loopState)
         {
-            movementLengthCollection = 0;
-            player.transform.localScale = new Vector3(2, 2, 2);
-            player.transform.rotation = Quaternion.Euler(0, 90, 0);
-            player.transform.position = new Vector3(-2.64f, -3.72f, 0.28f);
-            StartCoroutine(playingMovement());
+            endLoop();
         }
-        else { move.text = "Must Close All Loops To Play"; }
+
+        movementLengthCollection = 0;
+        player.transform.localScale = new Vector3(2, 2, 2);
+        player.transform.rotation = Quaternion.Euler(0, 90, 0);
+        player.transform.position = new Vector3(-2.64f, -3.72f, 0.28f);
+        StartCoroutine(playingMovement());
     }
 
     public void slider()
@@ -574,8 +586,8 @@ public class StoryLoops : MonoBehaviour {
         int buttonToFlash = 0;
         if (stepCount == 0) { buttonToFlash = 8; }
         if (stepCount == 1) { buttonToFlash = 3; }
-        if (stepCount == 2) { buttonToFlash = 9; }
-        if (stepCount == 3) { buttonToFlash = 10; }
+        //if (stepCount == 2) { buttonToFlash = 9; }
+        if (stepCount == 2) { buttonToFlash = 10; }
 
         myButtons[buttonToFlash].GetComponent<Image>().color = Color.white;
         yield return new WaitForSeconds(0.5f);
