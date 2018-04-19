@@ -45,8 +45,12 @@ public class GameManager : MonoBehaviour {
   
     public AudioClip[] mySounds;
 
+    public GameObject canvas;
+
     public Button[] myButtons;
     int buttonCount;
+
+    Light directionalLight;
 
     // Use this for initialization
     void Start()
@@ -91,7 +95,8 @@ public class GameManager : MonoBehaviour {
      
         buttonCount = 0;
         if (PlayerPrefs.GetInt("Scan") == 1) { StartCoroutine(scanner()); }
-       //GameStatusEventHandler.gameWasStarted("freeplay");
+        directionalLight = GameObject.FindObjectOfType<Light>();
+        //GameStatusEventHandler.gameWasStarted("freeplay");
     }
 
     IEnumerator scanner()
@@ -502,11 +507,13 @@ public class GameManager : MonoBehaviour {
     IEnumerator mainMenuStart()
     {
         playSound(7);
+        canvas.SetActive(false);
+        directionalLight.gameObject.SetActive(false);
+        LoadingScreen.LoadScene("MenuScreen");
         yield return new WaitForSeconds(1.5f);
         clearList();
-        LoadManager.level = "Title";
-        LoadingScreen.LoadScene("MenuScreen");
-        //SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);
-        Application.LoadLevel("MenuScreen");
+        //LoadManager.level = "Title";
+        //LoadingScreen.LoadScene("MenuScreen");
+        SceneManager.LoadScene("MenuScreen");
     }
 }

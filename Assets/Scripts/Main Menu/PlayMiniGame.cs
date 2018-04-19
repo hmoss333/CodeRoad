@@ -121,6 +121,18 @@ public class PlayMiniGame : MonoBehaviour {
         }
     }
 
+    public void FreePlay()
+    {
+        MiniGame.isMainMenuGame = true;
+        MiniGame.currentLevel = MiniGame.Level.FreePlay;
+
+        if (!loading)
+        {
+            StartCoroutine(GoToScene("MiniGame"));
+            loading = true;
+        }
+    }
+
     public void ChallengeBack ()
     {
         challengeMenu.SetActive(false);
