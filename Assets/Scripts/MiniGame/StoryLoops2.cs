@@ -54,6 +54,8 @@ public class StoryLoops2 : MonoBehaviour {
     public Text help;
     public GameObject canvas;
     public GameObject winCanvas;
+    public GameObject tryAgainCanvas;
+    public GameObject background;
 
     public Button[] myButtons;
     int buttonCount;
@@ -64,30 +66,30 @@ public class StoryLoops2 : MonoBehaviour {
     void Start()
     {
         GameObject moveBackground = GameObject.Find("MoveBackground");
-        GameObject helpBackground = GameObject.Find("HelpBackground");
+        //GameObject helpBackground = GameObject.Find("HelpBackground");
         switch (PlayerPrefs.GetInt("fontSizeIndex"))
         {
             case 0:
                 moveBackground.transform.localScale = new Vector2(1.0f, 1.0f);
-                helpBackground.transform.localScale = new Vector2(1.0f, 1.0f);
-                help.GetComponent<RectTransform>().sizeDelta = new Vector2(200.0f, 145);
-                showMoves.GetComponent<RectTransform>().sizeDelta = new Vector2(375, 145);
+                //helpBackground.transform.localScale = new Vector2(1.0f, 1.0f);
+                //help.GetComponent<RectTransform>().sizeDelta = new Vector2(200.0f, 145);
+                //showMoves.GetComponent<RectTransform>().sizeDelta = new Vector2(375, 145);
                 break;
             case 1:
                 moveBackground.transform.localScale = new Vector2(1.0f, 1.2f);
-                helpBackground.transform.localScale = new Vector2(1.3f, 1.2f);
-                help.GetComponent<RectTransform>().sizeDelta = new Vector2(250.0f, 190);
-                showMoves.GetComponent<RectTransform>().sizeDelta = new Vector2(375, 190);
+                //helpBackground.transform.localScale = new Vector2(1.3f, 1.2f);
+                //help.GetComponent<RectTransform>().sizeDelta = new Vector2(250.0f, 190);
+                //showMoves.GetComponent<RectTransform>().sizeDelta = new Vector2(375, 190);
                 break;
             case 2:
                 moveBackground.transform.localScale = new Vector2(1.0f, 1.5f);
-                helpBackground.transform.localScale = new Vector2(1.5f, 1.5f);
-                help.GetComponent<RectTransform>().sizeDelta = new Vector2(300.0f, 210);
-                showMoves.GetComponent<RectTransform>().sizeDelta = new Vector2(375, 210);
+                //helpBackground.transform.localScale = new Vector2(1.5f, 1.5f);
+                //help.GetComponent<RectTransform>().sizeDelta = new Vector2(300.0f, 210);
+                //showMoves.GetComponent<RectTransform>().sizeDelta = new Vector2(375, 210);
                 break;
         }
         showMoves.fontSize = 25;//PlayerPrefs.GetInt("fontSize");
-        help.fontSize = 25;//PlayerPrefs.GetInt("fontSize") - 5;
+        //help.fontSize = 25;//PlayerPrefs.GetInt("fontSize") - 5;
         loopState = false;
         loopsFromSlider = 2;
         howManyTimesToLoop.text = "Times To Loop : " + loopsFromSlider;
@@ -333,6 +335,9 @@ public class StoryLoops2 : MonoBehaviour {
 
     public void clearList()
     {
+        canvas.SetActive(true);
+        tryAgainCanvas.SetActive(false);
+
         stepCount = 0;
         shrinkCount = 0;
         help.text = "Show Dudley how to <b><color=yellow>Loop</color></b> by making Tommy <b><color=yellow>Jump</color></b> and <b><color=yellow>Spin</color></b>. Its fun to do it over and over again.";
@@ -557,14 +562,17 @@ public class StoryLoops2 : MonoBehaviour {
 
     void displayErrorMessage()
     {
-        help.text = "Good try! Press Clear To Try Again";
-        if (PlayerPrefs.GetInt("Voice") == 0)
-        {
-            incorrectVoiceOver.Play();
-            if (narration.isPlaying)
-                narration.Stop();
-        }
-        PointHandler.incorrect += 1.0f;
+        //help.text = "Good try! Press Clear To Try Again";
+        //if (PlayerPrefs.GetInt("Voice") == 0)
+        //{
+        //    incorrectVoiceOver.Play();
+        //    if (narration.isPlaying)
+        //        narration.Stop();
+        //}
+        //PointHandler.incorrect += 1.0f;
+
+        tryAgainCanvas.SetActive(true);
+        canvas.SetActive(false);
     }
 
 
@@ -593,9 +601,9 @@ public class StoryLoops2 : MonoBehaviour {
         //if (stepCount == 3) { buttonToFlash = 9; }
         if (stepCount == 3) { buttonToFlash = 10; }
 
-        myButtons[buttonToFlash].GetComponent<Image>().color = Color.white;
-        yield return new WaitForSeconds(0.5f);
         myButtons[buttonToFlash].GetComponent<Image>().color = new Color(0.258f, 0.941f, 0.090f, 1);
+        yield return new WaitForSeconds(0.5f);
+        myButtons[buttonToFlash].GetComponent<Image>().color = Color.white;
         yield return new WaitForSeconds(0.5f);
         StartCoroutine(buttonFlash());
     }
@@ -628,6 +636,9 @@ public class StoryLoops2 : MonoBehaviour {
     {
         canvas.SetActive(false);
         winCanvas.SetActive(false);
+        tryAgainCanvas.SetActive(false);
+        background.SetActive(false);
+
         GetComponent<Camera>().enabled = false;
         //if (!SceneManager.GetSceneByName("LoadingScreen").isLoaded)
         //SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);

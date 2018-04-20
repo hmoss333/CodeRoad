@@ -56,6 +56,8 @@ public class Tutorial : MonoBehaviour
     public GameObject canvas;
     public GameObject winCanvas;
     public GameObject tutorialCanvas;
+    public GameObject tryAgainCanvas;
+    public GameObject background;
 
     Light directionalLight;
 
@@ -258,10 +260,17 @@ public class Tutorial : MonoBehaviour
     public void addWalkBackward()
     {
         movement.Add("Backward");
-        if (tutorialCount == 4)
+        if (!MiniGame.isMainMenuGame)
         {
             showMoves.text = showMoves.text + "Backward..."; lineSkip(8); playSound(0);
-            tutorialCount++;
+        }
+        else
+        {
+            if (tutorialCount == 4)
+            {
+                showMoves.text = showMoves.text + "Backward..."; lineSkip(8); playSound(0);
+                tutorialCount++;
+            }
         }
 
         if (tutorialCount == 8) { tutorialCount++; }
@@ -328,7 +337,13 @@ public class Tutorial : MonoBehaviour
     }
 
     public void clearList()
-    {       
+    {
+        if (!MiniGame.isMainMenuGame)
+        {
+            canvas.SetActive(true);
+            tryAgainCanvas.SetActive(false);
+        }
+
         playSound(2);
         movementLengthCollection = 0;
         movement.Clear();
@@ -527,8 +542,20 @@ public class Tutorial : MonoBehaviour
             growthSwitch = true;
             shrinkSwitch = true;
             turned = false;
-        }       
-        checkTutorial();
+        }
+        //checkTutorial();
+        for (int i = 0; i < movement.Count; i++)
+            Debug.Log(movement[i].ToString());
+
+        if (!MiniGame.isMainMenuGame)
+        {
+            if (movement[0].Contains("Forward"))
+                displayWinScreen();
+            else
+                displayErrorMessage();
+        }
+        else
+            checkTutorial();
         move.text = "Done Moving";
     }
 
@@ -586,6 +613,19 @@ public class Tutorial : MonoBehaviour
         AnimateFriend.win = true;
         PointHandler.completedChallenges += 1.0f;
     }
+    void displayErrorMessage()
+    {
+        //showMoves.text = "Good try! Press Clear To Try Again";
+        //if (PlayerPrefs.GetInt("Voice") == 0)
+        //{
+        //    incorrectVoiceOver.Play();
+        //    if (narration.isPlaying)
+        //        narration.Stop();
+        //}
+        //PointHandler.incorrect += 1.0f;
+        canvas.SetActive(false);
+        tryAgainCanvas.SetActive(true);
+    }
 
     IEnumerator buttonFlash()
     {
@@ -607,9 +647,9 @@ public class Tutorial : MonoBehaviour
         if(tutorialCount == 14) { buttonToFlash = 10; }
         if(tutorialCount == 15) { buttonToFlash = 12; }
 
-        myButtons[buttonToFlash].GetComponent<Image>().color = Color.white;
-        yield return new WaitForSeconds(0.5f);        
         myButtons[buttonToFlash].GetComponent<Image>().color = new Color(0.258f, 0.941f, 0.090f, 1);
+        yield return new WaitForSeconds(0.5f);
+        myButtons[buttonToFlash].GetComponent<Image>().color = Color.white;
         yield return new WaitForSeconds(0.5f);
         StartCoroutine(buttonFlash());
     }
@@ -651,6 +691,11 @@ public class Tutorial : MonoBehaviour
     {
         //playSound(7);
         canvas.SetActive(false);
+        if (!MiniGame.isMainMenuGame)
+        {
+            tryAgainCanvas.SetActive(false);
+            background.SetActive(false);
+        }
         //if (!SceneManager.GetSceneByName("LoadingScreen").isLoaded)
         //    SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);
         //LoadManager.level = "MenuScreen";
