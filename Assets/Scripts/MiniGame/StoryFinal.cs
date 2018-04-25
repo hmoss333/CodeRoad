@@ -649,7 +649,7 @@ public class StoryFinal : MonoBehaviour {
         canvas.SetActive(false);
         winCanvas.SetActive(false);
         tryAgainCanvas.SetActive(false);
-        canvas.SetActive(false);
+        background.SetActive(false);
 
         GetComponent<Camera>().enabled = false;
         //if (!SceneManager.GetSceneByName("LoadingScreen").isLoaded)

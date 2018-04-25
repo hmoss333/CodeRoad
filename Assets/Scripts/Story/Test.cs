@@ -2291,7 +2291,7 @@ public class Test : MonoBehaviour
             sprite.mainTexture = Resources.Load("image15") as Texture;
             //sprite.mainTexture = Resources.Load("image16")) as Texture;
             StartCoroutine(FadeIn(sprite, 0.5f, startA));
-            message = "'I loop and I loop. \n Its really fun for me.' ";
+            message = "'I loop and I loop. \n It's really fun for me.' ";
             StartCoroutine(TypeText(nextAlpha, coverAlpha));
         }
         else if (count == 31)
