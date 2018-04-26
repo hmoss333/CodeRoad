@@ -1454,7 +1454,7 @@ public class Test : MonoBehaviour
                 break;
         }
 
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.01f);
         mainCamera.gameObject.SetActive(false);
         LoadingScreen.LoadScene("MiniGame");
         //SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);
@@ -1483,16 +1483,16 @@ public class Test : MonoBehaviour
         //while (!LoadingScreen.levelLoaded)
         //    yield return new WaitForSeconds(0.01f);
 
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.05f);
 
         inMiniGameMode = false;
         //storyView.alpha = 1f;
         //mainCamera.gameObject.SetActive(true);
         next.alpha = 1f;
-        //cover.alpha = 1f;
+        mainCamera.gameObject.SetActive(true);
         OnClick();
         storyView.alpha = 1f;
-        mainCamera.gameObject.SetActive(true);
+        //mainCamera.gameObject.SetActive(true);
     }
 
  //   IEnumerator FadeOther(UIWidget w, float durationInSeconds)
@@ -1531,8 +1531,16 @@ public class Test : MonoBehaviour
 
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (1)")) as GameObject;
                 //partPrefab = Instantiate(Part1);
-                partPrefab.transform.SetParent(storyView.transform);
-                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+                //partPrefab.transform.SetParent(storyView.transform);
+                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
+
+                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                foreach (UI2DSprite chars in characters)
+                {
+                    chars.ResetAnchors();
+                    chars.SetAnchor(UICamera.list[0].transform);
+                    chars.ResetAnchors();
+                }
             }
 
             audiosource.Stop();
@@ -1555,8 +1563,16 @@ public class Test : MonoBehaviour
 
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (1)")) as GameObject;
                 //partPrefab = Instantiate(Part1);
-                partPrefab.transform.SetParent(storyView.transform);
-                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+                //partPrefab.transform.SetParent(storyView.transform);
+                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
+
+                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                foreach (UI2DSprite chars in characters)
+                {
+                    chars.ResetAnchors();
+                    chars.SetAnchor(UICamera.list[0].transform);
+                    chars.ResetAnchors();
+                }
             }
 
             audiosource.Stop();
@@ -1579,8 +1595,16 @@ public class Test : MonoBehaviour
 
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (2)")) as GameObject;
                 //partPrefab = Instantiate(Part2);
-                partPrefab.transform.SetParent(storyView.transform);
-                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+                //partPrefab.transform.SetParent(storyView.transform);
+                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
+
+                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                foreach (UI2DSprite chars in characters)
+                {
+                    chars.ResetAnchors();
+                    chars.SetAnchor(UICamera.list[0].transform);
+                    chars.ResetAnchors();
+                }
             }
 
             audiosource.Stop();
@@ -1603,8 +1627,16 @@ public class Test : MonoBehaviour
 
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (2)")) as GameObject;
                 //partPrefab = Instantiate(Part2);
-                partPrefab.transform.SetParent(storyView.transform);
-                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+                //partPrefab.transform.SetParent(storyView.transform);
+                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
+
+                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                foreach (UI2DSprite chars in characters)
+                {
+                    chars.ResetAnchors();
+                    chars.SetAnchor(UICamera.list[0].transform);
+                    chars.ResetAnchors();
+                }
             }
 
             audiosource.Stop();
@@ -1627,8 +1659,16 @@ public class Test : MonoBehaviour
 
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (3)")) as GameObject;
                 //partPrefab = Instantiate(Part3);
-                partPrefab.transform.SetParent(storyView.transform);
-                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+                //partPrefab.transform.SetParent(storyView.transform);
+                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
+
+                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                foreach (UI2DSprite chars in characters)
+                {
+                    chars.ResetAnchors();
+                    chars.SetAnchor(UICamera.list[0].transform);
+                    chars.ResetAnchors();
+                }
             }
 
             audiosource.Stop();
@@ -1651,8 +1691,16 @@ public class Test : MonoBehaviour
 
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (3)")) as GameObject;
                 //partPrefab = Instantiate(Part3);
-                partPrefab.transform.SetParent(storyView.transform);
-                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+                //partPrefab.transform.SetParent(storyView.transform);
+                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
+
+                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                foreach (UI2DSprite chars in characters)
+                {
+                    chars.ResetAnchors();
+                    chars.SetAnchor(UICamera.list[0].transform);
+                    chars.ResetAnchors();
+                }
             }
 
             audiosource.Stop();
@@ -1675,8 +1723,16 @@ public class Test : MonoBehaviour
 
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (4)")) as GameObject;
                 //partPrefab = Instantiate(Part4);
-                partPrefab.transform.SetParent(storyView.transform);
-                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+                //partPrefab.transform.SetParent(storyView.transform);
+                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
+
+                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                foreach (UI2DSprite chars in characters)
+                {
+                    chars.ResetAnchors();
+                    chars.SetAnchor(UICamera.list[0].transform);
+                    chars.ResetAnchors();
+                }
             }
 
             audiosource.Stop();
@@ -1699,8 +1755,16 @@ public class Test : MonoBehaviour
 
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (4)")) as GameObject;
                 //partPrefab = Instantiate(Part4);
-                partPrefab.transform.SetParent(storyView.transform);
-                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+                //partPrefab.transform.SetParent(storyView.transform);
+                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
+
+                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                foreach (UI2DSprite chars in characters)
+                {
+                    chars.ResetAnchors();
+                    chars.SetAnchor(UICamera.list[0].transform);
+                    chars.ResetAnchors();
+                }
             }
 
             audiosource.Stop();
@@ -1723,8 +1787,16 @@ public class Test : MonoBehaviour
 
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (5)")) as GameObject;
                 //partPrefab = Instantiate(Part5);
-                partPrefab.transform.SetParent(storyView.transform);
-                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+                //partPrefab.transform.SetParent(storyView.transform);
+                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
+
+                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                foreach (UI2DSprite chars in characters)
+                {
+                    chars.ResetAnchors();
+                    chars.SetAnchor(UICamera.list[0].transform);
+                    chars.ResetAnchors();
+                }
             }
 
             audiosource.Stop();
@@ -1747,8 +1819,16 @@ public class Test : MonoBehaviour
 
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (5)")) as GameObject;
                 //partPrefab = Instantiate(Part5);
-                partPrefab.transform.SetParent(storyView.transform);
-                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+                //partPrefab.transform.SetParent(storyView.transform);
+                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
+
+                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                foreach (UI2DSprite chars in characters)
+                {
+                    chars.ResetAnchors();
+                    chars.SetAnchor(UICamera.list[0].transform);
+                    chars.ResetAnchors();
+                }
             }
 
             audiosource.Stop();
@@ -1772,8 +1852,16 @@ public class Test : MonoBehaviour
 
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (6)")) as GameObject;
                 //partPrefab = Instantiate(Part6);
-                partPrefab.transform.SetParent(storyView.transform);
-                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+                //partPrefab.transform.SetParent(storyView.transform);
+                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
+
+                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                foreach (UI2DSprite chars in characters)
+                {
+                    chars.ResetAnchors();
+                    chars.SetAnchor(UICamera.list[0].transform);
+                    chars.ResetAnchors();
+                }
             }
 
             audiosource.Stop();
@@ -1796,8 +1884,16 @@ public class Test : MonoBehaviour
 
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (6)")) as GameObject;
                 //partPrefab = Instantiate(Part6);
-                partPrefab.transform.SetParent(storyView.transform);
-                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+                //partPrefab.transform.SetParent(storyView.transform);
+                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
+
+                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                foreach (UI2DSprite chars in characters)
+                {
+                    chars.ResetAnchors();
+                    chars.SetAnchor(UICamera.list[0].transform);
+                    chars.ResetAnchors();
+                }
             }
 
             audiosource.Stop();
@@ -1820,8 +1916,16 @@ public class Test : MonoBehaviour
 
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (7)")) as GameObject;
                 //partPrefab = Instantiate(Part7);
-                partPrefab.transform.SetParent(storyView.transform);
-                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+                //partPrefab.transform.SetParent(storyView.transform);
+                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
+
+                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                foreach (UI2DSprite chars in characters)
+                {
+                    chars.ResetAnchors();
+                    chars.SetAnchor(UICamera.list[0].transform);
+                    chars.ResetAnchors();
+                }
             }
 
             audiosource.Stop();
@@ -1844,8 +1948,16 @@ public class Test : MonoBehaviour
 
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (7)")) as GameObject;
                 //partPrefab = Instantiate(Part7);
-                partPrefab.transform.SetParent(storyView.transform);
-                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+                //partPrefab.transform.SetParent(storyView.transform);
+                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
+
+                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                foreach (UI2DSprite chars in characters)
+                {
+                    chars.ResetAnchors();
+                    chars.SetAnchor(UICamera.list[0].transform);
+                    chars.ResetAnchors();
+                }
             }
 
             audiosource.Stop();
@@ -1868,8 +1980,16 @@ public class Test : MonoBehaviour
 
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (8)")) as GameObject;
                 //partPrefab = Instantiate(Part8);
-                partPrefab.transform.SetParent(storyView.transform);
-                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+                //partPrefab.transform.SetParent(storyView.transform);
+                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
+
+                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                foreach (UI2DSprite chars in characters)
+                {
+                    chars.ResetAnchors();
+                    chars.SetAnchor(UICamera.list[0].transform);
+                    chars.ResetAnchors();
+                }
             }
 
             audiosource.Stop();
@@ -1892,8 +2012,16 @@ public class Test : MonoBehaviour
 
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (8)")) as GameObject;
                 //partPrefab = Instantiate(Part8);
-                partPrefab.transform.SetParent(storyView.transform);
-                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+                //partPrefab.transform.SetParent(storyView.transform);
+                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
+
+                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                foreach (UI2DSprite chars in characters)
+                {
+                    chars.ResetAnchors();
+                    chars.SetAnchor(UICamera.list[0].transform);
+                    chars.ResetAnchors();
+                }
             }
 
             audiosource.Stop();
@@ -1917,8 +2045,16 @@ public class Test : MonoBehaviour
 
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (9)")) as GameObject;
                 //partPrefab = Instantiate(Part9);
-                partPrefab.transform.SetParent(storyView.transform);
-                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+                //partPrefab.transform.SetParent(storyView.transform);
+                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
+
+                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                foreach (UI2DSprite chars in characters)
+                {
+                    chars.ResetAnchors();
+                    chars.SetAnchor(UICamera.list[0].transform);
+                    chars.ResetAnchors();
+                }
             }
 
             audiosource.Stop();
@@ -1941,8 +2077,16 @@ public class Test : MonoBehaviour
 
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (9)")) as GameObject;
                 //partPrefab = Instantiate(Part9);
-                partPrefab.transform.SetParent(storyView.transform);
-                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+                //partPrefab.transform.SetParent(storyView.transform);
+                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
+
+                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                foreach (UI2DSprite chars in characters)
+                {
+                    chars.ResetAnchors();
+                    chars.SetAnchor(UICamera.list[0].transform);
+                    chars.ResetAnchors();
+                }
             }
 
             audiosource.Stop();
@@ -1965,8 +2109,16 @@ public class Test : MonoBehaviour
 
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (10)")) as GameObject;
                 //partPrefab = Instantiate(Part10);
-                partPrefab.transform.SetParent(storyView.transform);
-                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+                //partPrefab.transform.SetParent(storyView.transform);
+                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
+
+                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                foreach (UI2DSprite chars in characters)
+                {
+                    chars.ResetAnchors();
+                    chars.SetAnchor(UICamera.list[0].transform);
+                    chars.ResetAnchors();
+                }
             }
 
             audiosource.Stop();
@@ -1989,8 +2141,16 @@ public class Test : MonoBehaviour
 
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (10)")) as GameObject;
                 //partPrefab = Instantiate(Part10);
-                partPrefab.transform.SetParent(storyView.transform);
-                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+                //partPrefab.transform.SetParent(storyView.transform);
+                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
+
+                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                foreach (UI2DSprite chars in characters)
+                {
+                    chars.ResetAnchors();
+                    chars.SetAnchor(UICamera.list[0].transform);
+                    chars.ResetAnchors();
+                }
             }
 
             audiosource.Stop();
@@ -2013,8 +2173,16 @@ public class Test : MonoBehaviour
 
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (11)")) as GameObject;
                 //partPrefab = Instantiate(Part11);
-                partPrefab.transform.SetParent(storyView.transform);
-                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+                //partPrefab.transform.SetParent(storyView.transform);
+                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
+
+                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                foreach (UI2DSprite chars in characters)
+                {
+                    chars.ResetAnchors();
+                    chars.SetAnchor(UICamera.list[0].transform);
+                    chars.ResetAnchors();
+                }
             }
 
             audiosource.Stop();
@@ -2037,8 +2205,16 @@ public class Test : MonoBehaviour
 
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (11)")) as GameObject;
                 //partPrefab = Instantiate(Part11);
-                partPrefab.transform.SetParent(storyView.transform);
-                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+                //partPrefab.transform.SetParent(storyView.transform);
+                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
+
+                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                foreach (UI2DSprite chars in characters)
+                {
+                    chars.ResetAnchors();
+                    chars.SetAnchor(UICamera.list[0].transform);
+                    chars.ResetAnchors();
+                }
             }
 
             audiosource.Stop();
@@ -2062,8 +2238,16 @@ public class Test : MonoBehaviour
 
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (12)")) as GameObject;
                 //partPrefab = Instantiate(Part12);
-                partPrefab.transform.SetParent(storyView.transform);
-                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+                //partPrefab.transform.SetParent(storyView.transform);
+                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
+
+                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                foreach (UI2DSprite chars in characters)
+                {
+                    chars.ResetAnchors();
+                    chars.SetAnchor(UICamera.list[0].transform);
+                    chars.ResetAnchors();
+                }
             }
 
             audiosource.Stop();
@@ -2086,8 +2270,16 @@ public class Test : MonoBehaviour
 
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (12)")) as GameObject;
                 //partPrefab = Instantiate(Part12);
-                partPrefab.transform.SetParent(storyView.transform);
-                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+                //partPrefab.transform.SetParent(storyView.transform);
+                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
+
+                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                foreach (UI2DSprite chars in characters)
+                {
+                    chars.ResetAnchors();
+                    chars.SetAnchor(UICamera.list[0].transform);
+                    chars.ResetAnchors();
+                }
             }
 
             audiosource.Stop();
@@ -2110,8 +2302,16 @@ public class Test : MonoBehaviour
 
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (13)")) as GameObject;
                 //partPrefab = Instantiate(Part13);
-                partPrefab.transform.SetParent(storyView.transform);
-                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+                //partPrefab.transform.SetParent(storyView.transform);
+                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
+
+                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                foreach (UI2DSprite chars in characters)
+                {
+                    chars.ResetAnchors();
+                    chars.SetAnchor(UICamera.list[0].transform);
+                    chars.ResetAnchors();
+                }
             }
 
             audiosource.Stop();
@@ -2134,8 +2334,16 @@ public class Test : MonoBehaviour
 
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (13)")) as GameObject;
                 //partPrefab = Instantiate(Part13);
-                partPrefab.transform.SetParent(storyView.transform);
-                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+                //partPrefab.transform.SetParent(storyView.transform);
+                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
+
+                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                foreach (UI2DSprite chars in characters)
+                {
+                    chars.ResetAnchors();
+                    chars.SetAnchor(UICamera.list[0].transform);
+                    chars.ResetAnchors();
+                }
             }
 
             audiosource.Stop();
@@ -2158,8 +2366,16 @@ public class Test : MonoBehaviour
 
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (14)")) as GameObject;
                 //partPrefab = Instantiate(Part14);
-                partPrefab.transform.SetParent(storyView.transform);
-                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+                //partPrefab.transform.SetParent(storyView.transform);
+                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
+
+                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                foreach (UI2DSprite chars in characters)
+                {
+                    chars.ResetAnchors();
+                    chars.SetAnchor(UICamera.list[0].transform);
+                    chars.ResetAnchors();
+                }
             }
 
             audiosource.Stop();
@@ -2182,8 +2398,16 @@ public class Test : MonoBehaviour
 
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (14)")) as GameObject;
                 //partPrefab = Instantiate(Part14);
-                partPrefab.transform.SetParent(storyView.transform);
-                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+                //partPrefab.transform.SetParent(storyView.transform);
+                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
+
+                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                foreach (UI2DSprite chars in characters)
+                {
+                    chars.ResetAnchors();
+                    chars.SetAnchor(UICamera.list[0].transform);
+                    chars.ResetAnchors();
+                }
             }
 
             audiosource.Stop();
@@ -2207,8 +2431,16 @@ public class Test : MonoBehaviour
 
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (15)")) as GameObject;
                 //partPrefab = Instantiate(Part15);
-                partPrefab.transform.SetParent(storyView.transform);
-                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+                //partPrefab.transform.SetParent(storyView.transform);
+                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
+
+                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                foreach (UI2DSprite chars in characters)
+                {
+                    chars.ResetAnchors();
+                    chars.SetAnchor(UICamera.list[0].transform);
+                    chars.ResetAnchors();
+                }
             }
 
             audiosource.Stop();
@@ -2231,8 +2463,16 @@ public class Test : MonoBehaviour
 
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (15)")) as GameObject;
                 //partPrefab = Instantiate(Part15);
-                partPrefab.transform.SetParent(storyView.transform);
-                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+                //partPrefab.transform.SetParent(storyView.transform);
+                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
+
+                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                foreach (UI2DSprite chars in characters)
+                {
+                    chars.ResetAnchors();
+                    chars.SetAnchor(UICamera.list[0].transform);
+                    chars.ResetAnchors();
+                }
             }
 
             audiosource.Stop();
@@ -2255,8 +2495,16 @@ public class Test : MonoBehaviour
 
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (16)")) as GameObject;
                 //partPrefab = Instantiate(Part16);
-                partPrefab.transform.SetParent(storyView.transform);
-                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+                //partPrefab.transform.SetParent(storyView.transform);
+                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
+
+                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                foreach (UI2DSprite chars in characters)
+                {
+                    chars.ResetAnchors();
+                    chars.SetAnchor(UICamera.list[0].transform);
+                    chars.ResetAnchors();
+                }
             }
 
             audiosource.Stop();
@@ -2280,8 +2528,16 @@ public class Test : MonoBehaviour
 
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (16)")) as GameObject;
                 //partPrefab = Instantiate(Part16);
-                partPrefab.transform.SetParent(storyView.transform);
-                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+                //partPrefab.transform.SetParent(storyView.transform);
+                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
+
+                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                foreach (UI2DSprite chars in characters)
+                {
+                    chars.ResetAnchors();
+                    chars.SetAnchor(UICamera.list[0].transform);
+                    chars.ResetAnchors();
+                }
             }
 
             audiosource.Stop();
@@ -2305,8 +2561,16 @@ public class Test : MonoBehaviour
 
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (17)")) as GameObject;
                 //partPrefab = Instantiate(Part17);
-                partPrefab.transform.SetParent(storyView.transform);
-                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+                //partPrefab.transform.SetParent(storyView.transform);
+                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
+
+                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                foreach (UI2DSprite chars in characters)
+                {
+                    chars.ResetAnchors();
+                    chars.SetAnchor(UICamera.list[0].transform);
+                    chars.ResetAnchors();
+                }
             }
 
             audiosource.Stop();
@@ -2330,8 +2594,16 @@ public class Test : MonoBehaviour
 
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (17)")) as GameObject;
                 //partPrefab = Instantiate(Part17);
-                partPrefab.transform.SetParent(storyView.transform);
-                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+                //partPrefab.transform.SetParent(storyView.transform);
+                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
+
+                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                foreach (UI2DSprite chars in characters)
+                {
+                    chars.ResetAnchors();
+                    chars.SetAnchor(UICamera.list[0].transform);
+                    chars.ResetAnchors();
+                }
             }
 
             audiosource.Stop();
@@ -2356,8 +2628,16 @@ public class Test : MonoBehaviour
 
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (18)")) as GameObject;
                 //partPrefab = Instantiate(Part18);
-                partPrefab.transform.SetParent(storyView.transform);
-                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+                //partPrefab.transform.SetParent(storyView.transform);
+                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
+
+                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                foreach (UI2DSprite chars in characters)
+                {
+                    chars.ResetAnchors();
+                    chars.SetAnchor(UICamera.list[0].transform);
+                    chars.ResetAnchors();
+                }
             }
 
             audiosource.Stop();
@@ -2380,8 +2660,16 @@ public class Test : MonoBehaviour
 
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (18)")) as GameObject;
                 //partPrefab = Instantiate(Part18);
-                partPrefab.transform.SetParent(storyView.transform);
-                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+                //partPrefab.transform.SetParent(storyView.transform);
+                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
+
+                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                foreach (UI2DSprite chars in characters)
+                {
+                    chars.ResetAnchors();
+                    chars.SetAnchor(UICamera.list[0].transform);
+                    chars.ResetAnchors();
+                }
             }
 
             audiosource.Stop();
@@ -2404,8 +2692,16 @@ public class Test : MonoBehaviour
 
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (19)")) as GameObject;
                 //partPrefab = Instantiate(Part19);
-                partPrefab.transform.SetParent(storyView.transform);
-                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+                //partPrefab.transform.SetParent(storyView.transform);
+                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
+
+                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                foreach (UI2DSprite chars in characters)
+                {
+                    chars.ResetAnchors();
+                    chars.SetAnchor(UICamera.list[0].transform);
+                    chars.ResetAnchors();
+                }
             }
 
             audiosource.Stop();
@@ -2429,8 +2725,16 @@ public class Test : MonoBehaviour
 
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (19)")) as GameObject;
                 //partPrefab = Instantiate(Part19);
-                partPrefab.transform.SetParent(storyView.transform);
-                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+                //partPrefab.transform.SetParent(storyView.transform);
+                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
+
+                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                foreach (UI2DSprite chars in characters)
+                {
+                    chars.ResetAnchors();
+                    chars.SetAnchor(UICamera.list[0].transform);
+                    chars.ResetAnchors();
+                }
             }
 
             audiosource.Stop();
@@ -2454,8 +2758,16 @@ public class Test : MonoBehaviour
 
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (20)")) as GameObject;
                 //partPrefab = Instantiate(Part20);
-                partPrefab.transform.SetParent(storyView.transform);
-                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+                //partPrefab.transform.SetParent(storyView.transform);
+                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
+
+                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                foreach (UI2DSprite chars in characters)
+                {
+                    chars.ResetAnchors();
+                    chars.SetAnchor(UICamera.list[0].transform);
+                    chars.ResetAnchors();
+                }
             }
 
             audiosource.Stop();
@@ -2479,8 +2791,16 @@ public class Test : MonoBehaviour
 
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (20)")) as GameObject;
                 //partPrefab = Instantiate(Part20);
-                partPrefab.transform.SetParent(storyView.transform);
-                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+                //partPrefab.transform.SetParent(storyView.transform);
+                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
+
+                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                foreach (UI2DSprite chars in characters)
+                {
+                    chars.ResetAnchors();
+                    chars.SetAnchor(UICamera.list[0].transform);
+                    chars.ResetAnchors();
+                }
             }
 
             audiosource.Stop();
@@ -2505,8 +2825,16 @@ public class Test : MonoBehaviour
 
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (21)")) as GameObject;
                 //partPrefab = Instantiate(Part21);
-                partPrefab.transform.SetParent(storyView.transform);
-                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+                //partPrefab.transform.SetParent(storyView.transform);
+                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
+
+                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                foreach (UI2DSprite chars in characters)
+                {
+                    chars.ResetAnchors();
+                    chars.SetAnchor(UICamera.list[0].transform);
+                    chars.ResetAnchors();
+                }
             }
 
             audiosource.Stop();
@@ -2529,8 +2857,16 @@ public class Test : MonoBehaviour
 
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (21)")) as GameObject;
                 //partPrefab = Instantiate(Part21);
-                partPrefab.transform.SetParent(storyView.transform);
-                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+                //partPrefab.transform.SetParent(storyView.transform);
+                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
+
+                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                foreach (UI2DSprite chars in characters)
+                {
+                    chars.ResetAnchors();
+                    chars.SetAnchor(UICamera.list[0].transform);
+                    chars.ResetAnchors();
+                }
             }
 
             audiosource.Stop();
@@ -2553,8 +2889,16 @@ public class Test : MonoBehaviour
 
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (22)")) as GameObject;
                 //partPrefab = Instantiate(Part22);
-                partPrefab.transform.SetParent(storyView.transform);
-                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+                //partPrefab.transform.SetParent(storyView.transform);
+                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
+
+                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                foreach (UI2DSprite chars in characters)
+                {
+                    chars.ResetAnchors();
+                    chars.SetAnchor(UICamera.list[0].transform);
+                    chars.ResetAnchors();
+                }
             }
 
             audiosource.Stop();
@@ -2578,8 +2922,16 @@ public class Test : MonoBehaviour
 
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (22)")) as GameObject;
                 //partPrefab = Instantiate(Part22);
-                partPrefab.transform.SetParent(storyView.transform);
-                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+                //partPrefab.transform.SetParent(storyView.transform);
+                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
+
+                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                foreach (UI2DSprite chars in characters)
+                {
+                    chars.ResetAnchors();
+                    chars.SetAnchor(UICamera.list[0].transform);
+                    chars.ResetAnchors();
+                }
             }
 
             audiosource.Stop();
@@ -2604,8 +2956,16 @@ public class Test : MonoBehaviour
 
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (23)")) as GameObject;
                 //partPrefab = Instantiate(Part23);
-                partPrefab.transform.SetParent(storyView.transform);
-                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+                //partPrefab.transform.SetParent(storyView.transform);
+                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
+
+                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                foreach (UI2DSprite chars in characters)
+                {
+                    chars.ResetAnchors();
+                    chars.SetAnchor(UICamera.list[0].transform);
+                    chars.ResetAnchors();
+                }
             }
 
             audiosource.Stop();
@@ -2628,8 +2988,16 @@ public class Test : MonoBehaviour
 
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (23)")) as GameObject;
                 //partPrefab = Instantiate(Part23);
-                partPrefab.transform.SetParent(storyView.transform);
-                partPrefab.transform.localScale = new Vector3(1, 1, 1);
+                //partPrefab.transform.SetParent(storyView.transform);
+                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
+
+                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                foreach (UI2DSprite chars in characters)
+                {
+                    chars.ResetAnchors();
+                    chars.SetAnchor(UICamera.list[0].transform);
+                    chars.ResetAnchors();
+                }
             }
 
             audiosource.Stop();
