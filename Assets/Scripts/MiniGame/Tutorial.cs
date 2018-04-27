@@ -50,6 +50,7 @@ public class Tutorial : MonoBehaviour
     public Button[] myButtons;
     int buttonCount;
     bool buttonChoosen;
+    bool playing;
 
     int tutorialCount;
 
@@ -64,6 +65,7 @@ public class Tutorial : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        playing = false;
         moveBackground = GameObject.Find("MoveBackground");
         switch(PlayerPrefs.GetInt("fontSizeIndex"))
         {
@@ -344,6 +346,7 @@ public class Tutorial : MonoBehaviour
             tryAgainCanvas.SetActive(false);
         }
 
+        playing = false;
         playSound(2);
         movementLengthCollection = 0;
         movement.Clear();
@@ -379,7 +382,11 @@ public class Tutorial : MonoBehaviour
     }
     public void play()
     {
-        StartCoroutine(playStart());
+        if (!playing)
+        {
+            playing = true;
+            StartCoroutine(playStart());
+        }
     }
 
     public IEnumerator playStart()
@@ -647,9 +654,11 @@ public class Tutorial : MonoBehaviour
         if(tutorialCount == 14) { buttonToFlash = 10; }
         if(tutorialCount == 15) { buttonToFlash = 12; }
 
-        myButtons[buttonToFlash].GetComponent<Image>().color = new Color(0.258f, 0.941f, 0.090f, 1);
-        yield return new WaitForSeconds(0.5f);
+        //myButtons[buttonToFlash].GetComponent<Image>().color = new Color(0.258f, 0.941f, 0.090f, 1);
         myButtons[buttonToFlash].GetComponent<Image>().color = Color.white;
+        yield return new WaitForSeconds(0.5f);
+        //myButtons[buttonToFlash].GetComponent<Image>().color = Color.white;
+        myButtons[buttonToFlash].GetComponent<Image>().color = new Color(0.549f, 0.776f, 0.251f, 1);
         yield return new WaitForSeconds(0.5f);
         StartCoroutine(buttonFlash());
     }

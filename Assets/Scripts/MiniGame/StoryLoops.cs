@@ -59,12 +59,14 @@ public class StoryLoops : MonoBehaviour {
 
     public Button[] myButtons;
     int buttonCount;
+    bool playing;
 
     Light directionalLight;
 
     // Use this for initialization
     void Start()
     {
+        playing = false;
         GameObject moveBackground = GameObject.Find("MoveBackground");
         //GameObject helpBackground = GameObject.Find("HelpBackground");
         switch (PlayerPrefs.GetInt("fontSizeIndex"))
@@ -333,6 +335,7 @@ public class StoryLoops : MonoBehaviour {
         canvas.SetActive(true);
         tryAgainCanvas.SetActive(false);
 
+        playing = false;
         stepCount = 0;
         shrinkCount = 0;
         help.text = "Show Cathy how to <b><color=yellow>Loop</color></b> with a <b><color=yellow>Spin</color></b>.";
@@ -349,7 +352,11 @@ public class StoryLoops : MonoBehaviour {
     }
     public void play()
     {
-        StartCoroutine(playStart());
+        if (!playing)
+        {
+            playing = true;
+            StartCoroutine(playStart());
+        }
     }
     public IEnumerator playStart()
     {
@@ -597,9 +604,11 @@ public class StoryLoops : MonoBehaviour {
         //if (stepCount == 2) { buttonToFlash = 9; }
         if (stepCount == 2) { buttonToFlash = 10; }
 
-        myButtons[buttonToFlash].GetComponent<Image>().color = new Color(0.258f, 0.941f, 0.090f, 1);
-        yield return new WaitForSeconds(0.5f);
+        //myButtons[buttonToFlash].GetComponent<Image>().color = new Color(0.258f, 0.941f, 0.090f, 1);
         myButtons[buttonToFlash].GetComponent<Image>().color = Color.white;
+        yield return new WaitForSeconds(0.5f);
+        //myButtons[buttonToFlash].GetComponent<Image>().color = Color.white;
+        myButtons[buttonToFlash].GetComponent<Image>().color = new Color(0.549f, 0.776f, 0.251f, 1);
         yield return new WaitForSeconds(0.5f);
         StartCoroutine(buttonFlash());
     }

@@ -1480,19 +1480,13 @@ public class Test : MonoBehaviour
         //while (!SceneManager.GetSceneByName("Empty").isLoaded)
         //    yield return null;
 
-        //while (!LoadingScreen.levelLoaded)
-        //    yield return new WaitForSeconds(0.01f);
-
         yield return new WaitForSeconds(0.05f);
 
         inMiniGameMode = false;
-        //storyView.alpha = 1f;
-        //mainCamera.gameObject.SetActive(true);
-        next.alpha = 1f;
-        mainCamera.gameObject.SetActive(true);
-        OnClick();
         storyView.alpha = 1f;
-        //mainCamera.gameObject.SetActive(true);
+        mainCamera.gameObject.SetActive(true);
+        next.alpha = 1f;
+        OnClick();
     }
 
  //   IEnumerator FadeOther(UIWidget w, float durationInSeconds)
@@ -1525,9 +1519,9 @@ public class Test : MonoBehaviour
             if (!back)
             {
                 //while (!LoadingScreen.levelLoaded)
-                //    yield return new WaitForSeconds(0.01f);
+                //    yield return null;
 
-                Destroy(GameObject.Find("Part (1)(Clone)"));
+                //Destroy(GameObject.Find("Part (1)(Clone)"));
 
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (1)")) as GameObject;
                 //partPrefab = Instantiate(Part1);
