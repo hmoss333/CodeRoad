@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayMiniGame : MonoBehaviour {
 
@@ -10,6 +11,11 @@ public class PlayMiniGame : MonoBehaviour {
     //public string altLevelToLoad = "Tutorial";
     public GameObject challengeMenu;
     public GameObject challengeAvatar;
+    public GameObject[] avatars;
+    public GameObject currentAvatar;
+    int currentAvatarNum;
+    public Text avatarName;
+
     public UITexture background;
     private bool on = true;
     private bool loading = false;
@@ -27,9 +33,12 @@ public class PlayMiniGame : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        //ls = GameObject.Find("LoadingScreen").GetComponent<LoadingScreen>();
+        TurnOffAvatars(avatars);
         challengeMenu.SetActive(false);
         challengeAvatar.SetActive(false);
+        currentAvatarNum = 0;
+        currentAvatar = SetAvatar(avatars, currentAvatarNum);
+        SetAvatarName(currentAvatarNum);
 
         //if (PlayerPrefs.GetInt("MiniGameTutorial") == 0)
         //    tutorialMode = true;
@@ -59,6 +68,74 @@ public class PlayMiniGame : MonoBehaviour {
     void Update()
     {
 
+    }
+
+    void TurnOffAvatars(GameObject[] avatarList)
+    {
+        foreach (GameObject avatar in avatarList)
+        {
+            avatar.SetActive(false);
+        }
+    }
+
+    GameObject SetAvatar(GameObject[] avatarList, int posNum)
+    {
+        TurnOffAvatars(avatarList);
+
+        GameObject tempAvatar = avatarList[posNum];
+        SetAvatarName(posNum);
+        tempAvatar.SetActive(true);
+
+        return tempAvatar;
+    }
+
+    void SetAvatarName(int avatarPos)
+    {
+        switch (avatarPos)
+        {
+            case 0:
+                avatarName.text = "Tommy Turtle";
+                break;
+            case 1:
+                avatarName.text = "Ollie Owl";
+                break;
+            case 2:
+                avatarName.text = "Leo Lion";
+                break;
+            case 3:
+                avatarName.text = "Eleanor Elephant";
+                break;
+            case 4:
+                avatarName.text = "Cathy Cat";
+                break;
+            case 5:
+                avatarName.text = "Dudley Dog";
+                break;
+            default:
+                avatarName.text = "NULL";
+                Debug.Log("There is no character for this position. Please update this function to include any new characters.");
+                break;
+        }
+    }
+
+    public void NextAvatar( )
+    {
+        TurnOffAvatars(avatars);
+        if (currentAvatarNum < avatars.Length-1)
+            currentAvatarNum++;
+        else
+            currentAvatarNum = 0;
+        currentAvatar = SetAvatar(avatars, currentAvatarNum);
+    }
+
+    public void PreviousAvatar( )
+    {
+        TurnOffAvatars(avatars);
+        if (currentAvatarNum > 0)
+            currentAvatarNum--;
+        else
+            currentAvatarNum = avatars.Length-1;
+        currentAvatar = SetAvatar(avatars, currentAvatarNum);
     }
 
     public void ChallengeMovements ()
