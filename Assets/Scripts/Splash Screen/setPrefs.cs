@@ -26,6 +26,11 @@ public class setPrefs : MonoBehaviour {
             PlayerPrefs.SetInt("MiniGameTutorial", 0);
             PlayerPrefs.SetInt("levelSelect", 0);
 
+            PlayerPrefs.SetInt("MovementChallenge", 0);
+            PlayerPrefs.SetInt("AbilitiesChallenge", 0);
+            PlayerPrefs.SetInt("LoopChallenge", 0);
+            PlayerPrefs.SetInt("ComboChallenge", 0);
+
             PlayerPrefs.Save();
         }
 

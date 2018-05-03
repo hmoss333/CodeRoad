@@ -570,7 +570,8 @@ public class Loops2 : MonoBehaviour
 
     public void nextLevel()
     {
-       //GameStatusEventHandler.gameWasStopped();
+        //GameStatusEventHandler.gameWasStopped();
+        PlayerPrefs.SetInt("LoopChallenge", 1);
         StartCoroutine(mainMenuStart());
     }
 }

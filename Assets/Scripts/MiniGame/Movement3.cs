@@ -847,7 +847,7 @@ public class Movement3 : MonoBehaviour
 
     public void mainMenu()
     {
-       //GameStatusEventHandler.gameWasStopped();
+        //GameStatusEventHandler.gameWasStopped();
         StartCoroutine(mainMenuStart());
     }
     IEnumerator mainMenuStart()
@@ -866,7 +866,8 @@ public class Movement3 : MonoBehaviour
 
     public void nextLevel()
     {
-       //GameStatusEventHandler.gameWasStopped();
+        //GameStatusEventHandler.gameWasStopped();
+        PlayerPrefs.SetInt("MovementChallenge", 1);
         StartCoroutine(mainMenuStart());
     }
 }

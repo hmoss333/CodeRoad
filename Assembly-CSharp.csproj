@@ -229,6 +229,8 @@
      <Compile Include="Assets\Scripts\Main Menu\BackSettings.cs" />
      <Compile Include="Assets\Scripts\Main Menu\BackTherapyScript.cs" />
      <Compile Include="Assets\Scripts\Main Menu\BuyBookButton.cs" />
+     <Compile Include="Assets\Scripts\Main Menu\ChallenegeMenu.cs" />
+     <Compile Include="Assets\Scripts\Main Menu\ChallengeStarController.cs" />
      <Compile Include="Assets\Scripts\Main Menu\EducationKeyStorage.cs" />
      <Compile Include="Assets\Scripts\Main Menu\EducationScript.cs" />
      <Compile Include="Assets\Scripts\Main Menu\Exit.cs" />

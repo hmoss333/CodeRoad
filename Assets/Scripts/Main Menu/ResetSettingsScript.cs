@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class ResetSettingsScript : MonoBehaviour {
 
@@ -22,11 +23,11 @@ public class ResetSettingsScript : MonoBehaviour {
 	private Color half;
 
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
 		orig = playBackground.color;
 		half = new Color(playBackground.color.r/2, playBackground.color.g/2, playBackground.color.b/2);
-	}
+    }
 
 	public void OnClick() {
         PlayerPrefs.DeleteAll();
@@ -46,6 +47,12 @@ public class ResetSettingsScript : MonoBehaviour {
         PlayerPrefs.SetFloat("speedOfLabel", 1f);
         PlayerPrefs.SetInt("MiniGameTutorial", 0);
         PlayerPrefs.SetInt("levelSelect", 0);
+
+        PlayerPrefs.SetInt("MovementChallenge", 0);
+        PlayerPrefs.SetInt("AbilitiesChallenge", 0);
+        PlayerPrefs.SetInt("LoopChallenge", 0);
+        PlayerPrefs.SetInt("ComboChallenge", 0);
+
 
         //		educationCheck.value = false;
         //		educationBack.color = half;

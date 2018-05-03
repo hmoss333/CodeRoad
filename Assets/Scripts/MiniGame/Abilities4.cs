@@ -571,7 +571,8 @@ public class Abilities4 : MonoBehaviour
 
     public void nextLevel()
     {
-       //GameStatusEventHandler.gameWasStopped();
+        //GameStatusEventHandler.gameWasStopped();
+        PlayerPrefs.SetInt("AbilitiesChallenge", 1);
         StartCoroutine(mainMenuStart());
     }
 

@@ -562,7 +562,7 @@ public class Combos3 : MonoBehaviour
 
     public void mainMenu()
     {
-       //GameStatusEventHandler.gameWasStopped();
+        //GameStatusEventHandler.gameWasStopped();
         StartCoroutine(mainMenuStart());
     }
     IEnumerator mainMenuStart()
@@ -581,7 +581,8 @@ public class Combos3 : MonoBehaviour
 
     public void nextLevel()
     {
-       //GameStatusEventHandler.gameWasStopped();
+        //GameStatusEventHandler.gameWasStopped();
+        PlayerPrefs.SetInt("ComboChallenge", 1);
         StartCoroutine(mainMenuStart());
     }
 
