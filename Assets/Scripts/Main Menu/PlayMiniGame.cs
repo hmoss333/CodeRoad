@@ -11,6 +11,7 @@ public class PlayMiniGame : MonoBehaviour {
     //public string altLevelToLoad = "Tutorial";
     public GameObject challengeMenu; //can change this to Canvas and use alpha if need be (check which is better for performance)
     public GameObject challengeAvatar;
+    public GameObject characterSelectMenu;
     public GameObject[] avatars;
     public GameObject currentAvatar;
     int currentAvatarNum;
@@ -34,6 +35,7 @@ public class PlayMiniGame : MonoBehaviour {
     void Start()
     {
         TurnOffAvatars(avatars);
+        characterSelectMenu.SetActive(false);
         challengeMenu.SetActive(false);
         challengeAvatar.SetActive(false);
         currentAvatarNum = 0;
@@ -140,6 +142,8 @@ public class PlayMiniGame : MonoBehaviour {
 
     public void ChallengeMovements ()
     {
+        characterSelectMenu.SetActive(false);
+
         MiniGame.isMainMenuGame = true;
         MiniGame.currentLevel = MiniGame.Level.Movement1;
 
@@ -152,6 +156,8 @@ public class PlayMiniGame : MonoBehaviour {
 
     public void ChallengeAbilities()
     {
+        characterSelectMenu.SetActive(false);
+
         MiniGame.isMainMenuGame = true;
         MiniGame.currentLevel = MiniGame.Level.Abilities1;
 
@@ -164,6 +170,8 @@ public class PlayMiniGame : MonoBehaviour {
 
     public void ChallengeLoops()
     {
+        characterSelectMenu.SetActive(false);
+
         MiniGame.isMainMenuGame = true;
         MiniGame.currentLevel = MiniGame.Level.Loops1;
 
@@ -176,6 +184,8 @@ public class PlayMiniGame : MonoBehaviour {
 
     public void ChallengeCombos()
     {
+        characterSelectMenu.SetActive(false);
+
         MiniGame.isMainMenuGame = true;
         MiniGame.currentLevel = MiniGame.Level.Combos1;
 
@@ -188,6 +198,8 @@ public class PlayMiniGame : MonoBehaviour {
 
     public void Tutorial()
     {
+        characterSelectMenu.SetActive(false);
+
         MiniGame.isMainMenuGame = true;
         MiniGame.currentLevel = MiniGame.Level.Tutorial;
 
@@ -200,9 +212,19 @@ public class PlayMiniGame : MonoBehaviour {
 
     public void FreePlay()
     {
+        characterSelectMenu.SetActive(true);
         MiniGame.isMainMenuGame = true;
         MiniGame.currentLevel = MiniGame.Level.FreePlay;
 
+        //if (!loading)
+        //{
+        //    StartCoroutine(GoToScene("MiniGame"));
+        //    loading = true;
+        //}
+    }
+
+    public void StartGame()
+    {
         if (!loading)
         {
             StartCoroutine(GoToScene("MiniGame"));
@@ -212,6 +234,7 @@ public class PlayMiniGame : MonoBehaviour {
 
     public void ChallengeBack ()
     {
+        characterSelectMenu.SetActive(false);
         challengeMenu.SetActive(false);
         challengeAvatar.SetActive(false);
         frontPanel.alpha = 1f;
