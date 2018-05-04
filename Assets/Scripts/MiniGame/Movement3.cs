@@ -343,7 +343,7 @@ public class Movement3 : MonoBehaviour
         tryAgainCanvas.SetActive(false);
 
         backwardCount = 0;
-        help.text = "Tommy wants to have a face-to-face chat. Move <b><color=yellow>Forward</color></b> to Dog and then <b><color=yellow>Backwards</color></b> to Cat.";
+        help.text = "Tommy wants to have a face-to-face chat. \nMove <b><color=yellow>Forward</color></b> to Dog and then <b><color=yellow>Backwards</color></b> to Cat.";
         playSound(2);
         movementLengthCollection = 0;
         movement.Clear();
@@ -826,6 +826,8 @@ public class Movement3 : MonoBehaviour
 
     void displayWinScreen()
     {
+        PlayerPrefs.SetInt("MovementChallenge", 1);
+
         canvas.SetActive(false);
         winCanvas.SetActive(true);
         GetComponent<AudioSource>().Stop();
@@ -879,7 +881,6 @@ public class Movement3 : MonoBehaviour
     public void nextLevel()
     {
         //GameStatusEventHandler.gameWasStopped();
-        PlayerPrefs.SetInt("MovementChallenge", 1);
         StartCoroutine(mainMenuStart());
     }
 }

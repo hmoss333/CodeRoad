@@ -340,7 +340,7 @@ public class Movement2 : MonoBehaviour
         tryAgainCanvas.SetActive(false);
 
         backwardCount = 0;
-        help.text = "Oh No! Tommy passed his friend Cat! Walk <b><color=yellow>Backwards</color></b> until close enough to chat.";
+        help.text = "Oh No! Tommy passed his friend Cat! \nWalk <b><color=yellow>Backwards</color></b> until close enough to chat.";
         playSound(2);
         movementLengthCollection = 0;
         movement.Clear();

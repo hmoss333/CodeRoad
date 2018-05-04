@@ -340,7 +340,7 @@ public class Movement1 : MonoBehaviour
         tryAgainCanvas.SetActive(false);
 
         forwardCount = 0;
-        help.text = "Help Tommy say hello to Cat. Walk <b><color=yellow>Forward</color></b> until close enough to chat.";
+        help.text = "Help Tommy say hello to Cat. \nWalk <b><color=yellow>Forward</color></b> until close enough to chat.";
         narrationVoiceOverStop();
         playSound(2);
         movementLengthCollection = 0;
@@ -366,15 +366,26 @@ public class Movement1 : MonoBehaviour
         playSound(8);
         yield return new WaitForSeconds(1);
         facingRight = true;
-        if (!loopState)
+        //if (!loopState)
+        //{
+        //    movementLengthCollection = 0;
+        //    player.transform.localScale = new Vector3(2, 2, 2);
+        //    player.transform.rotation = Quaternion.Euler(0, 90, 0);
+        //    player.transform.position = new Vector3(-2.64f, -3.72f, 0.28f);
+        //    StartCoroutine(playingMovement());
+        //}
+        //else { move.text = "Must Close All Loops To Play"; }
+
+        if (loopState)
         {
-            movementLengthCollection = 0;
-            player.transform.localScale = new Vector3(2, 2, 2);
-            player.transform.rotation = Quaternion.Euler(0, 90, 0);
-            player.transform.position = new Vector3(-2.64f, -3.72f, 0.28f);
-            StartCoroutine(playingMovement());
+            endLoop();
         }
-        else { move.text = "Must Close All Loops To Play"; }
+
+        movementLengthCollection = 0;
+        player.transform.localScale = new Vector3(2, 2, 2);
+        player.transform.rotation = Quaternion.Euler(0, 90, 0);
+        player.transform.position = new Vector3(-2.64f, -3.72f, 0.28f);
+        StartCoroutine(playingMovement());
     }
 
     public void slider()

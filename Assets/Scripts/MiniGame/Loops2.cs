@@ -51,6 +51,8 @@ public class Loops2 : MonoBehaviour
     public Text help;
     public GameObject canvas;
     public GameObject winCanvas;
+    public GameObject tryAgainCanvas;
+    public GameObject background;
 
     public Button[] myButtons;
     int buttonCount;
@@ -61,30 +63,30 @@ public class Loops2 : MonoBehaviour
     void Start()
     {
         GameObject moveBackground = GameObject.Find("MoveBackground");
-        GameObject helpBackground = GameObject.Find("HelpBackground");
+        //GameObject helpBackground = GameObject.Find("HelpBackground");
         switch(PlayerPrefs.GetInt("fontSizeIndex"))
         {
             case 0:
                 moveBackground.transform.localScale = new Vector2(1.0f, 1.0f);
-                helpBackground.transform.localScale = new Vector2(1.0f, 1.0f);
-                help.GetComponent<RectTransform>().sizeDelta = new Vector2(200.0f, 145);
-                showMoves.GetComponent<RectTransform>().sizeDelta = new Vector2(375, 145);
+                //helpBackground.transform.localScale = new Vector2(1.0f, 1.0f);
+                //help.GetComponent<RectTransform>().sizeDelta = new Vector2(200.0f, 145);
+                //showMoves.GetComponent<RectTransform>().sizeDelta = new Vector2(375, 145);
                 break;
             case 1:
                 moveBackground.transform.localScale = new Vector2(1.0f, 1.2f);
-                helpBackground.transform.localScale = new Vector2(1.3f, 1.2f);
-                help.GetComponent<RectTransform>().sizeDelta = new Vector2(250.0f, 190);
-                showMoves.GetComponent<RectTransform>().sizeDelta = new Vector2(375, 190);
+                //helpBackground.transform.localScale = new Vector2(1.3f, 1.2f);
+                //help.GetComponent<RectTransform>().sizeDelta = new Vector2(250.0f, 190);
+                //showMoves.GetComponent<RectTransform>().sizeDelta = new Vector2(375, 190);
                 break;
             case 2:
                 moveBackground.transform.localScale = new Vector2(1.0f, 1.5f);
-                helpBackground.transform.localScale = new Vector2(1.5f, 1.5f);
-                help.GetComponent<RectTransform>().sizeDelta = new Vector2(300.0f, 210);
-                showMoves.GetComponent<RectTransform>().sizeDelta = new Vector2(375, 210);
+                //helpBackground.transform.localScale = new Vector2(1.5f, 1.5f);
+                //help.GetComponent<RectTransform>().sizeDelta = new Vector2(300.0f, 210);
+                //showMoves.GetComponent<RectTransform>().sizeDelta = new Vector2(375, 210);
                 break;
         }
         showMoves.fontSize = 25;// PlayerPrefs.GetInt("fontSize");
-        help.fontSize = 25;// PlayerPrefs.GetInt("fontSize")-5;
+        //help.fontSize = 25;// PlayerPrefs.GetInt("fontSize")-5;
         loopState = false;
         loopsFromSlider = 2;
         howManyTimesToLoop.text = "Times To Loop : " + loopsFromSlider;
@@ -309,8 +311,11 @@ public class Loops2 : MonoBehaviour
 
     public void clearList()
     {
+        canvas.SetActive(true);
+        tryAgainCanvas.SetActive(false);
+
         shrinkCount = 0;
-        help.text = "Tommy wants a <b><color=yellow>Loop</color></b> with a <b><color=yellow>Spin</color></b> and <b><color=yellow>Grow</color></b>. Increase <b><color=yellow>Times</color></b> to <b><color=yellow>Loop</color></b> and see him go.";
+        help.text = "Tommy wants a <b><color=yellow>Loop</color></b> with a <b><color=yellow>Spin</color></b> and <b><color=yellow>Grow</color></b>. \nIncrease <b><color=yellow>Times</color></b> to <b><color=yellow>Loop</color></b> and see him go.";
         playSound(2);
         movementLengthCollection = 0;
         movement.Clear();
@@ -331,15 +336,26 @@ public class Loops2 : MonoBehaviour
         playSound(8);
         yield return new WaitForSeconds(1);
         facingRight = true;
-        if (!loopState)
+        //if (!loopState)
+        //{
+        //    movementLengthCollection = 0;
+        //    player.transform.localScale = new Vector3(2, 2, 2);
+        //    player.transform.rotation = Quaternion.Euler(0, 90, 0);
+        //    player.transform.position = new Vector3(-2.64f, -3.72f, 0.28f);
+        //    StartCoroutine(playingMovement());
+        //}
+        //else { move.text = "Must Close All Loops To Play"; }
+
+        if (loopState)
         {
-            movementLengthCollection = 0;
-            player.transform.localScale = new Vector3(2, 2, 2);
-            player.transform.rotation = Quaternion.Euler(0, 90, 0);
-            player.transform.position = new Vector3(-2.64f, -3.72f, 0.28f);
-            StartCoroutine(playingMovement());
+            endLoop();
         }
-        else { move.text = "Must Close All Loops To Play"; }
+
+        movementLengthCollection = 0;
+        player.transform.localScale = new Vector3(2, 2, 2);
+        player.transform.rotation = Quaternion.Euler(0, 90, 0);
+        player.transform.position = new Vector3(-2.64f, -3.72f, 0.28f);
+        StartCoroutine(playingMovement());
     }
 
     public void slider()
@@ -509,6 +525,8 @@ public class Loops2 : MonoBehaviour
     }
       void displayWinScreen()
     {
+        PlayerPrefs.SetInt("LoopChallenge", 1);
+
         canvas.SetActive(false);
         winCanvas.SetActive(true);
         GetComponent<AudioSource>().Stop();
@@ -522,14 +540,17 @@ public class Loops2 : MonoBehaviour
 
     void displayErrorMessage()
     {
-            help.text = "Good try! Press Clear To Try Again";
-            if (PlayerPrefs.GetInt("Voice") == 0)
-            {
-                incorrectVoiceOver.Play();
-                if (narration.isPlaying)
-                    narration.Stop();
-            }
-            PointHandler.incorrect += 1.0f;
+        //help.text = "Good try! Press Clear To Try Again";
+        //if (PlayerPrefs.GetInt("Voice") == 0)
+        //{
+        //    incorrectVoiceOver.Play();
+        //    if (narration.isPlaying)
+        //        narration.Stop();
+        //}
+        //PointHandler.incorrect += 1.0f;
+
+        tryAgainCanvas.SetActive(true);
+        canvas.SetActive(false);
     }
 
 
@@ -556,9 +577,13 @@ public class Loops2 : MonoBehaviour
     }
     IEnumerator mainMenuStart()
     {
-        playSound(7);
+        //playSound(7);
         canvas.SetActive(false);
         winCanvas.SetActive(false);
+        tryAgainCanvas.SetActive(false);
+        background.SetActive(false);
+
+        GetComponent<Camera>().enabled = false;
         directionalLight.gameObject.SetActive(false);
         LoadingScreen.LoadScene("MenuScreen");
         //SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);
@@ -571,7 +596,6 @@ public class Loops2 : MonoBehaviour
     public void nextLevel()
     {
         //GameStatusEventHandler.gameWasStopped();
-        PlayerPrefs.SetInt("LoopChallenge", 1);
         StartCoroutine(mainMenuStart());
     }
 }
