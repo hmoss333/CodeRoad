@@ -82,7 +82,7 @@ public class parentzoneScript : MonoBehaviour {
             if (optionClick)
             {
                 optionspanel.alpha = 1;
-                background.mainTexture = Resources.Load("background_st") as Texture;
+                background.mainTexture = Resources.Load("background_challenge") as Texture;
             }
             else if (bookClick)
             {
@@ -106,7 +106,7 @@ public class parentzoneScript : MonoBehaviour {
             if (optionClick)
             {
                 optionspanel.alpha = 1;
-                background.mainTexture = Resources.Load("background_st") as Texture;
+                background.mainTexture = Resources.Load("background_challenge") as Texture;
             }
             else if (bookClick)
             {
@@ -129,7 +129,7 @@ public class parentzoneScript : MonoBehaviour {
             if (optionClick)
             {
                 optionspanel.alpha = 1;
-                background.mainTexture = Resources.Load("background_st") as Texture;
+                background.mainTexture = Resources.Load("background_challenge") as Texture;
             }
             else if (bookClick)
             {
@@ -152,7 +152,7 @@ public class parentzoneScript : MonoBehaviour {
             if (optionClick)
             {
                 optionspanel.alpha = 1;
-                background.mainTexture = Resources.Load("background_st") as Texture;
+                background.mainTexture = Resources.Load("background_challenge") as Texture;
             }
             else if (bookClick)
             {

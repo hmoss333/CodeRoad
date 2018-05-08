@@ -578,6 +578,8 @@ public class Abilities4 : MonoBehaviour
     }
     IEnumerator mainMenuStart()
     {
+        PlayMiniGame.returnFromChallenge = true;
+
         //playSound(7);
         canvas.SetActive(false);
         winCanvas.SetActive(false);

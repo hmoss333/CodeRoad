@@ -506,7 +506,9 @@ public class GameManager : MonoBehaviour {
     }
     IEnumerator mainMenuStart()
     {
-        playSound(7);
+        PlayMiniGame.returnFromChallenge = true;
+
+        //playSound(7);
         canvas.SetActive(false);
         directionalLight.gameObject.SetActive(false);
         LoadingScreen.LoadScene("MenuScreen");

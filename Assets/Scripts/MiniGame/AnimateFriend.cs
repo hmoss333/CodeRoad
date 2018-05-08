@@ -15,7 +15,7 @@ public class AnimateFriend : MonoBehaviour {
     {
         win = false;
         if (MiniGame.currentLevel == MiniGame.Level.Abilities3) { StartCoroutine(GrowShrink()); }
-        if (MiniGame.currentLevel == MiniGame.Level.Combos1 || MiniGame.currentLevel == MiniGame.Level.Story3) { jumpSwitch = true; StartCoroutine(Combo1()); }
+        if (MiniGame.currentLevel == MiniGame.Level.Combos1 || MiniGame.currentLevel == MiniGame.Level.Story3 || MiniGame.currentLevel == MiniGame.Level.Story6) { Debug.Log("jumpspin"); jumpSwitch = true; StartCoroutine(Combo1()); }
     }
 
     	
@@ -30,7 +30,7 @@ public class AnimateFriend : MonoBehaviour {
                 gameObject.transform.Rotate(0, Time.deltaTime * 370, 0);
             }
 
-            if (MiniGame.currentLevel == MiniGame.Level.Combos1 || MiniGame.currentLevel == MiniGame.Level.Story3)
+            if (MiniGame.currentLevel == MiniGame.Level.Combos1 || MiniGame.currentLevel == MiniGame.Level.Story3 || MiniGame.currentLevel == MiniGame.Level.Story6)
             {
                 if (!spin)
                 {

@@ -343,7 +343,7 @@ public class StoryLoops2 : MonoBehaviour {
         playing = false;
         stepCount = 0;
         shrinkCount = 0;
-        help.text = "Show Dudley how to <b><color=yellow>Loop</color></b> by making Tommy <b><color=yellow>Jump</color></b> and <b><color=yellow>Spin</color></b>. Its fun to do it over and over again.";
+        help.text = "Show Dudley how to <b><color=yellow>Loop</color></b> by making Tommy <b><color=yellow>Jump</color></b> and <b><color=yellow>Spin</color></b>. It's fun to do it over and over again.";
         playSound(2);
         movementLengthCollection = 0;
         movement.Clear();

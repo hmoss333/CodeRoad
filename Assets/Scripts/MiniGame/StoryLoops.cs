@@ -308,9 +308,6 @@ public class StoryLoops : MonoBehaviour {
             loopState = false;
             playSound(3);
         }
-
-        //if (stepCount == 2)
-        //    stepCount++;
     }
 
     void lineSkip(int counter)

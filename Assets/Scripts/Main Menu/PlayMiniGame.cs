@@ -25,6 +25,8 @@ public class PlayMiniGame : MonoBehaviour {
     public UIPanel frontPanel;
     public UICamera uiCam;
 
+    public static bool returnFromChallenge = false;
+
     //LoadingScreen ls;
 
     public void switching()
@@ -46,23 +48,19 @@ public class PlayMiniGame : MonoBehaviour {
         //    tutorialMode = true;
         //else
         //    tutorialMode = false;
+
+        if (returnFromChallenge)
+        {
+            SetChallengeScreen();
+            returnFromChallenge = false;
+        }
     }
 
     public void OnClick()
     {
         if (on)
         {
-            frontPanel.alpha = 0;
-            background.mainTexture = Resources.Load("background_clear") as Texture;
-            challengeMenu.SetActive(true);
-            challengeAvatar.SetActive(true);
-
-            //ls.LoadScene(levelToLoad);
-            //ls.ChangeText("Let's play...");
-            //SceneManager.LoadSceneAsync("LoadingScreen", LoadSceneMode.Additive);
-            //Resources.UnloadUnusedAssets();
-
-            //StartCoroutine(GoToScene(levelToLoad));
+            SetChallengeScreen();
         }
     }
 
@@ -138,6 +136,19 @@ public class PlayMiniGame : MonoBehaviour {
         else
             currentAvatarNum = avatars.Length-1;
         currentAvatar = SetAvatar(avatars, currentAvatarNum);
+    }
+
+    public void SetChallengeScreen ()
+    {
+        frontPanel.alpha = 0f;
+        background.mainTexture = Resources.Load("background_challenge") as Texture;
+        challengeMenu.SetActive(true);
+        challengeAvatar.SetActive(true);
+    }
+
+    public void PlayLevel(int levelNum)
+    {
+        
     }
 
     public void ChallengeMovements ()

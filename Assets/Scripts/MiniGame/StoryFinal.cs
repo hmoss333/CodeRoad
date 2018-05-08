@@ -324,9 +324,6 @@ public class StoryFinal : MonoBehaviour {
             loopState = false;
             playSound(3);
         }
-
-        if (stepCount == 5)
-            stepCount++;
     }
 
     void lineSkip(int counter)
@@ -620,6 +617,8 @@ public class StoryFinal : MonoBehaviour {
         if (stepCount == 4) { buttonToFlash = 4; }
         //if (stepCount == 5) { buttonToFlash = 9; }
         if (stepCount == 5) { buttonToFlash = 10; }
+
+        Debug.Log(stepCount);
 
         //myButtons[buttonToFlash].GetComponent<Image>().color = new Color(0.258f, 0.941f, 0.090f, 1);
         myButtons[buttonToFlash].GetComponent<Image>().color = Color.white;
