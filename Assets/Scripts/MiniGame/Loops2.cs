@@ -315,7 +315,7 @@ public class Loops2 : MonoBehaviour
         tryAgainCanvas.SetActive(false);
 
         shrinkCount = 0;
-        help.text = "Tommy wants a <b><color=yellow>Loop</color></b> with a <b><color=yellow>Spin</color></b> and <b><color=yellow>Grow</color></b>. \nIncrease <b><color=yellow>Times</color></b> to <b><color=yellow>Loop</color></b> and see him go.";
+        help.text = "Tommy wants a <b><color=yellow>Loop</color></b> with a <b><color=yellow>Spin</color></b> and <b><color=yellow>Grow</color></b>. \nUse your code and see him go.";
         playSound(2);
         movementLengthCollection = 0;
         movement.Clear();
@@ -525,7 +525,7 @@ public class Loops2 : MonoBehaviour
     }
       void displayWinScreen()
     {
-        PlayerPrefs.SetInt("LoopChallenge", 1);
+        PlayerPrefs.SetInt("Level9", 1);
 
         canvas.SetActive(false);
         winCanvas.SetActive(true);
@@ -598,6 +598,8 @@ public class Loops2 : MonoBehaviour
     public void nextLevel()
     {
         //GameStatusEventHandler.gameWasStopped();
-        StartCoroutine(mainMenuStart());
+        //StartCoroutine(mainMenuStart());
+        MiniGame.UnloadScene(MiniGame.Level.Level9);
+        MiniGame.LoadScene(MiniGame.Level.Level10);
     }
 }

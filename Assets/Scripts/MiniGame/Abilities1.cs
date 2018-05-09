@@ -520,6 +520,8 @@ public class Abilities1 : MonoBehaviour
 
     void displayWinScreen()
     {
+        PlayerPrefs.SetInt("Level4", 1);
+
         canvas.SetActive(false);
         winCanvas.SetActive(true);
         GetComponent<AudioSource>().Stop();
@@ -586,8 +588,8 @@ public class Abilities1 : MonoBehaviour
     public void nextLevel()
     {
         //SceneManager.LoadSceneAsync("Abilities2");
-        MiniGame.UnloadScene(MiniGame.Level.Abilities1);
-        MiniGame.LoadScene(MiniGame.Level.Abilities2);
+        MiniGame.UnloadScene(MiniGame.Level.Level4);
+        MiniGame.LoadScene(MiniGame.Level.Level5);
     }
 
 }

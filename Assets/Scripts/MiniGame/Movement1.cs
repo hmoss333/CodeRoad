@@ -610,6 +610,8 @@ public class Movement1 : MonoBehaviour
 
     void displayWinScreen()
     {
+        PlayerPrefs.SetInt("Level1", 1);
+
         canvas.SetActive(false);
         winCanvas.SetActive(true);
         GetComponent<AudioSource>().Stop();
@@ -675,8 +677,8 @@ public class Movement1 : MonoBehaviour
 
     public void nextLevel()
     {
-        MiniGame.UnloadScene(MiniGame.Level.Movement1);
-        MiniGame.LoadScene(MiniGame.Level.Movement2);
+        MiniGame.UnloadScene(MiniGame.Level.Level1);
+        MiniGame.LoadScene(MiniGame.Level.Level2);
     }
 }
 

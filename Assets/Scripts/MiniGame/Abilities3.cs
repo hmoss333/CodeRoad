@@ -315,7 +315,7 @@ public class Abilities3 : MonoBehaviour
         tryAgainCanvas.SetActive(false);
 
         shrinkCount = 0;
-        help.text = "<b><color=yellow>Grow</color></b> big then <b><color=yellow>Shrink</color></b> small! It's the most fun of all!";
+        help.text = "Show Dudley you can <b><color=yellow>Grow</color></b> big, \nthen <b><color=yellow>Jump</color></b> to celebrate!";
         playSound(2);
         movementLengthCollection = 0;
         movement.Clear();
@@ -508,7 +508,7 @@ public class Abilities3 : MonoBehaviour
 
     void checkCorrect()
     {
-        if (shrinkCount >= 1 && movement[0].Equals("Grow"))
+        if (movement[0].Equals("Grow") && movement[1].Equals(startFormat + "Jump" + endFormat))
         {
             displayWinScreen();
         }
@@ -520,6 +520,8 @@ public class Abilities3 : MonoBehaviour
 
     void displayWinScreen()
     {
+        PlayerPrefs.SetInt("Level6", 1);
+
         canvas.SetActive(false);
         winCanvas.SetActive(true);
         GetComponent<AudioSource>().Stop();
@@ -586,8 +588,8 @@ public class Abilities3 : MonoBehaviour
     public void nextLevel()
     {
         //SceneManager.LoadSceneAsync("Abilities4");
-        MiniGame.UnloadScene(MiniGame.Level.Abilities3);
-        MiniGame.LoadScene(MiniGame.Level.Abilities4);
+        MiniGame.UnloadScene(MiniGame.Level.Level6);
+        MiniGame.LoadScene(MiniGame.Level.Level7);
     }
 
 }

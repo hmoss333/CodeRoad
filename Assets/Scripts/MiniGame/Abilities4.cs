@@ -316,7 +316,7 @@ public class Abilities4 : MonoBehaviour
         tryAgainCanvas.SetActive(false);
 
         shrinkCount = 0;
-        help.text = "Try coding in this order! \n<b><color=yellow>Grow, Spin, Turn, Jump, Sing, Shrink</color></b>";
+        help.text = "Try coding in this order! \n<b><color=yellow>Grow, Spin, Jump</color></b>";
         playSound(2);
         movementLengthCollection = 0;
         movement.Clear();
@@ -511,7 +511,7 @@ public class Abilities4 : MonoBehaviour
     {
         try
         {
-            if (movement[0].Equals("Grow") && movement[1].Equals("Spin") && movement[2].Equals("Turn") && movement[3].Equals("Jump") && movement[4].Equals("Sing") && movement[5].Equals(startFormat + "Shrink" + endFormat))
+            if (movement[0].Equals("Grow") && movement[1].Equals("Spin") && movement[2].Equals(startFormat + "Jump" + endFormat))
             {
                 displayWinScreen();
             }
@@ -528,7 +528,7 @@ public class Abilities4 : MonoBehaviour
 
     void displayWinScreen()
     {
-        PlayerPrefs.SetInt("AbilitiesChallenge", 1);
+        PlayerPrefs.SetInt("Level7", 1);
 
         canvas.SetActive(false);
         winCanvas.SetActive(true);
@@ -599,7 +599,9 @@ public class Abilities4 : MonoBehaviour
     public void nextLevel()
     {
         //GameStatusEventHandler.gameWasStopped();
-        StartCoroutine(mainMenuStart());
+        //StartCoroutine(mainMenuStart());
+        MiniGame.UnloadScene(MiniGame.Level.Level7);
+        MiniGame.LoadScene(MiniGame.Level.Level8);
     }
 
 }

@@ -526,6 +526,8 @@ public class Combos1 : MonoBehaviour
     }
     void displayWinScreen()
     {
+        PlayerPrefs.SetInt("Level10", 1);
+
         canvas.SetActive(false);
         winCanvas.SetActive(true);
         GetComponent<AudioSource>().Stop();
@@ -592,7 +594,7 @@ public class Combos1 : MonoBehaviour
     public void nextLevel()
     {
         //SceneManager.LoadSceneAsync("Combos2");
-        MiniGame.UnloadScene(MiniGame.Level.Combos1);
-        MiniGame.LoadScene(MiniGame.Level.Combos2);
+        MiniGame.UnloadScene(MiniGame.Level.Level10);
+        MiniGame.LoadScene(MiniGame.Level.Level11);
     }
 }

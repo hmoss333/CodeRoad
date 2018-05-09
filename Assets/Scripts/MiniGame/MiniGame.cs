@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class MiniGame : MonoBehaviour {
 
-    public enum Level { Tutorial, Movement1, Movement2, Movement3, Abilities1, Abilities2, Abilities3, Abilities4, Combos1, Combos2, Combos3, Loops1, Loops2, Story1, Story2, Story3, Story4, Story5, Story6, Story7, FreePlay };
+    public enum Level { Tutorial, Level1, Level2, Level3, Level4, Level5, Level6, Level7, Level8, Level9, Level10, Level11, Level12, Story1, Story2, Story3, Story4, Story5, Story6, Story7, FreePlay };
     public static Level currentLevel;
 
     public static bool isMainMenuGame;

@@ -525,6 +525,8 @@ public class Loops1 : MonoBehaviour
     }
     void displayWinScreen()
     {
+        PlayerPrefs.SetInt("Level8", 1);
+
         canvas.SetActive(false);
         winCanvas.SetActive(true);
         GetComponent<AudioSource>().Stop();
@@ -591,8 +593,8 @@ public class Loops1 : MonoBehaviour
     public void nextLevel()
     {
         //SceneManager.LoadSceneAsync("Loops2");
-        MiniGame.UnloadScene(MiniGame.Level.Loops1);
-        MiniGame.LoadScene(MiniGame.Level.Loops2);
+        MiniGame.UnloadScene(MiniGame.Level.Level8);
+        MiniGame.LoadScene(MiniGame.Level.Level9);
     }
 
 }

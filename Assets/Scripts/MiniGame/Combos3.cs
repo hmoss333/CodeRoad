@@ -326,7 +326,7 @@ public class Combos3 : MonoBehaviour
         spinCount = 0;
         jumpCount = 0;
         shrinkCount = 0;
-        help.text = "<b><color=yellow>Turn</color></b> towards Cat and show him you can <b><color=yellow>Grow</color></b> too! \n<b><color=yellow>Jump</color></b> for joy after you do!";
+        help.text = "Walk <b><color=yellow>Backward</color></b> towards Cathy and show her you can \n<b><color=yellow>Grow</color></b> too! <b><color=yellow>Jump</color></b> for joy after you do!";
         playSound(2);
         movementLengthCollection = 0;
         movement.Clear();
@@ -522,7 +522,7 @@ public class Combos3 : MonoBehaviour
     {
         try
         {
-            if (movement[0].Equals("Turn") && movement[1].Equals("Grow") && movement[2].Equals(startFormat + "Jump" + endFormat))
+            if (movement[0].Equals("Backward") && movement[1].Equals("Grow") && movement[2].Equals(startFormat + "Jump" + endFormat))
             {
                 displayWinScreen();
             }
@@ -537,7 +537,7 @@ public class Combos3 : MonoBehaviour
     }
      void displayWinScreen()
     {
-        PlayerPrefs.SetInt("ComboChallenge", 1);
+        PlayerPrefs.SetInt("Level12", 1);
 
         canvas.SetActive(false);
         winCanvas.SetActive(true);

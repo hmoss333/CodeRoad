@@ -148,78 +148,67 @@ public class PlayMiniGame : MonoBehaviour {
 
     public void PlayLevel(int levelNum)
     {
-        
-    }
-
-    public void ChallengeMovements ()
-    {
+        MiniGame.isMainMenuGame = true;
         characterSelectMenu.SetActive(false);
 
-        MiniGame.isMainMenuGame = true;
-        MiniGame.currentLevel = MiniGame.Level.Movement1;
+        switch (levelNum)
+        {
+            case -1:
+                MiniGame.currentLevel = MiniGame.Level.Tutorial;
+                break;
+            case 0:
+                characterSelectMenu.SetActive(true);
+                MiniGame.currentLevel = MiniGame.Level.FreePlay;
+                break;
+            case 1:
+                MiniGame.currentLevel = MiniGame.Level.Level1;
+                break;
+            case 2:
+                MiniGame.currentLevel = MiniGame.Level.Level2;
+                break;
+            case 3:
+                MiniGame.currentLevel = MiniGame.Level.Level3;
+                break;
+            case 4:
+                MiniGame.currentLevel = MiniGame.Level.Level4;
+                break;
+            case 5:
+                MiniGame.currentLevel = MiniGame.Level.Level5;
+                break;
+            case 6:
+                MiniGame.currentLevel = MiniGame.Level.Level6;
+                break;
+            case 7:
+                MiniGame.currentLevel = MiniGame.Level.Level7;
+                break;
+            case 8:
+                MiniGame.currentLevel = MiniGame.Level.Level8;
+                break;
+            case 9:
+                MiniGame.currentLevel = MiniGame.Level.Level9;
+                break;
+            case 10:
+                MiniGame.currentLevel = MiniGame.Level.Level10;
+                break;
+            case 11:
+                MiniGame.currentLevel = MiniGame.Level.Level11;
+                break;
+            case 12:
+                MiniGame.currentLevel = MiniGame.Level.Level12;
+                break;
+                //TO DO: add story levels
+            default:
+                Debug.Log("Unable to select challenge level");
+                break;
+        }
 
-        if (!loading)
+        if (!loading && MiniGame.currentLevel != MiniGame.Level.FreePlay)
         {
             StartCoroutine(GoToScene("MiniGame"));
             loading = true;
         }
     }
 
-    public void ChallengeAbilities()
-    {
-        characterSelectMenu.SetActive(false);
-
-        MiniGame.isMainMenuGame = true;
-        MiniGame.currentLevel = MiniGame.Level.Abilities1;
-
-        if (!loading)
-        {
-            StartCoroutine(GoToScene("MiniGame"));
-            loading = true;
-        }
-    }
-
-    public void ChallengeLoops()
-    {
-        characterSelectMenu.SetActive(false);
-
-        MiniGame.isMainMenuGame = true;
-        MiniGame.currentLevel = MiniGame.Level.Loops1;
-
-        if (!loading)
-        {
-            StartCoroutine(GoToScene("MiniGame"));
-            loading = true;
-        }
-    }
-
-    public void ChallengeCombos()
-    {
-        characterSelectMenu.SetActive(false);
-
-        MiniGame.isMainMenuGame = true;
-        MiniGame.currentLevel = MiniGame.Level.Combos1;
-
-        if (!loading)
-        {
-            StartCoroutine(GoToScene("MiniGame"));
-            loading = true;
-        }
-    }
-
-    public void Tutorial()
-    {
-        characterSelectMenu.SetActive(false);
-
-        MiniGame.isMainMenuGame = true;
-        MiniGame.currentLevel = MiniGame.Level.Tutorial;
-
-        if (!loading)
-        {
-            StartCoroutine(GoToScene("MiniGame"));
-            loading = true;
-        }
-    }
 
     public void FreePlay()
     {

@@ -826,7 +826,7 @@ public class Movement3 : MonoBehaviour
 
     void displayWinScreen()
     {
-        PlayerPrefs.SetInt("MovementChallenge", 1);
+        PlayerPrefs.SetInt("Level3", 1);
 
         canvas.SetActive(false);
         winCanvas.SetActive(true);
@@ -883,6 +883,8 @@ public class Movement3 : MonoBehaviour
     public void nextLevel()
     {
         //GameStatusEventHandler.gameWasStopped();
-        StartCoroutine(mainMenuStart());
+        //StartCoroutine(mainMenuStart());
+        MiniGame.UnloadScene(MiniGame.Level.Level3);
+        MiniGame.LoadScene(MiniGame.Level.Level4);
     }
 }

@@ -325,7 +325,7 @@ public class Combos2 : MonoBehaviour
         spinCount = 0;
         jumpCount = 0;
         shrinkCount = 0;
-        help.text = "Join the fun! Stand between Owl and Cat and <b><color=yellow>Sing</color></b> as one!";
+        help.text = "Join the fun! Stand between Owl and Cat \nand <b><color=yellow>Grow</color></b> as one!";
         playSound(2);
         movementLengthCollection = 0;
         movement.Clear();
@@ -460,7 +460,7 @@ public class Combos2 : MonoBehaviour
                 AnimatePlayer.run = true;
             }
 
-            if (movement[i].Contains("Sing"))
+            if (movement[i].Contains("Grow"))
             {
                 if (player.transform.position.x >= 4.3f && player.transform.position.x <= 6.5) { singBetween = true; }
                 AnimatePlayer.sing = true;
@@ -530,6 +530,8 @@ public class Combos2 : MonoBehaviour
     }
     void displayWinScreen()
     {
+        PlayerPrefs.SetInt("Level11", 1);
+
         canvas.SetActive(false);
         winCanvas.SetActive(true);
         GetComponent<AudioSource>().Stop();
@@ -596,8 +598,8 @@ public class Combos2 : MonoBehaviour
     public void nextLevel()
     {
         //SceneManager.LoadSceneAsync("Combos3");
-        MiniGame.UnloadScene(MiniGame.Level.Combos2);
-        MiniGame.LoadScene(MiniGame.Level.Combos3);
+        MiniGame.UnloadScene(MiniGame.Level.Level11);
+        MiniGame.LoadScene(MiniGame.Level.Level12);
     }
 
 }
