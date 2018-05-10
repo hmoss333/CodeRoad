@@ -325,7 +325,7 @@ public class Combos2 : MonoBehaviour
         spinCount = 0;
         jumpCount = 0;
         shrinkCount = 0;
-        help.text = "Join the fun! Stand between Owl and Cat \nand <b><color=yellow>Grow</color></b> as one!";
+        help.text = "Join the fun! Stand between Ollie and Cathy \nand <b><color=yellow>Grow</color></b> as one!";
         playSound(2);
         movementLengthCollection = 0;
         movement.Clear();

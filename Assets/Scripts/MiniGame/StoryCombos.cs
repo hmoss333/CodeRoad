@@ -541,6 +541,10 @@ public class StoryCombos : MonoBehaviour {
     }
     void displayWinScreen()
     {
+        if (MiniGame.isMainMenuGame)
+        {
+            PlayerPrefs.SetInt("Level14", 1);
+        }
         canvas.SetActive(false);
         winCanvas.SetActive(true);
         GetComponent<AudioSource>().Stop();
@@ -615,7 +619,7 @@ public class StoryCombos : MonoBehaviour {
         //directionalLight.gameObject.SetActive(false);
         yield return new WaitForSeconds(1.5f);
         //LoadManager.level = "Title";
-        SceneManager.LoadSceneAsync("MainScreen");
+        SceneManager.LoadSceneAsync("MenuScreen");
     }
 
     public void nextLevel()
@@ -624,20 +628,28 @@ public class StoryCombos : MonoBehaviour {
     }
     IEnumerator nextLevetStart()
     {
-        canvas.SetActive(false);
-        winCanvas.SetActive(false);
-        tryAgainCanvas.SetActive(false);
-        background.SetActive(false);
+        if (!MiniGame.isMainMenuGame)
+        {
+            canvas.SetActive(false);
+            winCanvas.SetActive(false);
+            tryAgainCanvas.SetActive(false);
+            background.SetActive(false);
 
-        GetComponent<Camera>().enabled = false;
-        //if (!SceneManager.GetSceneByName("LoadingScreen").isLoaded)
-        //SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);
-        directionalLight.gameObject.SetActive(false);
-        LoadingScreen.LoadScene("Empty");
-        //directionalLight.gameObject.SetActive(false);
-        yield return new WaitForSeconds(1f);
-        story.EndMiniGame();
-        MiniGame.UnloadScene(MiniGame.currentLevel);
-        SceneManager.UnloadSceneAsync("MiniGame");
+            GetComponent<Camera>().enabled = false;
+            //if (!SceneManager.GetSceneByName("LoadingScreen").isLoaded)
+            //SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);
+            directionalLight.gameObject.SetActive(false);
+            LoadingScreen.LoadScene("Empty");
+            //directionalLight.gameObject.SetActive(false);
+            yield return new WaitForSeconds(1f);
+            story.EndMiniGame();
+            MiniGame.UnloadScene(MiniGame.currentLevel);
+            SceneManager.UnloadSceneAsync("MiniGame");
+        }
+        else
+        {
+            MiniGame.UnloadScene(MiniGame.Level.Story3);
+            MiniGame.LoadScene(MiniGame.Level.Story4);
+        }
     }
 }

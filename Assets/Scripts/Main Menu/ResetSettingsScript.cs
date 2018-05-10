@@ -48,10 +48,11 @@ public class ResetSettingsScript : MonoBehaviour {
         PlayerPrefs.SetInt("MiniGameTutorial", 0);
         PlayerPrefs.SetInt("levelSelect", 0);
 
-        PlayerPrefs.SetInt("MovementChallenge", 0);
-        PlayerPrefs.SetInt("AbilitiesChallenge", 0);
-        PlayerPrefs.SetInt("LoopChallenge", 0);
-        PlayerPrefs.SetInt("ComboChallenge", 0);
+        for (int i = -1; i < 18; i++)
+        {
+            string levelNum = "Level" + i;
+            PlayerPrefs.SetInt(levelNum, 0);
+        }
 
 
         //		educationCheck.value = false;

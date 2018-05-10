@@ -40,7 +40,7 @@ public class AnimatePlayer : MonoBehaviour {
             }
             else if (!run && !jump && !sing)
             {
-                GetComponent<Animation>().Play("Idle Turtle");
+                GetComponent<Animation>().Play("Idle");
             }
             else if (jump)
             {

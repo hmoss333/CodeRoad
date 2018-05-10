@@ -340,7 +340,7 @@ public class Movement1 : MonoBehaviour
         tryAgainCanvas.SetActive(false);
 
         forwardCount = 0;
-        help.text = "Help Tommy say hello to Cat. \nWalk <b><color=yellow>Forward</color></b> until close enough to chat.";
+        help.text = "Help Tommy say hello to Cathy. \nWalk <b><color=yellow>Forward</color></b> until close enough to chat.";
         narrationVoiceOverStop();
         playSound(2);
         movementLengthCollection = 0;

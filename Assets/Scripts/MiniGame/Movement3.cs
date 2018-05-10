@@ -343,7 +343,7 @@ public class Movement3 : MonoBehaviour
         tryAgainCanvas.SetActive(false);
 
         backwardCount = 0;
-        help.text = "Tommy wants to have a face-to-face chat. \nMove <b><color=yellow>Forward</color></b> to Dog and then <b><color=yellow>Backwards</color></b> to Cat.";
+        help.text = "Tommy is feeling chatty. \nMove <b><color=yellow>Forward</color></b> to Dudley and then <b><color=yellow>Backwards</color></b> to Cathy.";
         playSound(2);
         movementLengthCollection = 0;
         movement.Clear();

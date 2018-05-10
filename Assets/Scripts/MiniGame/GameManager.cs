@@ -50,11 +50,18 @@ public class GameManager : MonoBehaviour {
     public Button[] myButtons;
     int buttonCount;
 
+    public enum Avatars { turtle, owl, lion, elephant, cat, dog};
+    public static Avatars avatars;
+    public GameObject[] avatarList;
+
+    static GameManager gm;
+
     Light directionalLight;
 
     // Use this for initialization
     void Start()
     {
+        gm = GetComponent<GameManager>();
         moveBackground = GameObject.Find("MoveBackground");
         switch(PlayerPrefs.GetInt("fontSizeIndex"))
         {
@@ -97,6 +104,18 @@ public class GameManager : MonoBehaviour {
         if (PlayerPrefs.GetInt("Scan") == 1) { StartCoroutine(scanner()); }
         directionalLight = GameObject.FindObjectOfType<Light>();
         //GameStatusEventHandler.gameWasStarted("freeplay");
+
+        SelectAvatar(avatars);
+    }
+
+    public static void SelectAvatar(Avatars avatar)
+    {
+        int avatarNum = (int)avatar;
+        GameObject selectedAvatar;
+
+        selectedAvatar = Instantiate(gm.avatarList[avatarNum]);
+
+        gm.player = selectedAvatar;
     }
 
     IEnumerator scanner()

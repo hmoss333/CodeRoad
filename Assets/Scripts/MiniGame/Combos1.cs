@@ -322,7 +322,7 @@ public class Combos1 : MonoBehaviour
         spinCount = 0;
         jumpCount =0;
         shrinkCount = 0;
-        help.text = "Owl and Cat can <b><color=yellow>Jump</color></b>, and <b><color=yellow>Spin</color></b>! \nEnter the contest, can you win?";
+        help.text = "Ollie and Cathy can <b><color=yellow>Jump</color></b>, and <b><color=yellow>Spin</color></b>! \nEnter the contest, can you win?";
         playSound(2);
         movementLengthCollection = 0;
         movement.Clear();

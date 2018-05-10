@@ -95,21 +95,27 @@ public class PlayMiniGame : MonoBehaviour {
         {
             case 0:
                 avatarName.text = "Tommy Turtle";
+                GameManager.avatars = GameManager.Avatars.turtle;
                 break;
             case 1:
                 avatarName.text = "Ollie Owl";
+                GameManager.avatars = GameManager.Avatars.owl;
                 break;
             case 2:
                 avatarName.text = "Leo Lion";
+                GameManager.avatars = GameManager.Avatars.lion;
                 break;
             case 3:
                 avatarName.text = "Eleanor Elephant";
+                GameManager.avatars = GameManager.Avatars.elephant;
                 break;
             case 4:
                 avatarName.text = "Cathy Cat";
+                GameManager.avatars = GameManager.Avatars.cat;
                 break;
             case 5:
                 avatarName.text = "Dudley Dog";
+                GameManager.avatars = GameManager.Avatars.dog;
                 break;
             default:
                 avatarName.text = "NULL";
@@ -158,7 +164,7 @@ public class PlayMiniGame : MonoBehaviour {
                 break;
             case 0:
                 characterSelectMenu.SetActive(true);
-                MiniGame.currentLevel = MiniGame.Level.FreePlay;
+                MiniGame.currentLevel = MiniGame.Level.FreePlay;              
                 break;
             case 1:
                 MiniGame.currentLevel = MiniGame.Level.Level1;
@@ -196,6 +202,24 @@ public class PlayMiniGame : MonoBehaviour {
             case 12:
                 MiniGame.currentLevel = MiniGame.Level.Level12;
                 break;
+            case 13:
+                MiniGame.currentLevel = MiniGame.Level.Story2;
+                break;
+            case 14:
+                MiniGame.currentLevel = MiniGame.Level.Story3;
+                break;
+            case 15:
+                MiniGame.currentLevel = MiniGame.Level.Story4;
+                break;
+            case 16:
+                MiniGame.currentLevel = MiniGame.Level.Story5;
+                break;
+            case 17:
+                MiniGame.currentLevel = MiniGame.Level.Story6;
+                break;
+            case 18:
+                MiniGame.currentLevel = MiniGame.Level.Story7;
+                break;
                 //TO DO: add story levels
             default:
                 Debug.Log("Unable to select challenge level");
@@ -215,12 +239,6 @@ public class PlayMiniGame : MonoBehaviour {
         characterSelectMenu.SetActive(true);
         MiniGame.isMainMenuGame = true;
         MiniGame.currentLevel = MiniGame.Level.FreePlay;
-
-        //if (!loading)
-        //{
-        //    StartCoroutine(GoToScene("MiniGame"));
-        //    loading = true;
-        //}
     }
 
     public void StartGame()

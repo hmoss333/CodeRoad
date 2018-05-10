@@ -522,7 +522,7 @@ public class Combos3 : MonoBehaviour
     {
         try
         {
-            if (movement[0].Equals("Backward") && movement[1].Equals("Grow") && movement[2].Equals(startFormat + "Jump" + endFormat))
+            if (movement[0].Equals("Backward") && movement[1].Equals("Backward") && movement[2].Equals("Backward") && movement[3].Equals("Backward") && movement[4].Equals("Grow") && movement[5].Equals(startFormat + "Jump" + endFormat))
             {
                 displayWinScreen();
             }
@@ -609,7 +609,9 @@ public class Combos3 : MonoBehaviour
     public void nextLevel()
     {
         //GameStatusEventHandler.gameWasStopped();
-        StartCoroutine(mainMenuStart());
+        //StartCoroutine(mainMenuStart());
+        MiniGame.UnloadScene(MiniGame.Level.Level12);
+        MiniGame.LoadScene(MiniGame.Level.Story2); //skipping story 1 because it's a repeat of the tutorial
     }
 
 }
