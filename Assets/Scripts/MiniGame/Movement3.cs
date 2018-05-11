@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 
 public class Movement3 : MonoBehaviour
 {
+    int stepCount;
+
     public GameObject player;
     public Text move;
     public Text showMoves;
@@ -64,12 +66,14 @@ public class Movement3 : MonoBehaviour
 
     public Button[] myButtons;
     int buttonCount;
+    bool playing;
 
     Light directionalLight;
 
     // Use this for initialization
     void Start()
     {
+        playing = false;
         GameObject moveBackground = GameObject.Find("MoveBackground");
         //GameObject helpBackground = GameObject.Find("HelpBackground");
         switch(PlayerPrefs.GetInt("fontSizeIndex"))
@@ -103,6 +107,7 @@ public class Movement3 : MonoBehaviour
         countTillLineSkip = 0;
         growthSwitch = true;
         shrinkSwitch = true;
+        stepCount = 0;
 
         turned = false;
         facingRight = true;
@@ -121,7 +126,10 @@ public class Movement3 : MonoBehaviour
         if (PlayerPrefs.GetInt("Scan") == 1) { StartCoroutine(scanner()); }
         if (PlayerPrefs.GetInt("Voice") == 0) { narration.Play(); }
         directionalLight = GameObject.FindObjectOfType<Light>();
-       //GameStatusEventHandler.gameWasStarted("challenge");
+        //GameStatusEventHandler.gameWasStarted("challenge");
+
+        if (MiniGame.tutorialMode)
+            StartCoroutine(buttonFlash());
     }
     void narrationVoiceOverStop()
     {
@@ -270,8 +278,18 @@ public class Movement3 : MonoBehaviour
     public void addShrink() { movement.Add("Shrink"); showMoves.text = showMoves.text + "Shrink..."; lineSkip(6); playSound(9); }
     public void addTurn() { movement.Add("Turn"); showMoves.text = showMoves.text + "Turn..."; lineSkip(4); playSound(13); }
     public void addJump() { movement.Add("Jump"); showMoves.text = showMoves.text + "Jump..."; lineSkip(4); playSound(6); }
-    public void addWalkForward() { movement.Add("Forward"); showMoves.text = showMoves.text + "Forward..."; lineSkip(7); playSound(4); }
-    public void addWalkBackward() { movement.Add("Backward"); showMoves.text = showMoves.text + "Backward..."; lineSkip(8); playSound(0); backwardCount += 1; }
+    public void addWalkForward() {
+        movement.Add("Forward"); showMoves.text = showMoves.text + "Forward..."; lineSkip(7); playSound(4);
+
+        if (stepCount < 3)
+            stepCount++;
+    }
+    public void addWalkBackward() {
+        movement.Add("Backward"); showMoves.text = showMoves.text + "Backward..."; lineSkip(8); playSound(0); backwardCount += 1;
+
+        if (stepCount >= 3 && stepCount < 10)
+            stepCount++;
+    }
     public void addSing() { movement.Add("Sing"); showMoves.text = showMoves.text + "Sing..."; lineSkip(4); playSound(10); }
 
     public void erase()
@@ -342,6 +360,8 @@ public class Movement3 : MonoBehaviour
         canvas.SetActive(true);
         tryAgainCanvas.SetActive(false);
 
+        playing = false;
+        stepCount = 0;
         backwardCount = 0;
         help.text = "Tommy is feeling chatty. \nMove <b><color=yellow>Forward</color></b> to Dudley and then <b><color=yellow>Backwards</color></b> to Cathy.";
         playSound(2);
@@ -359,7 +379,11 @@ public class Movement3 : MonoBehaviour
     }
     public void play()
     {
-        StartCoroutine(playStart());
+        if (!playing)
+        {
+            playing = true;
+            StartCoroutine(playStart());
+        }
     }
     public IEnumerator playStart()
     {
@@ -855,6 +879,37 @@ public class Movement3 : MonoBehaviour
         }
     }
 
+    IEnumerator buttonFlash()
+    {
+        int buttonToFlash = 0;
+        if (stepCount == 0) { buttonToFlash = 6; }
+        if (stepCount == 1) { buttonToFlash = 6; }
+        if (stepCount == 2) { buttonToFlash = 6; }
+        if (stepCount == 3) { buttonToFlash = 7; }
+        if (stepCount == 4) { buttonToFlash = 7; }
+        if (stepCount == 5) { buttonToFlash = 7; }
+        if (stepCount == 6) { buttonToFlash = 7; }
+        if (stepCount == 7) { buttonToFlash = 7; }
+        if (stepCount == 8) { buttonToFlash = 7; }
+        if (stepCount == 9) { buttonToFlash = 7; }
+        if (stepCount == 10) { buttonToFlash = 10; }
+
+        if (buttonToFlash == 10)
+        {
+            myButtons[buttonToFlash].GetComponent<Image>().color = new Color(0.258f, 0.941f, 0.090f, 1);
+            yield return new WaitForSeconds(0.5f);
+            myButtons[buttonToFlash].GetComponent<Image>().color = Color.white;
+        }
+        else
+        {
+            myButtons[buttonToFlash].GetComponent<Image>().color = Color.white;
+            yield return new WaitForSeconds(0.5f);
+            myButtons[buttonToFlash].GetComponent<Image>().color = new Color(0.549f, 0.776f, 0.251f, 1);
+        }
+        yield return new WaitForSeconds(0.5f);
+        StartCoroutine(buttonFlash());
+    }
+
     public void mainMenu()
     {
         //GameStatusEventHandler.gameWasStopped();
@@ -862,7 +917,7 @@ public class Movement3 : MonoBehaviour
     }
     IEnumerator mainMenuStart()
     {
-        PlayMiniGame.returnFromChallenge = true;
+        ChallenegeMenu.returnFromChallenge = true;
 
         //playSound(7);
         canvas.SetActive(false);

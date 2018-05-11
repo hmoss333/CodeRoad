@@ -15,7 +15,7 @@ public class AnimateFriend : MonoBehaviour {
     {
         win = false;
         if (MiniGame.currentLevel == MiniGame.Level.Level6) { StartCoroutine(GrowShrink()); }
-        if (MiniGame.currentLevel == MiniGame.Level.Level10 || MiniGame.currentLevel == MiniGame.Level.Story3 || MiniGame.currentLevel == MiniGame.Level.Story6) { Debug.Log("jumpspin"); jumpSwitch = true; StartCoroutine(Combo1()); }
+        if (MiniGame.currentLevel == MiniGame.Level.Level10 || MiniGame.currentLevel == MiniGame.Level.Story3 || MiniGame.currentLevel == MiniGame.Level.Story6) { /*Debug.Log("jumpspin");*/ jumpSwitch = true; StartCoroutine(Combo1()); }
     }
 
     	

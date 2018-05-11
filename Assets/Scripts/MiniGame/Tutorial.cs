@@ -118,7 +118,10 @@ public class Tutorial : MonoBehaviour
             tutorialCanvas.SetActive(true);
         }
         else
+        {
+            GetComponent<AudioListener>().enabled = true;
             StartCoroutine(buttonFlash());
+        }
     }
 
   
@@ -654,11 +657,18 @@ public class Tutorial : MonoBehaviour
         if(tutorialCount == 14) { buttonToFlash = 10; }
         if(tutorialCount == 15) { buttonToFlash = 12; }
 
-        //myButtons[buttonToFlash].GetComponent<Image>().color = new Color(0.258f, 0.941f, 0.090f, 1);
-        myButtons[buttonToFlash].GetComponent<Image>().color = Color.white;
-        yield return new WaitForSeconds(0.5f);
-        //myButtons[buttonToFlash].GetComponent<Image>().color = Color.white;
-        myButtons[buttonToFlash].GetComponent<Image>().color = new Color(0.549f, 0.776f, 0.251f, 1);
+        if (buttonToFlash == 10)
+        {
+            myButtons[buttonToFlash].GetComponent<Image>().color = new Color(0.258f, 0.941f, 0.090f, 1);
+            yield return new WaitForSeconds(0.5f);
+            myButtons[buttonToFlash].GetComponent<Image>().color = Color.white;
+        }
+        else
+        {
+            myButtons[buttonToFlash].GetComponent<Image>().color = Color.white;
+            yield return new WaitForSeconds(0.5f);
+            myButtons[buttonToFlash].GetComponent<Image>().color = new Color(0.549f, 0.776f, 0.251f, 1);
+        }
         yield return new WaitForSeconds(0.5f);
         StartCoroutine(buttonFlash());
     }
@@ -704,6 +714,10 @@ public class Tutorial : MonoBehaviour
         {
             tryAgainCanvas.SetActive(false);
             background.SetActive(false);
+        }
+        else
+        {
+            ChallenegeMenu.returnFromChallenge = true;
         }
         //if (!SceneManager.GetSceneByName("LoadingScreen").isLoaded)
         //    SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);

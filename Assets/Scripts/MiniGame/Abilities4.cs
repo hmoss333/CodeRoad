@@ -8,6 +8,8 @@ using UnityEngine.SceneManagement;
 
 public class Abilities4 : MonoBehaviour
 {
+    int stepCount;
+
     public GameObject player;
     public Text move;
     public Text showMoves;
@@ -57,12 +59,14 @@ public class Abilities4 : MonoBehaviour
 
     public Button[] myButtons;
     int buttonCount;
+    bool playing;
 
     Light directionalLight;
 
     // Use this for initialization
     void Start()
     {
+        playing = false;
         GameObject moveBackground = GameObject.Find("MoveBackground");
         //GameObject helpBackground = GameObject.Find("HelpBackground");
         switch(PlayerPrefs.GetInt("fontSizeIndex"))
@@ -96,6 +100,7 @@ public class Abilities4 : MonoBehaviour
         countTillLineSkip = 0;
         growthSwitch = true;
         shrinkSwitch = true;
+        stepCount = 0;
 
         turned = false;
         facingRight = true;
@@ -115,6 +120,9 @@ public class Abilities4 : MonoBehaviour
         if (PlayerPrefs.GetInt("Voice") == 0) { narration.Play(); }
         directionalLight = GameObject.FindObjectOfType<Light>();
         //GameStatusEventHandler.gameWasStarted("challenge");
+
+        if (MiniGame.tutorialMode)
+            StartCoroutine(buttonFlash());
     }
 
     void narrationVoiceOverStop()
@@ -248,11 +256,26 @@ public class Abilities4 : MonoBehaviour
         //    directionalLight.gameObject.SetActive(false);
     }
 
-    public void addSpin() { movement.Add("Spin"); showMoves.text = showMoves.text + "Spin..."; lineSkip(4); playSound(11); }
-    public void addGrow() { movement.Add("Grow"); showMoves.text = showMoves.text + "Grow..."; lineSkip(4); playSound(5); }
+    public void addSpin() {
+        movement.Add("Spin"); showMoves.text = showMoves.text + "Spin..."; lineSkip(4); playSound(11);
+
+        if (stepCount == 1)
+            stepCount++;
+    }
+    public void addGrow() {
+        movement.Add("Grow"); showMoves.text = showMoves.text + "Grow..."; lineSkip(4); playSound(5);
+
+        if (stepCount == 0)
+            stepCount++;
+    }
     public void addShrink() { movement.Add("Shrink"); showMoves.text = showMoves.text + "Shrink..."; lineSkip(6); playSound(9); shrinkCount += 1; }
     public void addTurn() { movement.Add("Turn"); showMoves.text = showMoves.text + "Turn..."; lineSkip(4); playSound(13); }
-    public void addJump() { movement.Add("Jump"); showMoves.text = showMoves.text + "Jump..."; lineSkip(4); playSound(6); }
+    public void addJump() {
+        movement.Add("Jump"); showMoves.text = showMoves.text + "Jump..."; lineSkip(4); playSound(6);
+
+        if (stepCount == 2)
+            stepCount++;
+    }
     public void addWalkForward() { movement.Add("Forward"); showMoves.text = showMoves.text + "Forward..."; lineSkip(7); playSound(4); }
     public void addWalkBackward() { movement.Add("Backward"); showMoves.text = showMoves.text + "Backward..."; lineSkip(8); playSound(0); }
     public void addSing() { movement.Add("Sing"); showMoves.text = showMoves.text + "Sing..."; lineSkip(4); playSound(10); }
@@ -315,6 +338,8 @@ public class Abilities4 : MonoBehaviour
         canvas.SetActive(true);
         tryAgainCanvas.SetActive(false);
 
+        playing = false;
+        stepCount = 0;
         shrinkCount = 0;
         help.text = "Try coding in this order! \n<b><color=yellow>Grow, Spin, Jump</color></b>";
         playSound(2);
@@ -330,7 +355,11 @@ public class Abilities4 : MonoBehaviour
     }
     public void play()
     {
-        StartCoroutine(playStart());
+        if (!playing)
+        {
+            playing = true;
+            StartCoroutine(playStart());
+        }
     }
     public IEnumerator playStart()
     {
@@ -571,6 +600,30 @@ public class Abilities4 : MonoBehaviour
         }
     }
 
+    IEnumerator buttonFlash()
+    {
+        int buttonToFlash = 0;
+        if (stepCount == 0) { buttonToFlash = 0; }
+        if (stepCount == 1) { buttonToFlash = 3; }
+        if (stepCount == 2) { buttonToFlash = 4; }
+        if (stepCount == 3) { buttonToFlash = 10; }
+
+        if (buttonToFlash == 10)
+        {
+            myButtons[buttonToFlash].GetComponent<Image>().color = new Color(0.258f, 0.941f, 0.090f, 1);
+            yield return new WaitForSeconds(0.5f);
+            myButtons[buttonToFlash].GetComponent<Image>().color = Color.white;
+        }
+        else
+        {
+            myButtons[buttonToFlash].GetComponent<Image>().color = Color.white;
+            yield return new WaitForSeconds(0.5f);
+            myButtons[buttonToFlash].GetComponent<Image>().color = new Color(0.549f, 0.776f, 0.251f, 1);
+        }
+        yield return new WaitForSeconds(0.5f);
+        StartCoroutine(buttonFlash());
+    }
+
     public void mainMenu()
     {
         //GameStatusEventHandler.gameWasStopped();
@@ -578,7 +631,7 @@ public class Abilities4 : MonoBehaviour
     }
     IEnumerator mainMenuStart()
     {
-        PlayMiniGame.returnFromChallenge = true;
+        ChallenegeMenu.returnFromChallenge = true;
 
         //playSound(7);
         canvas.SetActive(false);

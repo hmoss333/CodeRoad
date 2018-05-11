@@ -49,6 +49,7 @@ public class GameManager : MonoBehaviour {
 
     public Button[] myButtons;
     int buttonCount;
+    bool playing;
 
     public enum Avatars { turtle, owl, lion, elephant, cat, dog};
     public static Avatars avatars;
@@ -61,6 +62,7 @@ public class GameManager : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
+        playing = false;
         gm = GetComponent<GameManager>();
         moveBackground = GameObject.Find("MoveBackground");
         switch(PlayerPrefs.GetInt("fontSizeIndex"))
@@ -320,6 +322,7 @@ public class GameManager : MonoBehaviour {
             movement.Clear();
             move.text = "List Of Moves Cleared";
         }
+        playing = false;
         movementLengthCollection = 0;
         showMoves.text = "";
         player.transform.localScale = new Vector3(2, 2, 2);
@@ -328,7 +331,11 @@ public class GameManager : MonoBehaviour {
     }
     public void play()
     {
-        StartCoroutine(playStart());
+        if (!playing)
+        {
+            playing = true;
+            StartCoroutine(playStart());
+        }
     }
     public IEnumerator playStart()
     {
@@ -525,7 +532,7 @@ public class GameManager : MonoBehaviour {
     }
     IEnumerator mainMenuStart()
     {
-        PlayMiniGame.returnFromChallenge = true;
+        ChallenegeMenu.returnFromChallenge = true;
 
         //playSound(7);
         canvas.SetActive(false);

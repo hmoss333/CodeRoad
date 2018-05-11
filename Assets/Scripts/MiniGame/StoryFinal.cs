@@ -125,6 +125,9 @@ public class StoryFinal : MonoBehaviour {
 
         if (MiniGame.tutorialMode)
             StartCoroutine(buttonFlash());
+
+        if (MiniGame.isMainMenuGame)
+            GetComponent<AudioListener>().enabled = true;
     }
 
     void narrationVoiceOverStop()
@@ -622,13 +625,18 @@ public class StoryFinal : MonoBehaviour {
         //if (stepCount == 5) { buttonToFlash = 9; }
         if (stepCount == 5) { buttonToFlash = 10; }
 
-        Debug.Log(stepCount);
-
-        //myButtons[buttonToFlash].GetComponent<Image>().color = new Color(0.258f, 0.941f, 0.090f, 1);
-        myButtons[buttonToFlash].GetComponent<Image>().color = Color.white;
-        yield return new WaitForSeconds(0.5f);
-        //myButtons[buttonToFlash].GetComponent<Image>().color = Color.white;
-        myButtons[buttonToFlash].GetComponent<Image>().color = new Color(0.549f, 0.776f, 0.251f, 1);
+        if (buttonToFlash == 10)
+        {
+            myButtons[buttonToFlash].GetComponent<Image>().color = new Color(0.258f, 0.941f, 0.090f, 1);
+            yield return new WaitForSeconds(0.5f);
+            myButtons[buttonToFlash].GetComponent<Image>().color = Color.white;
+        }
+        else
+        {
+            myButtons[buttonToFlash].GetComponent<Image>().color = Color.white;
+            yield return new WaitForSeconds(0.5f);
+            myButtons[buttonToFlash].GetComponent<Image>().color = new Color(0.549f, 0.776f, 0.251f, 1);
+        }
         yield return new WaitForSeconds(0.5f);
         StartCoroutine(buttonFlash());
     }
@@ -640,6 +648,9 @@ public class StoryFinal : MonoBehaviour {
     }
     IEnumerator mainMenuStart()
     {
+        if (MiniGame.isMainMenuGame)
+            ChallenegeMenu.returnFromChallenge = true;
+
         //playSound(7);
         canvas.SetActive(false);
         winCanvas.SetActive(false);
