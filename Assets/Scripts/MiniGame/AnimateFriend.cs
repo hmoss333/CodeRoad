@@ -51,6 +51,22 @@ public class AnimateFriend : MonoBehaviour {
                 }
             }
 
+            if (MiniGame.currentLevel == MiniGame.Level.Level6)
+            {
+                if (jumpReset)
+                {
+                    if (jumpSwitch)
+                    {
+                        GetComponent<Animation>().Play("Jump");
+                        gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 2, 0), Time.deltaTime * 4);
+                    }
+                    else
+                    {
+                        gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y - 2, 0), Time.deltaTime * 4);
+                    }
+                }
+            }
+
         }
         else {
             gameObject.transform.eulerAngles = new Vector3(0, 180, 0);
@@ -97,9 +113,13 @@ public class AnimateFriend : MonoBehaviour {
     IEnumerator GrowShrink()
     {
         gameObject.transform.localScale = new Vector3(3f, 3f, 3f);
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(1f);
+        StartCoroutine(jump());
+        yield return new WaitForSeconds(1f);
+        GetComponent<Animation>().Play("Idle");
+        yield return new WaitForSeconds(0.5f);
         gameObject.transform.localScale = new Vector3(2, 2, 2);
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(1f);
         StartCoroutine(GrowShrink());
     }
 

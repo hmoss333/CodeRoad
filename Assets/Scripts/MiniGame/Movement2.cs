@@ -679,7 +679,8 @@ public class Movement2 : MonoBehaviour
 
     public void mainMenu()
     {
-       //GameStatusEventHandler.gameWasStopped();
+        //GameStatusEventHandler.gameWasStopped();
+        narration.Stop();
         StartCoroutine(mainMenuStart());
     }
     IEnumerator mainMenuStart()
@@ -704,6 +705,7 @@ public class Movement2 : MonoBehaviour
 
     public void nextLevel()
     {
+        narration.Stop();
         MiniGame.UnloadScene(MiniGame.Level.Level2);
         MiniGame.LoadScene(MiniGame.Level.Level3);
     }

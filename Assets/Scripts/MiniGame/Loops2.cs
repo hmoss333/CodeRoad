@@ -623,7 +623,8 @@ public class Loops2 : MonoBehaviour
 
     public void mainMenu()
     {
-       //GameStatusEventHandler.gameWasStopped();
+        //GameStatusEventHandler.gameWasStopped();
+        narration.Stop();
         StartCoroutine(mainMenuStart());
     }
     IEnumerator mainMenuStart()
@@ -650,6 +651,7 @@ public class Loops2 : MonoBehaviour
     {
         //GameStatusEventHandler.gameWasStopped();
         //StartCoroutine(mainMenuStart());
+        narration.Stop();
         MiniGame.UnloadScene(MiniGame.Level.Level9);
         MiniGame.LoadScene(MiniGame.Level.Level10);
     }

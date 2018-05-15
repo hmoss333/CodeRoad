@@ -354,7 +354,7 @@ public class StoryFinal : MonoBehaviour {
         playing = false;
         stepCount = 0;
         shrinkCount = 0;
-        help.text = "Try coding in this order! <b><color=yellow>Loop, Forward, Grow, Spin, Jump</color></b>";
+        help.text = "Try coding in this order! \n<b><color=yellow>Loop, Forward, Grow, Spin, Jump</color></b>";
         playSound(2);
         movementLengthCollection = 0;
         movement.Clear();
@@ -362,7 +362,7 @@ public class StoryFinal : MonoBehaviour {
         showMoves.text = "";
         player.transform.localScale = new Vector3(2, 2, 2);
         player.transform.rotation = Quaternion.Euler(0, 90, 0);
-        player.transform.position = new Vector3(-2.64f, -3.72f, 0.28f);
+        player.transform.position = new Vector3(-2.68f, -3.72f, 0f);
         loopState = false;
         StartCoroutine(playNarration());
     }
@@ -644,6 +644,7 @@ public class StoryFinal : MonoBehaviour {
     public void mainMenu()
     {
         //GameStatusEventHandler.gameWasStopped();
+        narration.Stop();
         StartCoroutine(mainMenuStart());
     }
     IEnumerator mainMenuStart()
@@ -664,6 +665,7 @@ public class StoryFinal : MonoBehaviour {
 
     public void nextLevel()
     {
+        narration.Stop();
         StartCoroutine(nextLevetStart());
     }
 

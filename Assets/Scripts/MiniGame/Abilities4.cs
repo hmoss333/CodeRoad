@@ -627,6 +627,7 @@ public class Abilities4 : MonoBehaviour
     public void mainMenu()
     {
         //GameStatusEventHandler.gameWasStopped();
+        narration.Stop();
         StartCoroutine(mainMenuStart());
     }
     IEnumerator mainMenuStart()

@@ -913,6 +913,7 @@ public class Movement3 : MonoBehaviour
     public void mainMenu()
     {
         //GameStatusEventHandler.gameWasStopped();
+        narration.Stop();
         StartCoroutine(mainMenuStart());
     }
     IEnumerator mainMenuStart()
@@ -939,6 +940,7 @@ public class Movement3 : MonoBehaviour
     {
         //GameStatusEventHandler.gameWasStopped();
         //StartCoroutine(mainMenuStart());
+        narration.Stop();
         MiniGame.UnloadScene(MiniGame.Level.Level3);
         MiniGame.LoadScene(MiniGame.Level.Level4);
     }

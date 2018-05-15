@@ -357,12 +357,12 @@ public class Tutorial : MonoBehaviour
         showMoves.text = "";
         player.transform.localScale = new Vector3(2, 2, 2);
         player.transform.rotation = Quaternion.Euler(0, 90, 0);
-        player.transform.position = new Vector3(-2.64f, -3.72f, 0.28f);
+        player.transform.position = new Vector3(-2.95f, -3.72f, 0f);
 
         if (tutorialCount == 2)
         {
            //playSound(17);
-           showMoves.text = "Tap <b><color=yellow>Forward</color></b>, <b><color=yellow>Backward</color></b>, and then <b><color=yellow>Play</color></b>. Make Tommy move to where he began.";
+           showMoves.text = "Tap <b><color=yellow>Forward</color></b> and then <b><color=yellow>Play</color></b> \nto make Tommy move with Glee.";
            tutorialCount++;
         }
 
@@ -704,6 +704,7 @@ public class Tutorial : MonoBehaviour
 
     public void mainMenu()
     {
+        GetComponent<AudioSource>().Stop();
         StartCoroutine(mainMenuStart());
     }
     IEnumerator mainMenuStart()

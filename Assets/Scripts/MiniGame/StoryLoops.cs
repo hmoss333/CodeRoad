@@ -346,7 +346,7 @@ public class StoryLoops : MonoBehaviour {
         showMoves.text = "";
         player.transform.localScale = new Vector3(2, 2, 2);
         player.transform.rotation = Quaternion.Euler(0, 90, 0);
-        player.transform.position = new Vector3(-2.64f, -3.72f, 0.28f);
+        player.transform.position = new Vector3(-2.68f, -3.72f, 0f);
         loopState = false;
         StartCoroutine(playNarration());
     }
@@ -626,7 +626,8 @@ public class StoryLoops : MonoBehaviour {
 
     public void mainMenu()
     {
-       //GameStatusEventHandler.gameWasStopped();
+        //GameStatusEventHandler.gameWasStopped();
+        narration.Stop();
         StartCoroutine(mainMenuStart());
     }
     IEnumerator mainMenuStart()
@@ -648,6 +649,7 @@ public class StoryLoops : MonoBehaviour {
 
     public void nextLevel()
     {
+        narration.Stop();
         StartCoroutine(nextLevetStart());
     }
     IEnumerator nextLevetStart()

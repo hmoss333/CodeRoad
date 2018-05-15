@@ -360,7 +360,7 @@ public class StoryAbilities : MonoBehaviour {
         playing = false;
         stepCount = 0;
         spinCount = 0;
-        help.text = "Don't get dizzy spinning like your friend! <b><color=yellow>Spin</color></b> 3 times, again and again!";
+        help.text = "Don't get dizzy spinning like your friend! \n<b><color=yellow>Spin</color></b> 3 times, again and again!";
         playSound(2);
         movementLengthCollection = 0;
         movement.Clear();
@@ -368,7 +368,7 @@ public class StoryAbilities : MonoBehaviour {
         showMoves.text = "";
         player.transform.localScale = new Vector3(2, 2, 2);
         player.transform.rotation = Quaternion.Euler(0, 90, 0);
-        player.transform.position = new Vector3(-2.64f, -3.72f, 0.28f);
+        player.transform.position = new Vector3(-2.68f, -3.72f, 0f);
         loopState = false;
         numberOfLoops = 0;
         loopCounts.Clear();
@@ -688,7 +688,8 @@ public class StoryAbilities : MonoBehaviour {
 
     public void mainMenu()
     {
-       //GameStatusEventHandler.gameWasStopped();
+        //GameStatusEventHandler.gameWasStopped();
+        narration.Stop();
         StartCoroutine(mainMenuStart());
     }
     IEnumerator mainMenuStart()
@@ -710,6 +711,7 @@ public class StoryAbilities : MonoBehaviour {
 
     public void nextLevel()
     {
+        narration.Stop();
         StartCoroutine(nextLevetStart());
     }
     IEnumerator nextLevetStart()

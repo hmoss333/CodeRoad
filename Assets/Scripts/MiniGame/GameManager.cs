@@ -527,7 +527,8 @@ public class GameManager : MonoBehaviour {
    
     public void mainMenu()
     {
-       //GameStatusEventHandler.gameWasStopped();
+        //GameStatusEventHandler.gameWasStopped();
+        GetComponent<AudioSource>().Stop();
         StartCoroutine(mainMenuStart());
     }
     IEnumerator mainMenuStart()

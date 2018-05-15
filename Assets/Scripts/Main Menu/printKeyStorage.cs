@@ -41,7 +41,7 @@ public class printKeyStorage : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+        printSlider.value = PlayerPrefs.GetFloat("printSize");
 	}
 	
 	// Update is called once per frame

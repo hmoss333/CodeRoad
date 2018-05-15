@@ -685,6 +685,7 @@ public class Abilities2 : MonoBehaviour
     public void mainMenu()
     {
         //GameStatusEventHandler.gameWasStopped();
+        narration.Stop();
         StartCoroutine(mainMenuStart());
     }
     IEnumerator mainMenuStart()
@@ -710,6 +711,7 @@ public class Abilities2 : MonoBehaviour
     public void nextLevel()
     {
         //SceneManager.LoadSceneAsync("Abilities3");
+        narration.Stop();
         MiniGame.UnloadScene(MiniGame.Level.Level5);
         MiniGame.LoadScene(MiniGame.Level.Level6);
     }

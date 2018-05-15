@@ -626,7 +626,8 @@ public class Combos2 : MonoBehaviour
 
     public void mainMenu()
     {
-       //GameStatusEventHandler.gameWasStopped();
+        //GameStatusEventHandler.gameWasStopped();
+        narration.Stop();
         StartCoroutine(mainMenuStart());
     }
     IEnumerator mainMenuStart()
@@ -652,6 +653,7 @@ public class Combos2 : MonoBehaviour
     public void nextLevel()
     {
         //SceneManager.LoadSceneAsync("Combos3");
+        narration.Stop();
         MiniGame.UnloadScene(MiniGame.Level.Level11);
         MiniGame.LoadScene(MiniGame.Level.Level12);
     }

@@ -365,7 +365,7 @@ public class StoryMovement : MonoBehaviour {
         playing = false;
         stepCount = 0;
         forwardCount = 0;
-        help.text = "Help Tommy say hello to Eleanor. Walk <b><color=yellow>Forward</color></b> 2, then <b><color=yellow>Backward</color></b> 4.";
+        help.text = "Help Tommy say hello to Eleanor. \nWalk <b><color=yellow>Forward</color></b> 2, then <b><color=yellow>Backward</color></b> 4.";
         narrationVoiceOverStop();
         playSound(2);
         movementLengthCollection = 0;
@@ -737,7 +737,8 @@ public class StoryMovement : MonoBehaviour {
 
     public void mainMenu()
     {
-       //GameStatusEventHandler.gameWasStopped();
+        //GameStatusEventHandler.gameWasStopped();
+        narration.Stop();
         StartCoroutine(mainMenuStart());
     }
     IEnumerator mainMenuStart()
@@ -759,6 +760,7 @@ public class StoryMovement : MonoBehaviour {
 
     public void nextLevel()
     {
+        narration.Stop();
         StartCoroutine(nextLevetStart());
     }
     IEnumerator nextLevetStart()
