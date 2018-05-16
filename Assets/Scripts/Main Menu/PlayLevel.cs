@@ -86,13 +86,6 @@ public class PlayLevel : MonoBehaviour {
 	#endif
 
 		e = Event.current;
-
-        //ls = GameObject.Find("LoadingScreen").GetComponent<LoadingScreen>();
-
-        //if (PlayerPrefs.GetInt("MiniGameTutorial") == 0)
-        //    tutorialMode = true;
-        //else
-        //    tutorialMode = false;
 	}
 
 	public void OnClick() {

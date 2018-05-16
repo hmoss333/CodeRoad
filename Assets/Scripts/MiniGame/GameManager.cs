@@ -44,8 +44,14 @@ public class GameManager : MonoBehaviour {
     bool loopState;
   
     public AudioClip[] mySounds;
+    public AudioClip[] backgroundMusic;
+    public AudioSource musicController;
 
+    public Text help;
     public GameObject canvas;
+    //public GameObject winCanvas;
+    public GameObject tryAgainCanvas;
+    public GameObject background;
 
     public Button[] myButtons;
     int buttonCount;
@@ -69,15 +75,15 @@ public class GameManager : MonoBehaviour {
         {
             case 0:
                 moveBackground.transform.localScale = new Vector2(1.0f, 1.0f);
-                showMoves.GetComponent<RectTransform>().sizeDelta = new Vector2(504, 145);
+                //showMoves.GetComponent<RectTransform>().sizeDelta = new Vector2(504, 145);
                 break;
             case 1:
                 moveBackground.transform.localScale = new Vector2(1.0f, 1.2f);
-                showMoves.GetComponent<RectTransform>().sizeDelta = new Vector2(504, 190);
+                //showMoves.GetComponent<RectTransform>().sizeDelta = new Vector2(504, 190);
                 break;
             case 2:
                 moveBackground.transform.localScale = new Vector2(1.0f, 1.5f);
-                showMoves.GetComponent<RectTransform>().sizeDelta = new Vector2(504, 210);
+                //showMoves.GetComponent<RectTransform>().sizeDelta = new Vector2(504, 210);
                 break;
         }
         showMoves.fontSize = 25;// PlayerPrefs.GetInt("fontSize");
@@ -108,6 +114,8 @@ public class GameManager : MonoBehaviour {
         //GameStatusEventHandler.gameWasStarted("freeplay");
 
         SelectAvatar(avatars);
+        UpdateInstructionText(player);
+        SetBackgroundMusic(player, backgroundMusic, musicController);
     }
 
     public static void SelectAvatar(Avatars avatar)
@@ -118,6 +126,45 @@ public class GameManager : MonoBehaviour {
         selectedAvatar = Instantiate(gm.avatarList[avatarNum]);
 
         gm.player = selectedAvatar;
+    }
+
+    void UpdateInstructionText (GameObject playerAvatar)
+    {
+        string avatarName = player.name.Replace("(Clone)", "");
+
+        help.text = "Use your coding skills to help <color=yellow>" + avatarName + "</color> dance around";
+    }
+
+    void SetBackgroundMusic(GameObject playerAvatar, AudioClip[] backgroundMusic, AudioSource backgroundPlayer)
+    {
+        string avatarName = player.name.Replace("(Clone)", "");
+
+        backgroundPlayer.Stop();
+        switch (avatarName)
+        {
+            case "Tommy":
+                backgroundPlayer.clip = backgroundMusic[0];
+                break;
+            case "Ollie":
+                backgroundPlayer.clip = backgroundMusic[1];
+                break;
+            case "Leo":
+                backgroundPlayer.clip = backgroundMusic[2];
+                break;
+            case "Eleanor":
+                backgroundPlayer.clip = backgroundMusic[3];
+                break;
+            case "Cathy":
+                backgroundPlayer.clip = backgroundMusic[4];
+                break;
+            case "Dudley":
+                backgroundPlayer.clip = backgroundMusic[5];
+                break;
+            default:
+                backgroundPlayer.clip = backgroundMusic[0];
+                break;
+        }
+        backgroundPlayer.Play();
     }
 
     IEnumerator scanner()
@@ -315,6 +362,9 @@ public class GameManager : MonoBehaviour {
 
     public void clearList()
     {
+        canvas.SetActive(true);
+        tryAgainCanvas.SetActive(false);
+
         loopState = false;
         if (!loadedCode)
         {
@@ -323,6 +373,7 @@ public class GameManager : MonoBehaviour {
             move.text = "List Of Moves Cleared";
         }
         playing = false;
+        UpdateInstructionText(player);
         movementLengthCollection = 0;
         showMoves.text = "";
         player.transform.localScale = new Vector3(2, 2, 2);
@@ -350,7 +401,10 @@ public class GameManager : MonoBehaviour {
             player.transform.position = new Vector3(-2.64f, -3.72f, 0.28f);
             StartCoroutine(playingMovement());
         }
-        else { move.text = "Must Close All Loops To Play"; }
+        else {
+            //move.text = "Must Close All Loops To Play";
+            endLoop();
+        }
     }
 
     public void slider()
@@ -426,7 +480,6 @@ public class GameManager : MonoBehaviour {
             GetComponent<AudioSource>().Play();
         }
     }
-  
     IEnumerator playingMovement()
     {
         for (int i = 0; i < movement.Count; i++)
@@ -468,7 +521,7 @@ public class GameManager : MonoBehaviour {
                 StartCoroutine(jump());
             }
             insertFormat(i);
-            
+
             move.text = movement[i];
             playMoveName(move.text);
 
@@ -508,6 +561,13 @@ public class GameManager : MonoBehaviour {
         }
       
         move.text = "Done Moving";
+        DisplayEndScreen();
+    }
+
+    void DisplayEndScreen()
+    {
+        tryAgainCanvas.SetActive(true);
+        canvas.SetActive(false);
     }
 
     IEnumerator jump()
@@ -535,14 +595,27 @@ public class GameManager : MonoBehaviour {
     {
         ChallenegeMenu.returnFromChallenge = true;
 
+        Destroy(player);
+
         //playSound(7);
         canvas.SetActive(false);
+        tryAgainCanvas.SetActive(false);
+        background.SetActive(false);
+
+        GetComponent<Camera>().enabled = false;
         directionalLight.gameObject.SetActive(false);
         LoadingScreen.LoadScene("MenuScreen");
         yield return new WaitForSeconds(1.5f);
-        clearList();
         //LoadManager.level = "Title";
         //LoadingScreen.LoadScene("MenuScreen");
         SceneManager.LoadScene("MenuScreen");
+    }
+
+    public void nextLevel()
+    {
+        Destroy(player);
+        //narration.Stop();
+        MiniGame.UnloadScene(MiniGame.Level.FreePlay);
+        MiniGame.LoadScene(MiniGame.Level.Level1);
     }
 }
