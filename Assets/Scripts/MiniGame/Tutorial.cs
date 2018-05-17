@@ -554,8 +554,8 @@ public class Tutorial : MonoBehaviour
             turned = false;
         }
         //checkTutorial();
-        for (int i = 0; i < movement.Count; i++)
-            Debug.Log(movement[i].ToString());
+        //for (int i = 0; i < movement.Count; i++)
+        //    Debug.Log(movement[i].ToString());
 
         if (!MiniGame.isMainMenuGame)
         {
