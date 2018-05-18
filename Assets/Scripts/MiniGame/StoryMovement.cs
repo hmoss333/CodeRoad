@@ -93,8 +93,8 @@ public class StoryMovement : MonoBehaviour {
                 //showMoves.GetComponent<RectTransform>().sizeDelta = new Vector2(375, 210);
                 break;
         }
-        showMoves.fontSize = 25; //(int)((PlayerPrefs.GetFloat("printSize") + 0.05f) * 100); //can be too small to see
-        //help.fontSize = 25; //(int)((PlayerPrefs.GetFloat("printSize") + 0.05f) * 100); //can't see a change in text size
+        showMoves.fontSize = (int)(25 * PlayerPrefs.GetFloat("printSize")) + 20;//25;// PlayerPrefs.GetInt("fontSize");
+        help.fontSize = (int)(27 * PlayerPrefs.GetFloat("printSize")) + 23;//25;// PlayerPrefs.GetInt("fontSize")-5;
         loopState = false;
         loopsFromSlider = 2;
         howManyTimesToLoop.text = "Times To Loop : " + loopsFromSlider;

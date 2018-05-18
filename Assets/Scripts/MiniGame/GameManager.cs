@@ -86,7 +86,8 @@ public class GameManager : MonoBehaviour {
                 //showMoves.GetComponent<RectTransform>().sizeDelta = new Vector2(504, 210);
                 break;
         }
-        showMoves.fontSize = 25;// PlayerPrefs.GetInt("fontSize");
+        showMoves.fontSize = (int)(25 * PlayerPrefs.GetFloat("printSize")) + 20;//25;// PlayerPrefs.GetInt("fontSize");
+        help.fontSize = (int)(27 * PlayerPrefs.GetFloat("printSize")) + 23;//25;// PlayerPrefs.GetInt("fontSize")-5;
         loopState = false;
         loopsFromSlider = 2;
         howManyTimesToLoop.text = "Times To Loop : " + loopsFromSlider;

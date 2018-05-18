@@ -53,7 +53,7 @@ public class Tutorial : MonoBehaviour
     bool playing;
 
     int tutorialCount;
-
+    public Text help;
     public GameObject canvas;
     public GameObject winCanvas;
     public GameObject tutorialCanvas;
@@ -79,7 +79,8 @@ public class Tutorial : MonoBehaviour
                 moveBackground.transform.localScale = new Vector2(1.0f, 1.5f);
                 break;
         }
-        showMoves.fontSize = 25;// PlayerPrefs.GetInt("fontSize");
+        showMoves.fontSize = (int)(25 * PlayerPrefs.GetFloat("printSize")) + 20;//25;// PlayerPrefs.GetInt("fontSize");
+        help.fontSize = (int)(27 * PlayerPrefs.GetFloat("printSize")) + 23;//25;// PlayerPrefs.GetInt("fontSize")-5;
         tutorialCount = 0;
 
         loopState = false;
@@ -226,59 +227,40 @@ public class Tutorial : MonoBehaviour
         //    directionalLight.gameObject.SetActive(false);
     }
 
-    public void addSpin() { movement.Add("Spin"); showMoves.text = showMoves.text + "Spin..."; lineSkip(4); playSound(11); if (tutorialCount == 8) { tutorialCount++; } if (tutorialCount == 12) { tutorialCount++; } }
-    public void addGrow() { movement.Add("Grow"); showMoves.text = showMoves.text + "Grow..."; lineSkip(4); playSound(5); if (tutorialCount == 8) { tutorialCount++; } }
-    public void addShrink() { movement.Add("Shrink"); showMoves.text = showMoves.text + "Shrink..."; lineSkip(6); playSound(9); if (tutorialCount == 8) { tutorialCount++; } }
-    public void addTurn() { movement.Add("Turn"); showMoves.text = showMoves.text + "Turn..."; lineSkip(4); playSound(13); if (tutorialCount == 8) { tutorialCount++; } }
+    public void addSpin() { movement.Add("Spin"); showMoves.text = showMoves.text + "Spin..."; lineSkip(4); playSound(11); /*if (tutorialCount == 8) { tutorialCount++; } if (tutorialCount == 12) { tutorialCount++; }*/ }
+    public void addGrow() { movement.Add("Grow"); showMoves.text = showMoves.text + "Grow..."; lineSkip(4); playSound(5); /*if (tutorialCount == 8) { tutorialCount++; }*/ }
+    public void addShrink() { movement.Add("Shrink"); showMoves.text = showMoves.text + "Shrink..."; lineSkip(6); playSound(9); /*if (tutorialCount == 8) { tutorialCount++; }*/ }
+    public void addTurn() { movement.Add("Turn"); showMoves.text = showMoves.text + "Turn..."; lineSkip(4); playSound(13); /*if (tutorialCount == 8) { tutorialCount++; }*/ }
 
     public void addJump()
     {
         movement.Add("Jump");
+        showMoves.text = showMoves.text + "Jump..."; lineSkip(4); playSound(6);
         if (tutorialCount == 8)
          {
-            showMoves.text = showMoves.text + "Jump..."; lineSkip(4); playSound(6);
+            //showMoves.text = showMoves.text + "Jump..."; lineSkip(4); playSound(6);
             tutorialCount++; 
          }
-
-          if (tutorialCount == 11)
-           {
-            showMoves.text = ""; showMoves.text = showMoves.text + "Jump..."; movement.Clear(); movement.Add("Jump"); lineSkip(4); playSound(6);
-            tutorialCount++;
-           } 
      }
 
     public void addWalkForward()
     {
         movement.Add("Forward");
-        if (tutorialCount == 0)
+        showMoves.text = ""; showMoves.text = showMoves.text + "Forward..."; lineSkip(7); playSound(4);
+        if (tutorialCount == 0 || tutorialCount == 3)
         {
-            showMoves.text = ""; showMoves.text = showMoves.text + "Forward..."; lineSkip(7); playSound(4);
             tutorialCount++;
         }
-        if(tutorialCount == 3)
-        {
-            showMoves.text = ""; showMoves.text = showMoves.text + "Forward..."; lineSkip(7); playSound(4);
-            tutorialCount++;
-        }
-        if (tutorialCount == 8) { tutorialCount++; }
     }
     public void addWalkBackward()
     {
         movement.Add("Backward");
-        if (!MiniGame.isMainMenuGame)
+        showMoves.text = showMoves.text + "Backward..."; lineSkip(8); playSound(0);
+        if (MiniGame.isMainMenuGame && tutorialCount == 4)
         {
-            showMoves.text = showMoves.text + "Backward..."; lineSkip(8); playSound(0);
+            //showMoves.text = showMoves.text + "Backward..."; lineSkip(8); playSound(0);
+            tutorialCount++;
         }
-        else
-        {
-            if (tutorialCount == 4)
-            {
-                showMoves.text = showMoves.text + "Backward..."; lineSkip(8); playSound(0);
-                tutorialCount++;
-            }
-        }
-
-        if (tutorialCount == 8) { tutorialCount++; }
     }
 
     public void addSing() { movement.Add("Sing"); showMoves.text = showMoves.text + "Sing..."; lineSkip(4); playSound(10); if (tutorialCount == 8) { tutorialCount++; } }
@@ -302,15 +284,15 @@ public class Tutorial : MonoBehaviour
     {
         if (loopState)
         {
-            if (tutorialCount == 9)
-            {
+            //if (tutorialCount == 9)
+            //{
                 //showMoves.text = "";
                 movement.Add("End Loop"); showMoves.text = showMoves.text + "End Loop..."; lineSkip(8);
                 loopState = false;
                 playSound(3);
 
                 tutorialCount++;
-            }
+            //}
         }
     }
 
@@ -347,6 +329,7 @@ public class Tutorial : MonoBehaviour
         {
             canvas.SetActive(true);
             tryAgainCanvas.SetActive(false);
+            tutorialCount = 0;
         }
 
         playing = false;
@@ -355,6 +338,7 @@ public class Tutorial : MonoBehaviour
         movement.Clear();
         move.text = "List Of Moves Cleared";
         showMoves.text = "";
+        //player.GetComponent<Animation>().Play("Idle");
         player.transform.localScale = new Vector3(2, 2, 2);
         player.transform.rotation = Quaternion.Euler(0, 90, 0);
         player.transform.position = new Vector3(-2.95f, -3.72f, 0f);
@@ -362,24 +346,15 @@ public class Tutorial : MonoBehaviour
         if (tutorialCount == 2)
         {
            //playSound(17);
-           showMoves.text = "Tap <b><color=yellow>Forward</color></b> and then <b><color=yellow>Play</color></b> \nto make Tommy move with Glee.";
+           help.text = "Tap <b><color=yellow>Forward</color></b> and then <b><color=yellow>Backward</color></b> \nto make Tommy move with Glee.";
            tutorialCount++;
         }
 
         if (tutorialCount == 6)
         {
-            ////If in story mode, skip Looping and go straight to end
-            //if (!MiniGame.isMainMenuGame)
-            //{
-            //    tutorialCount = 14;
-            //    checkTutorial();
-            //}
-            //else
-            //{
-                //playSound(18);
-                showMoves.text = "Tap <b><color=yellow>Begin Loop</color></b>.\nTap a command.\nTap <b><color=yellow>End Loop</color></b> and then <b><color=yellow>Play</color></b>.\nTommy moves many times over and over again. ";
-                tutorialCount++;
-            //}
+            //playSound(18);
+            help.text = "Tap <b><color=yellow>Loop</color></b>, <b><color=yellow>Jump</color></b>, then <b><color=yellow>Play</color></b>.\nTommy moves many times over and over again. ";
+            tutorialCount++;
         }
 
     }
@@ -405,7 +380,17 @@ public class Tutorial : MonoBehaviour
             player.transform.position = new Vector3(-2.64f, -3.72f, 0.28f);
             StartCoroutine(playingMovement());
         }
-        else { move.text = "Must Close All Loops To Play"; }
+        else {
+            //move.text = "Must Close All Loops To Play";
+            endLoop();
+            movementLengthCollection = 0;
+            player.transform.localScale = new Vector3(2, 2, 2);
+            player.transform.rotation = Quaternion.Euler(0, 90, 0);
+            player.transform.position = new Vector3(-2.64f, -3.72f, 0.28f);
+            StartCoroutine(playingMovement());
+        }
+
+        if (!MiniGame.isMainMenuGame && (tutorialCount == 1 || tutorialCount == 5 || tutorialCount == 9)) { tutorialCount++; }
 
     }
 
@@ -585,31 +570,29 @@ public class Tutorial : MonoBehaviour
             else
             {
                 tutorialCount++;
-                showMoves.text = "Tap <b><color=yellow>Play</color></b> to make Tommy move again.\n\nTap <b><color=yellow>Clear</color></b> for the next learn to code lesson.";
+                help.text = "Tap <b><color=yellow>Clear</color></b> for the next lesson.";
                 //playSound(16);
             }
         }
+
         if (tutorialCount == 5)
         {
+            //help.text = "Tap 2 commands and then Tap <b><color=yellow>Erase</color></b>.\n<b><color=yellow>Erase</color></b> takes away the last command.";
+            //help.text = "Tap <b><color=yellow>Loop</color></b>, <b><color=yellow>Jump</color></b>, then <b><color=yellow>Play</color></b>.\nTommy moves many times over and over again. ";
             tutorialCount++;
+            //playSound(19);
         }
 
-        if(tutorialCount == 10)
-         {
-            showMoves.text = "Tap 2 commands and then Tap <b><color=yellow>Erase</color></b>.\n<b><color=yellow>Erase</color></b> takes away the last command.";
-            tutorialCount++;
-            playSound(19);
-         }
-
-         if(tutorialCount == 14) 
+        if (tutorialCount == 10) 
          {
             if (!MiniGame.isMainMenuGame)
-                showMoves.text = "You did it! Congratulations! Lets see what else we can learn on the Code Road!";
+                help.text = "You did it! Congratulations! Lets see what else we can learn on the Code Road!";
             else
-                showMoves.text = "You did it! Congratulations! Time to practice your coding skills in Free Play or Challenge.";
-            tutorialCount++;
+                help.text = "You did it! Congratulations! Time to practice your coding skills in Free Play or Challenge.";
             //playSound(20);
         }
+
+        Debug.Log(tutorialCount);
     }
     void displayWinScreen()
     {
@@ -640,24 +623,22 @@ public class Tutorial : MonoBehaviour
     IEnumerator buttonFlash()
     {
         int buttonToFlash = 0;
-        if(tutorialCount == 0) { buttonToFlash = 6; }
-        if(tutorialCount == 1) { buttonToFlash = 10; }
-        if(tutorialCount == 2) { buttonToFlash = 11; }
-        if(tutorialCount == 3) { buttonToFlash = 6; }
-        if(tutorialCount == 4) { buttonToFlash = 7; }
-        if(tutorialCount == 5) { buttonToFlash = 10; }
-        if(tutorialCount == 6) { buttonToFlash = 11; }
-        if(tutorialCount == 7) { buttonToFlash = 8; }
-        if(tutorialCount == 8) { buttonToFlash = 4; }
-        if(tutorialCount == 9) { buttonToFlash = 9; }
-        if(tutorialCount == 10) { buttonToFlash = 10; }
-        if(tutorialCount == 11) { buttonToFlash = 4; }
-        if (tutorialCount == 12) { buttonToFlash = 3; }
-        if(tutorialCount == 13) { buttonToFlash = 13; }
-        if(tutorialCount == 14) { buttonToFlash = 10; }
-        if(tutorialCount == 15) { buttonToFlash = 12; }
 
-        if (buttonToFlash == 10)
+        if(tutorialCount == 0) { buttonToFlash = 6; }
+        if (tutorialCount == 1) { buttonToFlash = 10; }
+        if(tutorialCount == 2) { buttonToFlash = 11; }
+
+        if (tutorialCount == 3) { buttonToFlash = 6; }
+        if (tutorialCount == 4) { buttonToFlash = 7; }
+        if (tutorialCount == 5) { buttonToFlash = 10; }
+        if (tutorialCount == 6) { buttonToFlash = 11; }
+
+        if (tutorialCount == 7) { buttonToFlash = 8; }
+        if(tutorialCount == 8) { buttonToFlash = 4; }
+        if(tutorialCount == 9) { buttonToFlash = 10; }
+        if(tutorialCount == 10) { buttonToFlash = 12; }
+
+        if (buttonToFlash >= 10)
         {
             myButtons[buttonToFlash].GetComponent<Image>().color = new Color(0.258f, 0.941f, 0.090f, 1);
             yield return new WaitForSeconds(0.5f);
@@ -711,21 +692,11 @@ public class Tutorial : MonoBehaviour
     {
         //playSound(7);
         canvas.SetActive(false);
+        directionalLight.gameObject.SetActive(false);
         if (!MiniGame.isMainMenuGame)
         {
             tryAgainCanvas.SetActive(false);
             background.SetActive(false);
-        }
-        else
-        {
-            ChallenegeMenu.returnFromChallenge = true;
-        }
-        //if (!SceneManager.GetSceneByName("LoadingScreen").isLoaded)
-        //    SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);
-        //LoadManager.level = "MenuScreen";
-        directionalLight.gameObject.SetActive(false);
-        if (!MiniGame.isMainMenuGame)
-        {
             winCanvas.SetActive(false);
             LoadingScreen.LoadScene("Empty");
             yield return new WaitForSeconds(1.5f);
@@ -735,6 +706,8 @@ public class Tutorial : MonoBehaviour
         }
         else
         {
+            ChallenegeMenu.returnFromChallenge = true;
+
             LoadingScreen.LoadScene("MenuScreen");
             yield return new WaitForSeconds(1.5f);
             SceneManager.LoadSceneAsync("MenuScreen");
