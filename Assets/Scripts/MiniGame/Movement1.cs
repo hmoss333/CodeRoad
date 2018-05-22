@@ -119,7 +119,7 @@ public class Movement1 : MonoBehaviour
         forwardCount = 0;
 
         buttonCount = 0;
-        if (PlayerPrefs.GetInt("Scan") == 1) { StartCoroutine(scanner()); }
+        if (MiniGame.scanMode == true /*PlayerPrefs.GetInt("Scan") == 1*/) { StartCoroutine(scanner()); }
         if (PlayerPrefs.GetInt("Voice") == 0) { narration.Play(); }
         directionalLight = GameObject.FindObjectOfType<Light>();
         //GameStatusEventHandler.gameWasStarted("challenge");
