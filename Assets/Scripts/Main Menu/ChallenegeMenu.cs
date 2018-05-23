@@ -23,7 +23,6 @@ public class ChallenegeMenu : MonoBehaviour {
     public UICamera uiCam;
 
     public Toggle hintToggle;
-    public Toggle scanToggle;
 
     public static bool returnFromChallenge = false;
 
@@ -41,9 +40,6 @@ public class ChallenegeMenu : MonoBehaviour {
 
         hintToggle.isOn = true;
         ToggleHints();
-
-        scanToggle.isOn = false;
-        //ToggleScan();
 
         if (returnFromChallenge)
         {
@@ -250,13 +246,6 @@ public class ChallenegeMenu : MonoBehaviour {
             MiniGame.tutorialMode = true;
         else
             MiniGame.tutorialMode = false;
-    }
-    public void ToggleScan()
-    {
-        if (scanToggle.isOn)
-            MiniGame.scanMode = true;
-        else
-            MiniGame.scanMode = false;
     }
 
     IEnumerator GoToScene(string sceneName)

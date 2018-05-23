@@ -9,7 +9,9 @@ public class settingsPanelScript : MonoBehaviour {
 	public UIToggle typingCheck;
 	public UIToggle voiceCheck;
     public UIToggle miniGameCheck;
-	public UIToggle educationCheck;
+    public UIToggle scanCheck;
+    public UISlider scanSlider;
+    public UIToggle educationCheck;
 	public UIToggle therapyCheck;
 	private bool on = false;
 
@@ -74,6 +76,28 @@ public class settingsPanelScript : MonoBehaviour {
                 PlayerPrefs.SetInt("minigames", 1);
             }
         }
+    }
+
+    public void scanButton()
+    {
+        if (on)
+        {
+            if (PlayerPrefs.GetInt("Scan") == 1)
+            {
+                PlayerPrefs.SetInt("Scan", 0);
+            }
+            else
+            {
+                PlayerPrefs.SetInt("Scan", 1);
+            }
+        }
+
+        Debug.Log(PlayerPrefs.GetInt("Scan"));
+    }
+
+    public void scanSpeed()
+    {
+        PlayerPrefs.SetFloat("scanSpeed", scanSlider.value);
     }
 
     public void educationButton () {
@@ -161,11 +185,19 @@ public class settingsPanelScript : MonoBehaviour {
         } else {
             miniGameCheck.value = false;
         }
+        if (PlayerPrefs.GetInt("Scan") == 1) {
+            scanCheck.value = true;
+        } else {
+            scanCheck.value = false;
+        }
+        scanSlider.value = PlayerPrefs.GetFloat("scanSpeed");
+
 
         if (PlayerPrefs.GetInt("eduStart") == 0) {
 			PlayerPrefs.SetInt("eduStart",1);
 			PlayerPrefs.SetInt("educationOn",1);
 		}
+
 
 		if ((PlayerPrefs.GetInt("educationOn") == 1) && (PlayerPrefs.GetInt("therapyOn") == 1)) {
 			educationCheck.value = true;

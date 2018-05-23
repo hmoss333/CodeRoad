@@ -14,7 +14,7 @@ public class MiniGame : MonoBehaviour {
 
     //public enum TutorialMode { on, off, notSet };
     public static bool tutorialMode;
-    public static bool scanMode;
+    //public static bool scanMode;
 
     static MiniGame mg;
 
