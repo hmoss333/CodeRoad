@@ -2,31 +2,33 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayRobotAudio : MonoBehaviour {
+public class CharacterAudio : MonoBehaviour {
 
-    public AudioClip[] characterSounds;
+    public AudioClip characterSound;
     AudioSource specialAudiosource;
 
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         specialAudiosource = GameObject.Find("SpecialAudiosource").GetComponent<AudioSource>();
 
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
-    void OnClick ()
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+
+    void OnClick()
     {
         specialAudiosource.Stop();
-        specialAudiosource.clip = SelectRandomAudio(characterSounds);//robotSound;
+        specialAudiosource.clip = characterSound; //SelectRandomAudio(characterSounds);
         specialAudiosource.Play();
     }
 
-    AudioClip SelectRandomAudio (AudioClip[] audioList)
+    AudioClip SelectRandomAudio(AudioClip[] audioList)
     {
         int randNum = (int)Random.Range(0.0f, (float)audioList.Length);
 
