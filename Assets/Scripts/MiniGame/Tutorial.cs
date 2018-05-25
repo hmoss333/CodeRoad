@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class Tutorial : MonoBehaviour
 {
     Test story;
+    int scanCount;
 
     public GameObject player;
     GameObject moveBackground;
@@ -49,7 +50,7 @@ public class Tutorial : MonoBehaviour
 
     public Button[] myButtons;
     int buttonCount;
-    bool buttonChoosen;
+    bool buttonChosen;
     bool playing;
 
     int tutorialCount;
@@ -59,6 +60,8 @@ public class Tutorial : MonoBehaviour
     public GameObject tutorialCanvas;
     public GameObject tryAgainCanvas;
     public GameObject background;
+
+    public GameObject homeButton;
 
     Light directionalLight;
 
@@ -91,6 +94,8 @@ public class Tutorial : MonoBehaviour
         countTillLineSkip = 0;
         growthSwitch = true;
         shrinkSwitch = true;
+        buttonChosen = false;
+        scanCount = 0;
 
         turned = false;
         facingRight = true;
@@ -108,24 +113,71 @@ public class Tutorial : MonoBehaviour
             story = GameObject.FindObjectOfType<Test>();
         directionalLight = GameObject.FindObjectOfType<Light>();
 
-        buttonChoosen = false;
         buttonCount = 0;
         //playSound(15);
 
         if (!MiniGame.isMainMenuGame)
         {
             //launch tutorial on/off screen to set the buttonFlash
+            homeButton.SetActive(false);
             canvas.SetActive(false);
             tutorialCanvas.SetActive(true);
         }
         else
         {
             GetComponent<AudioListener>().enabled = true;
+            homeButton.SetActive(true);
             StartCoroutine(buttonFlash());
         }
     }
 
-  
+    IEnumerator scanner()
+    {
+        if (scanCount == 0) { buttonCount = 6; }
+        if (scanCount == 1) { buttonCount = 7; }
+        else if (scanCount == 2) { buttonCount = 10; }
+        else if (scanCount == 3) { buttonCount = 11; }
+        else if (scanCount == 4) { buttonCount = 12; }
+
+        if (buttonCount >= 10)
+        {
+            myButtons[buttonCount].GetComponent<Image>().color = new Color(0.258f, 0.941f, 0.090f, 1);
+            yield return new WaitForSeconds(PlayerPrefs.GetFloat("scanSpeed"));
+            myButtons[buttonCount].GetComponent<Image>().color = Color.white;
+        }
+        else
+        {
+            myButtons[buttonCount].GetComponent<Image>().color = Color.white;
+            yield return new WaitForSeconds(PlayerPrefs.GetFloat("scanSpeed"));
+            myButtons[buttonCount].GetComponent<Image>().color = new Color(0.549f, 0.776f, 0.251f, 1);
+        }
+
+        scanCount++;
+
+        if (scanCount > 5) { scanCount = 0; }
+        while (playing)
+            yield return null;
+        StartCoroutine(scanner());
+    }
+
+    void checkScanPosition()
+    {
+        if (buttonCount == 0) { addGrow(); }
+        else if (buttonCount == 1) { addShrink(); }
+        else if (buttonCount == 2) { addTurn(); }
+        else if (buttonCount == 3) { addSpin(); }
+        else if (buttonCount == 4) { addJump(); }
+        else if (buttonCount == 5) { addSing(); }
+        else if (buttonCount == 6) { addWalkForward(); }
+        else if (buttonCount == 7) { addWalkBackward(); }
+        else if (buttonCount == 8) { startLoop(); }
+        else if (buttonCount == 9) { endLoop(); }
+        else if (buttonCount == 10) { play(); }
+        else if (buttonCount == 11) { clearList(); }
+        else if (buttonCount == 12) { erase(); }
+        else if (buttonCount == 13) { mainMenu(); }
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -134,16 +186,12 @@ public class Tutorial : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1) || Input.GetMouseButtonDown(2)) return;
 
-            if ((PlayerPrefs.GetInt("Scan") == 1))
+            if (winCanvas.active) { mainMenu(); }
+            else if (tutorialCanvas.active) { TutorialOn(); }
+            else if (tryAgainCanvas.active) { clearList(); }
+            else if ((PlayerPrefs.GetInt("Scan") == 1 || MiniGame.tutorialMode) && !playing)
             {
-                    if (tutorialCount == 0) { addWalkForward(); }else
-                    if (tutorialCount == 1) { play(); }else
-                    if (tutorialCount == 2) { clearList(); }else
-                    if (tutorialCount == 3) { addWalkForward(); }else
-                    if (tutorialCount == 4) { addWalkBackward(); }else
-                    if (tutorialCount == 5) { play(); }else
-                    if (tutorialCount == 6) { clearList(); }else
-                    if (tutorialCount == 7) { mainMenu(); }
+                checkScanPosition();
             }
         }
 
@@ -370,6 +418,7 @@ public class Tutorial : MonoBehaviour
     public IEnumerator playStart()
     {
         playSound(8);
+        buttonCount = 10;
         yield return new WaitForSeconds(1);
         facingRight = true;
         if (!loopState)
@@ -390,7 +439,7 @@ public class Tutorial : MonoBehaviour
             StartCoroutine(playingMovement());
         }
 
-        if (!MiniGame.isMainMenuGame && (tutorialCount == 1 || tutorialCount == 5 || tutorialCount == 9)) { tutorialCount++; }
+        if (MiniGame.isMainMenuGame && (tutorialCount == 1 || tutorialCount == 5 || tutorialCount == 9)) { tutorialCount++; }
 
     }
 
@@ -591,8 +640,6 @@ public class Tutorial : MonoBehaviour
                 help.text = "You did it! Congratulations! Time to practice your coding skills in Free Play or Challenge.";
             //playSound(20);
         }
-
-        Debug.Log(tutorialCount);
     }
     void displayWinScreen()
     {
@@ -624,19 +671,19 @@ public class Tutorial : MonoBehaviour
     {
         int buttonToFlash = 0;
 
-        if(tutorialCount == 0) { buttonToFlash = 6; }
-        if (tutorialCount == 1) { buttonToFlash = 10; }
-        if(tutorialCount == 2) { buttonToFlash = 11; }
+        if(tutorialCount == 0) { buttonToFlash = 6; buttonCount = 6; }
+        if (tutorialCount == 1) { buttonToFlash = 10; buttonCount = 10; }
+        if(tutorialCount == 2) { buttonToFlash = 11; buttonCount = 11; }
 
-        if (tutorialCount == 3) { buttonToFlash = 6; }
-        if (tutorialCount == 4) { buttonToFlash = 7; }
-        if (tutorialCount == 5) { buttonToFlash = 10; }
-        if (tutorialCount == 6) { buttonToFlash = 11; }
+        if (tutorialCount == 3) { buttonToFlash = 6; buttonCount = 6; }
+        if (tutorialCount == 4) { buttonToFlash = 7; buttonCount = 7; }
+        if (tutorialCount == 5) { buttonToFlash = 10; buttonCount = 10; }
+        if (tutorialCount == 6) { buttonToFlash = 11; buttonCount = 11; }
 
-        if (tutorialCount == 7) { buttonToFlash = 8; }
-        if(tutorialCount == 8) { buttonToFlash = 4; }
-        if(tutorialCount == 9) { buttonToFlash = 10; }
-        if(tutorialCount == 10) { buttonToFlash = 12; }
+        if (tutorialCount == 7) { buttonToFlash = 8; buttonCount = 8; }
+        if(tutorialCount == 8) { buttonToFlash = 4; buttonCount = 4; }
+        if(tutorialCount == 9) { buttonToFlash = 10; buttonCount = 10; }
+        if(tutorialCount == 10) { buttonToFlash = 12; buttonCount = 12; }
 
         if (buttonToFlash >= 10)
         {
@@ -650,6 +697,7 @@ public class Tutorial : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
             myButtons[buttonToFlash].GetComponent<Image>().color = new Color(0.549f, 0.776f, 0.251f, 1);
         }
+
         yield return new WaitForSeconds(0.5f);
         StartCoroutine(buttonFlash());
     }
@@ -666,6 +714,11 @@ public class Tutorial : MonoBehaviour
         MiniGame.tutorialMode = false;
         tutorialCanvas.SetActive(false);
         canvas.SetActive(true);
+
+        if (PlayerPrefs.GetInt("Scan") == 1)
+        {
+            StartCoroutine(scanner());
+        }
     }
 
     IEnumerator jump()

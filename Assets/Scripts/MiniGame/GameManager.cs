@@ -198,6 +198,8 @@ public class GameManager : MonoBehaviour {
         scanCount++;
 
         if (scanCount > 8) { scanCount = 0; }
+        while (playing)
+            yield return null;
         StartCoroutine(scanner());
     }
 
@@ -249,7 +251,7 @@ public class GameManager : MonoBehaviour {
             if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1) || Input.GetMouseButtonDown(2)) return;
 
             if (tryAgainCanvas.active) { nextLevel(); }
-            else if ((PlayerPrefs.GetInt("Scan") == 1) || MiniGame.tutorialMode)
+            else if ((PlayerPrefs.GetInt("Scan") == 1 || MiniGame.tutorialMode) && !playing)
             {
                 checkScanPosition();
             }

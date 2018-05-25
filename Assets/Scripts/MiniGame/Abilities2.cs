@@ -166,6 +166,8 @@ public class Abilities2 : MonoBehaviour
         scanCount++;
 
         if (scanCount > 8) { scanCount = 0; }
+        while (playing)
+            yield return null;
         StartCoroutine(scanner());
     }
 
@@ -207,7 +209,7 @@ public class Abilities2 : MonoBehaviour
 
             if (winCanvas.active) { nextLevel(); }
             else if (tryAgainCanvas.active) { clearList(); }
-            else if ((PlayerPrefs.GetInt("Scan") == 1) || MiniGame.tutorialMode)
+            else if ((PlayerPrefs.GetInt("Scan") == 1 || MiniGame.tutorialMode) && !playing)
             {
                 checkScanPosition();
             }

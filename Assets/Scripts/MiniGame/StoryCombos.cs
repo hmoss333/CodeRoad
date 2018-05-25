@@ -56,6 +56,8 @@ public class StoryCombos : MonoBehaviour {
     public GameObject tryAgainCanvas;
     public GameObject background;
 
+    public GameObject homeButton;
+
     int spinCount;
     int jumpCount;
 
@@ -133,7 +135,12 @@ public class StoryCombos : MonoBehaviour {
             StartCoroutine(buttonFlash());
 
         if (MiniGame.isMainMenuGame)
+        {
             GetComponent<AudioListener>().enabled = true;
+            homeButton.SetActive(true);
+        }
+        else
+            homeButton.SetActive(false);
     }
 
     void narrationVoiceOverStop()
@@ -175,6 +182,8 @@ public class StoryCombos : MonoBehaviour {
         scanCount++;
 
         if (scanCount > 6) { scanCount = 0; }
+        while (playing)
+            yield return null;
         StartCoroutine(scanner());
     }
 
@@ -205,7 +214,7 @@ public class StoryCombos : MonoBehaviour {
 
             if (winCanvas.active) { nextLevel(); }
             else if (tryAgainCanvas.active) { clearList(); }
-            else if ((PlayerPrefs.GetInt("Scan") == 1) || MiniGame.tutorialMode)
+            else if ((PlayerPrefs.GetInt("Scan") == 1 || MiniGame.tutorialMode) && !playing)
             {
                 checkScanPosition();
             }

@@ -57,6 +57,8 @@ public class StoryLoops : MonoBehaviour {
     public GameObject tryAgainCanvas;
     public GameObject background;
 
+    public GameObject homeButton;
+
     public Button[] myButtons;
     int buttonCount;
     int scanCount;
@@ -128,7 +130,12 @@ public class StoryLoops : MonoBehaviour {
             StartCoroutine(buttonFlash());
 
         if (MiniGame.isMainMenuGame)
+        {
             GetComponent<AudioListener>().enabled = true;
+            homeButton.SetActive(true);
+        }
+        else
+            homeButton.SetActive(false);
     }
 
     void narrationVoiceOverStop()
@@ -170,6 +177,8 @@ public class StoryLoops : MonoBehaviour {
         scanCount++;
 
         if (scanCount > 7) { scanCount = 0; }
+        while (playing)
+            yield return null;
         StartCoroutine(scanner());
     }
 
@@ -200,7 +209,7 @@ public class StoryLoops : MonoBehaviour {
 
             if (winCanvas.active) { nextLevel(); }
             else if (tryAgainCanvas.active) { clearList(); }
-            else if ((PlayerPrefs.GetInt("Scan") == 1) || MiniGame.tutorialMode)
+            else if ((PlayerPrefs.GetInt("Scan") == 1 || MiniGame.tutorialMode) && !playing)
             {
                 checkScanPosition();
             }
