@@ -251,7 +251,7 @@ public class ChallenegeMenu : MonoBehaviour {
     IEnumerator GoToScene(string sceneName)
     {
         uiCam.enabled = false;
-        //SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);
+        SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);
         LoadingScreen.LoadScene("MiniGame");
         challengeMenu.alpha = 0f;
         challengeAvatar.SetActive(false);

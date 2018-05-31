@@ -1457,16 +1457,16 @@ public class Test : MonoBehaviour
         yield return new WaitForSeconds(0.01f);
         mainCamera.gameObject.SetActive(false);
         LoadingScreen.LoadScene("MiniGame");
-        //SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);
-        //yield return new WaitForSeconds(1f);
+        SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);
+        yield return new WaitForSeconds(1f);
         audiosource.Stop();
 		storyView.alpha = 0f;
 
         yield return new WaitForSeconds(1f);
         SceneManager.LoadSceneAsync("MiniGame");
 
-        //if (SceneManager.GetSceneByName("LoadingScreen").isLoaded)
-        //    SceneManager.UnloadSceneAsync("LoadingScreen");
+        if (SceneManager.GetSceneByName("LoadingScreen").isLoaded)
+            SceneManager.UnloadSceneAsync("LoadingScreen");
     }
 
 	public void EndMiniGame()
@@ -3200,7 +3200,7 @@ public class Test : MonoBehaviour
         Resources.UnloadUnusedAssets();
         mainCamera.gameObject.SetActive(false);
         LoadingScreen.LoadScene("MenuScreen");
-        //SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);
+        SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);
 
         yield return new WaitForSeconds(1);
 		SceneManager.LoadSceneAsync(1);
@@ -3213,8 +3213,8 @@ public class Test : MonoBehaviour
 
 		Destroy(storyParent);
 
-        //if (SceneManager.GetActiveScene().name == "LoadingScreen")
-        //    SceneManager.UnloadSceneAsync("LoadingScreen");
+        if (SceneManager.GetActiveScene().name == "LoadingScreen")
+            SceneManager.UnloadSceneAsync("LoadingScreen");
     }
 
 	public void Turotiral1OnClick()

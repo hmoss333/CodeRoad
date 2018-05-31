@@ -20,7 +20,7 @@ public class SplashScreen_ : MonoBehaviour {
         yield return new WaitForEndOfFrame();
         LoadManager.level = "Title";
         LoadingScreen.LoadScene("MenuScreen");
-        //SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);
+        SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);
         Application.LoadLevel("MenuScreen");
     }
 }

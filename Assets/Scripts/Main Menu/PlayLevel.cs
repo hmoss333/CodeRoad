@@ -164,7 +164,7 @@ public class PlayLevel : MonoBehaviour {
     IEnumerator GoToScene(string sceneName)
     {
         uiCam.enabled = false;
-        //SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);
+        SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);
         LoadingScreen.LoadScene("1stScene");
         yield return new WaitForSeconds(1.5f);
         SceneManager.LoadSceneAsync(sceneName);

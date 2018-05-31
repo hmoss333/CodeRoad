@@ -17,8 +17,6 @@ public class LoadingScreen : MonoBehaviour {
 
     private void Awake()
     {
-        DontDestroyOnLoad(this.gameObject);
-
         loadingPanel = gameObject.GetComponent<UIPanel>();
 
         if (!cameras)

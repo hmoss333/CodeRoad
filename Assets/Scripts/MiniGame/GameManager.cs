@@ -632,6 +632,7 @@ public class GameManager : MonoBehaviour {
         GetComponent<Camera>().enabled = false;
         directionalLight.gameObject.SetActive(false);
         LoadingScreen.LoadScene("MenuScreen");
+        SceneManager.LoadSceneAsync("LoadingScreen", LoadSceneMode.Additive);
         yield return new WaitForSeconds(1.5f);
         //LoadManager.level = "Title";
         //LoadingScreen.LoadScene("MenuScreen");
