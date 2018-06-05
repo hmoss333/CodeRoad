@@ -3035,7 +3035,7 @@ public class Test : MonoBehaviour
             StartCoroutine(DisplayScene());
         }
 
-        yield return null;
+        //yield return null;
         back = false;
         Resources.UnloadUnusedAssets();
     }

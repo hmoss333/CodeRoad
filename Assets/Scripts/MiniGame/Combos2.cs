@@ -294,7 +294,7 @@ public class Combos2 : MonoBehaviour
     public void addGrow() {
         movement.Add("Grow"); showMoves.text = showMoves.text + "Grow..."; lineSkip(4); playSound(5);
 
-        if (stepCount == 8)
+        if (stepCount == 7)
             stepCount++;
     }
     public void addShrink() { movement.Add("Shrink"); showMoves.text = showMoves.text + "Shrink..."; lineSkip(6); playSound(9); shrinkCount += 1; }
@@ -631,9 +631,9 @@ public class Combos2 : MonoBehaviour
         if (stepCount == 4) { buttonToFlash = 6; buttonCount = 6; }
         if (stepCount == 5) { buttonToFlash = 6; buttonCount = 6; }
         if (stepCount == 6) { buttonToFlash = 6; buttonCount = 6; }
-        if (stepCount == 7) { buttonToFlash = 6; buttonCount = 6; }
-        if (stepCount == 8) { buttonToFlash = 0; buttonCount = 0; }
-        if (stepCount == 9) { buttonToFlash = 10; buttonCount = 10; }
+        //if (stepCount == 7) { buttonToFlash = 6; buttonCount = 6; }
+        if (stepCount == 7) { buttonToFlash = 0; buttonCount = 0; }
+        if (stepCount == 8) { buttonToFlash = 10; buttonCount = 10; }
 
         if (buttonToFlash == 10)
         {

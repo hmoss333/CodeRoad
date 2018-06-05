@@ -57,6 +57,7 @@ public class StoryFinal : MonoBehaviour {
     public GameObject winCanvas;
     public GameObject tryAgainCanvas;
     public GameObject background;
+    public GameObject stayTunedCanvas;
 
     public GameObject homeButton;
 
@@ -208,7 +209,8 @@ public class StoryFinal : MonoBehaviour {
         {
             if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1) || Input.GetMouseButtonDown(2)) return;
 
-            if (winCanvas.active) { nextLevel(); }
+            if (winCanvas.active) { VictoryButton(); }
+            else if (stayTunedCanvas.active) { nextLevel(); }
             else if (tryAgainCanvas.active) { clearList(); }
             else if ((PlayerPrefs.GetInt("Scan") == 1 || MiniGame.tutorialMode) && !playing)
             {
@@ -632,6 +634,19 @@ public class StoryFinal : MonoBehaviour {
         canvas.SetActive(false);
     }
 
+    public void VictoryButton()
+    {
+        if (MiniGame.isMainMenuGame)
+        {
+            stayTunedCanvas.SetActive(true);
+            winCanvas.SetActive(false);
+        }
+        else
+        {
+            nextLevel();
+        }
+    }
+
     IEnumerator jump()
     {
         yield return new WaitForSeconds(.5f);
@@ -689,6 +704,7 @@ public class StoryFinal : MonoBehaviour {
         //playSound(7);
         canvas.SetActive(false);
         winCanvas.SetActive(false);
+        stayTunedCanvas.SetActive(false);
         LoadingScreen.LoadScene("MenuScreen");
         SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);
         directionalLight.gameObject.SetActive(false);
@@ -702,7 +718,6 @@ public class StoryFinal : MonoBehaviour {
         narration.Stop();
         StartCoroutine(nextLevetStart());
     }
-
     IEnumerator nextLevetStart()
     {
         if (!MiniGame.isMainMenuGame)

@@ -174,7 +174,7 @@ public class Tutorial : MonoBehaviour
         else if (buttonCount == 9) { endLoop(); }
         else if (buttonCount == 10) { play(); }
         else if (buttonCount == 11) { clearList(); }
-        else if (buttonCount == 12) { erase(); }
+        else if (buttonCount == 12) { mainMenu(); } //erase(); }
         else if (buttonCount == 13) { mainMenu(); }
     }
 
@@ -189,7 +189,7 @@ public class Tutorial : MonoBehaviour
             if (winCanvas.active) { mainMenu(); }
             else if (tutorialCanvas.active) { TutorialOn(); }
             else if (tryAgainCanvas.active) { clearList(); }
-            else if ((PlayerPrefs.GetInt("Scan") == 1 || MiniGame.tutorialMode) && !playing)
+            else if ((PlayerPrefs.GetInt("Scan") == 1 || MiniGame.tutorialMode))// && !playing)
             {
                 checkScanPosition();
             }

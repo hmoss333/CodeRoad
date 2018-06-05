@@ -86,7 +86,8 @@ public class PlayLevel : MonoBehaviour {
 	#endif
 
 		e = Event.current;
-	}
+        Resources.UnloadUnusedAssets();
+    }
 
 	public void OnClick() {
 		if (on) {
