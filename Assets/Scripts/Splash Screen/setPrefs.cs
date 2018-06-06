@@ -5,6 +5,8 @@ public class setPrefs : MonoBehaviour {
 
     void Awake()
     {
+        //PlayerPrefs.DeleteAll(); //Stricktly for testing purposes
+
         if (PlayerPrefs.GetInt("firstTime") == 0)
         {
             PlayerPrefs.DeleteAll();

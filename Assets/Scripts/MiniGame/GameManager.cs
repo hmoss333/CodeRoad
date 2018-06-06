@@ -434,6 +434,14 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+    public void playAgain()
+    {
+        tryAgainCanvas.SetActive(false);
+        canvas.SetActive(true);
+        playing = false;
+        play();
+    }
+
     public void slider()
     {
         loopsFromSlider = myLoops.value;
