@@ -627,10 +627,12 @@ public class Loops2 : MonoBehaviour
     IEnumerator buttonFlash()
     {
         int buttonToFlash = 0;
-        if (stepCount == 0) { buttonToFlash = 8; buttonCount = 8; }
-        if (stepCount == 1) { buttonToFlash = 3; buttonCount = 3; }
-        if (stepCount == 2) { buttonToFlash = 0; buttonCount = 0; }
-        if (stepCount == 3) { buttonToFlash = 10; buttonCount = 10; }
+        if (stepCount == 0) { buttonToFlash = 8; }
+        if (stepCount == 1) { buttonToFlash = 3; }
+        if (stepCount == 2) { buttonToFlash = 0; }
+        if (stepCount == 3) { buttonToFlash = 10; }
+
+        buttonCount = buttonToFlash;
 
         if (buttonToFlash == 10)
         {

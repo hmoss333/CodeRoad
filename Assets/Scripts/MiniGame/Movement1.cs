@@ -699,11 +699,13 @@ public class Movement1 : MonoBehaviour
     IEnumerator buttonFlash()
     {
         int buttonToFlash = 0;
-        if (stepCount == 0) { buttonToFlash = 6; buttonCount = 6; }
-        if (stepCount == 1) { buttonToFlash = 6; buttonCount = 6; }
-        if (stepCount == 2) { buttonToFlash = 6; buttonCount = 6; }
-        if (stepCount == 3) { buttonToFlash = 6; buttonCount = 6; }
-        if (stepCount == 4) { buttonToFlash = 10; buttonCount = 10; }
+        if (stepCount == 0) { buttonToFlash = 6; }
+        if (stepCount == 1) { buttonToFlash = 6; }
+        if (stepCount == 2) { buttonToFlash = 6; }
+        if (stepCount == 3) { buttonToFlash = 6; }
+        if (stepCount == 4) { buttonToFlash = 10; }
+
+        buttonCount = buttonToFlash;
 
         if (buttonToFlash == 10)
         {

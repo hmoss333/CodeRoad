@@ -614,9 +614,11 @@ public class Abilities3 : MonoBehaviour
     IEnumerator buttonFlash()
     {
         int buttonToFlash = 0;
-        if (stepCount == 0) { buttonToFlash = 0; buttonCount = 0; }
-        if (stepCount == 1) { buttonToFlash = 4; buttonCount = 4; }
-        if (stepCount == 2) { buttonToFlash = 10; buttonCount = 10; }
+        if (stepCount == 0) { buttonToFlash = 0; }
+        if (stepCount == 1) { buttonToFlash = 4; }
+        if (stepCount == 2) { buttonToFlash = 10; }
+
+        buttonCount = buttonToFlash;
 
         if (buttonToFlash == 10)
         {
