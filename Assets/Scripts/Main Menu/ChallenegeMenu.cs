@@ -13,6 +13,8 @@ public class ChallenegeMenu : MonoBehaviour {
     public GameObject currentAvatar;
     int currentAvatarNum;
     public Text avatarName;
+    public AudioClip[] avatarNamesAudio;
+    public AudioSource audioSource;
 
     public UITexture background;
     private bool on = true;
@@ -115,6 +117,10 @@ public class ChallenegeMenu : MonoBehaviour {
         else
             currentAvatarNum = 0;
         currentAvatar = SetAvatar(avatars, currentAvatarNum);
+
+        audioSource.Stop();
+        audioSource.clip = avatarNamesAudio[currentAvatarNum];
+        audioSource.Play();
     }
 
     public void PreviousAvatar()
@@ -125,6 +131,10 @@ public class ChallenegeMenu : MonoBehaviour {
         else
             currentAvatarNum = avatars.Length - 1;
         currentAvatar = SetAvatar(avatars, currentAvatarNum);
+
+        audioSource.Stop();
+        audioSource.clip = avatarNamesAudio[currentAvatarNum];
+        audioSource.Play();
     }
 
     public void SetChallengeScreen()
@@ -147,6 +157,9 @@ public class ChallenegeMenu : MonoBehaviour {
                 break;
             case 0:
                 characterSelectMenu.SetActive(true);
+                audioSource.Stop();
+                audioSource.clip = avatarNamesAudio[currentAvatarNum];
+                audioSource.Play();
                 MiniGame.currentLevel = MiniGame.Level.FreePlay;
                 break;
             case 1:

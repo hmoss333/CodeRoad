@@ -356,7 +356,7 @@ public class Abilities1 : MonoBehaviour
         playing = false;
         stepCount = 0;
         jumpCount = 0;
-        help.text = "Tommy's friend can fly high. \nCan you <b><color=yellow>Jump</color></b> just as high?";
+        help.text = "Tommy's friend can fly. \nCan you <b><color=yellow>Jump</color></b> just as high?";
         playSound(2);
         movementLengthCollection = 0;
         movement.Clear();

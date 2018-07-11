@@ -128,6 +128,7 @@ public class Tutorial : MonoBehaviour
             GetComponent<AudioListener>().enabled = true;
             homeButton.SetActive(true);
             StartCoroutine(buttonFlash());
+            playSound(15);
         }
     }
 
@@ -316,7 +317,7 @@ public class Tutorial : MonoBehaviour
         }
     }
 
-    public void addSing() { movement.Add("Sing"); showMoves.text = showMoves.text + "Sing..."; lineSkip(4); playSound(10); if (tutorialCount == 8) { tutorialCount++; } }
+    public void addSing() { movement.Add("Sing"); showMoves.text = showMoves.text + "Sing..."; lineSkip(4); playSound(10); /*if (tutorialCount == 8) { tutorialCount++; }*/ }
 
     public void startLoop()
     {
@@ -398,14 +399,14 @@ public class Tutorial : MonoBehaviour
 
         if (tutorialCount == 2)
         {
-           //playSound(17);
+           playSound(17);
            help.text = "Tap <b><color=yellow>Forward</color></b> and then <b><color=yellow>Backward</color></b> \nto make Tommy walk around.";
            tutorialCount++;
         }
 
         if (tutorialCount == 6)
         {
-            //playSound(18);
+            playSound(18);
             help.text = "Tap <b><color=yellow>Jump</color></b>, <b><color=yellow>Spin</color></b>, then <b><color=yellow>Play</color></b>.\nTommy loves this game. ";
                 //"Tap <b><color=yellow>Loop</color></b>, <b><color=yellow>Jump</color></b>, then <b><color=yellow>Play</color></b>.\nTommy moves many times over and over again. ";
             tutorialCount++;
@@ -413,7 +414,7 @@ public class Tutorial : MonoBehaviour
 
         if (tutorialCount == 10)
         {
-            //playSound(18);
+            playSound(19);
             help.text = "Tap <b><color=yellow>Loop</color></b>, <b><color=yellow>Forward</color></b>, <b><color=yellow>Jump</color></b>, <b><color=yellow>Spin</color></b>, <b><color=yellow>Backwards</color></b>, then <b><color=yellow>Play</color></b>.\nTommy moves many times over and over again. ";
             tutorialCount++;
         }
@@ -634,7 +635,7 @@ public class Tutorial : MonoBehaviour
             {
                 tutorialCount++;
                 help.text = "Tap <b><color=yellow>Clear</color></b> for the next lesson.";
-                //playSound(16);
+                playSound(16);
             }
         }
 
@@ -646,18 +647,19 @@ public class Tutorial : MonoBehaviour
             //playSound(19);
         }
 
-        if (tutorialCount == 10) 
-         {
-            if (!MiniGame.isMainMenuGame)
-                help.text = "You did it! Congratulations! Lets see what else we can learn on the Code Road!";
-            //else
-            //    help.text = "You did it! Congratulations! Time to practice your coding skills in Free Play or Challenge.";
-            //playSound(20);
-        }
+        //if (tutorialCount == 10) 
+        // {
+        //    if (!MiniGame.isMainMenuGame)
+        //    {
+        //        help.text = "You did it! Congratulations! Lets see what else we can learn on the Code Road!";
+        //        playSound(20);
+        //    }
+        //}
 
         if (tutorialCount == 17)
         {
             help.text = "You did it! Congratulations! Time to practice your coding skills in Free Play or Challenge.";
+            playSound(20);
         }
     }
     void displayWinScreen()
@@ -665,7 +667,8 @@ public class Tutorial : MonoBehaviour
         canvas.SetActive(false);
         winCanvas.SetActive(true);
         GetComponent<AudioSource>().Stop();
-        GetComponent<AudioSource>().clip = winSound[UnityEngine.Random.Range(0, winSound.Length)];
+        //GetComponent<AudioSource>().clip = winSound[UnityEngine.Random.Range(0, winSound.Length)];
+        playSound(20);
         GetComponent<AudioSource>().Play();
         player.transform.eulerAngles = new Vector3(0, 180, 0);
         AnimatePlayer.win = true;
@@ -752,6 +755,7 @@ public class Tutorial : MonoBehaviour
         MiniGame.tutorialMode = true;
         tutorialCanvas.SetActive(false);
         canvas.SetActive(true);
+        playSound(15);
         StartCoroutine(buttonFlash());
     }
     public void TutorialOff ()
@@ -783,7 +787,7 @@ public class Tutorial : MonoBehaviour
 
     public void mainMenu()
     {
-        GetComponent<AudioSource>().Stop();
+        //GetComponent<AudioSource>().Stop();
         StartCoroutine(mainMenuStart());
     }
     IEnumerator mainMenuStart()
