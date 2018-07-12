@@ -45,6 +45,7 @@ public class GameManager : MonoBehaviour {
   
     public AudioClip[] mySounds;
     public AudioClip[] backgroundMusic;
+    public AudioClip[] narrationClips;
     public AudioSource musicController;
 
     public Text help;
@@ -118,7 +119,7 @@ public class GameManager : MonoBehaviour {
 
         SelectAvatar(avatars);
         UpdateInstructionText(player);
-        SetBackgroundMusic(player, backgroundMusic, musicController);
+        SetBackgroundMusic(avatars, backgroundMusic, musicController);
     }
 
     public static void SelectAvatar(Avatars avatar)
@@ -138,36 +139,16 @@ public class GameManager : MonoBehaviour {
         help.text = "Use your coding skills to help <color=yellow>" + avatarName + "</color> dance around";
     }
 
-    void SetBackgroundMusic(GameObject playerAvatar, AudioClip[] backgroundMusic, AudioSource backgroundPlayer)
+    void SetBackgroundMusic(Avatars playerAvatar, AudioClip[] backgroundMusic, AudioSource backgroundPlayer)
     {
-        string avatarName = player.name.Replace("(Clone)", "");
+        int avatarNum = (int)playerAvatar;
 
         backgroundPlayer.Stop();
-        switch (avatarName)
-        {
-            case "Tommy":
-                backgroundPlayer.clip = backgroundMusic[0];
-                break;
-            case "Ollie":
-                backgroundPlayer.clip = backgroundMusic[1];
-                break;
-            case "Leo":
-                backgroundPlayer.clip = backgroundMusic[2];
-                break;
-            case "Eleanor":
-                backgroundPlayer.clip = backgroundMusic[3];
-                break;
-            case "Cathy":
-                backgroundPlayer.clip = backgroundMusic[4];
-                break;
-            case "Dudley":
-                backgroundPlayer.clip = backgroundMusic[5];
-                break;
-            default:
-                backgroundPlayer.clip = backgroundMusic[0];
-                break;
-        }
+        backgroundPlayer.clip = backgroundMusic[avatarNum];
         backgroundPlayer.Play();
+
+        GetComponent<AudioSource>().clip = narrationClips[avatarNum];
+        GetComponent<AudioSource>().Play();
     }
 
     IEnumerator scanner()
