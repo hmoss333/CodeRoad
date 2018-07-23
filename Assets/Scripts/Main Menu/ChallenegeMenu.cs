@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class ChallenegeMenu : MonoBehaviour {
 
-    public CanvasGroup challengeMenu; //can change this to Canvas and use alpha if need be (check which is better for performance)
+    public GameObject challengeMenu; //can change this to Canvas and use alpha if need be (check which is better for performance)
     public GameObject challengeAvatar;
     public GameObject characterSelectMenu;
     public GameObject[] avatars;
@@ -33,7 +33,8 @@ public class ChallenegeMenu : MonoBehaviour {
         TurnOffAvatars(avatars);
 
         //challengeMenu = GetComponent<CanvasGroup>();
-        challengeMenu.alpha = 0f;
+        //challengeMenu.alpha = 0f;
+        challengeMenu.SetActive(false);
         characterSelectMenu.SetActive(false);
         challengeAvatar.SetActive(false);
         currentAvatarNum = 0;
@@ -141,7 +142,8 @@ public class ChallenegeMenu : MonoBehaviour {
     {
         frontPanel.alpha = 0f;
         background.mainTexture = Resources.Load("background_challenge") as Texture;
-        challengeMenu.alpha = 1f;
+        //challengeMenu.alpha = 1f;
+        challengeMenu.SetActive(true);
         challengeAvatar.SetActive(true);
     }
 
@@ -247,7 +249,8 @@ public class ChallenegeMenu : MonoBehaviour {
     public void ChallengeBack()
     {
         characterSelectMenu.SetActive(false);
-        challengeMenu.alpha = 0f;
+        //challengeMenu.alpha = 0f;
+        challengeMenu.SetActive(false);
         challengeAvatar.SetActive(false);
         frontPanel.alpha = 1f;
         background.mainTexture = Resources.Load("coderoad_opening") as Texture;
@@ -266,7 +269,8 @@ public class ChallenegeMenu : MonoBehaviour {
         uiCam.enabled = false;
         SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);
         LoadingScreen.LoadScene("MiniGame");
-        challengeMenu.alpha = 0f;
+        challengeMenu.GetComponent<CanvasGroup>().alpha = 0f;
+        //challengeMenu.SetActive(false);
         challengeAvatar.SetActive(false);
         yield return new WaitForSeconds(1.5f);
         SceneManager.LoadSceneAsync(sceneName);

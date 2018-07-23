@@ -10,7 +10,7 @@ public class PlayMiniGame : MonoBehaviour {
     //public string levelToLoad = "1stScene";
     //public string altLevelToLoad = "Tutorial";
 
-    public CanvasGroup challengeMenu; //can change this to Canvas and use alpha if need be (check which is better for performance)
+    public GameObject challengeMenu; //can change this to Canvas and use alpha if need be (check which is better for performance)
     public GameObject challengeAvatar;
     //public GameObject characterSelectMenu;
     //public GameObject[] avatars;
@@ -58,7 +58,8 @@ public class PlayMiniGame : MonoBehaviour {
         {
             frontPanel.alpha = 0f;
             background.mainTexture = Resources.Load("background_challenge") as Texture;
-            challengeMenu.alpha = 1f;
+            //challengeMenu.alpha = 1f;
+            challengeMenu.SetActive(true);
             challengeAvatar.SetActive(true);
         }
     }
