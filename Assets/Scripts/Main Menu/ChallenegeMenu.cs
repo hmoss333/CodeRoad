@@ -41,8 +41,8 @@ public class ChallenegeMenu : MonoBehaviour {
         currentAvatar = SetAvatar(avatars, currentAvatarNum);
         SetAvatarName(currentAvatarNum);
 
-        hintToggle.isOn = true;
-        ToggleHints();
+        hintToggle.isOn = MiniGame.tutorialMode;
+        //ToggleHints();
 
         if (returnFromChallenge)
         {

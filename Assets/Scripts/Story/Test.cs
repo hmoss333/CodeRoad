@@ -248,7 +248,7 @@ public class Test : MonoBehaviour
 	keyenterPress = true;
 	}
 	objectApp = true;
-	setTap ();
+	//setTap ();
 	}
 
 	void iCadeKeyPressedCallback(int i)
