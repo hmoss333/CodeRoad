@@ -183,7 +183,7 @@ public class Loops1 : MonoBehaviour
 
         buttonCount = 0;
         if (PlayerPrefs.GetInt("Scan") == 1 && !MiniGame.tutorialMode) { StartCoroutine(scanner()); }
-        if (PlayerPrefs.GetInt("Voice") == 0) { narration.Play(); }
+        if (PlayerPrefs.GetInt("voice") == 0) { narration.Play(); }
         directionalLight = GameObject.FindObjectOfType<Light>();
         //GameStatusEventHandler.gameWasStarted("challenge");
 
@@ -193,7 +193,7 @@ public class Loops1 : MonoBehaviour
 
     void narrationVoiceOverStop()
     {
-        if (PlayerPrefs.GetInt("Voice") == 0)
+        if (PlayerPrefs.GetInt("voice") == 0)
         {
             if (incorrectVoiceOver.isPlaying)
                 incorrectVoiceOver.Stop();
@@ -450,7 +450,7 @@ public class Loops1 : MonoBehaviour
     IEnumerator playNarration()
     {
         yield return new WaitForSeconds(1.0f);
-        if (PlayerPrefs.GetInt("Voice") == 0)
+        if (PlayerPrefs.GetInt("voice") == 0)
             narration.Play();
     }
 
@@ -564,7 +564,7 @@ public class Loops1 : MonoBehaviour
 
     void playMoveName(string move)
     {
-        if (PlayerPrefs.GetInt("Voice") == 0)
+        if (PlayerPrefs.GetInt("voice") == 0)
         {
             if (move.Contains("Grow")) { GetComponent<AudioSource>().clip = mySounds[5]; }
             if (move.Contains("Spin")) { GetComponent<AudioSource>().clip = mySounds[11]; }
@@ -680,15 +680,18 @@ public class Loops1 : MonoBehaviour
 
         canvas.SetActive(false);
         winCanvas.SetActive(true);
-        GetComponent<AudioSource>().Stop();
-        GetComponent<AudioSource>().clip = winSound[UnityEngine.Random.Range(0, winSound.Length)];
-        GetComponent<AudioSource>().Play();
+        if (PlayerPrefs.GetInt("voice") == 0)
+        {
+            GetComponent<AudioSource>().Stop();
+            GetComponent<AudioSource>().clip = winSound[UnityEngine.Random.Range(0, winSound.Length)];
+            GetComponent<AudioSource>().Play();
+        }
         PointHandler.completedChallenges += 1.0f;
     }
     void displayErrorMessage()
     {
         //help.text = "Good try! Press Clear To Try Again";
-        //if (PlayerPrefs.GetInt("Voice") == 0)
+        //if (PlayerPrefs.GetInt("voice") == 0)
         //{
         //    incorrectVoiceOver.Play();
         //    if (narration.isPlaying)
@@ -708,7 +711,7 @@ public class Loops1 : MonoBehaviour
 
     void playSound(int num)
     {
-        if (PlayerPrefs.GetInt("Voice") == 0)
+        if (PlayerPrefs.GetInt("voice") == 0)
         {
             narrationVoiceOverStop();
             GetComponent<AudioSource>().clip = mySounds[num];

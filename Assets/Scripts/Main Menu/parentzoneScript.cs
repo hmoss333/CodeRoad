@@ -31,7 +31,10 @@ public class parentzoneScript : MonoBehaviour {
     public string link;
 
 	public void parentzoneEnter(){
-        backgroundMusic.PlayOneShot(askVoice, 1.0F);
+        if (PlayerPrefs.GetInt("voice") == 0)
+        {
+            backgroundMusic.PlayOneShot(askVoice, 1.0F);
+        }
 
         parentalGateFirstNumber = Random.Range (4,10);
 		parentalGateSecondNumber = Random.Range (4,10);

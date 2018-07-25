@@ -22,7 +22,7 @@ public class AnimatePlayer : MonoBehaviour {
 
     void play()
     {
-        if (playOnce)
+        if (PlayerPrefs.GetInt("voice") == 0 && playOnce)
         {
             playOnce = false;
             GetComponent<AudioSource>().Play();

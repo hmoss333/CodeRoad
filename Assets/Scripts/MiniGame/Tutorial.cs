@@ -284,7 +284,7 @@ public class Tutorial : MonoBehaviour
             if (winCanvas.activeSelf) { mainMenu(); }
             else if (tutorialCanvas.activeSelf) { TutorialOn(); }
             else if (tryAgainCanvas.activeSelf) { clearList(); }
-            else if ((PlayerPrefs.GetInt("Scan") == 1 || MiniGame.tutorialMode))// && !playing)
+            else if ((PlayerPrefs.GetInt("Scan") == 1 || MiniGame.tutorialMode) || MiniGame.isMainMenuGame)// && !playing)
             {
                 checkScanPosition();
             }
@@ -613,7 +613,7 @@ public class Tutorial : MonoBehaviour
 
     void playMoveName(string move)
     {
-        if (PlayerPrefs.GetInt("Voice") == 0)
+        if (PlayerPrefs.GetInt("voice") == 0)
         {
             if (move.Contains("Grow")) { GetComponent<AudioSource>().clip = mySounds[5]; }
             if (move.Contains("Spin")) { GetComponent<AudioSource>().clip = mySounds[11]; }
@@ -767,10 +767,10 @@ public class Tutorial : MonoBehaviour
     {
         canvas.SetActive(false);
         winCanvas.SetActive(true);
-        GetComponent<AudioSource>().Stop();
+        //GetComponent<AudioSource>().Stop();
         //GetComponent<AudioSource>().clip = winSound[UnityEngine.Random.Range(0, winSound.Length)];
         playSound(20);
-        GetComponent<AudioSource>().Play();
+        //GetComponent<AudioSource>().Play();
         player.transform.eulerAngles = new Vector3(0, 180, 0);
         AnimatePlayer.win = true;
         AnimateFriend.win = true;
@@ -779,7 +779,7 @@ public class Tutorial : MonoBehaviour
     void displayErrorMessage()
     {
         //showMoves.text = "Good try! Press Clear To Try Again";
-        //if (PlayerPrefs.GetInt("Voice") == 0)
+        //if (PlayerPrefs.GetInt("voice") == 0)
         //{
         //    incorrectVoiceOver.Play();
         //    if (narration.isPlaying)
@@ -879,8 +879,9 @@ public class Tutorial : MonoBehaviour
 
     void playSound(int num)
     {
-        if (PlayerPrefs.GetInt("Voice") == 0)
+        if (PlayerPrefs.GetInt("voice") == 0)
         {
+            GetComponent<AudioSource>().Stop();
             GetComponent<AudioSource>().clip = mySounds[num];
             GetComponent<AudioSource>().Play();
         }
@@ -894,6 +895,7 @@ public class Tutorial : MonoBehaviour
     IEnumerator mainMenuStart()
     {
         //playSound(7);
+        GetComponent<AudioSource>().Stop();
         canvas.SetActive(false);
         //directionalLight.gameObject.SetActive(false);
         if (!MiniGame.isMainMenuGame)

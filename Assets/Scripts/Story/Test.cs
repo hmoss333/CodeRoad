@@ -314,7 +314,8 @@ public class Test : MonoBehaviour
 
 	void Start()
 	{
-		e = Event.current;
+
+        e = Event.current;
 
 		//ls = GameObject.Find("LoadingScreen").GetComponent<LoadingScreen>();
 		inMiniGameMode = false;

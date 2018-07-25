@@ -119,9 +119,12 @@ public class ChallenegeMenu : MonoBehaviour {
             currentAvatarNum = 0;
         currentAvatar = SetAvatar(avatars, currentAvatarNum);
 
-        audioSource.Stop();
-        audioSource.clip = avatarNamesAudio[currentAvatarNum];
-        audioSource.Play();
+        if (PlayerPrefs.GetInt("voice") == 0)
+        {
+            audioSource.Stop();
+            audioSource.clip = avatarNamesAudio[currentAvatarNum];
+            audioSource.Play();
+        }
     }
 
     public void PreviousAvatar()

@@ -187,7 +187,8 @@ public class GameManager : MonoBehaviour {
 
         SelectAvatar(avatars);
         UpdateInstructionText(player);
-        SetBackgroundMusic(avatars, backgroundMusic, musicController);
+        if (PlayerPrefs.GetInt("voice") == 0)
+            SetBackgroundMusic(avatars, backgroundMusic, musicController);
     }
 
     public static void SelectAvatar(Avatars avatar)
@@ -592,7 +593,7 @@ public class GameManager : MonoBehaviour {
 
     void playMoveName(string move)
     {
-        if (PlayerPrefs.GetInt("Voice") == 1)
+        if (PlayerPrefs.GetInt("voice") == 0)
         {
             if (move.Contains("Grow")) { GetComponent<AudioSource>().clip = mySounds[5]; }
             if (move.Contains("Spin")) { GetComponent<AudioSource>().clip = mySounds[11]; }
@@ -705,7 +706,7 @@ public class GameManager : MonoBehaviour {
 
     void playSound(int num)
     {
-        if (PlayerPrefs.GetInt("Voice") == 1)
+        if (PlayerPrefs.GetInt("voice") == 0)
         {
             GetComponent<AudioSource>().clip = mySounds[num];
             GetComponent<AudioSource>().Play();
@@ -725,6 +726,7 @@ public class GameManager : MonoBehaviour {
         Destroy(player);
 
         //playSound(7);
+        GetComponent<AudioSource>().Stop();
         canvas.SetActive(false);
         tryAgainCanvas.SetActive(false);
         background.SetActive(false);
@@ -743,6 +745,7 @@ public class GameManager : MonoBehaviour {
     {
         Destroy(player);
         //narration.Stop();
+        GetComponent<AudioSource>().Stop();
         MiniGame.UnloadScene(MiniGame.Level.FreePlay);
         MiniGame.LoadScene(MiniGame.Level.Level1);
     }
