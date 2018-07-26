@@ -1472,6 +1472,7 @@ public class Test : MonoBehaviour
 
 	public void EndMiniGame()
 	{
+        Resources.UnloadUnusedAssets();
         StartCoroutine(TurnOnCamera());
     }
 	IEnumerator TurnOnCamera()
