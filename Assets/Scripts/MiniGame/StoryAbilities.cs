@@ -865,13 +865,14 @@ public class StoryAbilities : MonoBehaviour {
             winCanvas.SetActive(false);
             tryAgainPanel.SetActive(false);
             background.SetActive(false);
+
             GetComponent<Camera>().enabled = false;
             if (!SceneManager.GetSceneByName("LoadingScreen").isLoaded)
                 SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);
             directionalLight.gameObject.SetActive(false);
             LoadingScreen.LoadScene("Empty");
             //directionalLight.gameObject.SetActive(false);
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(1.25f);
             story.EndMiniGame();
             MiniGame.UnloadScene(MiniGame.currentLevel);
             SceneManager.UnloadSceneAsync("MiniGame");

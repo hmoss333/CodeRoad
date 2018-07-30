@@ -841,7 +841,7 @@ public class StoryFinal : MonoBehaviour {
             directionalLight.gameObject.SetActive(false);
             LoadingScreen.LoadScene("Empty");
             //directionalLight.gameObject.SetActive(false);
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(1.25f);
             story.EndMiniGame();
             MiniGame.UnloadScene(MiniGame.currentLevel);
             SceneManager.UnloadSceneAsync("MiniGame");

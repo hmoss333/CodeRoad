@@ -1472,7 +1472,7 @@ public class Test : MonoBehaviour
 
 	public void EndMiniGame()
 	{
-        Resources.UnloadUnusedAssets();
+        //Resources.UnloadUnusedAssets();
         StartCoroutine(TurnOnCamera());
     }
 	IEnumerator TurnOnCamera()
@@ -1482,7 +1482,7 @@ public class Test : MonoBehaviour
         //while (!SceneManager.GetSceneByName("Empty").isLoaded)
         //    yield return null;
 
-        yield return new WaitForSeconds(0.05f);
+        yield return new WaitForSeconds(0.05f); //needs to be >0.0f so that following page characters can re-anchor properly
 
         inMiniGameMode = false;
         storyView.alpha = 1f;
@@ -1554,9 +1554,10 @@ public class Test : MonoBehaviour
             {
                 yield return new WaitForSeconds(0);
 
-                Destroy(GameObject.Find("Part (1)(Clone)"));
-                Destroy(GameObject.Find("Part (2)(Clone)"));
+                //Destroy(GameObject.Find("Part (1)(Clone)"));
+                //Destroy(GameObject.Find("Part (2)(Clone)"));
 
+                ClearStoryCharacters();
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (1)")) as GameObject;
                 //partPrefab = Instantiate(Part1);
                 //partPrefab.transform.SetParent(storyView.transform);
@@ -1586,9 +1587,10 @@ public class Test : MonoBehaviour
             {
                 yield return new WaitForSeconds(0);
 
-                Destroy(GameObject.Find("Part (1)(Clone)"));
-                Destroy(GameObject.Find("Part (2)(Clone)"));
+                //Destroy(GameObject.Find("Part (1)(Clone)"));
+                //Destroy(GameObject.Find("Part (2)(Clone)"));
 
+                ClearStoryCharacters();
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (2)")) as GameObject;
                 //partPrefab = Instantiate(Part2);
                 //partPrefab.transform.SetParent(storyView.transform);
@@ -1618,9 +1620,10 @@ public class Test : MonoBehaviour
             {
                 yield return new WaitForSeconds(0);
 
-                Destroy(GameObject.Find("Part (2)(Clone)"));
-                Destroy(GameObject.Find("Part (3)(Clone)"));
+                //Destroy(GameObject.Find("Part (2)(Clone)"));
+                //Destroy(GameObject.Find("Part (3)(Clone)"));
 
+                ClearStoryCharacters();
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (2)")) as GameObject;
                 //partPrefab = Instantiate(Part2);
                 //partPrefab.transform.SetParent(storyView.transform);
@@ -1650,9 +1653,10 @@ public class Test : MonoBehaviour
             {
                 yield return new WaitForSeconds(0);
 
-                Destroy(GameObject.Find("Part (2)(Clone)"));
-                Destroy(GameObject.Find("Part (3)(Clone)"));
+                //Destroy(GameObject.Find("Part (2)(Clone)"));
+                //Destroy(GameObject.Find("Part (3)(Clone)"));
 
+                ClearStoryCharacters();
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (3)")) as GameObject;
                 //partPrefab = Instantiate(Part3);
                 //partPrefab.transform.SetParent(storyView.transform);
@@ -1682,9 +1686,10 @@ public class Test : MonoBehaviour
             {
                 yield return new WaitForSeconds(0);
 
-                Destroy(GameObject.Find("Part (3)(Clone)"));
-                Destroy(GameObject.Find("Part (4)(Clone)"));
+                //Destroy(GameObject.Find("Part (3)(Clone)"));
+                //Destroy(GameObject.Find("Part (4)(Clone)"));
 
+                ClearStoryCharacters();
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (3)")) as GameObject;
                 //partPrefab = Instantiate(Part3);
                 //partPrefab.transform.SetParent(storyView.transform);
@@ -1714,9 +1719,10 @@ public class Test : MonoBehaviour
             {
                 yield return new WaitForSeconds(0);
 
-                Destroy(GameObject.Find("Part (3)(Clone)"));
-                Destroy(GameObject.Find("Part (4)(Clone)"));
+                //Destroy(GameObject.Find("Part (3)(Clone)"));
+                //Destroy(GameObject.Find("Part (4)(Clone)"));
 
+                ClearStoryCharacters();
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (4)")) as GameObject;
                 //partPrefab = Instantiate(Part4);
                 //partPrefab.transform.SetParent(storyView.transform);
@@ -1746,9 +1752,10 @@ public class Test : MonoBehaviour
             {
                 yield return new WaitForSeconds(0);
 
-                Destroy(GameObject.Find("Part (4)(Clone)"));
-                Destroy(GameObject.Find("Part (5)(Clone)"));
+                //Destroy(GameObject.Find("Part (4)(Clone)"));
+                //Destroy(GameObject.Find("Part (5)(Clone)"));
 
+                ClearStoryCharacters();
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (4)")) as GameObject;
                 //partPrefab = Instantiate(Part4);
                 //partPrefab.transform.SetParent(storyView.transform);
@@ -1778,9 +1785,10 @@ public class Test : MonoBehaviour
             {
                 yield return new WaitForSeconds(0);
 
-                Destroy(GameObject.Find("Part (4)(Clone)"));
-                Destroy(GameObject.Find("Part (5)(Clone)"));
+                //Destroy(GameObject.Find("Part (4)(Clone)"));
+                //Destroy(GameObject.Find("Part (5)(Clone)"));
 
+                ClearStoryCharacters();
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (5)")) as GameObject;
                 //partPrefab = Instantiate(Part5);
                 //partPrefab.transform.SetParent(storyView.transform);
@@ -1810,9 +1818,10 @@ public class Test : MonoBehaviour
             {
                 yield return new WaitForSeconds(0);
 
-                Destroy(GameObject.Find("Part (5)(Clone)"));
-                Destroy(GameObject.Find("Part (6)(Clone)"));
+                //Destroy(GameObject.Find("Part (5)(Clone)"));
+                //Destroy(GameObject.Find("Part (6)(Clone)"));
 
+                ClearStoryCharacters();
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (5)")) as GameObject;
                 //partPrefab = Instantiate(Part5);
                 //partPrefab.transform.SetParent(storyView.transform);
@@ -1843,9 +1852,10 @@ public class Test : MonoBehaviour
                 if (PlayerPrefs.GetInt("minigames") != 1)
                     yield return new WaitForSeconds(0);
 
-                Destroy(GameObject.Find("Part (5)(Clone)"));
-                Destroy(GameObject.Find("Part (6)(Clone)"));
+                //Destroy(GameObject.Find("Part (5)(Clone)"));
+                //Destroy(GameObject.Find("Part (6)(Clone)"));
 
+                ClearStoryCharacters();
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (6)")) as GameObject;
                 //partPrefab = Instantiate(Part6);
                 //partPrefab.transform.SetParent(storyView.transform);
@@ -1875,9 +1885,10 @@ public class Test : MonoBehaviour
             {
                 yield return new WaitForSeconds(0);
 
-                Destroy(GameObject.Find("Part (6)(Clone)"));
-                Destroy(GameObject.Find("Part (7)(Clone)"));
+                //Destroy(GameObject.Find("Part (6)(Clone)"));
+                //Destroy(GameObject.Find("Part (7)(Clone)"));
 
+                ClearStoryCharacters();
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (6)")) as GameObject;
                 //partPrefab = Instantiate(Part6);
                 //partPrefab.transform.SetParent(storyView.transform);
@@ -1907,9 +1918,10 @@ public class Test : MonoBehaviour
             {
                 yield return new WaitForSeconds(0);
 
-                Destroy(GameObject.Find("Part (6)(Clone)"));
-                Destroy(GameObject.Find("Part (7)(Clone)"));
+                //Destroy(GameObject.Find("Part (6)(Clone)"));
+                //Destroy(GameObject.Find("Part (7)(Clone)"));
 
+                ClearStoryCharacters();
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (7)")) as GameObject;
                 //partPrefab = Instantiate(Part7);
                 //partPrefab.transform.SetParent(storyView.transform);
@@ -1939,9 +1951,10 @@ public class Test : MonoBehaviour
             {
                 yield return new WaitForSeconds(0);
 
-                Destroy(GameObject.Find("Part (7)(Clone)"));
-                Destroy(GameObject.Find("Part (8)(Clone)"));
+                //Destroy(GameObject.Find("Part (7)(Clone)"));
+                //Destroy(GameObject.Find("Part (8)(Clone)"));
 
+                ClearStoryCharacters();
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (7)")) as GameObject;
                 //partPrefab = Instantiate(Part7);
                 //partPrefab.transform.SetParent(storyView.transform);
@@ -1971,9 +1984,10 @@ public class Test : MonoBehaviour
             {
                 yield return new WaitForSeconds(0);
 
-                Destroy(GameObject.Find("Part (7)(Clone)"));
-                Destroy(GameObject.Find("Part (8)(Clone)"));
+                //Destroy(GameObject.Find("Part (7)(Clone)"));
+                //Destroy(GameObject.Find("Part (8)(Clone)"));
 
+                ClearStoryCharacters();
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (8)")) as GameObject;
                 //partPrefab = Instantiate(Part8);
                 //partPrefab.transform.SetParent(storyView.transform);
@@ -2003,9 +2017,10 @@ public class Test : MonoBehaviour
             {
                 yield return new WaitForSeconds(0);
 
-                Destroy(GameObject.Find("Part (8)(Clone)"));
-                Destroy(GameObject.Find("Part (9)(Clone)"));
+                //Destroy(GameObject.Find("Part (8)(Clone)"));
+                //Destroy(GameObject.Find("Part (9)(Clone)"));
 
+                ClearStoryCharacters();
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (8)")) as GameObject;
                 //partPrefab = Instantiate(Part8);
                 //partPrefab.transform.SetParent(storyView.transform);
@@ -2036,9 +2051,10 @@ public class Test : MonoBehaviour
                 if (PlayerPrefs.GetInt("minigames") != 1)
                     yield return new WaitForSeconds(0);
 
-                Destroy(GameObject.Find("Part (8)(Clone)"));
-                Destroy(GameObject.Find("Part (9)(Clone)"));
+                //Destroy(GameObject.Find("Part (8)(Clone)"));
+                //Destroy(GameObject.Find("Part (9)(Clone)"));
 
+                ClearStoryCharacters();
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (9)")) as GameObject;
                 //partPrefab = Instantiate(Part9);
                 //partPrefab.transform.SetParent(storyView.transform);
@@ -2068,9 +2084,10 @@ public class Test : MonoBehaviour
             {
                 yield return new WaitForSeconds(0);
 
-                Destroy(GameObject.Find("Part (9)(Clone)"));
-                Destroy(GameObject.Find("Part (10)(Clone)"));
+                //Destroy(GameObject.Find("Part (9)(Clone)"));
+                //Destroy(GameObject.Find("Part (10)(Clone)"));
 
+                ClearStoryCharacters();
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (9)")) as GameObject;
                 //partPrefab = Instantiate(Part9);
                 //partPrefab.transform.SetParent(storyView.transform);
@@ -2100,9 +2117,10 @@ public class Test : MonoBehaviour
             {
                 yield return new WaitForSeconds(0);
 
-                Destroy(GameObject.Find("Part (9)(Clone)"));
-                Destroy(GameObject.Find("Part (10)(Clone)"));
+                //Destroy(GameObject.Find("Part (9)(Clone)"));
+                //Destroy(GameObject.Find("Part (10)(Clone)"));
 
+                ClearStoryCharacters();
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (10)")) as GameObject;
                 //partPrefab = Instantiate(Part10);
                 //partPrefab.transform.SetParent(storyView.transform);
@@ -2132,9 +2150,10 @@ public class Test : MonoBehaviour
             {
                 yield return new WaitForSeconds(0);
 
-                Destroy(GameObject.Find("Part (10)(Clone)"));
-                Destroy(GameObject.Find("Part (11)(Clone)"));
+                //Destroy(GameObject.Find("Part (10)(Clone)"));
+                //Destroy(GameObject.Find("Part (11)(Clone)"));
 
+                ClearStoryCharacters();
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (10)")) as GameObject;
                 //partPrefab = Instantiate(Part10);
                 //partPrefab.transform.SetParent(storyView.transform);
@@ -2164,9 +2183,10 @@ public class Test : MonoBehaviour
             {
                 yield return new WaitForSeconds(0);
 
-                Destroy(GameObject.Find("Part (10)(Clone)"));
-                Destroy(GameObject.Find("Part (11)(Clone)"));
+                //Destroy(GameObject.Find("Part (10)(Clone)"));
+                //Destroy(GameObject.Find("Part (11)(Clone)"));
 
+                ClearStoryCharacters();
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (11)")) as GameObject;
                 //partPrefab = Instantiate(Part11);
                 //partPrefab.transform.SetParent(storyView.transform);
@@ -2196,9 +2216,10 @@ public class Test : MonoBehaviour
             {
                 yield return new WaitForSeconds(0);
 
-                Destroy(GameObject.Find("Part (11)(Clone)"));
-                Destroy(GameObject.Find("Part (12)(Clone)"));
+                //Destroy(GameObject.Find("Part (11)(Clone)"));
+                //Destroy(GameObject.Find("Part (12)(Clone)"));
 
+                ClearStoryCharacters();
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (11)")) as GameObject;
                 //partPrefab = Instantiate(Part11);
                 //partPrefab.transform.SetParent(storyView.transform);
@@ -2229,9 +2250,10 @@ public class Test : MonoBehaviour
                 if (PlayerPrefs.GetInt("minigames") != 1)
                     yield return new WaitForSeconds(0);
 
-                Destroy(GameObject.Find("Part (11)(Clone)"));
-                Destroy(GameObject.Find("Part (12)(Clone)"));
+                //Destroy(GameObject.Find("Part (11)(Clone)"));
+                //Destroy(GameObject.Find("Part (12)(Clone)"));
 
+                ClearStoryCharacters();
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (12)")) as GameObject;
                 //partPrefab = Instantiate(Part12);
                 //partPrefab.transform.SetParent(storyView.transform);
@@ -2261,9 +2283,10 @@ public class Test : MonoBehaviour
             {
                 yield return new WaitForSeconds(0);
 
-                Destroy(GameObject.Find("Part (12)(Clone)"));
-                Destroy(GameObject.Find("Part (13)(Clone)"));
+                //Destroy(GameObject.Find("Part (12)(Clone)"));
+                //Destroy(GameObject.Find("Part (13)(Clone)"));
 
+                ClearStoryCharacters();
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (12)")) as GameObject;
                 //partPrefab = Instantiate(Part12);
                 //partPrefab.transform.SetParent(storyView.transform);
@@ -2293,9 +2316,10 @@ public class Test : MonoBehaviour
             {
                 yield return new WaitForSeconds(0);
 
-                Destroy(GameObject.Find("Part (12)(Clone)"));
-                Destroy(GameObject.Find("Part (13)(Clone)"));
+                //Destroy(GameObject.Find("Part (12)(Clone)"));
+                //Destroy(GameObject.Find("Part (13)(Clone)"));
 
+                ClearStoryCharacters();
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (13)")) as GameObject;
                 //partPrefab = Instantiate(Part13);
                 //partPrefab.transform.SetParent(storyView.transform);
@@ -2325,9 +2349,10 @@ public class Test : MonoBehaviour
             {
                 yield return new WaitForSeconds(0);
 
-                Destroy(GameObject.Find("Part (13)(Clone)"));
-                Destroy(GameObject.Find("Part (14)(Clone)"));
+                //Destroy(GameObject.Find("Part (13)(Clone)"));
+                //Destroy(GameObject.Find("Part (14)(Clone)"));
 
+                ClearStoryCharacters();
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (13)")) as GameObject;
                 //partPrefab = Instantiate(Part13);
                 //partPrefab.transform.SetParent(storyView.transform);
@@ -2357,9 +2382,10 @@ public class Test : MonoBehaviour
             {
                 yield return new WaitForSeconds(0);
 
-                Destroy(GameObject.Find("Part (13)(Clone)"));
-                Destroy(GameObject.Find("Part (14)(Clone)"));
+                //Destroy(GameObject.Find("Part (13)(Clone)"));
+                //Destroy(GameObject.Find("Part (14)(Clone)"));
 
+                ClearStoryCharacters();
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (14)")) as GameObject;
                 //partPrefab = Instantiate(Part14);
                 //partPrefab.transform.SetParent(storyView.transform);
@@ -2389,9 +2415,10 @@ public class Test : MonoBehaviour
             {
                 yield return new WaitForSeconds(0);
 
-                Destroy(GameObject.Find("Part (14)(Clone)"));
-                Destroy(GameObject.Find("Part (15)(Clone)"));
+                //Destroy(GameObject.Find("Part (14)(Clone)"));
+                //Destroy(GameObject.Find("Part (15)(Clone)"));
 
+                ClearStoryCharacters();
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (14)")) as GameObject;
                 //partPrefab = Instantiate(Part14);
                 //partPrefab.transform.SetParent(storyView.transform);
@@ -2422,9 +2449,10 @@ public class Test : MonoBehaviour
                 if (PlayerPrefs.GetInt("minigames") != 1)
                     yield return new WaitForSeconds(0);
 
-                Destroy(GameObject.Find("Part (14)(Clone)"));
-                Destroy(GameObject.Find("Part (15)(Clone)"));
+                //Destroy(GameObject.Find("Part (14)(Clone)"));
+                //Destroy(GameObject.Find("Part (15)(Clone)"));
 
+                ClearStoryCharacters();
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (15)")) as GameObject;
                 //partPrefab = Instantiate(Part15);
                 //partPrefab.transform.SetParent(storyView.transform);
@@ -2454,9 +2482,10 @@ public class Test : MonoBehaviour
             {
                 yield return new WaitForSeconds(0);
 
-                Destroy(GameObject.Find("Part (15)(Clone)"));
-                Destroy(GameObject.Find("Part (16)(Clone)"));
+                //Destroy(GameObject.Find("Part (15)(Clone)"));
+                //Destroy(GameObject.Find("Part (16)(Clone)"));
 
+                ClearStoryCharacters();
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (15)")) as GameObject;
                 //partPrefab = Instantiate(Part15);
                 //partPrefab.transform.SetParent(storyView.transform);
@@ -2486,9 +2515,10 @@ public class Test : MonoBehaviour
             {
                 yield return new WaitForSeconds(0);
 
-                Destroy(GameObject.Find("Part (15)(Clone)"));
-                Destroy(GameObject.Find("Part (16)(Clone)"));
+                //Destroy(GameObject.Find("Part (15)(Clone)"));
+                //Destroy(GameObject.Find("Part (16)(Clone)"));
 
+                ClearStoryCharacters();
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (16)")) as GameObject;
                 //partPrefab = Instantiate(Part16);
                 //partPrefab.transform.SetParent(storyView.transform);
@@ -2519,9 +2549,10 @@ public class Test : MonoBehaviour
             {
                 yield return new WaitForSeconds(0);
 
-                Destroy(GameObject.Find("Part (16)(Clone)"));
-                Destroy(GameObject.Find("Part (17)(Clone)"));
+                //Destroy(GameObject.Find("Part (16)(Clone)"));
+                //Destroy(GameObject.Find("Part (17)(Clone)"));
 
+                ClearStoryCharacters();
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (16)")) as GameObject;
                 //partPrefab = Instantiate(Part16);
                 //partPrefab.transform.SetParent(storyView.transform);
@@ -2552,9 +2583,10 @@ public class Test : MonoBehaviour
             {
                 yield return new WaitForSeconds(0);
 
-                Destroy(GameObject.Find("Part (16)(Clone)"));
-                Destroy(GameObject.Find("Part (17)(Clone)"));
+                //Destroy(GameObject.Find("Part (16)(Clone)"));
+                //Destroy(GameObject.Find("Part (17)(Clone)"));
 
+                ClearStoryCharacters();
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (17)")) as GameObject;
                 //partPrefab = Instantiate(Part17);
                 //partPrefab.transform.SetParent(storyView.transform);
@@ -2585,9 +2617,10 @@ public class Test : MonoBehaviour
             {
                 yield return new WaitForSeconds(0);
 
-                Destroy(GameObject.Find("Part (17)(Clone)"));
-                Destroy(GameObject.Find("Part (18)(Clone)"));
+                //Destroy(GameObject.Find("Part (17)(Clone)"));
+                //Destroy(GameObject.Find("Part (18)(Clone)"));
 
+                ClearStoryCharacters();
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (17)")) as GameObject;
                 //partPrefab = Instantiate(Part17);
                 //partPrefab.transform.SetParent(storyView.transform);
@@ -2619,9 +2652,10 @@ public class Test : MonoBehaviour
                 if (PlayerPrefs.GetInt("minigames") != 1)
                     yield return new WaitForSeconds(0);
 
-                Destroy(GameObject.Find("Part (17)(Clone)"));
-                Destroy(GameObject.Find("Part (18)(Clone)"));
+                //Destroy(GameObject.Find("Part (17)(Clone)"));
+                //Destroy(GameObject.Find("Part (18)(Clone)"));
 
+                ClearStoryCharacters();
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (18)")) as GameObject;
                 //partPrefab = Instantiate(Part18);
                 //partPrefab.transform.SetParent(storyView.transform);
@@ -2651,9 +2685,10 @@ public class Test : MonoBehaviour
             {
                 yield return new WaitForSeconds(0);
 
-                Destroy(GameObject.Find("Part (18)(Clone)"));
-                Destroy(GameObject.Find("Part (19)(Clone)"));
+                //Destroy(GameObject.Find("Part (18)(Clone)"));
+                //Destroy(GameObject.Find("Part (19)(Clone)"));
 
+                ClearStoryCharacters();
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (18)")) as GameObject;
                 //partPrefab = Instantiate(Part18);
                 //partPrefab.transform.SetParent(storyView.transform);
@@ -2683,9 +2718,10 @@ public class Test : MonoBehaviour
             {
                 yield return new WaitForSeconds(0);
 
-                Destroy(GameObject.Find("Part (18)(Clone)"));
-                Destroy(GameObject.Find("Part (19)(Clone)"));
+                //Destroy(GameObject.Find("Part (18)(Clone)"));
+                //Destroy(GameObject.Find("Part (19)(Clone)"));
 
+                ClearStoryCharacters();
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (19)")) as GameObject;
                 //partPrefab = Instantiate(Part19);
                 //partPrefab.transform.SetParent(storyView.transform);
@@ -2716,9 +2752,10 @@ public class Test : MonoBehaviour
             {
                 yield return new WaitForSeconds(0);
 
-                Destroy(GameObject.Find("Part (19)(Clone)"));
-                Destroy(GameObject.Find("Part (20)(Clone)"));
+                //Destroy(GameObject.Find("Part (19)(Clone)"));
+                //Destroy(GameObject.Find("Part (20)(Clone)"));
 
+                ClearStoryCharacters();
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (19)")) as GameObject;
                 //partPrefab = Instantiate(Part19);
                 //partPrefab.transform.SetParent(storyView.transform);
@@ -2749,9 +2786,10 @@ public class Test : MonoBehaviour
             {
                 yield return new WaitForSeconds(0);
 
-                Destroy(GameObject.Find("Part (19)(Clone)"));
-                Destroy(GameObject.Find("Part (20)(Clone)"));
+                //Destroy(GameObject.Find("Part (19)(Clone)"));
+                //Destroy(GameObject.Find("Part (20)(Clone)"));
 
+                ClearStoryCharacters();
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (20)")) as GameObject;
                 //partPrefab = Instantiate(Part20);
                 //partPrefab.transform.SetParent(storyView.transform);
@@ -2782,9 +2820,10 @@ public class Test : MonoBehaviour
             {
                 yield return new WaitForSeconds(0);
 
-                Destroy(GameObject.Find("Part (20)(Clone)"));
-                Destroy(GameObject.Find("Part (21)(Clone)"));
+                //Destroy(GameObject.Find("Part (20)(Clone)"));
+                //Destroy(GameObject.Find("Part (21)(Clone)"));
 
+                ClearStoryCharacters();
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (20)")) as GameObject;
                 //partPrefab = Instantiate(Part20);
                 //partPrefab.transform.SetParent(storyView.transform);
@@ -2816,9 +2855,10 @@ public class Test : MonoBehaviour
                 if (PlayerPrefs.GetInt("minigames") != 1)
                     yield return new WaitForSeconds(0);
 
-                Destroy(GameObject.Find("Part (20)(Clone)"));
-                Destroy(GameObject.Find("Part (21)(Clone)"));
+                //Destroy(GameObject.Find("Part (20)(Clone)"));
+                //Destroy(GameObject.Find("Part (21)(Clone)"));
 
+                ClearStoryCharacters();
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (21)")) as GameObject;
                 //partPrefab = Instantiate(Part21);
                 //partPrefab.transform.SetParent(storyView.transform);
@@ -2848,9 +2888,10 @@ public class Test : MonoBehaviour
             {
                 yield return new WaitForSeconds(0);
 
-                Destroy(GameObject.Find("Part (21)(Clone)"));
-                Destroy(GameObject.Find("Part (22)(Clone)"));
+                //Destroy(GameObject.Find("Part (21)(Clone)"));
+                //Destroy(GameObject.Find("Part (22)(Clone)"));
 
+                ClearStoryCharacters();
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (21)")) as GameObject;
                 //partPrefab = Instantiate(Part21);
                 //partPrefab.transform.SetParent(storyView.transform);
@@ -2880,9 +2921,10 @@ public class Test : MonoBehaviour
             {
                 yield return new WaitForSeconds(0);
 
-                Destroy(GameObject.Find("Part (21)(Clone)"));
-                Destroy(GameObject.Find("Part (22)(Clone)"));
+                //Destroy(GameObject.Find("Part (21)(Clone)"));
+                //Destroy(GameObject.Find("Part (22)(Clone)"));
 
+                ClearStoryCharacters();
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (22)")) as GameObject;
                 //partPrefab = Instantiate(Part22);
                 //partPrefab.transform.SetParent(storyView.transform);
@@ -2913,9 +2955,10 @@ public class Test : MonoBehaviour
             {
                 yield return new WaitForSeconds(0);
 
-                Destroy(GameObject.Find("Part (22)(Clone)"));
-                Destroy(GameObject.Find("Part (23)(Clone)"));
+                //Destroy(GameObject.Find("Part (22)(Clone)"));
+                //Destroy(GameObject.Find("Part (23)(Clone)"));
 
+                ClearStoryCharacters();
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (22)")) as GameObject;
                 //partPrefab = Instantiate(Part22);
                 //partPrefab.transform.SetParent(storyView.transform);
@@ -2947,9 +2990,10 @@ public class Test : MonoBehaviour
                 if (PlayerPrefs.GetInt("minigames") != 1)
                     yield return new WaitForSeconds(0);
 
-                Destroy(GameObject.Find("Part (22)(Clone)"));
-                Destroy(GameObject.Find("Part (23)(Clone)"));
+                //Destroy(GameObject.Find("Part (22)(Clone)"));
+                //Destroy(GameObject.Find("Part (23)(Clone)"));
 
+                ClearStoryCharacters();
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (23)")) as GameObject;
                 //partPrefab = Instantiate(Part23);
                 //partPrefab.transform.SetParent(storyView.transform);
@@ -2979,9 +3023,10 @@ public class Test : MonoBehaviour
             {
                 yield return new WaitForSeconds(0);
 
-                Destroy(GameObject.Find("Part (23)(Clone)"));
-                //Destroy(GameObject.Find("Part (24)(Clone)"));
+                //Destroy(GameObject.Find("Part (23)(Clone)"));
+                ////Destroy(GameObject.Find("Part (24)(Clone)"));
 
+                ClearStoryCharacters();
                 partPrefab = Instantiate(Resources.Load("StoryParts/Part (23)")) as GameObject;
                 //partPrefab = Instantiate(Part23);
                 //partPrefab.transform.SetParent(storyView.transform);
@@ -3196,6 +3241,16 @@ public class Test : MonoBehaviour
 			repeatClick();
 		}
 	}
+
+    void ClearStoryCharacters()
+    {
+        GameObject[] storyParts = GameObject.FindGameObjectsWithTag("Story");
+        foreach (GameObject part in storyParts)
+        {
+            //Debug.Log(part.name);
+            Destroy(part);
+        }
+    }
 
 	IEnumerator DisplayScene()
 	{

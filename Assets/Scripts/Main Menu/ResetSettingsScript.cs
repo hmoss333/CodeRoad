@@ -18,8 +18,9 @@ public class ResetSettingsScript : MonoBehaviour {
 	public UISprite playBackground; 
 
 	public UISlider printSlider;
-	
-	private Color orig;
+    public UISlider scanSlider;
+
+    private Color orig;
 	private Color half;
 
 
@@ -45,6 +46,8 @@ public class ResetSettingsScript : MonoBehaviour {
         PlayerPrefs.SetInt("tutorialMiniGame", 0);
         PlayerPrefs.SetInt("tutorialMiniGameStory", 0);
         PlayerPrefs.SetFloat("speedOfLabel", 1f);
+        PlayerPrefs.SetFloat("printSize", 0.5f);
+        PlayerPrefs.SetFloat("scanSpeed", 0.5f);
         PlayerPrefs.SetInt("MiniGameTutorial", 0);
         PlayerPrefs.SetInt("levelSelect", 0);
 
@@ -70,8 +73,11 @@ public class ResetSettingsScript : MonoBehaviour {
 		therapy.GetComponent<Collider>().enabled = false;
 		PlayerPrefs.SetInt("therapyOn",0);
 
-		printSlider.value = 0.5f;
-		PlayerPrefs.SetFloat("printSize",printSlider.value);
+		//printSlider.value = 0.5f;
+		//PlayerPrefs.SetFloat("printSize",printSlider.value);
+        printSlider.value = PlayerPrefs.GetFloat("printSize");
+
+        scanSlider.value = PlayerPrefs.GetFloat("scanSpeed");
 
         PlayerPrefs.Save();
         Debug.Log("Prefs Reset");

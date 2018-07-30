@@ -25,6 +25,7 @@ public class setPrefs : MonoBehaviour {
             PlayerPrefs.SetInt("tutorialMiniGame", 0);
             PlayerPrefs.SetInt("tutorialMiniGameStory", 0);
             PlayerPrefs.SetFloat("speedOfLabel", 1f);
+            PlayerPrefs.SetFloat("scanSpeed", 0.5f);
             PlayerPrefs.SetInt("MiniGameTutorial", 0);
             PlayerPrefs.SetInt("levelSelect", 0);
 

@@ -897,19 +897,19 @@ public class Tutorial : MonoBehaviour
         //playSound(7);
         GetComponent<AudioSource>().Stop();
         canvas.SetActive(false);
-        //directionalLight.gameObject.SetActive(false);
+
         if (!MiniGame.isMainMenuGame)
         {
+            winCanvas.SetActive(false);
             tryAgainCanvas.SetActive(false);
             background.SetActive(false);
-            winCanvas.SetActive(false);
-            //LoadingScreen.LoadScene("Empty");
+
             GetComponent<Camera>().enabled = false;
             if (!SceneManager.GetSceneByName("LoadingScreen").isLoaded)
                 SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);
             directionalLight.gameObject.SetActive(false);
             LoadingScreen.LoadScene("Empty");
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(1.25f);
             story.EndMiniGame();
             MiniGame.UnloadScene(MiniGame.currentLevel);
             SceneManager.UnloadSceneAsync("MiniGame");
@@ -922,7 +922,7 @@ public class Tutorial : MonoBehaviour
             if (!SceneManager.GetSceneByName("LoadingScreen").isLoaded)
                 SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Additive);
             directionalLight.gameObject.SetActive(false);
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(1.25f);
             SceneManager.LoadSceneAsync("MenuScreen");
         }
     }

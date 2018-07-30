@@ -190,7 +190,7 @@ public class settingsPanelScript : MonoBehaviour {
         } else {
             scanCheck.value = false;
         }
-        scanSlider.value = PlayerPrefs.GetFloat("scanSpeed");
+        scanSlider.value = PlayerPrefs.GetFloat("scanSpeed", 0.5f);
 
 
         if (PlayerPrefs.GetInt("eduStart") == 0) {
