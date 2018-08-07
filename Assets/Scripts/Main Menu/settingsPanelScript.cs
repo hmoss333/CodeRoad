@@ -10,6 +10,9 @@ public class settingsPanelScript : MonoBehaviour {
 	public UIToggle voiceCheck;
     public UIToggle miniGameCheck;
     public UIToggle scanCheck;
+    const float minScanSpeed = 0.05f;
+    const float maxScanSpeed = 9.00f;
+    //float scanSpeed = 1.65f;
     public UISlider scanSlider;
     public UIToggle educationCheck;
 	public UIToggle therapyCheck;
@@ -97,8 +100,19 @@ public class settingsPanelScript : MonoBehaviour {
 
     public void scanSpeed()
     {
-        PlayerPrefs.SetFloat("scanSpeed", scanSlider.value);
+        float tempVal = Mathf.Lerp(minScanSpeed, maxScanSpeed, scanSlider.value);
+
+        PlayerPrefs.SetFloat("scanSpeed", (float)System.Math.Round(tempVal, 2));
+        //Debug.Log(PlayerPrefs.GetFloat("scanSpeed"));
     }
+    //public void incrementScanSpeed()
+    //{
+    //    scanSpeed += 0.05f;
+    //    float currentValue = (float)System.Math.Round(scanSpeed, 2);
+    //    scanSpeed = (currentValue > maxScanSpeed) ? scanSpeed = minScanSpeed : scanSpeed = currentValue;
+    //    //scanSpeedTxt.text = scanSpeed.ToString("0.00") + " Seconds";
+    //    PlayerPrefs.SetFloat("scanSpeed", scanSpeed);
+    //}
 
     public void educationButton () {
 		if (on) {
@@ -190,7 +204,8 @@ public class settingsPanelScript : MonoBehaviour {
         } else {
             scanCheck.value = false;
         }
-        scanSlider.value = PlayerPrefs.GetFloat("scanSpeed", 0.5f);
+        //Debug.Log(PlayerPrefs.GetFloat("scanSpeed"));
+        scanSlider.value = PlayerPrefs.GetFloat("scanSpeed") / maxScanSpeed;
 
 
         if (PlayerPrefs.GetInt("eduStart") == 0) {

@@ -5,7 +5,7 @@ using System.Collections;
 public class Test : MonoBehaviour
 {
 	[Header("Variables")]
-	//private bool enabled = true;
+	private bool enabled = true;
 	//public bool isOn = false; // Clicking will toggle the button on and off. Starts off
 	public int count = -1;
 	string message;
@@ -355,7 +355,7 @@ public class Test : MonoBehaviour
 		//If tutorial is finished, don't start; otherwise start normally
 		if (PlayerPrefs.GetInt("tutorial") != 0) { inTutorialMode = false; } else { inTutorialMode = true; }
 
-		if (PlayerPrefs.GetInt("tutorial") == 0)
+		if (inTutorialMode)
 			Tutorial_1.SetActive(true);
 		else
 			Tutorial_1.SetActive(false);
@@ -378,25 +378,25 @@ public class Test : MonoBehaviour
 			{
 				key1Press = true;
 				objectApp = true;
-				//setTap ();
+                //setTap ();
 			}
 			if (Input.GetKeyDown("2") == true)
 			{
 				key2Press = true;
 				objectApp = true;
-				//setTap ();
+                //setTap ();
             }
 			if (Input.GetKeyDown("3") == true)
 			{
 				key3Press = true;
 				objectApp = true;
-				//setTap ();
+                //setTap ();
             }
 			if (Input.GetKeyDown("space") == true)
 			{
 				keyspacePress = true;
 				objectApp = true;
-				//setTap ();
+                //setTap ();
             }
 			if (e != null)
 			{
@@ -405,14 +405,14 @@ public class Test : MonoBehaviour
 					//if (Input.GetKeyDown(KeyCode.Return)) {
 					keyenterPress = true;
 					objectApp = true;
-					//setTap ();
+                    //setTap ();
                 }
 			}
 
-            if (objectApp && inTutorialMode)
-            {
-                setTap();
-            }
+            //if (objectApp && inTutorialMode)
+            //{
+            //    setTap();
+            //}
 
 			if ((PlayerPrefs.GetInt("educationOn") == 1) && (PlayerPrefs.GetInt("therapyOn") == 0))
 			{
@@ -782,52 +782,9 @@ public class Test : MonoBehaviour
 				keyenterPress = false;
 			}
 
-
-			if (sequence == 0)
-			{
-
-			}
-			else if (sequence == 1)
-			{
-
-			}
-
-//			if ((PlayerPrefs.GetInt("educationOn") == 0) && (PlayerPrefs.GetInt("therapyOn") == 1))
-//			{
-//				if ((PlayerPrefs.GetInt("key1toggle") == 0) && key1Press)
-//				{
-//					setTap();
-//					OnClick();
-//				}
-//				if ((PlayerPrefs.GetInt("key2toggle") == 0) && key2Press)
-//				{
-//					setTap();
-//					OnClick();
-//				}
-//				if ((PlayerPrefs.GetInt("key3toggle") == 0) && key3Press)
-//				{
-//					setTap();
-//					OnClick();
-//				}
-//				if ((PlayerPrefs.GetInt("keySpacetoggle") == 0) && keyspacePress)
-//				{
-//					setTap();
-//					OnClick();
-//				}
-//				if ((PlayerPrefs.GetInt("keyEntertoggle") == 0) && keyenterPress)
-//				{
-//					setTap();
-//					OnClick();
-//				}
-//				key1Press = false;
-//				key2Press = false;
-//				key3Press = false;
-//				keyspacePress = false;
-//				keyenterPress = false;
-//			}
-			if (objectApp && (((PlayerPrefs.GetInt("educationOn") == 1) && (PlayerPrefs.GetInt("therapyOn") == 1))
-				|| ((PlayerPrefs.GetInt("educationOn") == 0) && (PlayerPrefs.GetInt("therapyOn") == 0))))
-			{
+            if (objectApp && (((PlayerPrefs.GetInt("educationOn") == 1) && (PlayerPrefs.GetInt("therapyOn") == 1))
+                || ((PlayerPrefs.GetInt("educationOn") == 0) && (PlayerPrefs.GetInt("therapyOn") == 0))))
+            {
 				setTap();
 				OnClick();
 				objectApp = false;
@@ -1293,46 +1250,46 @@ public class Test : MonoBehaviour
 
 	public void OnClick()
 	{
-		if (!inTutorialMode)
-		{
-			load = false;
-			//enabled = false;
-			float nextAlpha = next.alpha;
-			float coverAlpha = cover.alpha;
-			play.text = "";
-			//cover.alpha = 0;
-			next.alpha = 0;
-			exitBack.GetComponent<Collider>().enabled = false;
-			exitBack.alpha = 0;
-			playBack2.alpha = 0;
-			exitLabel.alpha = 0;
-			repeatBack.GetComponent<Collider>().enabled = false;
-			repeatBack.alpha = 0;
-			repeatBack2.alpha = 0;
-			repeatLabel.alpha = 0;
-			backBack.GetComponent<Collider>().enabled = false;
-			backBack.alpha = 0;
-			backBack2.alpha = 0;
-			backLabel.alpha = 0;
+        if (enabled == true && !inTutorialMode)
+        {
+            load = false;
+            enabled = false;
+            float nextAlpha = next.alpha;
+            float coverAlpha = cover.alpha;
+            play.text = "";
+            //cover.alpha = 0;
+            next.alpha = 0;
+            exitBack.GetComponent<Collider>().enabled = false;
+            exitBack.alpha = 0;
+            playBack2.alpha = 0;
+            exitLabel.alpha = 0;
+            repeatBack.GetComponent<Collider>().enabled = false;
+            repeatBack.alpha = 0;
+            repeatBack2.alpha = 0;
+            repeatLabel.alpha = 0;
+            backBack.GetComponent<Collider>().enabled = false;
+            backBack.alpha = 0;
+            backBack2.alpha = 0;
+            backLabel.alpha = 0;
 
-			specialAnimationEffect1.GetComponent<ParticleSystem>().Stop();
-			specialAnimationEffect2.GetComponent<ParticleSystem>().Stop();
-			specialAnimationEffect3.GetComponent<ParticleSystem>().Stop();
-			specialAnimationEffect4.GetComponent<ParticleSystem>().Stop();
-			specialAnimationEffect5.GetComponent<ParticleSystem>().Stop();
-			specialAnimationEffect6.GetComponent<ParticleSystem>().Stop();
-			specialAnimationEffect7.GetComponent<ParticleSystem>().Stop();
-			specialAnimationEffect8.GetComponent<ParticleSystem>().Stop();
-			specialAnimationEffect9.GetComponent<ParticleSystem>().Stop();
-			specialAnimationEffect10.GetComponent<ParticleSystem>().Stop();
-			specialAnimationEffect11.GetComponent<ParticleSystem>().Stop();
-			specialAnimationEffect12.GetComponent<ParticleSystem>().Stop();
-			specialAnimationEffect13.GetComponent<ParticleSystem>().Stop();
-			specialAnimationEffect14.GetComponent<ParticleSystem>().Stop();
-			specialAnimationEffect15.GetComponent<ParticleSystem>().Stop();
-			specialAnimationEffect16.GetComponent<ParticleSystem>().Stop();
-			specialAnimationEffect17.GetComponent<ParticleSystem>().Stop();
-			specialAnimationEffect18.GetComponent<ParticleSystem>().Stop();
+            specialAnimationEffect1.GetComponent<ParticleSystem>().Stop();
+            specialAnimationEffect2.GetComponent<ParticleSystem>().Stop();
+            specialAnimationEffect3.GetComponent<ParticleSystem>().Stop();
+            specialAnimationEffect4.GetComponent<ParticleSystem>().Stop();
+            specialAnimationEffect5.GetComponent<ParticleSystem>().Stop();
+            specialAnimationEffect6.GetComponent<ParticleSystem>().Stop();
+            specialAnimationEffect7.GetComponent<ParticleSystem>().Stop();
+            specialAnimationEffect8.GetComponent<ParticleSystem>().Stop();
+            specialAnimationEffect9.GetComponent<ParticleSystem>().Stop();
+            specialAnimationEffect10.GetComponent<ParticleSystem>().Stop();
+            specialAnimationEffect11.GetComponent<ParticleSystem>().Stop();
+            specialAnimationEffect12.GetComponent<ParticleSystem>().Stop();
+            specialAnimationEffect13.GetComponent<ParticleSystem>().Stop();
+            specialAnimationEffect14.GetComponent<ParticleSystem>().Stop();
+            specialAnimationEffect15.GetComponent<ParticleSystem>().Stop();
+            specialAnimationEffect16.GetComponent<ParticleSystem>().Stop();
+            specialAnimationEffect17.GetComponent<ParticleSystem>().Stop();
+            specialAnimationEffect18.GetComponent<ParticleSystem>().Stop();
             specialAnimationEffect19.GetComponent<ParticleSystem>().Stop();
             specialAnimationEffect20.GetComponent<ParticleSystem>().Stop();
             specialAnimationEffect21.GetComponent<ParticleSystem>().Stop();
@@ -1343,36 +1300,39 @@ public class Test : MonoBehaviour
 
             //every 5 levels, if minigame option is active, display minigame instead of going to next page
             if (count == 9 || count == 15 || count == 21 || count == 27 || count == 33 || count == 39 || count == 43)
-			{
-				if (PlayerPrefs.GetInt("minigames") == 1)
-				{
-					if (!inMiniGameMode && CanPlay())
-					{
-						label.text = "";
+            {
+                if (PlayerPrefs.GetInt("minigames") == 1)
+                {
+                    if (!inMiniGameMode && CanPlay())
+                    {
+                        label.text = "";
                         StartCoroutine(SetMiniGame());
                     }
-					else
-					{
-						StartCoroutine(FadeOuter(sprite, 0.5f, nextAlpha, coverAlpha));
-					}
-				}
-				else
-					StartCoroutine(FadeOuter(sprite, 0.5f, nextAlpha, coverAlpha));
-			}
-			else
-			{
-				StartCoroutine(FadeOuter(sprite, 0.5f, nextAlpha, coverAlpha));
-			}
-		}
-
+                    else
+                    {
+                        StartCoroutine(FadeOuter(sprite, 0.5f, nextAlpha, coverAlpha));
+                    }
+                }
+                else
+                    StartCoroutine(FadeOuter(sprite, 0.5f, nextAlpha, coverAlpha));
+            }
+            else
+            {
+                StartCoroutine(FadeOuter(sprite, 0.5f, nextAlpha, coverAlpha));
+            }
+        }
         else
         {
-            if (Tutorial_1.activeInHierarchy)
-                Turotiral1OnClick();
-            else if (Tutorial_2.activeInHierarchy)
-                Turotiral2OnClick();
-            else if (Tutorial_3.activeInHierarchy)
-                Turotiral3OnClick();
+            if (inTutorialMode)
+            {
+                Debug.Log("play tutorial");
+                if (Tutorial_1.activeInHierarchy)
+                    Turotiral1OnClick();
+                else if (Tutorial_2.activeInHierarchy)
+                    Turotiral2OnClick();
+                else if (Tutorial_3.activeInHierarchy)
+                    Turotiral3OnClick();
+            }
         }
     }
 
@@ -1477,17 +1437,20 @@ public class Test : MonoBehaviour
     }
 	IEnumerator TurnOnCamera()
 	{
+        yield return new WaitForSeconds(1f);
         SceneManager.LoadSceneAsync("Empty");
 
         //while (!SceneManager.GetSceneByName("Empty").isLoaded)
         //    yield return null;
 
-        yield return new WaitForSeconds(0.05f); //needs to be >0.0f so that following page characters can re-anchor properly
+        //yield return new WaitForSeconds(0.05f); //needs to be >0.0f so that following page characters can re-anchor properly
 
         inMiniGameMode = false;
         storyView.alpha = 1f;
         mainCamera.gameObject.SetActive(true);
+        enabled = true;
         next.alpha = 1f;
+        cover.alpha = 1f;
         OnClick();
     }
 
@@ -3223,7 +3186,7 @@ public class Test : MonoBehaviour
 		{
 			//play.text = "Play";
 		}
-		//enabled = true;
+		enabled = true;
 
 		if (backPage)
 		{
