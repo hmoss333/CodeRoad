@@ -400,7 +400,7 @@ public class Test : MonoBehaviour
             }
 			if (e != null)
 			{
-				if (e.keyCode.ToString() == "10" && e.type == EventType.keyDown)
+				if (e.keyCode.ToString() == "10" && e.type == EventType.KeyDown)
 				{
 					//if (Input.GetKeyDown(KeyCode.Return)) {
 					keyenterPress = true;

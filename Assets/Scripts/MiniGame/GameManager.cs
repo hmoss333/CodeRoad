@@ -271,7 +271,6 @@ public class GameManager : MonoBehaviour {
         else if (buttonCount == 13) { mainMenu(); }
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (showMoves.text != movesString)
@@ -319,7 +318,7 @@ public class GameManager : MonoBehaviour {
         }
         if (e != null)
         {
-            if (e.keyCode.ToString() == "10" && e.type == EventType.keyDown)
+            if (e.keyCode.ToString() == "10" && e.type == EventType.KeyDown)
             {
                 keyenterPress = true;
                 objectApp = true;
@@ -446,22 +445,26 @@ public class GameManager : MonoBehaviour {
 
     public void startLoop()
     {
-            if (!loopState)
-            {
-                movement.Add("Begin Loop"); showMoves.text = showMoves.text + "Begin Loop..."; lineSkip(10);
-                loopState = true;
-                playSound(1);
-            }        
+        if (!loopState)
+        {
+            movement.Add("Begin Loop");
+            showMoves.text = showMoves.text + "Begin Loop...";
+            lineSkip(10);
+            loopState = true;
+            playSound(1);
+        }        
     }
 
     public void endLoop()
-    {        
-            if (loopState)
-            {
-                movement.Add("End Loop"); showMoves.text = showMoves.text + "End Loop..."; lineSkip(8);
-                loopState = false;
-                playSound(3);
-            }        
+    {   
+        if (loopState)
+        {
+            movement.Add("End Loop");
+            showMoves.text = showMoves.text + "End Loop...";
+            lineSkip(8);
+            loopState = false;
+            playSound(3);
+        }        
     }
 
     void lineSkip(int counter)
@@ -492,8 +495,9 @@ public class GameManager : MonoBehaviour {
         showMoves.text = "";
         player.transform.localScale = new Vector3(2, 2, 2);
         player.transform.rotation = Quaternion.Euler(0, 90, 0);
-        player.transform.position = new Vector3(-2.64f,-3.72f,0.28f); 
+        player.transform.position = new Vector3(-2.64f,-3.72f,0.28f);
     }
+
     public void play()
     {
         if (!playing)
@@ -502,11 +506,10 @@ public class GameManager : MonoBehaviour {
             StartCoroutine(playStart());
         }
     }
+
     public IEnumerator playStart()
     {
-        playSound(8);
-        yield return new WaitForSeconds(1);
-        facingRight = true;
+
         //if (!loopState)
         //{
         //    movementLengthCollection = 0;
@@ -516,10 +519,14 @@ public class GameManager : MonoBehaviour {
         //    StartCoroutine(playingMovement());
         //}
 
-        if (loopState)
+        if(loopState)
         {
             endLoop();
         }
+
+        playSound(8);
+        yield return new WaitForSeconds(1);
+        facingRight = true;
 
         movementLengthCollection = 0;
         player.transform.localScale = new Vector3(2, 2, 2);
@@ -609,21 +616,30 @@ public class GameManager : MonoBehaviour {
             GetComponent<AudioSource>().Play();
         }
     }
+
     IEnumerator playingMovement()
     {
         for (int i = 0; i < movement.Count; i++)
         {
-            if(movement[i].Contains("Begin Loop")) { /*i++;*/ saveStartLocation = i; }
-            Debug.Log("startLocation: " + saveStartLocation);
-          
-            if (movement[i].Contains("End Loop")) {
-                countLoops++;
-                if (countLoops < loopsFromSlider) {
-                    i = saveStartLocation;
-                } else {
-                    countLoops = 0;
+            if(movement[i].Contains("Begin Loop")) 
+            { 
+                /*i++;*/ saveStartLocation = i;
+                if (movement[i].Contains("End Loop"))
+                {
+                    countLoops++;
+                    if (countLoops < loopsFromSlider)
+                    {
+                        i = saveStartLocation;
+                    }
+                    else
+                    {
+                        countLoops = 0;
+                    }
                 }
+                else Debug.Log("No End");
             }
+
+            Debug.Log("startLocation: " + saveStartLocation);
 
             if (movement[i].Contains("Roll") || movement[i].Contains("Spin"))
             {

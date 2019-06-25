@@ -278,7 +278,7 @@ public class Abilities3 : MonoBehaviour
         }
         if (e != null)
         {
-            if (e.keyCode.ToString() == "10" && e.type == EventType.keyDown)
+            if (e.keyCode.ToString() == "10" && e.type == EventType.KeyDown)
             {
                 keyenterPress = true;
                 objectApp = true;

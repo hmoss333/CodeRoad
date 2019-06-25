@@ -14,7 +14,7 @@ public class Tutorial : MonoBehaviour
     public Text move;
     public Text showMoves;
     List<string> movement = new List<string>();
-    List<string> movementListCreation = new List<string>();
+    //List<string> movementListCreation = new List<string>();
     string size;
 
     bool growthSwitch;
@@ -269,7 +269,7 @@ public class Tutorial : MonoBehaviour
         }
         if (e != null)
         {
-            if (e.keyCode.ToString() == "10" && e.type == EventType.keyDown)
+            if (e.keyCode.ToString() == "10" && e.type == EventType.KeyDown)
             {
                 keyenterPress = true;
                 objectApp = true;
@@ -401,7 +401,7 @@ public class Tutorial : MonoBehaviour
     public void addWalkForward()
     {
         movement.Add("Forward");
-        showMoves.text = ""; showMoves.text = showMoves.text + "Forward..."; lineSkip(7); playSound(4);
+        showMoves.text = showMoves.text + "Forward..."; lineSkip(7); playSound(4);
         if (tutorialCount == 0 || tutorialCount == 3 || tutorialCount == 12)
         {
             tutorialCount++;
@@ -820,7 +820,7 @@ public class Tutorial : MonoBehaviour
         if (tutorialCount == 16) { buttonToFlash = 10; }
         if (tutorialCount == 17) { buttonToFlash = 12; }
 
-
+        DeactivateButtons(buttonToFlash);
         ////Old Ending to Tutorial
         ////Loop, Jump, Play, Menu
         //if (tutorialCount == 7) { buttonToFlash = 8; }
@@ -925,6 +925,15 @@ public class Tutorial : MonoBehaviour
             yield return new WaitForSeconds(1.25f);
             SceneManager.LoadSceneAsync("MenuScreen");
         }
+    }
+
+    void DeactivateButtons(int button) //turns off buttons that aren't flashing
+    {
+        foreach (Button b in myButtons)
+            b.interactable = false;
+
+        myButtons[button].interactable = true;
+        myButtons[12].interactable = true; //skip forward button
     }
 
 }
