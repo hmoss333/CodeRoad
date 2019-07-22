@@ -478,7 +478,7 @@ public class UniRate : MonoBehaviour {
 		get {
 			if (_localizationDic == null) {
 				TextAsset txt = (TextAsset)Resources.Load("UniRateLocalizationStrings", typeof(TextAsset));
-				_localizationDic = UniRateMiniJSON.Json.Deserialize(txt.text) as Dictionary<string, object>;
+				//_localizationDic = UniRateMiniJSON.Json.Deserialize(txt.text) as Dictionary<string, object>;
 			}
 			return _localizationDic;
 		}
