@@ -52,6 +52,8 @@ public class Test : MonoBehaviour
 	public UISprite backBack2;
 	public UILabel backLabel;
 
+    bool reset = false;
+
     [Header("Effects")]
 	public UISprite testobj;
 	public GameObject specialAnimationEffect1;
@@ -270,6 +272,7 @@ public class Test : MonoBehaviour
 
 	public void repeatClick()
 	{
+        repeat = true;
 		count--;
 		OnClick();
 	}
@@ -1481,24 +1484,29 @@ public class Test : MonoBehaviour
 
         if (count == -1)
         {
-            if (!back)
+            if (repeat)
+                ResetAnimation();
+            else
             {
+                if (!back)
+                {
                 //while (!LoadingScreen.levelLoaded)
                 //    yield return null;
 
                 //Destroy(GameObject.Find("Part (1)(Clone)"));
+                
+                    partPrefab = Instantiate(Resources.Load("StoryParts/Part (1)")) as GameObject;
+                    //partPrefab = Instantiate(Part1);
+                    //partPrefab.transform.SetParent(storyView.transform);
+                    //partPrefab.transform.localScale = new Vector3(1, 1, 1);
 
-                partPrefab = Instantiate(Resources.Load("StoryParts/Part (1)")) as GameObject;
-                //partPrefab = Instantiate(Part1);
-                //partPrefab.transform.SetParent(storyView.transform);
-                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
-
-                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
-                foreach (UI2DSprite chars in characters)
-                {
-                    chars.ResetAnchors();
-                    chars.SetAnchor(UICamera.list[0].transform);
-                    chars.ResetAnchors();
+                    UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                    foreach (UI2DSprite chars in characters)
+                    {
+                        chars.ResetAnchors();
+                        chars.SetAnchor(UICamera.list[0].transform);
+                        chars.ResetAnchors();
+                    }
                 }
             }
 
@@ -1513,25 +1521,30 @@ public class Test : MonoBehaviour
         }
         else if (count == 0)
         {
-            if (back)
+            if (repeat)
+                ResetAnimation();
+            else
             {
-                yield return new WaitForSeconds(0);
-
-                //Destroy(GameObject.Find("Part (1)(Clone)"));
-                //Destroy(GameObject.Find("Part (2)(Clone)"));
-
-                ClearStoryCharacters();
-                partPrefab = Instantiate(Resources.Load("StoryParts/Part (1)")) as GameObject;
-                //partPrefab = Instantiate(Part1);
-                //partPrefab.transform.SetParent(storyView.transform);
-                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
-
-                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
-                foreach (UI2DSprite chars in characters)
+                if (back)
                 {
-                    chars.ResetAnchors();
-                    chars.SetAnchor(UICamera.list[0].transform);
-                    chars.ResetAnchors();
+                    yield return new WaitForSeconds(0);
+                    //Destroy(GameObject.Find("Part (1)(Clone)"));
+                    //Destroy(GameObject.Find("Part (2)(Clone)"));
+
+
+                    ClearStoryCharacters();
+                    partPrefab = Instantiate(Resources.Load("StoryParts/Part (1)")) as GameObject;
+                    //partPrefab = Instantiate(Part1);
+                    //partPrefab.transform.SetParent(storyView.transform);
+                    //partPrefab.transform.localScale = new Vector3(1, 1, 1);
+
+                    UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                    foreach (UI2DSprite chars in characters)
+                    {
+                        chars.ResetAnchors();
+                        chars.SetAnchor(UICamera.list[0].transform);
+                        chars.ResetAnchors();
+                    }
                 }
             }
 
@@ -1546,25 +1559,30 @@ public class Test : MonoBehaviour
         }
         else if (count == 1)
         {
-            if (!back)
+            if (repeat)
+                ResetAnimation();
+            else
             {
-                yield return new WaitForSeconds(0);
-
-                //Destroy(GameObject.Find("Part (1)(Clone)"));
-                //Destroy(GameObject.Find("Part (2)(Clone)"));
-
-                ClearStoryCharacters();
-                partPrefab = Instantiate(Resources.Load("StoryParts/Part (2)")) as GameObject;
-                //partPrefab = Instantiate(Part2);
-                //partPrefab.transform.SetParent(storyView.transform);
-                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
-
-                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
-                foreach (UI2DSprite chars in characters)
+                if (!back)
                 {
-                    chars.ResetAnchors();
-                    chars.SetAnchor(UICamera.list[0].transform);
-                    chars.ResetAnchors();
+                    yield return new WaitForSeconds(0);
+
+                    //Destroy(GameObject.Find("Part (1)(Clone)"));
+                    //Destroy(GameObject.Find("Part (2)(Clone)"));
+
+                    ClearStoryCharacters();
+                    partPrefab = Instantiate(Resources.Load("StoryParts/Part (2)")) as GameObject;
+                    //partPrefab = Instantiate(Part2);
+                    //partPrefab.transform.SetParent(storyView.transform);
+                    //partPrefab.transform.localScale = new Vector3(1, 1, 1);
+
+                    UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                    foreach (UI2DSprite chars in characters)
+                    {
+                        chars.ResetAnchors();
+                        chars.SetAnchor(UICamera.list[0].transform);
+                        chars.ResetAnchors();
+                    }
                 }
             }
 
@@ -1579,25 +1597,30 @@ public class Test : MonoBehaviour
         }
         else if (count == 2)
         {
-            if (back)
+            if (repeat)
+                ResetAnimation();
+            else
             {
+                if (back)
+                {
                 yield return new WaitForSeconds(0);
 
                 //Destroy(GameObject.Find("Part (2)(Clone)"));
                 //Destroy(GameObject.Find("Part (3)(Clone)"));
+                
+                    ClearStoryCharacters();
+                    partPrefab = Instantiate(Resources.Load("StoryParts/Part (2)")) as GameObject;
+                    //partPrefab = Instantiate(Part2);
+                    //partPrefab.transform.SetParent(storyView.transform);
+                    //partPrefab.transform.localScale = new Vector3(1, 1, 1);
 
-                ClearStoryCharacters();
-                partPrefab = Instantiate(Resources.Load("StoryParts/Part (2)")) as GameObject;
-                //partPrefab = Instantiate(Part2);
-                //partPrefab.transform.SetParent(storyView.transform);
-                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
-
-                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
-                foreach (UI2DSprite chars in characters)
-                {
-                    chars.ResetAnchors();
-                    chars.SetAnchor(UICamera.list[0].transform);
-                    chars.ResetAnchors();
+                    UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                    foreach (UI2DSprite chars in characters)
+                    {
+                        chars.ResetAnchors();
+                        chars.SetAnchor(UICamera.list[0].transform);
+                        chars.ResetAnchors();
+                    }
                 }
             }
 
@@ -1612,25 +1635,30 @@ public class Test : MonoBehaviour
         }
         else if (count == 3)
         {
-            if (!back)
+            if (repeat)
+                ResetAnimation();
+            else
             {
+                if (!back)
+                {
                 yield return new WaitForSeconds(0);
 
                 //Destroy(GameObject.Find("Part (2)(Clone)"));
                 //Destroy(GameObject.Find("Part (3)(Clone)"));
+                
+                    ClearStoryCharacters();
+                    partPrefab = Instantiate(Resources.Load("StoryParts/Part (3)")) as GameObject;
+                    //partPrefab = Instantiate(Part3);
+                    //partPrefab.transform.SetParent(storyView.transform);
+                    //partPrefab.transform.localScale = new Vector3(1, 1, 1);
 
-                ClearStoryCharacters();
-                partPrefab = Instantiate(Resources.Load("StoryParts/Part (3)")) as GameObject;
-                //partPrefab = Instantiate(Part3);
-                //partPrefab.transform.SetParent(storyView.transform);
-                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
-
-                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
-                foreach (UI2DSprite chars in characters)
-                {
-                    chars.ResetAnchors();
-                    chars.SetAnchor(UICamera.list[0].transform);
-                    chars.ResetAnchors();
+                    UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                    foreach (UI2DSprite chars in characters)
+                    {
+                        chars.ResetAnchors();
+                        chars.SetAnchor(UICamera.list[0].transform);
+                        chars.ResetAnchors();
+                    }
                 }
             }
 
@@ -1645,25 +1673,30 @@ public class Test : MonoBehaviour
         }
         else if (count == 4)
         {
-            if (back)
+            if (repeat)
+                ResetAnimation();
+            else
             {
+                if (back)
+                {
                 yield return new WaitForSeconds(0);
 
                 //Destroy(GameObject.Find("Part (3)(Clone)"));
                 //Destroy(GameObject.Find("Part (4)(Clone)"));
+                
+                    ClearStoryCharacters();
+                    partPrefab = Instantiate(Resources.Load("StoryParts/Part (3)")) as GameObject;
+                    //partPrefab = Instantiate(Part3);
+                    //partPrefab.transform.SetParent(storyView.transform);
+                    //partPrefab.transform.localScale = new Vector3(1, 1, 1);
 
-                ClearStoryCharacters();
-                partPrefab = Instantiate(Resources.Load("StoryParts/Part (3)")) as GameObject;
-                //partPrefab = Instantiate(Part3);
-                //partPrefab.transform.SetParent(storyView.transform);
-                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
-
-                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
-                foreach (UI2DSprite chars in characters)
-                {
-                    chars.ResetAnchors();
-                    chars.SetAnchor(UICamera.list[0].transform);
-                    chars.ResetAnchors();
+                    UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                    foreach (UI2DSprite chars in characters)
+                    {
+                        chars.ResetAnchors();
+                        chars.SetAnchor(UICamera.list[0].transform);
+                        chars.ResetAnchors();
+                    }
                 }
             }
 
@@ -1678,25 +1711,30 @@ public class Test : MonoBehaviour
         }
         else if (count == 5)
         {
-            if (!back)
+            if (repeat)
+                ResetAnimation();
+            else
             {
+                if (!back)
+                {
                 yield return new WaitForSeconds(0);
 
                 //Destroy(GameObject.Find("Part (3)(Clone)"));
                 //Destroy(GameObject.Find("Part (4)(Clone)"));
+                
+                    ClearStoryCharacters();
+                    partPrefab = Instantiate(Resources.Load("StoryParts/Part (4)")) as GameObject;
+                    //partPrefab = Instantiate(Part4);
+                    //partPrefab.transform.SetParent(storyView.transform);
+                    //partPrefab.transform.localScale = new Vector3(1, 1, 1);
 
-                ClearStoryCharacters();
-                partPrefab = Instantiate(Resources.Load("StoryParts/Part (4)")) as GameObject;
-                //partPrefab = Instantiate(Part4);
-                //partPrefab.transform.SetParent(storyView.transform);
-                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
-
-                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
-                foreach (UI2DSprite chars in characters)
-                {
-                    chars.ResetAnchors();
-                    chars.SetAnchor(UICamera.list[0].transform);
-                    chars.ResetAnchors();
+                    UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                    foreach (UI2DSprite chars in characters)
+                    {
+                        chars.ResetAnchors();
+                        chars.SetAnchor(UICamera.list[0].transform);
+                        chars.ResetAnchors();
+                    }
                 }
             }
 
@@ -1711,25 +1749,30 @@ public class Test : MonoBehaviour
         }
         else if (count == 6)
         {
-            if (back)
+            if (repeat)
+                ResetAnimation();
+            else
             {
+                if (back)
+                {
                 yield return new WaitForSeconds(0);
 
                 //Destroy(GameObject.Find("Part (4)(Clone)"));
                 //Destroy(GameObject.Find("Part (5)(Clone)"));
+                
+                    ClearStoryCharacters();
+                    partPrefab = Instantiate(Resources.Load("StoryParts/Part (4)")) as GameObject;
+                    //partPrefab = Instantiate(Part4);
+                    //partPrefab.transform.SetParent(storyView.transform);
+                    //partPrefab.transform.localScale = new Vector3(1, 1, 1);
 
-                ClearStoryCharacters();
-                partPrefab = Instantiate(Resources.Load("StoryParts/Part (4)")) as GameObject;
-                //partPrefab = Instantiate(Part4);
-                //partPrefab.transform.SetParent(storyView.transform);
-                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
-
-                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
-                foreach (UI2DSprite chars in characters)
-                {
-                    chars.ResetAnchors();
-                    chars.SetAnchor(UICamera.list[0].transform);
-                    chars.ResetAnchors();
+                    UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                    foreach (UI2DSprite chars in characters)
+                    {
+                        chars.ResetAnchors();
+                        chars.SetAnchor(UICamera.list[0].transform);
+                        chars.ResetAnchors();
+                    }
                 }
             }
 
@@ -1744,25 +1787,30 @@ public class Test : MonoBehaviour
         }
         else if (count == 7)
         {
-            if (!back)
+            if (repeat)
+                ResetAnimation();
+            else
             {
+                if (!back)
+                {
                 yield return new WaitForSeconds(0);
 
                 //Destroy(GameObject.Find("Part (4)(Clone)"));
                 //Destroy(GameObject.Find("Part (5)(Clone)"));
+                
+                    ClearStoryCharacters();
+                    partPrefab = Instantiate(Resources.Load("StoryParts/Part (5)")) as GameObject;
+                    //partPrefab = Instantiate(Part5);
+                    //partPrefab.transform.SetParent(storyView.transform);
+                    //partPrefab.transform.localScale = new Vector3(1, 1, 1);
 
-                ClearStoryCharacters();
-                partPrefab = Instantiate(Resources.Load("StoryParts/Part (5)")) as GameObject;
-                //partPrefab = Instantiate(Part5);
-                //partPrefab.transform.SetParent(storyView.transform);
-                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
-
-                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
-                foreach (UI2DSprite chars in characters)
-                {
-                    chars.ResetAnchors();
-                    chars.SetAnchor(UICamera.list[0].transform);
-                    chars.ResetAnchors();
+                    UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                    foreach (UI2DSprite chars in characters)
+                    {
+                        chars.ResetAnchors();
+                        chars.SetAnchor(UICamera.list[0].transform);
+                        chars.ResetAnchors();
+                    }
                 }
             }
 
@@ -1777,25 +1825,30 @@ public class Test : MonoBehaviour
         }
         else if (count == 8)
         {
-            if (back)
+            if (repeat)
+                ResetAnimation();
+            else
             {
+                if (back)
+                {
                 yield return new WaitForSeconds(0);
 
                 //Destroy(GameObject.Find("Part (5)(Clone)"));
                 //Destroy(GameObject.Find("Part (6)(Clone)"));
+                
+                    ClearStoryCharacters();
+                    partPrefab = Instantiate(Resources.Load("StoryParts/Part (5)")) as GameObject;
+                    //partPrefab = Instantiate(Part5);
+                    //partPrefab.transform.SetParent(storyView.transform);
+                    //partPrefab.transform.localScale = new Vector3(1, 1, 1);
 
-                ClearStoryCharacters();
-                partPrefab = Instantiate(Resources.Load("StoryParts/Part (5)")) as GameObject;
-                //partPrefab = Instantiate(Part5);
-                //partPrefab.transform.SetParent(storyView.transform);
-                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
-
-                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
-                foreach (UI2DSprite chars in characters)
-                {
-                    chars.ResetAnchors();
-                    chars.SetAnchor(UICamera.list[0].transform);
-                    chars.ResetAnchors();
+                    UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                    foreach (UI2DSprite chars in characters)
+                    {
+                        chars.ResetAnchors();
+                        chars.SetAnchor(UICamera.list[0].transform);
+                        chars.ResetAnchors();
+                    }
                 }
             }
 
@@ -1810,26 +1863,31 @@ public class Test : MonoBehaviour
         }
     /**/else if (count == 9)
         {
-            if (!back)
+            if (repeat)
+                ResetAnimation();
+            else
             {
+                if (!back)
+                {
                 if (PlayerPrefs.GetInt("minigames") != 1)
                     yield return new WaitForSeconds(0);
 
                 //Destroy(GameObject.Find("Part (5)(Clone)"));
                 //Destroy(GameObject.Find("Part (6)(Clone)"));
+                
+                    ClearStoryCharacters();
+                    partPrefab = Instantiate(Resources.Load("StoryParts/Part (6)")) as GameObject;
+                    //partPrefab = Instantiate(Part6);
+                    //partPrefab.transform.SetParent(storyView.transform);
+                    //partPrefab.transform.localScale = new Vector3(1, 1, 1);
 
-                ClearStoryCharacters();
-                partPrefab = Instantiate(Resources.Load("StoryParts/Part (6)")) as GameObject;
-                //partPrefab = Instantiate(Part6);
-                //partPrefab.transform.SetParent(storyView.transform);
-                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
-
-                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
-                foreach (UI2DSprite chars in characters)
-                {
-                    chars.ResetAnchors();
-                    chars.SetAnchor(UICamera.list[0].transform);
-                    chars.ResetAnchors();
+                    UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                    foreach (UI2DSprite chars in characters)
+                    {
+                        chars.ResetAnchors();
+                        chars.SetAnchor(UICamera.list[0].transform);
+                        chars.ResetAnchors();
+                    }
                 }
             }
 
@@ -1844,25 +1902,31 @@ public class Test : MonoBehaviour
         }
         else if (count == 10)
         {
-            if (back)
+            if (repeat)
+                ResetAnimation();
+            else
             {
+                if (back)
+                {
                 yield return new WaitForSeconds(0);
 
                 //Destroy(GameObject.Find("Part (6)(Clone)"));
                 //Destroy(GameObject.Find("Part (7)(Clone)"));
 
-                ClearStoryCharacters();
-                partPrefab = Instantiate(Resources.Load("StoryParts/Part (6)")) as GameObject;
-                //partPrefab = Instantiate(Part6);
-                //partPrefab.transform.SetParent(storyView.transform);
-                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
+                
+                    ClearStoryCharacters();
+                    partPrefab = Instantiate(Resources.Load("StoryParts/Part (6)")) as GameObject;
+                    //partPrefab = Instantiate(Part6);
+                    //partPrefab.transform.SetParent(storyView.transform);
+                    //partPrefab.transform.localScale = new Vector3(1, 1, 1);
 
-                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
-                foreach (UI2DSprite chars in characters)
-                {
-                    chars.ResetAnchors();
-                    chars.SetAnchor(UICamera.list[0].transform);
-                    chars.ResetAnchors();
+                    UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                    foreach (UI2DSprite chars in characters)
+                    {
+                        chars.ResetAnchors();
+                        chars.SetAnchor(UICamera.list[0].transform);
+                        chars.ResetAnchors();
+                    }
                 }
             }
 
@@ -1877,25 +1941,31 @@ public class Test : MonoBehaviour
         }
         else if (count == 11)
         {
-            if (!back)
+            if (repeat)
+                ResetAnimation();
+            else
             {
+                if (!back)
+                {
                 yield return new WaitForSeconds(0);
 
                 //Destroy(GameObject.Find("Part (6)(Clone)"));
                 //Destroy(GameObject.Find("Part (7)(Clone)"));
 
-                ClearStoryCharacters();
-                partPrefab = Instantiate(Resources.Load("StoryParts/Part (7)")) as GameObject;
-                //partPrefab = Instantiate(Part7);
-                //partPrefab.transform.SetParent(storyView.transform);
-                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
+                
+                    ClearStoryCharacters();
+                    partPrefab = Instantiate(Resources.Load("StoryParts/Part (7)")) as GameObject;
+                    //partPrefab = Instantiate(Part7);
+                    //partPrefab.transform.SetParent(storyView.transform);
+                    //partPrefab.transform.localScale = new Vector3(1, 1, 1);
 
-                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
-                foreach (UI2DSprite chars in characters)
-                {
-                    chars.ResetAnchors();
-                    chars.SetAnchor(UICamera.list[0].transform);
-                    chars.ResetAnchors();
+                    UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                    foreach (UI2DSprite chars in characters)
+                    {
+                        chars.ResetAnchors();
+                        chars.SetAnchor(UICamera.list[0].transform);
+                        chars.ResetAnchors();
+                    }
                 }
             }
 
@@ -1910,25 +1980,31 @@ public class Test : MonoBehaviour
         }
         else if (count == 12)
         {
-            if (back)
+            if (repeat)
+                ResetAnimation();
+            else
             {
+                if (back)
+                {
                 yield return new WaitForSeconds(0);
 
                 //Destroy(GameObject.Find("Part (7)(Clone)"));
                 //Destroy(GameObject.Find("Part (8)(Clone)"));
 
-                ClearStoryCharacters();
-                partPrefab = Instantiate(Resources.Load("StoryParts/Part (7)")) as GameObject;
-                //partPrefab = Instantiate(Part7);
-                //partPrefab.transform.SetParent(storyView.transform);
-                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
+                
+                    ClearStoryCharacters();
+                    partPrefab = Instantiate(Resources.Load("StoryParts/Part (7)")) as GameObject;
+                    //partPrefab = Instantiate(Part7);
+                    //partPrefab.transform.SetParent(storyView.transform);
+                    //partPrefab.transform.localScale = new Vector3(1, 1, 1);
 
-                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
-                foreach (UI2DSprite chars in characters)
-                {
-                    chars.ResetAnchors();
-                    chars.SetAnchor(UICamera.list[0].transform);
-                    chars.ResetAnchors();
+                    UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                    foreach (UI2DSprite chars in characters)
+                    {
+                        chars.ResetAnchors();
+                        chars.SetAnchor(UICamera.list[0].transform);
+                        chars.ResetAnchors();
+                    }
                 }
             }
 
@@ -1943,25 +2019,30 @@ public class Test : MonoBehaviour
         }
         else if (count == 13)
         {
-            if (!back)
+            if (repeat)
+                ResetAnimation();
+            else
             {
+                if (!back)
+                {
                 yield return new WaitForSeconds(0);
 
                 //Destroy(GameObject.Find("Part (7)(Clone)"));
                 //Destroy(GameObject.Find("Part (8)(Clone)"));
+                
+                    ClearStoryCharacters();
+                    partPrefab = Instantiate(Resources.Load("StoryParts/Part (8)")) as GameObject;
+                    //partPrefab = Instantiate(Part8);
+                    //partPrefab.transform.SetParent(storyView.transform);
+                    //partPrefab.transform.localScale = new Vector3(1, 1, 1);
 
-                ClearStoryCharacters();
-                partPrefab = Instantiate(Resources.Load("StoryParts/Part (8)")) as GameObject;
-                //partPrefab = Instantiate(Part8);
-                //partPrefab.transform.SetParent(storyView.transform);
-                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
-
-                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
-                foreach (UI2DSprite chars in characters)
-                {
-                    chars.ResetAnchors();
-                    chars.SetAnchor(UICamera.list[0].transform);
-                    chars.ResetAnchors();
+                    UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                    foreach (UI2DSprite chars in characters)
+                    {
+                        chars.ResetAnchors();
+                        chars.SetAnchor(UICamera.list[0].transform);
+                        chars.ResetAnchors();
+                    }
                 }
             }
 
@@ -1976,25 +2057,30 @@ public class Test : MonoBehaviour
         }
         else if (count == 14)
         {
-            if (back)
+            if (repeat)
+                ResetAnimation();
+            else
             {
+                if (back)
+                {
                 yield return new WaitForSeconds(0);
 
                 //Destroy(GameObject.Find("Part (8)(Clone)"));
                 //Destroy(GameObject.Find("Part (9)(Clone)"));
+                
+                    ClearStoryCharacters();
+                    partPrefab = Instantiate(Resources.Load("StoryParts/Part (8)")) as GameObject;
+                    //partPrefab = Instantiate(Part8);
+                    //partPrefab.transform.SetParent(storyView.transform);
+                    //partPrefab.transform.localScale = new Vector3(1, 1, 1);
 
-                ClearStoryCharacters();
-                partPrefab = Instantiate(Resources.Load("StoryParts/Part (8)")) as GameObject;
-                //partPrefab = Instantiate(Part8);
-                //partPrefab.transform.SetParent(storyView.transform);
-                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
-
-                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
-                foreach (UI2DSprite chars in characters)
-                {
-                    chars.ResetAnchors();
-                    chars.SetAnchor(UICamera.list[0].transform);
-                    chars.ResetAnchors();
+                    UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                    foreach (UI2DSprite chars in characters)
+                    {
+                        chars.ResetAnchors();
+                        chars.SetAnchor(UICamera.list[0].transform);
+                        chars.ResetAnchors();
+                    }
                 }
             }
 
@@ -2009,26 +2095,31 @@ public class Test : MonoBehaviour
         }
     /**/else if (count == 15)
         {
-            if (!back)
+            if (repeat)
+                ResetAnimation();
+            else
             {
+                if (!back)
+                {
                 if (PlayerPrefs.GetInt("minigames") != 1)
                     yield return new WaitForSeconds(0);
 
                 //Destroy(GameObject.Find("Part (8)(Clone)"));
                 //Destroy(GameObject.Find("Part (9)(Clone)"));
+                
+                    ClearStoryCharacters();
+                    partPrefab = Instantiate(Resources.Load("StoryParts/Part (9)")) as GameObject;
+                    //partPrefab = Instantiate(Part9);
+                    //partPrefab.transform.SetParent(storyView.transform);
+                    //partPrefab.transform.localScale = new Vector3(1, 1, 1);
 
-                ClearStoryCharacters();
-                partPrefab = Instantiate(Resources.Load("StoryParts/Part (9)")) as GameObject;
-                //partPrefab = Instantiate(Part9);
-                //partPrefab.transform.SetParent(storyView.transform);
-                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
-
-                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
-                foreach (UI2DSprite chars in characters)
-                {
-                    chars.ResetAnchors();
-                    chars.SetAnchor(UICamera.list[0].transform);
-                    chars.ResetAnchors();
+                    UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                    foreach (UI2DSprite chars in characters)
+                    {
+                        chars.ResetAnchors();
+                        chars.SetAnchor(UICamera.list[0].transform);
+                        chars.ResetAnchors();
+                    }
                 }
             }
 
@@ -2043,25 +2134,30 @@ public class Test : MonoBehaviour
         }
         else if (count == 16)
         {
-            if (back)
+            if (repeat)
+                ResetAnimation();
+            else
             {
+                if (back)
+                {
                 yield return new WaitForSeconds(0);
 
                 //Destroy(GameObject.Find("Part (9)(Clone)"));
                 //Destroy(GameObject.Find("Part (10)(Clone)"));
+                
+                    ClearStoryCharacters();
+                    partPrefab = Instantiate(Resources.Load("StoryParts/Part (9)")) as GameObject;
+                    //partPrefab = Instantiate(Part9);
+                    //partPrefab.transform.SetParent(storyView.transform);
+                    //partPrefab.transform.localScale = new Vector3(1, 1, 1);
 
-                ClearStoryCharacters();
-                partPrefab = Instantiate(Resources.Load("StoryParts/Part (9)")) as GameObject;
-                //partPrefab = Instantiate(Part9);
-                //partPrefab.transform.SetParent(storyView.transform);
-                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
-
-                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
-                foreach (UI2DSprite chars in characters)
-                {
-                    chars.ResetAnchors();
-                    chars.SetAnchor(UICamera.list[0].transform);
-                    chars.ResetAnchors();
+                    UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                    foreach (UI2DSprite chars in characters)
+                    {
+                        chars.ResetAnchors();
+                        chars.SetAnchor(UICamera.list[0].transform);
+                        chars.ResetAnchors();
+                    }
                 }
             }
 
@@ -2076,25 +2172,30 @@ public class Test : MonoBehaviour
         }
         else if (count == 17)
         {
-            if (!back)
+            if (repeat)
+                ResetAnimation();
+            else
             {
+                if (!back)
+                {
                 yield return new WaitForSeconds(0);
 
                 //Destroy(GameObject.Find("Part (9)(Clone)"));
                 //Destroy(GameObject.Find("Part (10)(Clone)"));
+                
+                    ClearStoryCharacters();
+                    partPrefab = Instantiate(Resources.Load("StoryParts/Part (10)")) as GameObject;
+                    //partPrefab = Instantiate(Part10);
+                    //partPrefab.transform.SetParent(storyView.transform);
+                    //partPrefab.transform.localScale = new Vector3(1, 1, 1);
 
-                ClearStoryCharacters();
-                partPrefab = Instantiate(Resources.Load("StoryParts/Part (10)")) as GameObject;
-                //partPrefab = Instantiate(Part10);
-                //partPrefab.transform.SetParent(storyView.transform);
-                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
-
-                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
-                foreach (UI2DSprite chars in characters)
-                {
-                    chars.ResetAnchors();
-                    chars.SetAnchor(UICamera.list[0].transform);
-                    chars.ResetAnchors();
+                    UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                    foreach (UI2DSprite chars in characters)
+                    {
+                        chars.ResetAnchors();
+                        chars.SetAnchor(UICamera.list[0].transform);
+                        chars.ResetAnchors();
+                    }
                 }
             }
 
@@ -2109,25 +2210,30 @@ public class Test : MonoBehaviour
         }
         else if (count == 18)
         {
-            if (back)
+            if (repeat)
+                ResetAnimation();
+            else
             {
+                if (back)
+                {
                 yield return new WaitForSeconds(0);
 
                 //Destroy(GameObject.Find("Part (10)(Clone)"));
                 //Destroy(GameObject.Find("Part (11)(Clone)"));
+                
+                    ClearStoryCharacters();
+                    partPrefab = Instantiate(Resources.Load("StoryParts/Part (10)")) as GameObject;
+                    //partPrefab = Instantiate(Part10);
+                    //partPrefab.transform.SetParent(storyView.transform);
+                    //partPrefab.transform.localScale = new Vector3(1, 1, 1);
 
-                ClearStoryCharacters();
-                partPrefab = Instantiate(Resources.Load("StoryParts/Part (10)")) as GameObject;
-                //partPrefab = Instantiate(Part10);
-                //partPrefab.transform.SetParent(storyView.transform);
-                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
-
-                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
-                foreach (UI2DSprite chars in characters)
-                {
-                    chars.ResetAnchors();
-                    chars.SetAnchor(UICamera.list[0].transform);
-                    chars.ResetAnchors();
+                    UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                    foreach (UI2DSprite chars in characters)
+                    {
+                        chars.ResetAnchors();
+                        chars.SetAnchor(UICamera.list[0].transform);
+                        chars.ResetAnchors();
+                    }
                 }
             }
 
@@ -2142,25 +2248,30 @@ public class Test : MonoBehaviour
         }
         else if (count == 19)
         {
-            if (!back)
+            if (repeat)
+                ResetAnimation();
+            else
             {
+                if (!back)
+                {
                 yield return new WaitForSeconds(0);
 
                 //Destroy(GameObject.Find("Part (10)(Clone)"));
                 //Destroy(GameObject.Find("Part (11)(Clone)"));
+                
+                    ClearStoryCharacters();
+                    partPrefab = Instantiate(Resources.Load("StoryParts/Part (11)")) as GameObject;
+                    //partPrefab = Instantiate(Part11);
+                    //partPrefab.transform.SetParent(storyView.transform);
+                    //partPrefab.transform.localScale = new Vector3(1, 1, 1);
 
-                ClearStoryCharacters();
-                partPrefab = Instantiate(Resources.Load("StoryParts/Part (11)")) as GameObject;
-                //partPrefab = Instantiate(Part11);
-                //partPrefab.transform.SetParent(storyView.transform);
-                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
-
-                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
-                foreach (UI2DSprite chars in characters)
-                {
-                    chars.ResetAnchors();
-                    chars.SetAnchor(UICamera.list[0].transform);
-                    chars.ResetAnchors();
+                    UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                    foreach (UI2DSprite chars in characters)
+                    {
+                        chars.ResetAnchors();
+                        chars.SetAnchor(UICamera.list[0].transform);
+                        chars.ResetAnchors();
+                    }
                 }
             }
 
@@ -2175,25 +2286,30 @@ public class Test : MonoBehaviour
         }
         else if (count == 20)
         {
-            if (back)
+            if (repeat)
+                ResetAnimation();
+            else
             {
+                if (back)
+                {
                 yield return new WaitForSeconds(0);
 
                 //Destroy(GameObject.Find("Part (11)(Clone)"));
                 //Destroy(GameObject.Find("Part (12)(Clone)"));
+                
+                    ClearStoryCharacters();
+                    partPrefab = Instantiate(Resources.Load("StoryParts/Part (11)")) as GameObject;
+                    //partPrefab = Instantiate(Part11);
+                    //partPrefab.transform.SetParent(storyView.transform);
+                    //partPrefab.transform.localScale = new Vector3(1, 1, 1);
 
-                ClearStoryCharacters();
-                partPrefab = Instantiate(Resources.Load("StoryParts/Part (11)")) as GameObject;
-                //partPrefab = Instantiate(Part11);
-                //partPrefab.transform.SetParent(storyView.transform);
-                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
-
-                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
-                foreach (UI2DSprite chars in characters)
-                {
-                    chars.ResetAnchors();
-                    chars.SetAnchor(UICamera.list[0].transform);
-                    chars.ResetAnchors();
+                    UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                    foreach (UI2DSprite chars in characters)
+                    {
+                        chars.ResetAnchors();
+                        chars.SetAnchor(UICamera.list[0].transform);
+                        chars.ResetAnchors();
+                    }
                 }
             }
 
@@ -2208,26 +2324,31 @@ public class Test : MonoBehaviour
         }
     /**/else if (count == 21)
         {
-            if (!back)
+            if (repeat)
+                ResetAnimation();
+            else
             {
+                if (!back)
+                {
                 if (PlayerPrefs.GetInt("minigames") != 1)
                     yield return new WaitForSeconds(0);
 
                 //Destroy(GameObject.Find("Part (11)(Clone)"));
                 //Destroy(GameObject.Find("Part (12)(Clone)"));
+                
+                    ClearStoryCharacters();
+                    partPrefab = Instantiate(Resources.Load("StoryParts/Part (12)")) as GameObject;
+                    //partPrefab = Instantiate(Part12);
+                    //partPrefab.transform.SetParent(storyView.transform);
+                    //partPrefab.transform.localScale = new Vector3(1, 1, 1);
 
-                ClearStoryCharacters();
-                partPrefab = Instantiate(Resources.Load("StoryParts/Part (12)")) as GameObject;
-                //partPrefab = Instantiate(Part12);
-                //partPrefab.transform.SetParent(storyView.transform);
-                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
-
-                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
-                foreach (UI2DSprite chars in characters)
-                {
-                    chars.ResetAnchors();
-                    chars.SetAnchor(UICamera.list[0].transform);
-                    chars.ResetAnchors();
+                    UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                    foreach (UI2DSprite chars in characters)
+                    {
+                        chars.ResetAnchors();
+                        chars.SetAnchor(UICamera.list[0].transform);
+                        chars.ResetAnchors();
+                    }
                 }
             }
 
@@ -2242,25 +2363,30 @@ public class Test : MonoBehaviour
         }
         else if (count == 22)
         {
-            if (back)
+            if (repeat)
+                ResetAnimation();
+            else
             {
+                if (back)
+                {
                 yield return new WaitForSeconds(0);
 
                 //Destroy(GameObject.Find("Part (12)(Clone)"));
                 //Destroy(GameObject.Find("Part (13)(Clone)"));
+                
+                    ClearStoryCharacters();
+                    partPrefab = Instantiate(Resources.Load("StoryParts/Part (12)")) as GameObject;
+                    //partPrefab = Instantiate(Part12);
+                    //partPrefab.transform.SetParent(storyView.transform);
+                    //partPrefab.transform.localScale = new Vector3(1, 1, 1);
 
-                ClearStoryCharacters();
-                partPrefab = Instantiate(Resources.Load("StoryParts/Part (12)")) as GameObject;
-                //partPrefab = Instantiate(Part12);
-                //partPrefab.transform.SetParent(storyView.transform);
-                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
-
-                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
-                foreach (UI2DSprite chars in characters)
-                {
-                    chars.ResetAnchors();
-                    chars.SetAnchor(UICamera.list[0].transform);
-                    chars.ResetAnchors();
+                    UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                    foreach (UI2DSprite chars in characters)
+                    {
+                        chars.ResetAnchors();
+                        chars.SetAnchor(UICamera.list[0].transform);
+                        chars.ResetAnchors();
+                    }
                 }
             }
 
@@ -2275,25 +2401,30 @@ public class Test : MonoBehaviour
         }
         else if (count == 23)
         {
-            if (!back)
+            if (repeat)
+                ResetAnimation();
+            else
             {
+                if (!back)
+                {
                 yield return new WaitForSeconds(0);
 
                 //Destroy(GameObject.Find("Part (12)(Clone)"));
                 //Destroy(GameObject.Find("Part (13)(Clone)"));
+                
+                    ClearStoryCharacters();
+                    partPrefab = Instantiate(Resources.Load("StoryParts/Part (13)")) as GameObject;
+                    //partPrefab = Instantiate(Part13);
+                    //partPrefab.transform.SetParent(storyView.transform);
+                    //partPrefab.transform.localScale = new Vector3(1, 1, 1);
 
-                ClearStoryCharacters();
-                partPrefab = Instantiate(Resources.Load("StoryParts/Part (13)")) as GameObject;
-                //partPrefab = Instantiate(Part13);
-                //partPrefab.transform.SetParent(storyView.transform);
-                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
-
-                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
-                foreach (UI2DSprite chars in characters)
-                {
-                    chars.ResetAnchors();
-                    chars.SetAnchor(UICamera.list[0].transform);
-                    chars.ResetAnchors();
+                    UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                    foreach (UI2DSprite chars in characters)
+                    {
+                        chars.ResetAnchors();
+                        chars.SetAnchor(UICamera.list[0].transform);
+                        chars.ResetAnchors();
+                    }
                 }
             }
 
@@ -2308,25 +2439,27 @@ public class Test : MonoBehaviour
         }
         else if (count == 24)
         {
-            if (back)
+            if (repeat)
+                ResetAnimation();
+            else
             {
-                yield return new WaitForSeconds(0);
-
-                //Destroy(GameObject.Find("Part (13)(Clone)"));
-                //Destroy(GameObject.Find("Part (14)(Clone)"));
-
-                ClearStoryCharacters();
-                partPrefab = Instantiate(Resources.Load("StoryParts/Part (13)")) as GameObject;
-                //partPrefab = Instantiate(Part13);
-                //partPrefab.transform.SetParent(storyView.transform);
-                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
-
-                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
-                foreach (UI2DSprite chars in characters)
+                if (back)
                 {
-                    chars.ResetAnchors();
-                    chars.SetAnchor(UICamera.list[0].transform);
-                    chars.ResetAnchors();
+                yield return new WaitForSeconds(0);
+                
+                    ClearStoryCharacters();
+                    partPrefab = Instantiate(Resources.Load("StoryParts/Part (13)")) as GameObject;
+                    //partPrefab = Instantiate(Part13);
+                    //partPrefab.transform.SetParent(storyView.transform);
+                    //partPrefab.transform.localScale = new Vector3(1, 1, 1);
+
+                    UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                    foreach (UI2DSprite chars in characters)
+                    {
+                        chars.ResetAnchors();
+                        chars.SetAnchor(UICamera.list[0].transform);
+                        chars.ResetAnchors();
+                    }
                 }
             }
 
@@ -2341,25 +2474,27 @@ public class Test : MonoBehaviour
         }
         else if (count == 25)
         {
-            if (!back)
+            if (repeat)
+                ResetAnimation();
+            else
             {
-                yield return new WaitForSeconds(0);
-
-                //Destroy(GameObject.Find("Part (13)(Clone)"));
-                //Destroy(GameObject.Find("Part (14)(Clone)"));
-
-                ClearStoryCharacters();
-                partPrefab = Instantiate(Resources.Load("StoryParts/Part (14)")) as GameObject;
-                //partPrefab = Instantiate(Part14);
-                //partPrefab.transform.SetParent(storyView.transform);
-                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
-
-                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
-                foreach (UI2DSprite chars in characters)
+                if (!back)
                 {
-                    chars.ResetAnchors();
-                    chars.SetAnchor(UICamera.list[0].transform);
-                    chars.ResetAnchors();
+                yield return new WaitForSeconds(0);
+                
+                    ClearStoryCharacters();
+                    partPrefab = Instantiate(Resources.Load("StoryParts/Part (14)")) as GameObject;
+                    //partPrefab = Instantiate(Part14);
+                    //partPrefab.transform.SetParent(storyView.transform);
+                    //partPrefab.transform.localScale = new Vector3(1, 1, 1);
+
+                    UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                    foreach (UI2DSprite chars in characters)
+                    {
+                        chars.ResetAnchors();
+                        chars.SetAnchor(UICamera.list[0].transform);
+                        chars.ResetAnchors();
+                    }
                 }
             }
 
@@ -2374,25 +2509,27 @@ public class Test : MonoBehaviour
         }
         else if (count == 26)
         {
-            if (back)
+            if (repeat)
+                ResetAnimation();
+            else
             {
-                yield return new WaitForSeconds(0);
-
-                //Destroy(GameObject.Find("Part (14)(Clone)"));
-                //Destroy(GameObject.Find("Part (15)(Clone)"));
-
-                ClearStoryCharacters();
-                partPrefab = Instantiate(Resources.Load("StoryParts/Part (14)")) as GameObject;
-                //partPrefab = Instantiate(Part14);
-                //partPrefab.transform.SetParent(storyView.transform);
-                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
-
-                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
-                foreach (UI2DSprite chars in characters)
+                if (back)
                 {
-                    chars.ResetAnchors();
-                    chars.SetAnchor(UICamera.list[0].transform);
-                    chars.ResetAnchors();
+                    yield return new WaitForSeconds(0);
+                
+                    ClearStoryCharacters();
+                    partPrefab = Instantiate(Resources.Load("StoryParts/Part (14)")) as GameObject;
+                    //partPrefab = Instantiate(Part14);
+                    //partPrefab.transform.SetParent(storyView.transform);
+                    //partPrefab.transform.localScale = new Vector3(1, 1, 1);
+
+                    UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                    foreach (UI2DSprite chars in characters)
+                    {
+                        chars.ResetAnchors();
+                        chars.SetAnchor(UICamera.list[0].transform);
+                        chars.ResetAnchors();
+                    }
                 }
             }
 
@@ -2407,26 +2544,28 @@ public class Test : MonoBehaviour
         }
     /**/else if (count == 27)
         {
-            if (!back)
+            if (repeat)
+                ResetAnimation();
+            else
             {
-                if (PlayerPrefs.GetInt("minigames") != 1)
-                    yield return new WaitForSeconds(0);
-
-                //Destroy(GameObject.Find("Part (14)(Clone)"));
-                //Destroy(GameObject.Find("Part (15)(Clone)"));
-
-                ClearStoryCharacters();
-                partPrefab = Instantiate(Resources.Load("StoryParts/Part (15)")) as GameObject;
-                //partPrefab = Instantiate(Part15);
-                //partPrefab.transform.SetParent(storyView.transform);
-                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
-
-                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
-                foreach (UI2DSprite chars in characters)
+                if (!back)
                 {
-                    chars.ResetAnchors();
-                    chars.SetAnchor(UICamera.list[0].transform);
-                    chars.ResetAnchors();
+                    if (PlayerPrefs.GetInt("minigames") != 1)
+                        yield return new WaitForSeconds(0);
+                
+                    ClearStoryCharacters();
+                    partPrefab = Instantiate(Resources.Load("StoryParts/Part (15)")) as GameObject;
+                    //partPrefab = Instantiate(Part15);
+                    //partPrefab.transform.SetParent(storyView.transform);
+                    //partPrefab.transform.localScale = new Vector3(1, 1, 1);
+
+                    UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                    foreach (UI2DSprite chars in characters)
+                    {
+                        chars.ResetAnchors();
+                        chars.SetAnchor(UICamera.list[0].transform);
+                        chars.ResetAnchors();
+                    }
                 }
             }
 
@@ -2441,25 +2580,27 @@ public class Test : MonoBehaviour
         }
         else if (count == 28)
         {
-            if (back)
+            if (repeat)
+                ResetAnimation();
+            else
             {
-                yield return new WaitForSeconds(0);
-
-                //Destroy(GameObject.Find("Part (15)(Clone)"));
-                //Destroy(GameObject.Find("Part (16)(Clone)"));
-
-                ClearStoryCharacters();
-                partPrefab = Instantiate(Resources.Load("StoryParts/Part (15)")) as GameObject;
-                //partPrefab = Instantiate(Part15);
-                //partPrefab.transform.SetParent(storyView.transform);
-                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
-
-                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
-                foreach (UI2DSprite chars in characters)
+                if (back)
                 {
-                    chars.ResetAnchors();
-                    chars.SetAnchor(UICamera.list[0].transform);
-                    chars.ResetAnchors();
+                    yield return new WaitForSeconds(0);
+                
+                    ClearStoryCharacters();
+                    partPrefab = Instantiate(Resources.Load("StoryParts/Part (15)")) as GameObject;
+                    //partPrefab = Instantiate(Part15);
+                    //partPrefab.transform.SetParent(storyView.transform);
+                    //partPrefab.transform.localScale = new Vector3(1, 1, 1);
+
+                    UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                    foreach (UI2DSprite chars in characters)
+                    {
+                        chars.ResetAnchors();
+                        chars.SetAnchor(UICamera.list[0].transform);
+                        chars.ResetAnchors();
+                    }
                 }
             }
 
@@ -2474,25 +2615,27 @@ public class Test : MonoBehaviour
         }
         else if (count == 29)
         {
-            if (!back)
+            if (repeat)
+                ResetAnimation();
+            else
             {
-                yield return new WaitForSeconds(0);
-
-                //Destroy(GameObject.Find("Part (15)(Clone)"));
-                //Destroy(GameObject.Find("Part (16)(Clone)"));
-
-                ClearStoryCharacters();
-                partPrefab = Instantiate(Resources.Load("StoryParts/Part (16)")) as GameObject;
-                //partPrefab = Instantiate(Part16);
-                //partPrefab.transform.SetParent(storyView.transform);
-                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
-
-                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
-                foreach (UI2DSprite chars in characters)
+                if (!back)
                 {
-                    chars.ResetAnchors();
-                    chars.SetAnchor(UICamera.list[0].transform);
-                    chars.ResetAnchors();
+                    yield return new WaitForSeconds(0);
+                    
+                    ClearStoryCharacters();
+                    partPrefab = Instantiate(Resources.Load("StoryParts/Part (16)")) as GameObject;
+                    //partPrefab = Instantiate(Part16);
+                    //partPrefab.transform.SetParent(storyView.transform);
+                    //partPrefab.transform.localScale = new Vector3(1, 1, 1);
+
+                    UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                    foreach (UI2DSprite chars in characters)
+                    {
+                        chars.ResetAnchors();
+                        chars.SetAnchor(UICamera.list[0].transform);
+                        chars.ResetAnchors();
+                    }
                 }
             }
 
@@ -2508,25 +2651,27 @@ public class Test : MonoBehaviour
         }
         else if (count == 30)
         {
-            if (back)
+            if (repeat)
+                ResetAnimation();
+            else
             {
-                yield return new WaitForSeconds(0);
-
-                //Destroy(GameObject.Find("Part (16)(Clone)"));
-                //Destroy(GameObject.Find("Part (17)(Clone)"));
-
-                ClearStoryCharacters();
-                partPrefab = Instantiate(Resources.Load("StoryParts/Part (16)")) as GameObject;
-                //partPrefab = Instantiate(Part16);
-                //partPrefab.transform.SetParent(storyView.transform);
-                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
-
-                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
-                foreach (UI2DSprite chars in characters)
+                if (back)
                 {
-                    chars.ResetAnchors();
-                    chars.SetAnchor(UICamera.list[0].transform);
-                    chars.ResetAnchors();
+                    yield return new WaitForSeconds(0);
+                
+                    ClearStoryCharacters();
+                    partPrefab = Instantiate(Resources.Load("StoryParts/Part (16)")) as GameObject;
+                    //partPrefab = Instantiate(Part16);
+                    //partPrefab.transform.SetParent(storyView.transform);
+                    //partPrefab.transform.localScale = new Vector3(1, 1, 1);
+
+                    UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                    foreach (UI2DSprite chars in characters)
+                    {
+                        chars.ResetAnchors();
+                        chars.SetAnchor(UICamera.list[0].transform);
+                        chars.ResetAnchors();
+                    }
                 }
             }
 
@@ -2542,25 +2687,27 @@ public class Test : MonoBehaviour
         }
         else if (count == 31)
         {
-            if (!back)
+            if (repeat)
+                ResetAnimation();
+            else
             {
-                yield return new WaitForSeconds(0);
-
-                //Destroy(GameObject.Find("Part (16)(Clone)"));
-                //Destroy(GameObject.Find("Part (17)(Clone)"));
-
-                ClearStoryCharacters();
-                partPrefab = Instantiate(Resources.Load("StoryParts/Part (17)")) as GameObject;
-                //partPrefab = Instantiate(Part17);
-                //partPrefab.transform.SetParent(storyView.transform);
-                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
-
-                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
-                foreach (UI2DSprite chars in characters)
+                if (!back)
                 {
-                    chars.ResetAnchors();
-                    chars.SetAnchor(UICamera.list[0].transform);
-                    chars.ResetAnchors();
+                    yield return new WaitForSeconds(0);
+                    
+                    ClearStoryCharacters();
+                    partPrefab = Instantiate(Resources.Load("StoryParts/Part (17)")) as GameObject;
+                    //partPrefab = Instantiate(Part17);
+                    //partPrefab.transform.SetParent(storyView.transform);
+                    //partPrefab.transform.localScale = new Vector3(1, 1, 1);
+
+                    UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                    foreach (UI2DSprite chars in characters)
+                    {
+                        chars.ResetAnchors();
+                        chars.SetAnchor(UICamera.list[0].transform);
+                        chars.ResetAnchors();
+                    }
                 }
             }
 
@@ -2576,25 +2723,27 @@ public class Test : MonoBehaviour
         }
         else if (count == 32)
         {
-            if (back)
+            if (repeat)
+                ResetAnimation();
+            else
             {
-                yield return new WaitForSeconds(0);
-
-                //Destroy(GameObject.Find("Part (17)(Clone)"));
-                //Destroy(GameObject.Find("Part (18)(Clone)"));
-
-                ClearStoryCharacters();
-                partPrefab = Instantiate(Resources.Load("StoryParts/Part (17)")) as GameObject;
-                //partPrefab = Instantiate(Part17);
-                //partPrefab.transform.SetParent(storyView.transform);
-                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
-
-                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
-                foreach (UI2DSprite chars in characters)
+                if (back)
                 {
-                    chars.ResetAnchors();
-                    chars.SetAnchor(UICamera.list[0].transform);
-                    chars.ResetAnchors();
+                    yield return new WaitForSeconds(0);
+
+                    ClearStoryCharacters();
+                    partPrefab = Instantiate(Resources.Load("StoryParts/Part (17)")) as GameObject;
+                    //partPrefab = Instantiate(Part17);
+                    //partPrefab.transform.SetParent(storyView.transform);
+                    //partPrefab.transform.localScale = new Vector3(1, 1, 1);
+
+                    UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                    foreach (UI2DSprite chars in characters)
+                    {
+                        chars.ResetAnchors();
+                        chars.SetAnchor(UICamera.list[0].transform);
+                        chars.ResetAnchors();
+                    }
                 }
             }
 
@@ -2610,26 +2759,28 @@ public class Test : MonoBehaviour
         }
     /**/else if (count == 33)
         {
-            if (!back)
+            if (repeat)
+                ResetAnimation();
+            else
             {
-                if (PlayerPrefs.GetInt("minigames") != 1)
-                    yield return new WaitForSeconds(0);
-
-                //Destroy(GameObject.Find("Part (17)(Clone)"));
-                //Destroy(GameObject.Find("Part (18)(Clone)"));
-
-                ClearStoryCharacters();
-                partPrefab = Instantiate(Resources.Load("StoryParts/Part (18)")) as GameObject;
-                //partPrefab = Instantiate(Part18);
-                //partPrefab.transform.SetParent(storyView.transform);
-                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
-
-                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
-                foreach (UI2DSprite chars in characters)
+                if (!back)
                 {
-                    chars.ResetAnchors();
-                    chars.SetAnchor(UICamera.list[0].transform);
-                    chars.ResetAnchors();
+                    if (PlayerPrefs.GetInt("minigames") != 1)
+                        yield return new WaitForSeconds(0);
+                
+                    ClearStoryCharacters();
+                    partPrefab = Instantiate(Resources.Load("StoryParts/Part (18)")) as GameObject;
+                    //partPrefab = Instantiate(Part18);
+                    //partPrefab.transform.SetParent(storyView.transform);
+                    //partPrefab.transform.localScale = new Vector3(1, 1, 1);
+
+                    UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                    foreach (UI2DSprite chars in characters)
+                    {
+                        chars.ResetAnchors();
+                        chars.SetAnchor(UICamera.list[0].transform);
+                        chars.ResetAnchors();
+                    }
                 }
             }
 
@@ -2644,25 +2795,26 @@ public class Test : MonoBehaviour
         }
         else if (count == 34)
         {
-            if (back)
+            if (repeat)
+                ResetAnimation();
+            else
             {
-                yield return new WaitForSeconds(0);
-
-                //Destroy(GameObject.Find("Part (18)(Clone)"));
-                //Destroy(GameObject.Find("Part (19)(Clone)"));
-
-                ClearStoryCharacters();
-                partPrefab = Instantiate(Resources.Load("StoryParts/Part (18)")) as GameObject;
-                //partPrefab = Instantiate(Part18);
-                //partPrefab.transform.SetParent(storyView.transform);
-                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
-
-                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
-                foreach (UI2DSprite chars in characters)
+                if (back)
                 {
-                    chars.ResetAnchors();
-                    chars.SetAnchor(UICamera.list[0].transform);
-                    chars.ResetAnchors();
+                    yield return new WaitForSeconds(0);
+                    ClearStoryCharacters();
+                    partPrefab = Instantiate(Resources.Load("StoryParts/Part (18)")) as GameObject;
+                    //partPrefab = Instantiate(Part18);
+                    //partPrefab.transform.SetParent(storyView.transform);
+                    //partPrefab.transform.localScale = new Vector3(1, 1, 1);
+
+                    UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                    foreach (UI2DSprite chars in characters)
+                    {
+                        chars.ResetAnchors();
+                        chars.SetAnchor(UICamera.list[0].transform);
+                        chars.ResetAnchors();
+                    }
                 }
             }
 
@@ -2677,25 +2829,27 @@ public class Test : MonoBehaviour
         }
         else if (count == 35)
         {
-            if (!back)
+            if (repeat)
+                ResetAnimation();
+            else
             {
-                yield return new WaitForSeconds(0);
-
-                //Destroy(GameObject.Find("Part (18)(Clone)"));
-                //Destroy(GameObject.Find("Part (19)(Clone)"));
-
-                ClearStoryCharacters();
-                partPrefab = Instantiate(Resources.Load("StoryParts/Part (19)")) as GameObject;
-                //partPrefab = Instantiate(Part19);
-                //partPrefab.transform.SetParent(storyView.transform);
-                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
-
-                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
-                foreach (UI2DSprite chars in characters)
+                if (!back)
                 {
-                    chars.ResetAnchors();
-                    chars.SetAnchor(UICamera.list[0].transform);
-                    chars.ResetAnchors();
+                    yield return new WaitForSeconds(0);
+                
+                    ClearStoryCharacters();
+                    partPrefab = Instantiate(Resources.Load("StoryParts/Part (19)")) as GameObject;
+                    //partPrefab = Instantiate(Part19);
+                    //partPrefab.transform.SetParent(storyView.transform);
+                    //partPrefab.transform.localScale = new Vector3(1, 1, 1);
+
+                    UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                    foreach (UI2DSprite chars in characters)
+                    {
+                        chars.ResetAnchors();
+                        chars.SetAnchor(UICamera.list[0].transform);
+                        chars.ResetAnchors();
+                    }
                 }
             }
 
@@ -2711,25 +2865,26 @@ public class Test : MonoBehaviour
         }
         else if (count == 36)
         {
-            if (back)
+            if (repeat)
+                ResetAnimation();
+            else
             {
-                yield return new WaitForSeconds(0);
-
-                //Destroy(GameObject.Find("Part (19)(Clone)"));
-                //Destroy(GameObject.Find("Part (20)(Clone)"));
-
-                ClearStoryCharacters();
-                partPrefab = Instantiate(Resources.Load("StoryParts/Part (19)")) as GameObject;
-                //partPrefab = Instantiate(Part19);
-                //partPrefab.transform.SetParent(storyView.transform);
-                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
-
-                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
-                foreach (UI2DSprite chars in characters)
+                if (back)
                 {
-                    chars.ResetAnchors();
-                    chars.SetAnchor(UICamera.list[0].transform);
-                    chars.ResetAnchors();
+                    yield return new WaitForSeconds(0);
+                    ClearStoryCharacters();
+                    partPrefab = Instantiate(Resources.Load("StoryParts/Part (19)")) as GameObject;
+                    //partPrefab = Instantiate(Part19);
+                    //partPrefab.transform.SetParent(storyView.transform);
+                    //partPrefab.transform.localScale = new Vector3(1, 1, 1);
+
+                    UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                    foreach (UI2DSprite chars in characters)
+                    {
+                        chars.ResetAnchors();
+                        chars.SetAnchor(UICamera.list[0].transform);
+                        chars.ResetAnchors();
+                    }
                 }
             }
 
@@ -2745,25 +2900,26 @@ public class Test : MonoBehaviour
         }
         else if (count == 37)
         {
-            if (!back)
+            if (repeat)
+                ResetAnimation();
+            else
             {
-                yield return new WaitForSeconds(0);
-
-                //Destroy(GameObject.Find("Part (19)(Clone)"));
-                //Destroy(GameObject.Find("Part (20)(Clone)"));
-
-                ClearStoryCharacters();
-                partPrefab = Instantiate(Resources.Load("StoryParts/Part (20)")) as GameObject;
-                //partPrefab = Instantiate(Part20);
-                //partPrefab.transform.SetParent(storyView.transform);
-                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
-
-                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
-                foreach (UI2DSprite chars in characters)
+                if (!back)
                 {
-                    chars.ResetAnchors();
-                    chars.SetAnchor(UICamera.list[0].transform);
-                    chars.ResetAnchors();
+                    yield return new WaitForSeconds(0);
+                    ClearStoryCharacters();
+                    partPrefab = Instantiate(Resources.Load("StoryParts/Part (20)")) as GameObject;
+                    //partPrefab = Instantiate(Part20);
+                    //partPrefab.transform.SetParent(storyView.transform);
+                    //partPrefab.transform.localScale = new Vector3(1, 1, 1);
+
+                    UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                    foreach (UI2DSprite chars in characters)
+                    {
+                        chars.ResetAnchors();
+                        chars.SetAnchor(UICamera.list[0].transform);
+                        chars.ResetAnchors();
+                    }
                 }
             }
 
@@ -2779,25 +2935,27 @@ public class Test : MonoBehaviour
         }
         else if (count == 38)
         {
-            if (back)
+            if (repeat)
+                ResetAnimation();
+            else
             {
-                yield return new WaitForSeconds(0);
-
-                //Destroy(GameObject.Find("Part (20)(Clone)"));
-                //Destroy(GameObject.Find("Part (21)(Clone)"));
-
-                ClearStoryCharacters();
-                partPrefab = Instantiate(Resources.Load("StoryParts/Part (20)")) as GameObject;
-                //partPrefab = Instantiate(Part20);
-                //partPrefab.transform.SetParent(storyView.transform);
-                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
-
-                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
-                foreach (UI2DSprite chars in characters)
+                if (back)
                 {
-                    chars.ResetAnchors();
-                    chars.SetAnchor(UICamera.list[0].transform);
-                    chars.ResetAnchors();
+                    yield return new WaitForSeconds(0);
+
+                    ClearStoryCharacters();
+                    partPrefab = Instantiate(Resources.Load("StoryParts/Part (20)")) as GameObject;
+                    //partPrefab = Instantiate(Part20);
+                    //partPrefab.transform.SetParent(storyView.transform);
+                    //partPrefab.transform.localScale = new Vector3(1, 1, 1);
+
+                    UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                    foreach (UI2DSprite chars in characters)
+                    {
+                        chars.ResetAnchors();
+                        chars.SetAnchor(UICamera.list[0].transform);
+                        chars.ResetAnchors();
+                    }
                 }
             }
 
@@ -2813,26 +2971,27 @@ public class Test : MonoBehaviour
         }
     /**/else if (count == 39)
         {
-            if (!back)
+            if (repeat)
+                ResetAnimation();
+            else
             {
-                if (PlayerPrefs.GetInt("minigames") != 1)
-                    yield return new WaitForSeconds(0);
-
-                //Destroy(GameObject.Find("Part (20)(Clone)"));
-                //Destroy(GameObject.Find("Part (21)(Clone)"));
-
-                ClearStoryCharacters();
-                partPrefab = Instantiate(Resources.Load("StoryParts/Part (21)")) as GameObject;
-                //partPrefab = Instantiate(Part21);
-                //partPrefab.transform.SetParent(storyView.transform);
-                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
-
-                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
-                foreach (UI2DSprite chars in characters)
+                if (!back)
                 {
-                    chars.ResetAnchors();
-                    chars.SetAnchor(UICamera.list[0].transform);
-                    chars.ResetAnchors();
+                    if (PlayerPrefs.GetInt("minigames") != 1)
+                    yield return new WaitForSeconds(0);
+                    ClearStoryCharacters();
+                    partPrefab = Instantiate(Resources.Load("StoryParts/Part (21)")) as GameObject;
+                    //partPrefab = Instantiate(Part21);
+                    //partPrefab.transform.SetParent(storyView.transform);
+                    //partPrefab.transform.localScale = new Vector3(1, 1, 1);
+
+                    UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                    foreach (UI2DSprite chars in characters)
+                    {
+                        chars.ResetAnchors();
+                        chars.SetAnchor(UICamera.list[0].transform);
+                        chars.ResetAnchors();
+                    }
                 }
             }
 
@@ -2847,25 +3006,27 @@ public class Test : MonoBehaviour
         }
         else if (count == 40)
         {
-            if (back)
+            if (repeat)
+                ResetAnimation();
+            else
             {
-                yield return new WaitForSeconds(0);
-
-                //Destroy(GameObject.Find("Part (21)(Clone)"));
-                //Destroy(GameObject.Find("Part (22)(Clone)"));
-
-                ClearStoryCharacters();
-                partPrefab = Instantiate(Resources.Load("StoryParts/Part (21)")) as GameObject;
-                //partPrefab = Instantiate(Part21);
-                //partPrefab.transform.SetParent(storyView.transform);
-                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
-
-                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
-                foreach (UI2DSprite chars in characters)
+                if (back)
                 {
-                    chars.ResetAnchors();
-                    chars.SetAnchor(UICamera.list[0].transform);
-                    chars.ResetAnchors();
+                    yield return new WaitForSeconds(0);
+                
+                    ClearStoryCharacters();
+                    partPrefab = Instantiate(Resources.Load("StoryParts/Part (21)")) as GameObject;
+                    //partPrefab = Instantiate(Part21);
+                    //partPrefab.transform.SetParent(storyView.transform);
+                    //partPrefab.transform.localScale = new Vector3(1, 1, 1);
+
+                    UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                    foreach (UI2DSprite chars in characters)
+                    {
+                        chars.ResetAnchors();
+                        chars.SetAnchor(UICamera.list[0].transform);
+                        chars.ResetAnchors();
+                    }
                 }
             }
 
@@ -2880,25 +3041,27 @@ public class Test : MonoBehaviour
         }
         else if (count == 41)
         {
-            if (!back)
+            if (repeat)
+                ResetAnimation();
+            else
             {
-                yield return new WaitForSeconds(0);
-
-                //Destroy(GameObject.Find("Part (21)(Clone)"));
-                //Destroy(GameObject.Find("Part (22)(Clone)"));
-
-                ClearStoryCharacters();
-                partPrefab = Instantiate(Resources.Load("StoryParts/Part (22)")) as GameObject;
-                //partPrefab = Instantiate(Part22);
-                //partPrefab.transform.SetParent(storyView.transform);
-                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
-
-                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
-                foreach (UI2DSprite chars in characters)
+                if (!back)
                 {
-                    chars.ResetAnchors();
-                    chars.SetAnchor(UICamera.list[0].transform);
-                    chars.ResetAnchors();
+                    yield return new WaitForSeconds(0);
+                
+                    ClearStoryCharacters();
+                    partPrefab = Instantiate(Resources.Load("StoryParts/Part (22)")) as GameObject;
+                    //partPrefab = Instantiate(Part22);
+                    //partPrefab.transform.SetParent(storyView.transform);
+                    //partPrefab.transform.localScale = new Vector3(1, 1, 1);
+
+                    UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                    foreach (UI2DSprite chars in characters)
+                    {
+                        chars.ResetAnchors();
+                        chars.SetAnchor(UICamera.list[0].transform);
+                        chars.ResetAnchors();
+                    }
                 }
             }
 
@@ -2914,25 +3077,27 @@ public class Test : MonoBehaviour
         }
         else if (count == 42)
         {
-            if (back)
+            if (repeat)
+                ResetAnimation();
+            else
             {
-                yield return new WaitForSeconds(0);
-
-                //Destroy(GameObject.Find("Part (22)(Clone)"));
-                //Destroy(GameObject.Find("Part (23)(Clone)"));
-
-                ClearStoryCharacters();
-                partPrefab = Instantiate(Resources.Load("StoryParts/Part (22)")) as GameObject;
-                //partPrefab = Instantiate(Part22);
-                //partPrefab.transform.SetParent(storyView.transform);
-                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
-
-                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
-                foreach (UI2DSprite chars in characters)
+                if (back)
                 {
-                    chars.ResetAnchors();
-                    chars.SetAnchor(UICamera.list[0].transform);
-                    chars.ResetAnchors();
+                    yield return new WaitForSeconds(0);
+
+                    ClearStoryCharacters();
+                    partPrefab = Instantiate(Resources.Load("StoryParts/Part (22)")) as GameObject;
+                    //partPrefab = Instantiate(Part22);
+                    //partPrefab.transform.SetParent(storyView.transform);
+                    //partPrefab.transform.localScale = new Vector3(1, 1, 1);
+
+                    UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                    foreach (UI2DSprite chars in characters)
+                    {
+                        chars.ResetAnchors();
+                        chars.SetAnchor(UICamera.list[0].transform);
+                        chars.ResetAnchors();
+                    }
                 }
             }
 
@@ -2948,26 +3113,28 @@ public class Test : MonoBehaviour
         }
     /**/else if (count == 43)
         {
-            if (!back)
+            if (repeat)
+                ResetAnimation();
+            else
             {
-                if (PlayerPrefs.GetInt("minigames") != 1)
-                    yield return new WaitForSeconds(0);
-
-                //Destroy(GameObject.Find("Part (22)(Clone)"));
-                //Destroy(GameObject.Find("Part (23)(Clone)"));
-
-                ClearStoryCharacters();
-                partPrefab = Instantiate(Resources.Load("StoryParts/Part (23)")) as GameObject;
-                //partPrefab = Instantiate(Part23);
-                //partPrefab.transform.SetParent(storyView.transform);
-                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
-
-                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
-                foreach (UI2DSprite chars in characters)
+                if (!back)
                 {
-                    chars.ResetAnchors();
-                    chars.SetAnchor(UICamera.list[0].transform);
-                    chars.ResetAnchors();
+                    if (PlayerPrefs.GetInt("minigames") != 1)
+                        yield return new WaitForSeconds(0);
+
+                    ClearStoryCharacters();
+                    partPrefab = Instantiate(Resources.Load("StoryParts/Part (23)")) as GameObject;
+                    //partPrefab = Instantiate(Part23);
+                    //partPrefab.transform.SetParent(storyView.transform);
+                    //partPrefab.transform.localScale = new Vector3(1, 1, 1);
+
+                    UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                    foreach (UI2DSprite chars in characters)
+                    {
+                        chars.ResetAnchors();
+                        chars.SetAnchor(UICamera.list[0].transform);
+                        chars.ResetAnchors();
+                    }
                 }
             }
 
@@ -2982,25 +3149,27 @@ public class Test : MonoBehaviour
         }
         else if (count == 44)
         {
-            if (back)
+            if (repeat)
+                ResetAnimation();
+            else
             {
-                yield return new WaitForSeconds(0);
-
-                //Destroy(GameObject.Find("Part (23)(Clone)"));
-                ////Destroy(GameObject.Find("Part (24)(Clone)"));
-
-                ClearStoryCharacters();
-                partPrefab = Instantiate(Resources.Load("StoryParts/Part (23)")) as GameObject;
-                //partPrefab = Instantiate(Part23);
-                //partPrefab.transform.SetParent(storyView.transform);
-                //partPrefab.transform.localScale = new Vector3(1, 1, 1);
-
-                UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
-                foreach (UI2DSprite chars in characters)
+                if (back)
                 {
-                    chars.ResetAnchors();
-                    chars.SetAnchor(UICamera.list[0].transform);
-                    chars.ResetAnchors();
+                    yield return new WaitForSeconds(0);
+                
+                    ClearStoryCharacters();
+                    partPrefab = Instantiate(Resources.Load("StoryParts/Part (23)")) as GameObject;
+                    //partPrefab = Instantiate(Part23);
+                    //partPrefab.transform.SetParent(storyView.transform);
+                    //partPrefab.transform.localScale = new Vector3(1, 1, 1);
+
+                    UI2DSprite[] characters = partPrefab.GetComponentsInChildren<UI2DSprite>();
+                    foreach (UI2DSprite chars in characters)
+                    {
+                        chars.ResetAnchors();
+                        chars.SetAnchor(UICamera.list[0].transform);
+                        chars.ResetAnchors();
+                    }
                 }
             }
 
@@ -3215,6 +3384,19 @@ public class Test : MonoBehaviour
         }
     }
 
+    void ResetAnimation()
+    {
+        GameObject storyPart = GameObject.FindGameObjectWithTag("Story");
+        foreach (Transform child in storyPart.transform)
+        {
+            if(child.GetComponent<UI2DSpriteAnimation>().isPlaying)
+                child.GetComponent<UI2DSpriteAnimation>().ResetToBeginning();
+            else
+                child.GetComponent<UI2DSpriteAnimation>().Play();
+        }
+        repeat = false;
+    }
+
 	IEnumerator DisplayScene()
 	{
         Resources.UnloadUnusedAssets();
@@ -3257,4 +3439,3 @@ public class Test : MonoBehaviour
 		PlayerPrefs.SetInt("tutorial", 3);
 	}
 }
-
