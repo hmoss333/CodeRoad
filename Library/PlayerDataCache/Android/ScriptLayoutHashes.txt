@@ -1,6 +1,6 @@
 Android
 PlayerPath?
-C:/Users/Crandon/Documents/UnityStuff/APKs/CodeRoad.apk
+C:/Users/Crandon/Documents/UnityStuff/FingerPrintAPKs/CodeRoad(Fingerprint).apk
 SceneListBegin?
 Assets/Scenes/SplashScreen.unity
 Assets/Scenes/MenuScreen.unity
